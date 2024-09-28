@@ -1,0 +1,134 @@
+/* Copyright 2020 foostan
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+#include QMK_KEYBOARD_H
+
+#define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
+#define LCG(kc) (QK_LCTL | QK_LGUI | (kc))
+
+#define LOWR_ESC  LT(_LOWER, KC_ESC)
+#define UPPR_TAB  LT(_RAISE, KC_TAB)
+#define HYPR_BSPC RHYPR_T(KC_BSPC)
+#define HYPR_TAB  RHYPR_T(KC_TAB)
+#define CTL_ENT   CTL_T(KC_ENT)
+#define CTL_ESC   CTL_T(KC_ESC)
+#define CTL_LBRC  CTL_T(KC_LBRC)
+#define CTL_QUOT  CTL_T(KC_QUOT)
+#define GUI_LNG2  GUI_T(KC_LNG2)
+#define RGUI_LNG1 RGUI_T(KC_LNG1)
+#define SFT_CW    SFT_T(CW_TOGG)
+#define SFT_RBRC  SFT_T(KC_RBRC)
+#define SFT_SPC   SFT_T(KC_SPC)
+
+enum layer_names {
+  _BASE,
+  _LOWER,
+  _RAISE,
+  _FN
+};
+
+// // Tri Layers
+// layer_state_t layer_state_set_user(layer_state_t state) {
+//   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+// }
+
+// Custom Keycodes
+enum my_keycodes {
+  CK_TEST = SAFE_RANGE
+};
+
+// Behavior of Any Keycode
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case CK_TEST:
+      if (record->event.pressed) {
+        // When pressed
+      } else {
+        // When release
+      }
+      return false;
+    case SFT_CW:
+      if (record->tap.count && record->event.pressed) {
+        caps_word_toggle();
+        return false;
+      }
+      break;
+    default:
+      return true;
+  }
+  return true;
+}
+
+// HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case LOWR_ESC:
+      return true;
+    case UPPR_TAB:
+      return true;
+    case HYPR_TAB:
+      return true;
+    case HYPR_BSPC:
+      return true;
+    case CTL_ESC:
+      return true;
+    case CTL_ENT:
+      return true;
+    case CTL_LBRC:
+      return true;
+    case GUI_LNG2:
+      return true;
+    case RGUI_LNG1:
+      return true;
+    case SFT_SPC:
+      return true;
+    case SFT_RBRC:
+      return true;
+    case SFT_CW:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  [_BASE] = LAYOUT(
+    HYPR_TAB, KC_Q,    KC_W,    KC_E,     KC_R,     KC_T,    KC_Y,    KC_U,     KC_I,      KC_O,    KC_P,    HYPR_BSPC,
+    CTL_ESC,  KC_A,    KC_S,    KC_D,     KC_F,     KC_G,    KC_H,    KC_J,     KC_K,      KC_L,    KC_SCLN, CTL_QUOT,
+    SFT_CW,   KC_Z,    KC_X,    KC_C,     KC_V,     KC_B,    KC_N,    KC_M,     KC_COMM,   KC_DOT,  KC_SLSH, KC_BSLS,
+    MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, LOWR_ESC, SFT_SPC, CTL_ENT, UPPR_TAB, RGUI_LNG1, KC_DOWN, KC_UP,   MO(_FN)
+  ),
+
+  [_LOWER] = LAYOUT(
+    _______, LSG(KC_S), KC_LPRN,      KC_RPRN,      MEH(KC_C), LSG(KC_T), G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR,  G(KC_RGHT), G(KC_UP),
+    _______, LSG(KC_A), CTL_LBRC,     SFT_RBRC,     LCG(KC_V), LCG(KC_S), KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT,  G(KC_LEFT), G(KC_DOWN),
+    _______, LSG(KC_Z), LCA(KC_LEFT), LCA(KC_RGHT), LSG(KC_V), G(KC_V),   KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E),  G(KC_BSLS), G(KC_GRV),
+    _______, _______,   _______,      _______,      _______,   _______,   _______,   _______,   _______, A(KC_UP), A(KC_DOWN), _______
+  ),
+
+  [_RAISE] = LAYOUT(
+    _______, KC_DOT,  KC_PLUS, KC_UNDS, KC_EXLM, KC_PIPE, KC_GRV,  KC_QUES, KC_CIRC, KC_DLR,  KC_COMM, XXXXXXX,
+    _______, KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT,   KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN, XXXXXXX,
+    _______, KC_8,    KC_6,    KC_4,    KC_2,    KC_BSLS, KC_TILD, KC_3,    KC_5,    KC_7,    KC_9,    XXXXXXX,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+  ),
+
+  [_FN] = LAYOUT(
+    LCG(KC_Q), XXXXXXX, A(KC_UP), KC_PGUP, A(KC_DOWN), C(KC_1), C(KC_4), LSG(KC_2), LSG(KC_3), LSG(KC_4), LSG(KC_5), XXXXXXX,
+    XXXXXXX,   XXXXXXX, KC_HOME,  KC_PGDN, KC_END,     C(KC_2), C(KC_5), XXXXXXX,   XXXXXXX,   KC_MPRV,   KC_MNXT,   KC_MPLY,
+    XXXXXXX,   XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,    C(KC_3), C(KC_6), XXXXXXX,   XXXXXXX,   KC_VOLD,   KC_VOLU,   KC_MUTE,
+    _______,   XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,    XXXXXXX, QK_BOOT, XXXXXXX,   XXXXXXX,   KC_LEFT,   KC_RGHT,   _______
+  ),
+};
