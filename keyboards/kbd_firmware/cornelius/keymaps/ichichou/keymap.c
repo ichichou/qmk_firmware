@@ -20,43 +20,66 @@
 
 #define LOWR_ESC  LT(_LOWER, KC_ESC)
 #define UPPR_TAB  LT(_RAISE, KC_TAB)
-#define HYPR_BSPC RHYPR_T(KC_BSPC)
 #define HYPR_TAB  RHYPR_T(KC_TAB)
-#define CTL_ENT   CTL_T(KC_ENT)
+#define HYPR_BSPC RHYPR_T(KC_BSPC)
 #define CTL_ESC   CTL_T(KC_ESC)
-#define CTL_LBRC  CTL_T(KC_LBRC)
+#define CTL_ENT   CTL_T(KC_ENT)
 #define CTL_QUOT  CTL_T(KC_QUOT)
+#define CTL_LBRC  CTL_T(KC_LBRC)
+#define SFT_SPC   SFT_T(KC_SPC)
+#define SFT_RBRC  SFT_T(KC_RBRC)
+#define SFT_CW    SFT_T(CW_TOGG)
 #define GUI_LNG2  GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
-#define SFT_CW    SFT_T(CW_TOGG)
-#define SFT_RBRC  SFT_T(KC_RBRC)
-#define SFT_SPC   SFT_T(KC_SPC)
 
 enum layer_names {
   _BASE,
   _LOWER,
   _RAISE,
+  _ADJUST,
   _FN
 };
 
-// // Tri Layers
-// layer_state_t layer_state_set_user(layer_state_t state) {
-//   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
-// }
+// Tri Layers
+layer_state_t layer_state_set_user(layer_state_t state) {
+  return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+}
 
 // Custom Keycodes
 enum my_keycodes {
-  CK_TEST = SAFE_RANGE
+  GRV_ESC = SAFE_RANGE,
+  LEFT_7,
+  RGHT_7,
+  LSEL_7,
+  RSEL_7
 };
 
 // Behavior of Any Keycode
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case CK_TEST:
+    case GRV_ESC:
       if (record->event.pressed) {
-        // When pressed
-      } else {
-        // When release
+        tap_code(KC_ESC);
+      }
+      return false;
+    case LEFT_7:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT));
+      }
+      return false;
+    case RGHT_7:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT));
+      }
+      return false;
+    case LSEL_7:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LSFT(SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT)));
+      }
+      return false;
+    case RSEL_7:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LSFT(SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT)));
       }
       return false;
     case SFT_CW:
@@ -64,11 +87,28 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         caps_word_toggle();
         return false;
       }
-      break;
+      break; // return false; では動く？
     default:
       return true;
   }
   return true;
+}
+
+// Key Overrides
+const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_ALT, GRV_ESC, KC_GRV);
+const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, GRV_ESC, KC_TILD);
+
+const key_override_t *key_overrides[] = {
+  &grave_esc_override,
+  &tilde_esc_override
+};
+
+// PERMISSIVE_HOLD_PER_KEY
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    default:
+      return false;
+  }
 }
 
 // HOLD_ON_OTHER_KEY_PRESS_PER_KEY
@@ -88,15 +128,15 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
       return true;
     case CTL_LBRC:
       return true;
-    case GUI_LNG2:
-      return true;
-    case RGUI_LNG1:
-      return true;
     case SFT_SPC:
       return true;
     case SFT_RBRC:
       return true;
     case SFT_CW:
+      return true;
+    case GUI_LNG2:
+      return true;
+    case RGUI_LNG1:
       return true;
     default:
       return false;
@@ -104,6 +144,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+
   [_BASE] = LAYOUT(
     HYPR_TAB, KC_Q,    KC_W,    KC_E,     KC_R,     KC_T,    KC_Y,    KC_U,     KC_I,      KC_O,    KC_P,    HYPR_BSPC,
     CTL_ESC,  KC_A,    KC_S,    KC_D,     KC_F,     KC_G,    KC_H,    KC_J,     KC_K,      KC_L,    KC_SCLN, CTL_QUOT,
@@ -112,10 +153,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_LOWER] = LAYOUT(
-    _______, LSG(KC_S), KC_LPRN,      KC_RPRN,      MEH(KC_C), LSG(KC_T), G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR,  G(KC_RGHT), G(KC_UP),
-    _______, LSG(KC_A), CTL_LBRC,     SFT_RBRC,     LCG(KC_V), LCG(KC_S), KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT,  G(KC_LEFT), G(KC_DOWN),
-    _______, LSG(KC_Z), LCA(KC_LEFT), LCA(KC_RGHT), LSG(KC_V), G(KC_V),   KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E),  G(KC_BSLS), G(KC_GRV),
-    _______, _______,   _______,      _______,      _______,   _______,   _______,   _______,   _______, A(KC_UP), A(KC_DOWN), _______
+    _______, LSG(KC_S), KC_LPRN,      KC_RPRN,      MEH(KC_C), LSG(KC_T), G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RGHT),   G(KC_UP),
+    _______, LSG(KC_A), CTL_LBRC,     SFT_RBRC,     LCG(KC_V), LCG(KC_S), KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LEFT),   G(KC_DOWN),
+    _______, LSG(KC_Z), LCA(KC_LEFT), LCA(KC_RGHT), LSG(KC_V), G(KC_V),   KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), LCA(KC_BSPC), LCA(KC_ENT),
+    _______, _______,   _______,      _______,      _______,   _______,   _______,   _______,   _______, _______, _______,      _______
   ),
 
   [_RAISE] = LAYOUT(
@@ -125,10 +166,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
 
-  [_FN] = LAYOUT(
-    LCG(KC_Q), XXXXXXX, A(KC_UP), KC_PGUP, A(KC_DOWN), C(KC_1), C(KC_4), LSG(KC_2), LSG(KC_3), LSG(KC_4), LSG(KC_5), XXXXXXX,
-    XXXXXXX,   XXXXXXX, KC_HOME,  KC_PGDN, KC_END,     C(KC_2), C(KC_5), XXXXXXX,   XXXXXXX,   KC_MPRV,   KC_MNXT,   KC_MPLY,
-    XXXXXXX,   XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,    C(KC_3), C(KC_6), XXXXXXX,   XXXXXXX,   KC_VOLD,   KC_VOLU,   KC_MUTE,
-    _______,   XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,    XXXXXXX, QK_BOOT, XXXXXXX,   XXXXXXX,   KC_LEFT,   KC_RGHT,   _______
+  [_ADJUST] = LAYOUT(
+    XXXXXXX, XXXXXXX, A(KC_UP), KC_PGUP, A(KC_DOWN), C(KC_1), XXXXXXX, LSG(KC_2), LSG(KC_3), LSG(KC_4), LSG(KC_5), XXXXXXX,
+    XXXXXXX, XXXXXXX, KC_HOME,  KC_PGDN, KC_END,     C(KC_2), LEFT_7,  LSEL_7,    RSEL_7,    RGHT_7,    XXXXXXX,   XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,    C(KC_3), XXXXXXX, XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,
+    _______, _______, _______,  _______, _______,    _______, _______, _______,   _______,   _______,   _______,   _______
   ),
+
+  [_FN] = LAYOUT(
+    LCG(KC_Q), KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_MPLY,
+    XXXXXXX,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,
+    _______,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT, XXXXXXX, XXXXXXX, KC_LEFT, KC_RGHT, _______
+  ),
+
 };
