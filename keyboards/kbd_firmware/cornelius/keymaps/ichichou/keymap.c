@@ -92,7 +92,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // // Key Overrides
 // const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_ALT, KC_ESC, KC_GRV);
 // const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, KC_TILD);
-//
 // const key_override_t *key_overrides[] = {
 //   &grave_esc_override,
 //   &tilde_esc_override,
@@ -100,7 +99,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // // Combos
 // const uint16_t PROGMEM ab_combo[] = {KC_A, KC_B, COMBO_END};
-//
 // combo_t key_combos[] = {
 //   COMBO(ab_combo, KC_ESC),
 // };
@@ -161,7 +159,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT(
     _______, KC_DOT,  KC_PLUS, KC_UNDS, KC_EXLM, KC_PIPE, KC_GRV,  KC_QUES, KC_CIRC, KC_DLR,  KC_COMM, XXXXXXX,
-    _______, KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT,   KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN, XXXXXXX,
+    _______, KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT,   KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN, KC_QUOT,
     _______, KC_8,    KC_6,    KC_4,    KC_2,    KC_BSLS, KC_TILD, KC_3,    KC_5,    KC_7,    KC_9,    XXXXXXX,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
