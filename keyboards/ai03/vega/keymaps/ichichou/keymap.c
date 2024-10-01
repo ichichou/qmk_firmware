@@ -23,35 +23,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define HYPR_BSPC RHYPR_T(KC_BSPC)
 #define CTL_ESC   CTL_T(KC_ESC)
 #define CTL_ENT   CTL_T(KC_ENT)
+#define CTL_LBRC  CTL_T(KC_LBRC)
 #define SFT_SPC   SFT_T(KC_SPC)
+#define SFT_RBRC  SFT_T(KC_RBRC)
 #define SFT_CW    SFT_T(CW_TOGG)
 #define GUI_LNG2  GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
 
 enum layer_names {
   _BASE,
-  _FN
+  _FN,
 };
 
-// Custom Keycodes
-enum my_keycodes {
-  GRV_ESC = SAFE_RANGE
-};
+// // Custom Keycodes
+// enum my_keycodes {
+//   TEST_1 = SAFE_RANGE,
+//   TEST_2,
+// };
 
 // Behavior of Any Keycode
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case GRV_ESC:
-      if (record->event.pressed) {
-        tap_code(KC_ESC);
-      }
-      return false;
     case SFT_CW:
       if (record->tap.count && record->event.pressed) {
         caps_word_toggle();
         return false;
       }
-      break; // return false; にする？
+      return true;
     default:
       return true;
   }
@@ -59,21 +57,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 // Key Overrides
-const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_ALT, GRV_ESC, KC_GRV);
-const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, GRV_ESC, KC_TILD);
-
+const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_ALT, KC_ESC, KC_GRV);
+const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, KC_TILD);
 const key_override_t *key_overrides[] = {
   &grave_esc_override,
-  &tilde_esc_override
+  &tilde_esc_override,
 };
 
-// PERMISSIVE_HOLD_PER_KEY
-bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    default:
-      return false;
-  }
-}
+// // PERMISSIVE_HOLD_PER_KEY
+// bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+//   switch (keycode) {
+//     default:
+//       return false;
+//   }
+// }
 
 // HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
@@ -102,19 +99,19 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT_all(
-    GRV_ESC,  KC_1,    KC_2,     KC_3, KC_4,   KC_5, KC_6,    KC_7,    KC_8,   KC_9, KC_0,      KC_MINS, KC_EQL,  HYPR_BSPC, KC_DEL,  KC_DEL,
-    HYPR_TAB, KC_Q,    KC_W,     KC_E, KC_R,   KC_T, KC_GRV,  KC_Y,    KC_U,   KC_I, KC_O,      KC_P,    KC_QUOT,            KC_BSLS, KC_GRV,
-    CTL_ESC,  KC_A,    KC_S,     KC_D, KC_F,   KC_G, KC_RBRC, KC_H,    KC_J,   KC_K, KC_L,      KC_SCLN,          CTL_ENT,            KC_TILD,
-    SFT_CW,   KC_BSLS, KC_Z,     KC_X, KC_C,   KC_V, KC_B,    KC_LBRC, KC_N,   KC_M, KC_COMM,   KC_DOT,           KC_SLSH,   KC_UP,   MO(_FN),
+    KC_ESC,   KC_1,    KC_2,     KC_3, KC_4,   KC_5, KC_6,    KC_7,    KC_8,   KC_9, KC_0,      KC_MINS, KC_EQL,  HYPR_BSPC, KC_DEL,  KC_DEL,
+    HYPR_TAB, KC_Q,    KC_W,     KC_E, KC_R,   KC_T, KC_RBRC, KC_Y,    KC_U,   KC_I, KC_O,      KC_P,    KC_QUOT, KC_BSLS,            KC_GRV,
+    CTL_ESC,  KC_A,    KC_S,     KC_D, KC_F,   KC_G, KC_QUOT, KC_H,    KC_J,   KC_K, KC_L,      KC_SCLN,          CTL_ENT,            KC_TILD,
+    SFT_CW,   KC_BSLS, KC_Z,     KC_X, KC_C,   KC_V, KC_B,    KC_LBRC, KC_N,   KC_M, KC_COMM,   KC_DOT,  KC_SLSH,            KC_UP,   MO(_FN),
     MO(_FN),  KC_LALT, GUI_LNG2,       KC_SPC,       SFT_SPC,          KC_SPC,       RGUI_LNG1, KC_RCTL,          KC_LEFT,   KC_DOWN, KC_RGHT
   ),
 
   [_FN] = LAYOUT_all(
-    LCG(KC_Q), KC_F1,   KC_F2,    KC_F3,   KC_F4,      KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,  XXXXXXX, XXXXXXX,
-    _______,   XXXXXXX, G(KC_UP), KC_PGUP, G(KC_DOWN), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_TILD,          KC_GRV,  G(KC_UP),
-    _______,   XXXXXXX, KC_HOME,  KC_PGDN, KC_END,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT,          KC_MPLY,          G(KC_DOWN),
-    _______,   XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU,          KC_MUTE, KC_PGUP, _______,
-    _______,   _______, _______,           _______,             _______,          _______,          _______, _______,          KC_HOME, KC_PGDN, KC_END
+    LCG(KC_Q), KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,   XXXXXXX, XXXXXXX,
+    _______,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_TILD, KC_GRV,            G(KC_UP),
+    _______,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT,          KC_MPLY,           G(KC_DOWN),
+    _______,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,           XXXXXXX, _______,
+    _______,   _______, _______,          _______,          _______,          _______,          _______, _______,          A(KC_UP), XXXXXXX, A(KC_DOWN)
   ),
 
 };
