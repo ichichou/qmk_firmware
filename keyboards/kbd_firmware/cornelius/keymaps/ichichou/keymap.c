@@ -46,37 +46,15 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
-// Custom Keycodes
-enum my_keycodes {
-  LEFT_7 = SAFE_RANGE,
-  RGHT_7,
-  LSEL_7,
-  RSEL_7,
-};
+// // Custom Keycodes
+// enum my_keycodes {
+//   TEST_1 = SAFE_RANGE,
+//   TEST_2,
+// };
 
 // Behavior of Any Keycode
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case LEFT_7:
-      if (record->event.pressed) {
-        SEND_STRING(SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT));
-      }
-      return false;
-    case RGHT_7:
-      if (record->event.pressed) {
-        SEND_STRING(SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT));
-      }
-      return false;
-    case LSEL_7:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LSFT(SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT)));
-      }
-      return false;
-    case RSEL_7:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LSFT(SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT)));
-      }
-      return false;
     case SFT_CW:
       if (record->tap.count && record->event.pressed) {
         caps_word_toggle();
@@ -151,31 +129,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_LOWER] = LAYOUT(
-    _______, LSG(KC_S), KC_LPRN,      KC_RPRN,      MEH(KC_C), LSG(KC_T), G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RGHT),   G(KC_UP),
-    _______, LSG(KC_A), CTL_LBRC,     SFT_RBRC,     LCG(KC_V), LCG(KC_S), KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LEFT),   G(KC_DOWN),
-    _______, LSG(KC_Z), LCA(KC_LEFT), LCA(KC_RGHT), LSG(KC_V), G(KC_V),   KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), LCA(KC_BSPC), LCA(KC_ENT),
-    _______, _______,   _______,      _______,      _______,   _______,   _______,   _______,   _______, _______, _______,      _______
+    _______, LSG(KC_S), KC_LPRN,      KC_RPRN,      MEH(KC_C), LSG(KC_T), G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RGHT), G(KC_UP),
+    _______, LSG(KC_A), CTL_LBRC,     SFT_RBRC,     LCG(KC_V), LCG(KC_S), KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LEFT), G(KC_DOWN),
+    _______, LSG(KC_Z), LCA(KC_LEFT), LCA(KC_RGHT), LSG(KC_V), G(KC_V),   KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), XXXXXXX,    XXXXXXX,
+    _______, _______,   _______,      _______,      _______,   _______,   _______,   _______,   _______, _______, _______,    _______
   ),
 
   [_RAISE] = LAYOUT(
     _______, KC_DOT,  KC_PLUS, KC_UNDS, KC_EXLM, KC_PIPE, KC_GRV,  KC_QUES, KC_CIRC, KC_DLR,  KC_COMM, XXXXXXX,
-    _______, KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT,   KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN, KC_QUOT,
+    _______, KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT,   KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN, XXXXXXX,
     _______, KC_8,    KC_6,    KC_4,    KC_2,    KC_BSLS, KC_TILD, KC_3,    KC_5,    KC_7,    KC_9,    XXXXXXX,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
 
   [_ADJUST] = LAYOUT(
-    XXXXXXX, XXXXXXX, A(KC_UP), KC_PGUP, A(KC_DOWN), XXXXXXX, XXXXXXX, LSG(KC_2),  LSG(KC_3),  LSG(KC_4), LSG(KC_5), XXXXXXX,
-    XXXXXXX, XXXXXXX, KC_HOME,  KC_PGDN, KC_END,     XXXXXXX, LEFT_7,  KC_LEFT,    KC_RGHT,    RGHT_7,    XXXXXXX,   XXXXXXX,
-    XXXXXXX, C(KC_5), C(KC_4),  C(KC_3), C(KC_2),    C(KC_1), LSEL_7,  S(KC_LEFT), S(KC_RGHT), RSEL_7,    XXXXXXX,   XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, _______,    XXXXXXX, XXXXXXX, _______,    XXXXXXX,    XXXXXXX,   XXXXXXX,   XXXXXXX
+    XXXXXXX, LCA(KC_U),    LCA(KC_I), XXXXXXX,   MEH(KC_C),    C(KC_3), C(KC_6), LCA(KC_BSPC), XXXXXXX,  XXXXXXX,    XXXXXXX, XXXXXXX,
+    XXXXXXX, LCA(KC_LEFT), XXXXXXX,   XXXXXXX,   LCA(KC_RGHT), C(KC_2), C(KC_5), LCA(KC_C),    XXXXXXX,  XXXXXXX,    XXXXXXX, XXXXXXX,
+    XXXXXXX, LCA(KC_Z),    LCA(KC_X), LCA(KC_C), LCA(KC_V),    C(KC_1), C(KC_4), LCA(KC_ENT),  A(KC_UP), A(KC_DOWN), XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX,      XXXXXXX,   XXXXXXX,   _______,      XXXXXXX, XXXXXXX, _______,      XXXXXXX,  XXXXXXX,    XXXXXXX, XXXXXXX
   ),
 
   [_FN] = LAYOUT(
-    LCG(KC_Q), KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, LCG(KC_Q),
-    XXXXXXX,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_MPLY,
-    XXXXXXX,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,
-    _______,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT, XXXXXXX, XXXXXXX, KC_LEFT, KC_RGHT, _______
+    LCG(KC_Q), KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXXXXXX, LSG(KC_4), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, LCG(KC_Q),
+    XXXXXXX,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXXXXXX, LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_MPLY,
+    XXXXXXX,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX, LSG(KC_2), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,
+    _______,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,   XXXXXXX, XXXXXXX, KC_LEFT, KC_RGHT, _______
   ),
 
 };
