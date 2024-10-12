@@ -16,9 +16,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include QMK_KEYBOARD_H
 
+// -- C Macros {{{
+
+// Modifier Keys
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
 #define LCG(kc) (QK_LCTL | QK_LGUI | (kc))
+#define SFT_GUI   G(KC_LSFT)
 
+// Tap-Hold Keys
 #define HYPR_TAB  RHYPR_T(KC_TAB)
 #define HYPR_BSPC RHYPR_T(KC_BSPC)
 #define CTL_ESC   CTL_T(KC_ESC)
@@ -28,18 +33,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define GUI_LNG2  GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
 
+// -- }}}
+
+// -- Layers {{{
+
 enum layer_names {
   _BASE,
   _MTGAP,
   _FN,
 };
 
-// Custom Keycodes
+// -- }}}
+
+// -- Custom Keycodes {{{
+
 enum my_keycodes {
   TEST_1 = SAFE_RANGE,
 };
 
-// Behavior of Any Keycode
+// -- }}}
+
+// -- Behavior of Any Keycode {{{
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case SFT_CW:
@@ -54,7 +69,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-// // Key Overrides
+// -- }}}
+
+// -- Key Overrides {{{
+
 // const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_ALT, KC_ESC, KC_GRV);
 // const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, KC_TILD);
 // const key_override_t *key_overrides[] = {
@@ -62,7 +80,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //   &tilde_esc_override,
 // };
 
-// // PERMISSIVE_HOLD_PER_KEY
+// -- }}}
+
+// -- PERMISSIVE_HOLD_PER_KEY {{{
+
 // bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 //   switch (keycode) {
 //     default:
@@ -70,7 +91,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //   }
 // }
 
-// HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+// -- }}}
+
+// -- HOLD_ON_OTHER_KEY_PRESS_PER_KEY {{{
+
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case HYPR_TAB:
@@ -94,13 +118,15 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
+// -- }}}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT_all(
     KC_ESC,            KC_1,     KC_2, KC_3,   KC_4, KC_5,    KC_6,    KC_7,   KC_8, KC_9,    KC_0,      KC_MINS, KC_EQL,  HYPR_BSPC, KC_DEL, KC_DEL,
     HYPR_TAB,          KC_Q,     KC_W, KC_E,   KC_R, KC_T,    KC_LBRC, KC_Y,   KC_U, KC_I,    KC_O,      KC_P,    KC_QUOT, KC_BSLS,           KC_GRV,
     CTL_ESC,           KC_A,     KC_S, KC_D,   KC_F, KC_G,    KC_RBRC, KC_H,   KC_J, KC_K,    KC_L,      KC_SCLN,          CTL_ENT,           KC_TILD,
-    SFT_CW,   KC_BSLS, KC_Z,     KC_X, KC_C,   KC_V, KC_B,    KC_GRV,  KC_N,   KC_M, KC_COMM, KC_DOT,    KC_SLSH,          KC_UP,             MO(_FN),
+    SFT_CW,   KC_BSLS, KC_Z,     KC_X, KC_C,   KC_V, KC_B,    SFT_GUI, KC_N,   KC_M, KC_COMM, KC_DOT,    KC_SLSH,          KC_UP,             MO(_FN),
     MO(_FN),  KC_LALT, GUI_LNG2,       KC_SPC,       SFT_SPC,          KC_SPC,       KC_RALT, RGUI_LNG1,          KC_LEFT, KC_DOWN,           KC_RGHT
   ),
 
@@ -108,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,            KC_1,     KC_2,    KC_3,    KC_4,   KC_5,    KC_6,    KC_7,   KC_8, KC_9,    KC_0,      KC_MINS, KC_EQL,  HYPR_BSPC, KC_DEL, KC_DEL,
     HYPR_TAB,          KC_Y,     KC_P,    KC_O,    KC_U,   KC_SCLN, KC_LBRC, KC_K,   KC_D, KC_L,    KC_C,      KC_W,    KC_Q,    KC_BSLS,           KC_GRV,
     CTL_ESC,           KC_I,     KC_N,    KC_E,    KC_A,   KC_COMM, KC_RBRC, KC_M,   KC_H, KC_T,    KC_S,      KC_R,             CTL_ENT,           KC_TILD,
-    SFT_CW,   KC_BSLS, KC_Z,     KC_SLSH, KC_QUOT, KC_DOT, KC_X,    KC_GRV,  KC_B,   KC_F, KC_G,    KC_V,      KC_J,             KC_UP,             MO(_FN),
+    SFT_CW,   KC_BSLS, KC_Z,     KC_SLSH, KC_QUOT, KC_DOT, KC_X,    SFT_GUI, KC_B,   KC_F, KC_G,    KC_V,      KC_J,             KC_UP,             MO(_FN),
     MO(_FN),  KC_LALT, GUI_LNG2,          KC_SPC,          SFT_SPC,          KC_SPC,       KC_RALT, RGUI_LNG1,          KC_LEFT, KC_DOWN,           KC_RGHT
   ),
 
