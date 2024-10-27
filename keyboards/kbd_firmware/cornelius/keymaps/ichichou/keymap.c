@@ -34,6 +34,7 @@
 #define CTL_Q     CTL_T(KC_Q)
 #define CTL_LBRC  CTL_T(KC_LBRC)
 #define SFT_SPC   SFT_T(KC_SPC)
+#define SFT_ENT   SFT_T(KC_ENT)
 #define SFT_RBRC  SFT_T(KC_RBRC)
 #define SFT_CW    SFT_T(CW_TOGG)
 #define GUI_LNG2  GUI_T(KC_LNG2)
@@ -155,6 +156,8 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
       return true;
     case SFT_SPC:
       return true;
+    case SFT_ENT:
+      return true;
     case SFT_CW:
       return true;
     case GUI_LNG2:
@@ -174,21 +177,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     HYPR_TAB, KC_Q,    KC_W,    KC_E,     KC_R,     KC_T,    KC_Y,    KC_U,     KC_I,      KC_O,    KC_P,    HYPR_BSPC,
     CTL_ESC,  KC_A,    KC_S,    KC_D,     KC_F,     KC_G,    KC_H,    KC_J,     KC_K,      KC_L,    KC_SCLN, CTL_QUOT,
     SFT_CW,   KC_Z,    KC_X,    KC_C,     KC_V,     KC_B,    KC_N,    KC_M,     KC_COMM,   KC_DOT,  KC_SLSH, KC_BSLS,
-    MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, LOWR_ESC, SFT_SPC, CTL_ENT, UPPR_TAB, RGUI_LNG1, KC_DOWN, KC_UP,   FN_GRV
+    MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, LOWR_ESC, SFT_SPC, SFT_ENT, UPPR_TAB, RGUI_LNG1, KC_DOWN, KC_UP,   FN_GRV
   ),
 
   [_MTGAP] = LAYOUT(
     HYPR_TAB, KC_Y,    KC_P,    KC_O,     KC_U,     KC_SCLN, KC_K,    KC_D,     KC_L,      KC_C,    KC_W,  HYPR_BSPC,
     CTL_ESC,  KC_I,    KC_N,    KC_E,     KC_A,     KC_COMM, KC_M,    KC_H,     KC_T,      KC_S,    KC_R,  CTL_Q,
     SFT_CW,   KC_Z,    KC_SLSH, KC_QUOT,  KC_DOT,   KC_X,    KC_B,    KC_F,     KC_G,      KC_V,    KC_J,  KC_BSLS,
-    MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, LOWR_ESC, SFT_SPC, CTL_ENT, UPPR_TAB, RGUI_LNG1, KC_DOWN, KC_UP, FN_GRV
+    MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, LOWR_ESC, SFT_SPC, SFT_ENT, UPPR_TAB, RGUI_LNG1, KC_DOWN, KC_UP, FN_GRV
   ),
 
   [_CTL_G] = LAYOUT(
     HYPR_TAB, KC_Q,    KC_W,    KC_E,     KC_R,     KC_T,    KC_Y,    KC_U,     KC_I,      KC_O,    KC_P,    HYPR_BSPC,
     CTL_C_G,  KC_A,    KC_S,    KC_D,     KC_F,     KC_G,    KC_H,    KC_J,     KC_K,      KC_L,    KC_SCLN, CTL_QUOT,
     SFT_CW,   KC_Z,    KC_X,    KC_C,     KC_V,     KC_B,    KC_N,    KC_M,     KC_COMM,   KC_DOT,  KC_SLSH, KC_BSLS,
-    MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, LOWR_ESC, SFT_SPC, CTL_ENT, UPPR_TAB, RGUI_LNG1, KC_DOWN, KC_UP,   FN_GRV
+    MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, LOWR_ESC, SFT_SPC, SFT_ENT, UPPR_TAB, RGUI_LNG1, KC_DOWN, KC_UP,   FN_GRV
   ),
 
   [_LOWER] = LAYOUT(
