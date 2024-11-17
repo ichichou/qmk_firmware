@@ -29,7 +29,6 @@
 #define HYPR_TAB  RHYPR_T(KC_TAB)
 #define HYPR_BSPC RHYPR_T(KC_BSPC)
 #define CTL_ESC   CTL_T(KC_ESC)
-#define CTL_C_G   CTL_T(C(KC_G))
 #define CTL_ENT   CTL_T(KC_ENT)
 #define CTL_QUOT  CTL_T(KC_QUOT)
 #define CTL_Q     CTL_T(KC_Q)
@@ -38,6 +37,7 @@
 #define SFT_ENT   SFT_T(KC_ENT)
 #define SFT_RBRC  SFT_T(KC_RBRC)
 #define SFT_CW    SFT_T(CW_TOGG)
+#define SFT_BSLS  SFT_T(KC_BSLS)
 #define GUI_LNG2  GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
 #define ALT_LSG_A ALT_T(LSG(KC_A))
@@ -49,7 +49,6 @@
 enum layer_names {
   _BASE,
   _MTGAP,
-  _CTL_G,
   _LOWER,
   _RAISE,
   _ADJUST,
@@ -87,12 +86,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case ALT_T(LSG(KC_A)):
       if (record->tap.count && record->event.pressed) {
         tap_code16(LSG(KC_A));
-        return false;
-      }
-      return true;
-    case CTL_C_G:
-      if (record->tap.count && record->event.pressed) {
-        tap_code16(C(KC_G));
         return false;
       }
       return true;
@@ -151,8 +144,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
       return true;
     case CTL_ESC:
       return true;
-    case CTL_C_G:
-      return true;
     case CTL_ENT:
       return true;
     case SFT_SPC:
@@ -160,6 +151,8 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case SFT_ENT:
       return true;
     case SFT_CW:
+      return true;
+    case SFT_BSLS:
       return true;
     case GUI_LNG2:
       return true;
@@ -177,34 +170,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT(
     HYPR_TAB, KC_Q,    KC_W,    KC_E,     KC_R,     KC_T,    KC_Y,    KC_U,     KC_I,      KC_O,    KC_P,    HYPR_BSPC,
     CTL_ESC,  KC_A,    KC_S,    KC_D,     KC_F,     KC_G,    KC_H,    KC_J,     KC_K,      KC_L,    KC_SCLN, CTL_QUOT,
-    SFT_CW,   KC_Z,    KC_X,    KC_C,     KC_V,     KC_B,    KC_N,    KC_M,     KC_COMM,   KC_DOT,  KC_SLSH, KC_BSLS,
-    MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, LOWR_ESC, SFT_SPC, SFT_ENT, UPPR_TAB, RGUI_LNG1, KC_DOWN, KC_UP,   FN_GRV
+    SFT_CW,   KC_Z,    KC_X,    KC_C,     KC_V,     KC_B,    KC_N,    KC_M,     KC_COMM,   KC_DOT,  KC_SLSH, SFT_BSLS,
+    MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, LOWR_ESC, SFT_SPC, CTL_ENT, UPPR_TAB, RGUI_LNG1, KC_DOWN, KC_UP,   FN_GRV
   ),
 
   [_MTGAP] = LAYOUT(
     HYPR_TAB, KC_Y,    KC_P,    KC_O,     KC_U,     KC_SCLN, KC_K,    KC_D,     KC_L,      KC_C,    KC_W,  HYPR_BSPC,
     CTL_ESC,  KC_I,    KC_N,    KC_E,     KC_A,     KC_COMM, KC_M,    KC_H,     KC_T,      KC_S,    KC_R,  CTL_Q,
-    SFT_CW,   KC_Z,    KC_SLSH, KC_QUOT,  KC_DOT,   KC_X,    KC_B,    KC_F,     KC_G,      KC_V,    KC_J,  KC_BSLS,
-    MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, LOWR_ESC, SFT_SPC, SFT_ENT, UPPR_TAB, RGUI_LNG1, KC_DOWN, KC_UP, FN_GRV
-  ),
-
-  [_CTL_G] = LAYOUT(
-    HYPR_TAB, KC_Q,    KC_W,    KC_E,     KC_R,     KC_T,    KC_Y,    KC_U,     KC_I,      KC_O,    KC_P,    HYPR_BSPC,
-    CTL_C_G,  KC_A,    KC_S,    KC_D,     KC_F,     KC_G,    KC_H,    KC_J,     KC_K,      KC_L,    KC_SCLN, CTL_QUOT,
-    SFT_CW,   KC_Z,    KC_X,    KC_C,     KC_V,     KC_B,    KC_N,    KC_M,     KC_COMM,   KC_DOT,  KC_SLSH, KC_BSLS,
-    MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, LOWR_ESC, SFT_SPC, SFT_ENT, UPPR_TAB, RGUI_LNG1, KC_DOWN, KC_UP,   FN_GRV
+    SFT_CW,   KC_Z,    KC_SLSH, KC_QUOT,  KC_DOT,   KC_X,    KC_B,    KC_F,     KC_G,      KC_V,    KC_J,  SFT_BSLS,
+    MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, LOWR_ESC, SFT_SPC, CTL_ENT, UPPR_TAB, RGUI_LNG1, KC_DOWN, KC_UP, FN_GRV
   ),
 
   [_LOWER] = LAYOUT(
-    _______, LSG(KC_S), KC_LPRN,      KC_RPRN,      MEH(KC_C), LSG(KC_T), G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC), G(KC_UP),
-    _______, ALT_LSG_A, CTL_LBRC,     SFT_RBRC,     LCG(KC_V), LCG(KC_S), KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC), G(KC_DOWN),
-    _______, LSG(KC_Z), LCA(KC_LEFT), LCA(KC_RGHT), LSG(KC_V), G(KC_V),   KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), XXXXXXX,    XXXXXXX,
-    _______, _______,   _______,      _______,      _______,   _______,   _______,   _______,   _______, _______, _______,    _______
+    _______, LSG(KC_S), KC_LPRN,  KC_RPRN,  MEH(KC_C), LSG(KC_T), G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC), G(KC_UP),
+    _______, ALT_LSG_A, CTL_LBRC, SFT_RBRC, LCG(KC_V), LCG(KC_S), KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC), G(KC_DOWN),
+    _______, LSG(KC_Z), G(KC_X),  G(KC_C),  LSG(KC_V), G(KC_V),   KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), XXXXXXX,    XXXXXXX,
+    _______, _______,   _______,  _______,  _______,   _______,   _______,   _______,   _______, _______, _______,    _______
   ),
 
   [_RAISE] = LAYOUT(
     _______, KC_DOT,  KC_PLUS, KC_UNDS, KC_EXLM, KC_PIPE, KC_GRV,  KC_QUES, KC_CIRC, KC_DLR,  KC_COMM, XXXXXXX,
-    _______, KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT,   KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN, XXXXXXX,
+    _______, KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT,   KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN, KC_QUOT,
     _______, KC_8,    KC_6,    KC_4,    KC_2,    KC_BSLS, KC_TILD, KC_3,    KC_5,    KC_7,    KC_9,    XXXXXXX,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
@@ -219,7 +205,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_FN] = LAYOUT(
     LCG(KC_Q), KC_F1,   KC_F2,   KC_F3,   KC_F4,   DF(_BASE),  LSG(KC_4), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, LCG(KC_Q),
     XXXXXXX,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   DF(_MTGAP), LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_MPLY,
-    XXXXXXX,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  DF(_CTL_G), LSG(KC_2), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,
+    XXXXXXX,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX,    LSG(KC_2), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,
     _______,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    QK_BOOT,   XXXXXXX, XXXXXXX, KC_LEFT, KC_RGHT, _______
   ),
 
