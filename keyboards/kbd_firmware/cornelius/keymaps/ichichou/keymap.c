@@ -20,7 +20,7 @@
 
 // Modifier Keycodes
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
-#define LCG(kc) (QK_LCTL | QK_LGUI | (kc))
+#define LCG(kc)     (QK_LCTL | QK_LGUI | (kc))
 
 // Tap-Hold Keys
 #define LOWR_ESC  LT(_LOWER, KC_ESC)

@@ -21,8 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // Modifier Keys
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
-#define LCG(kc) (QK_LCTL | QK_LGUI | (kc))
-#define SFT_GUI   G(KC_LSFT)
+#define LCG(kc)     (QK_LCTL | QK_LGUI | (kc))
+#define SFT_GUI     G(KC_LSFT)
 
 // Tap-Hold Keys
 #define HYPR_TAB  RHYPR_T(KC_TAB)
