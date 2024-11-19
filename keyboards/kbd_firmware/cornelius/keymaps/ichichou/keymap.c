@@ -21,25 +21,31 @@
 // Modifier Keycodes
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
 #define LCG(kc)     (QK_LCTL | QK_LGUI | (kc))
+#define GUI_SFT     G(KC_LSFT)
 
-// Tap-Hold Keys
-#define NAV_ESC   LT(_NAV, KC_ESC)
-#define SYM_TAB   LT(_SYM, KC_TAB)
+// Layer-Tap
+#define NAV_ESC  LT(_NAV, KC_ESC)
+#define NAV_SLSH LT(_NAV, KC_SLSH)
+#define SYM_TAB  LT(_SYM, KC_TAB)
+#define SYM_ENT  LT(_SYM, KC_ENT)
+
+// Mod-Tap
 #define HYPR_TAB  RHYPR_T(KC_TAB)
 #define HYPR_BSPC RHYPR_T(KC_BSPC)
-#define CTL_ESC   CTL_T(KC_ESC)
-#define CTL_ENT   CTL_T(KC_ENT)
-#define CTL_QUOT  CTL_T(KC_QUOT)
-#define CTL_Q     CTL_T(KC_Q)
 #define SFT_SPC   SFT_T(KC_SPC)
 #define SFT_CW    SFT_T(CW_TOGG)
+#define SFT_SLSH  SFT_T(KC_SLSH)
 #define SFT_BSLS  SFT_T(KC_BSLS)
+#define CTL_ENT   CTL_T(KC_ENT)
+#define CTL_ESC   CTL_T(KC_ESC)
+#define CTL_QUOT  CTL_T(KC_QUOT)
+#define CTL_Q     CTL_T(KC_Q)
 #define GUI_LNG2  GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
 
 // Home Row Mods
-#define CTL_LBRC  CTL_T(KC_LBRC)
 #define SFT_RBRC  SFT_T(KC_RBRC)
+#define CTL_LBRC  CTL_T(KC_LBRC)
 #define ALT_LSG_A ALT_T(LSG(KC_A))
 
 // }}}
@@ -98,22 +104,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
-    // Hold On Other Key Press Mode
+    // "Hold On Other Key Press Mode" Mode
     case NAV_ESC:
       return true;
     case SYM_TAB:
+      return true;
+    case SYM_ENT:
       return true;
     case HYPR_TAB:
       return true;
     case HYPR_BSPC:
       return true;
-    case CTL_ESC:
-      return true;
-    case CTL_ENT:
-      return true;
     case SFT_SPC:
       return true;
     case SFT_CW:
+      return true;
+    case CTL_ENT:
+      return true;
+    case CTL_ESC:
       return true;
     case GUI_LNG2:
       return true;
@@ -121,13 +129,17 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
       return true;
 
     // Default Mode
-    case CTL_QUOT:
+    case NAV_SLSH:
+      return false;
+    case SFT_SLSH:
       return false;
     case SFT_BSLS:
       return false;
-    case CTL_LBRC:
+    case CTL_QUOT:
       return false;
     case SFT_RBRC:
+      return false;
+    case CTL_LBRC:
       return false;
     case ALT_LSG_A:
       return false;
