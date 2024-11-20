@@ -34,12 +34,12 @@
 #define HYPR_BSPC RHYPR_T(KC_BSPC)
 #define SFT_SPC   SFT_T(KC_SPC)
 #define SFT_CW    SFT_T(CW_TOGG)
-#define RSFT_SLSH  RSFT_T(KC_SLSH)
-#define RSFT_BSLS  RSFT_T(KC_BSLS)
+#define RSFT_SLSH RSFT_T(KC_SLSH)
+#define RSFT_BSLS RSFT_T(KC_BSLS)
 #define CTL_ENT   CTL_T(KC_ENT)
 #define CTL_ESC   CTL_T(KC_ESC)
-#define RCTL_QUOT  RCTL_T(KC_QUOT)
-#define RCTL_Q     RCTL_T(KC_Q)
+#define RCTL_QUOT RCTL_T(KC_QUOT)
+#define RCTL_Q    RCTL_T(KC_Q)
 #define GUI_LNG2  GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
 
@@ -57,13 +57,13 @@ enum layer_names {
   _MTGAP,
   _NAV,
   _SYM,
-  _TRI,
+  _WIN,
   _FN,
 };
 
 // Tri Layers
 layer_state_t layer_state_set_user(layer_state_t state) {
-  return update_tri_layer_state(state, _NAV, _SYM, _TRI);
+  return update_tri_layer_state(state, _NAV, _SYM, _WIN);
 }
 
 // }}}
@@ -183,7 +183,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______
   ),
 
-  [_TRI] = LAYOUT(
+  [_WIN] = LAYOUT(
     XXXXXXX, LCA(KC_U),    LCA(KC_I), XXXXXXX,   MEH(KC_C),    C(KC_3),    C(KC_6), MEH(KC_C),   A(KC_UP),   XXXXXXX, XXXXXXX, LCA(KC_BSPC),
     XXXXXXX, LCA(KC_LEFT), LCA(KC_D), LCA(KC_G), LCA(KC_RGHT), C(KC_2),    C(KC_5), LCA(KC_C),   A(KC_DOWN), XXXXXXX, XXXXXXX, MEH(KC_ENT),
     XXXXXXX, LCA(KC_Z),    LCA(KC_X), LCA(KC_V), LCA(KC_B),    C(KC_1),    C(KC_4), LCA(KC_ENT), XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX,
