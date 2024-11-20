@@ -34,12 +34,12 @@
 #define HYPR_BSPC RHYPR_T(KC_BSPC)
 #define SFT_SPC   SFT_T(KC_SPC)
 #define SFT_CW    SFT_T(CW_TOGG)
-#define SFT_SLSH  SFT_T(KC_SLSH)
-#define SFT_BSLS  SFT_T(KC_BSLS)
+#define RSFT_SLSH  RSFT_T(KC_SLSH)
+#define RSFT_BSLS  RSFT_T(KC_BSLS)
 #define CTL_ENT   CTL_T(KC_ENT)
 #define CTL_ESC   CTL_T(KC_ESC)
-#define CTL_QUOT  CTL_T(KC_QUOT)
-#define CTL_Q     CTL_T(KC_Q)
+#define RCTL_QUOT  RCTL_T(KC_QUOT)
+#define RCTL_Q     RCTL_T(KC_Q)
 #define GUI_LNG2  GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
 
@@ -131,11 +131,11 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     // Default Mode
     case NAV_SLSH:
       return false;
-    case SFT_SLSH:
+    case RSFT_SLSH:
       return false;
-    case SFT_BSLS:
+    case RSFT_BSLS:
       return false;
-    case CTL_QUOT:
+    case RCTL_QUOT:
       return false;
     case SFT_RBRC:
       return false;
@@ -157,15 +157,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT(
     HYPR_TAB, KC_Q,    KC_W,    KC_E,     KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,      KC_O,    KC_P,    HYPR_BSPC,
-    CTL_ESC,  KC_A,    KC_S,    KC_D,     KC_F,    KC_G,       KC_H,    KC_J,    KC_K,      KC_L,    KC_SCLN, CTL_QUOT,
-    SFT_CW,   KC_Z,    KC_X,    KC_C,     KC_V,    KC_B,       KC_N,    KC_M,    KC_COMM,   KC_DOT,  KC_SLSH, SFT_BSLS,
+    CTL_ESC,  KC_A,    KC_S,    KC_D,     KC_F,    KC_G,       KC_H,    KC_J,    KC_K,      KC_L,    KC_SCLN, RCTL_QUOT,
+    SFT_CW,   KC_Z,    KC_X,    KC_C,     KC_V,    KC_B,       KC_N,    KC_M,    KC_COMM,   KC_DOT,  KC_SLSH, RSFT_BSLS,
     MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, NAV_ESC, SFT_SPC,    CTL_ENT, SYM_TAB, RGUI_LNG1, KC_DOWN, KC_UP,   MO(_FN)
   ),
 
   [_MTGAP] = LAYOUT(
     HYPR_TAB, KC_Y,    KC_P,    KC_O,     KC_U,    KC_SCLN,    KC_K,    KC_D,    KC_L,      KC_C,    KC_W,  HYPR_BSPC,
-    CTL_ESC,  KC_I,    KC_N,    KC_E,     KC_A,    KC_COMM,    KC_M,    KC_H,    KC_T,      KC_S,    KC_R,  CTL_Q,
-    SFT_CW,   KC_Z,    KC_SLSH, KC_QUOT,  KC_DOT,  KC_X,       KC_B,    KC_F,    KC_G,      KC_V,    KC_J,  SFT_BSLS,
+    CTL_ESC,  KC_I,    KC_N,    KC_E,     KC_A,    KC_COMM,    KC_M,    KC_H,    KC_T,      KC_S,    KC_R,  RCTL_Q,
+    SFT_CW,   KC_Z,    KC_SLSH, KC_QUOT,  KC_DOT,  KC_X,       KC_B,    KC_F,    KC_G,      KC_V,    KC_J,  RSFT_BSLS,
     MO(_FN),  KC_RCTL, KC_LALT, GUI_LNG2, NAV_ESC, SFT_SPC,    CTL_ENT, SYM_TAB, RGUI_LNG1, KC_DOWN, KC_UP, MO(_FN)
   ),
 
