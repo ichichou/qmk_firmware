@@ -21,11 +21,11 @@
 #define HYPR_BSPC RHYPR_T(KC_BSPC)
 #define SFT_SPC   SFT_T(KC_SPC)
 #define SFT_CW    SFT_T(CW_TOGG)
-#define RSFT_SLSH  RSFT_T(KC_SLSH)
-#define RSFT_BSLS  RSFT_T(KC_BSLS)
+#define RSFT_SLSH RSFT_T(KC_SLSH)
+#define RSFT_BSLS RSFT_T(KC_BSLS)
 #define CTL_ENT   CTL_T(KC_ENT)
 #define CTL_ESC   CTL_T(KC_ESC)
-#define RCTL_QUOT  CTL_T(KC_QUOT)
+#define RCTL_QUOT CTL_T(KC_QUOT)
 #define GUI_LNG2  GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
 
@@ -42,14 +42,9 @@ enum layer_names {
   _BASE,
   _NAV,
   _SYM,
-  _TRI,
+  _WIN,
   _FN,
 };
-
-// Tri Layers
-layer_state_t layer_state_set_user(layer_state_t state) {
-  return update_tri_layer_state(state, _NAV, _SYM, _TRI);
-}
 
 // }}}
 
@@ -161,18 +156,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______,                   _______,          _______,          _______,                   _______, _______, _______
   ),
 
-  [_TRI] = LAYOUT(
+  [_WIN] = LAYOUT(
     XXXXXXX,          LCA(KC_U),    LCA(KC_I), XXXXXXX,   MEH(KC_C),    C(KC_3), XXXXXXX, C(KC_6), MEH(KC_C),   A(KC_UP),   XXXXXXX, XXXXXXX, LCA(KC_BSPC), XXXXXXX,
     XXXXXXX,          LCA(KC_LEFT), LCA(KC_D), LCA(KC_G), LCA(KC_RGHT), C(KC_2), XXXXXXX, C(KC_5), LCA(KC_C),   A(KC_DOWN), XXXXXXX, XXXXXXX,               MEH(KC_ENT),
-    XXXXXXX, XXXXXXX, LCA(KC_Z),    LCA(KC_X), LCA(KC_V), LCA(KC_B),    C(KC_1), XXXXXXX, C(KC_4), LCA(KC_ENT), XXXXXXX,    XXXXXXX, XXXXXXX,               XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX,                            _______,               XXXXXXX,          _______,                          XXXXXXX, XXXXXXX,      XXXXXXX
+    XXXXXXX, _______, LCA(KC_Z),    LCA(KC_X), LCA(KC_V), LCA(KC_B),    C(KC_1), XXXXXXX, C(KC_4), LCA(KC_ENT), XXXXXXX,    XXXXXXX, _______,               XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX,               _______,          _______,                          XXXXXXX, XXXXXXX,      XXXXXXX
   ),
 
   [_FN] = LAYOUT(
-    LCG(KC_Q),          KC_F1,   KC_F2,   KC_F3,  KC_F4,   XXXXXXX, XXXXXXX, LSG(KC_4), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MNXT,
-    XXXXXXX,            KC_F5,   KC_F6,   KC_F7,  KC_F8,   XXXXXXX, XXXXXXX, LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV,          KC_MPLY,
-    XXXXXXX,   XXXXXXX, KC_F9,   KC_F10,  KC_F11, KC_F12,  XXXXXXX, XXXXXXX, LSG(KC_2), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,          _______,
-    _______,   XXXXXXX, XXXXXXX,                  XXXXXXX,          QK_BOOT,            XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
+    LCG(KC_Q),          KC_F1, KC_F2,  KC_F3,  KC_F4,  C(KC_3), XXXXXXX, C(KC_6), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MNXT,
+    XXXXXXX,            KC_F5, KC_F6,  KC_F7,  KC_F8,  C(KC_2), XXXXXXX, C(KC_5), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV,          KC_MPLY,
+    XXXXXXX,   XXXXXXX, KC_F9, KC_F10, KC_F11, KC_F12, C(KC_1), XXXXXXX, C(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,          _______,
+    _______,   XXXXXXX, XXXXXXX,               XXXXXXX,         QK_BOOT,          XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
 };
