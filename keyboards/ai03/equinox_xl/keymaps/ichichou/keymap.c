@@ -133,6 +133,55 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 
 // }}}
 
+// -- Combos {{{
+
+enum combos {
+  SD,
+  KL,
+  WE,
+  IO,
+};
+
+const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
+const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
+const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
+
+combo_t key_combos[] = {
+  [SD] = COMBO(sd_combo, MO(_NAV)),
+  [KL] = COMBO(kl_combo, MO(_NAV)),
+  [WE] = COMBO(we_combo, MO(_WIN)),
+  [IO] = COMBO(io_combo, MO(_WIN)),
+};
+
+// // COMBO_MUST_TAP_PER_COMBO
+// bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+//   switch (index) {
+//     case WE_TAP:
+//       return true;
+//     case IO_TAP:
+//       return true;
+//   }
+//   return false;
+// }
+
+// COMBO_MUST_HOLD_PER_COMBO
+bool get_combo_must_hold(uint16_t index, combo_t *combo) {
+  switch (index) {
+    case SD:
+      return true;
+    case KL:
+      return true;
+    case WE:
+      return true;
+    case IO:
+      return true;
+  }
+  return false;
+}
+
+// }}}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT(
