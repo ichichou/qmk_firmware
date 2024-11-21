@@ -61,11 +61,6 @@ enum layer_names {
   _FN,
 };
 
-// Tri Layers
-layer_state_t layer_state_set_user(layer_state_t state) {
-  return update_tri_layer_state(state, _NAV, _SYM, _WIN);
-}
-
 // }}}
 
 // -- Behavior of Any Keycode {{{
@@ -149,6 +144,44 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
       return false;
 
   }
+}
+
+// }}}
+
+// -- Combos {{{
+
+enum combos {
+  SD,
+  KL,
+  WE,
+  IO,
+};
+
+const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
+const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
+const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
+
+combo_t key_combos[] = {
+  [SD] = COMBO(sd_combo, MO(_NAV)),
+  [KL] = COMBO(kl_combo, MO(_NAV)),
+  [WE] = COMBO(we_combo, MO(_WIN)),
+  [IO] = COMBO(io_combo, MO(_WIN)),
+};
+
+// COMBO_MUST_HOLD_PER_COMBO
+bool get_combo_must_hold(uint16_t index, combo_t *combo) {
+  switch (index) {
+    case SD:
+      return true;
+    case KL:
+      return true;
+    case WE:
+      return true;
+    case IO:
+      return true;
+  }
+  return false;
 }
 
 // }}}
