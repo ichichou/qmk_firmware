@@ -52,6 +52,9 @@ enum layer_names {
 // 有効化には rules.mk に以下のコードを記述する：
 // TRI_LAYER_ENABLE = yes
 //
+// なお、Tri Layers の遷移先として指定したレイヤーは、コンボから遷移できなくなるよう
+// そのためコンボと Tri layers を併用したければ、_WIN と同じキーマップの _TRI レイヤーを作る必要がある
+
 layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, _NAV, _SYM, _WIN);
 }
@@ -104,13 +107,47 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //
 // 有効化には rules.mk に以下のコードを記述する：
 // COMBO_ENABLE = yes
-//
 // 有効化しない場合は keymap.c のコードをコメントアウトする必要あり
+//
+// 設定のため、必要に応じて config.h に以下のコードを記述する：
+// #define COMBO_TERM 20              // この時間以内に押された一連のキーがコンボと解釈される
+// #define COMBO_HOLD_TERM 100        // ホールド必須ならこの時間以上ホールドする。タップ必須ならこの時間未満にタップする
+// #define COMBO_MUST_TAP_PER_COMBO   // 個々のコンボでタップ必須かどうかを設定可能にする
+// #define COMBO_MUST_HOLD_PER_COMBO  // 個々のコンボでホールド必須かどうかを設定可能にする
 
-const uint16_t PROGMEM ab_combo[] = {KC_A, KC_B, COMBO_END};
-combo_t key_combos[] = {
-  COMBO(ab_combo, KC_ESC),
+enum combos {
+  SD,
+  KL,
+  WE,
+  IO,
 };
+
+const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
+const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
+const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
+
+combo_t key_combos[] = {
+  [SD] = COMBO(sd_combo, MO(_NAV)),
+  [KL] = COMBO(kl_combo, MO(_NAV)),
+  [WE] = COMBO(we_combo, MO(_WIN)),
+  [IO] = COMBO(io_combo, MO(_WIN)),
+};
+
+// COMBO_MUST_HOLD_PER_COMBO
+bool get_combo_must_hold(uint16_t index, combo_t *combo) {
+  switch (index) {
+    case SD:
+      return true;
+    case KL:
+      return true;
+    case WE:
+      return true;
+    case IO:
+      return true;
+  }
+  return false;
+}
 
 // }}}
 
