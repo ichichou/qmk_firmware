@@ -66,7 +66,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 // 定義したキーコードを利用しなくても、コメントアウトする必要はない
 
 enum my_keycodes {
-  SAMPLE_1 = SAFE_RANGE,
+  SAMPLE_1 = QK_USER,
   SAMPLE_2,
 };
 
