@@ -107,6 +107,12 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
       return true;
     case RGUI_LNG1:
       return true;
+    case SFT_RBRC:
+      return true;
+    case CTL_LBRC:
+      return true;
+    case ALT_LSG_A:
+      return true;
 
     // Default Mode
     case NAV_SLSH:
@@ -116,12 +122,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case RSFT_BSLS:
       return false;
     case RCTL_QUOT:
-      return false;
-    case SFT_RBRC:
-      return false;
-    case CTL_LBRC:
-      return false;
-    case ALT_LSG_A:
       return false;
 
     // Otherwise
