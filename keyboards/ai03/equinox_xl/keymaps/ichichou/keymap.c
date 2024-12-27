@@ -9,12 +9,14 @@
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
 #define LCG(kc)     (QK_LCTL | QK_LGUI | (kc))
 #define GUI_SFT     G(KC_LSFT)
+#define GUI_SFT_GRV MT(MOD_RGUI | MOD_RSFT, KC_GRV)
 
 // Layer-Tap
 #define NAV_ESC  LT(_NAV, KC_ESC)
 #define NAV_SLSH LT(_NAV, KC_SLSH)
 #define SYM_TAB  LT(_SYM, KC_TAB)
 #define SYM_ENT  LT(_SYM, KC_ENT)
+#define FN_BSLS  LT(_FN,  KC_BSLS)
 #define FN_GRV   LT(_FN,  KC_GRV)
 
 // Mod-Tap
@@ -26,9 +28,11 @@
 #define RSFT_BSLS RSFT_T(KC_BSLS)
 #define CTL_ENT   CTL_T(KC_ENT)
 #define CTL_ESC   CTL_T(KC_ESC)
-#define RCTL_QUOT CTL_T(KC_QUOT)
+#define RCTL_ENT  RCTL_T(KC_ENT)
+#define RCTL_QUOT RCTL_T(KC_QUOT)
 #define GUI_LNG2  GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
+#define RGUI_GRV  RGUI_T(KC_GRV)
 
 // Home Row Mods
 #define SFT_RBRC  SFT_T(KC_RBRC)
@@ -49,12 +53,21 @@ enum layer_names {
 
 // }}}
 
+// -- Custom Keycodes {{{
+
+// enum my_keycodes {
+//   SAMPLE = QK_USER,
+// };
+
+// }}}
+
 // -- Behavior of Any Keycode {{{
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
-    // Caps Word / Shift
+    // TAP:  Caps Word
+    // HOLD: Shift
     case SFT_CW:
       if (record->tap.count && record->event.pressed) {
         caps_word_toggle();
@@ -62,8 +75,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
 
-    // Shift-Command-A / Option
-    case ALT_T(LSG(KC_A)):
+    // TAP:  Shift-Command-A
+    // HOLD: Option
+    case ALT_LSG_A:
       if (record->tap.count && record->event.pressed) {
         tap_code16(LSG(KC_A));
         return false;
@@ -107,13 +121,19 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
       return true;
     case RSFT_BSLS:
       return true;
+    case CTL_ESC:
+      return true;
     case CTL_ENT:
       return true;
-    case CTL_ESC:
+    case RCTL_ENT:
       return true;
     case GUI_LNG2:
       return true;
     case RGUI_LNG1:
+      return true;
+    case RGUI_GRV:
+      return true;
+    case GUI_SFT_GRV:
       return true;
 
     // -- Home Row Mods
@@ -150,33 +170,37 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 // -- Combos {{{
 
 enum combos {
+  DF,
+  JK,
   SD,
   KL,
   WE,
   IO,
-  DF,
-  JK,
 };
 
+const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
 const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
 const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
 const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
 const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
-const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
-const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
 
 combo_t key_combos[] = {
-  [SD] = COMBO(sd_combo, MO(_NAV)),
-  [KL] = COMBO(kl_combo, MO(_NAV)),
-  [WE] = COMBO(we_combo, MO(_WIN)),
-  [IO] = COMBO(io_combo, MO(_WIN)),
   [DF] = COMBO(df_combo, KC_LNG2),
   [JK] = COMBO(jk_combo, KC_LNG1),
+  [SD] = COMBO(sd_combo, MO(_NAV)),
+  [KL] = COMBO(kl_combo, MO(_NAV)),
+  [WE] = COMBO(we_combo, LT(_WIN, KC_ESC)),
+  [IO] = COMBO(io_combo, LT(_WIN, KC_TAB)),
 };
 
 // COMBO_TERM_PER_COMBO (Default: 50)
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
   switch (index) {
+    case DF:
+      return 20;
+    case JK:
+      return 20;
     case SD:
       return 20;
     case KL:
@@ -184,10 +208,6 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
     case WE:
       return 20;
     case IO:
-      return 20;
-    case DF:
-      return 20;
-    case JK:
       return 20;
   }
   return COMBO_TERM;
@@ -211,10 +231,6 @@ bool get_combo_must_hold(uint16_t index, combo_t *combo) {
       return true;
     case KL:
       return true;
-    case WE:
-      return true;
-    case IO:
-      return true;
   }
   return false;
 }
@@ -224,14 +240,14 @@ bool get_combo_must_hold(uint16_t index, combo_t *combo) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT(
-    HYPR_TAB,           KC_Q, KC_W, KC_E, KC_R, KC_T, KC_LBRC, KC_Y, KC_U, KC_I,    KC_O,   KC_P,      HYPR_BSPC, RCTL_QUOT,
-    CTL_ESC,            KC_A, KC_S, KC_D, KC_F, KC_G, KC_RBRC, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,              CTL_ENT,
-    SFT_CW,   MO(_NAV), KC_Z, KC_X, KC_C, KC_V, KC_B, GUI_SFT, KC_N, KC_M, KC_COMM, KC_DOT, NAV_SLSH,             MO(_FN),
-    MO(_FN),  XXXXXXX,  GUI_LNG2,         SFT_SPC,    NAV_ESC,       SYM_ENT,               RGUI_LNG1, XXXXXXX,   KC_RALT
+    HYPR_TAB,           KC_Q, KC_W, KC_E, KC_R, KC_T, KC_LBRC,  KC_Y, KC_U, KC_I,    KC_O,   KC_P,      HYPR_BSPC, RCTL_QUOT,
+    CTL_ESC,            KC_A, KC_S, KC_D, KC_F, KC_G, KC_RBRC,  KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,              RCTL_ENT,
+    SFT_CW,   MO(_NAV), KC_Z, KC_X, KC_C, KC_V, KC_B, RGUI_GRV, KC_N, KC_M, KC_COMM, KC_DOT, NAV_SLSH,             FN_BSLS,
+    MO(_FN),  XXXXXXX,  GUI_LNG2,         SFT_SPC,    NAV_ESC,        SYM_ENT,               RGUI_LNG1, XXXXXXX,   KC_RALT
   ),
 
   [_NAV] = LAYOUT(
-    _______,          LSG(KC_S), KC_LPRN,  KC_RPRN,  MEH(KC_C), LSG(KC_T), XXXXXXX, G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC), G(KC_UP), G(KC_DOWN),
+    _______,          G(KC_Z),   KC_LPRN,  KC_RPRN,  MEH(KC_C), LSG(KC_T), XXXXXXX, G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC), G(KC_UP), G(KC_DOWN),
     _______,          ALT_LSG_A, CTL_LBRC, SFT_RBRC, LCG(KC_V), LCG(KC_S), XXXXXXX, KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC),           XXXXXXX,
     _______, _______, LSG(KC_Z), G(KC_X),  G(KC_C),  LSG(KC_V), G(KC_V),   XXXXXXX, KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), XXXXXXX,              _______,
     _______, _______, _______,                       _______,              _______,            _______,                     _______,    _______,  _______
