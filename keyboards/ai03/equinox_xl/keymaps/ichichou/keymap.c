@@ -8,36 +8,30 @@
 // Modifier Keycodes
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
 #define LCG(kc)     (QK_LCTL | QK_LGUI | (kc))
-#define GUI_SFT     G(KC_LSFT)
-#define GUI_SFT_GRV MT(MOD_RGUI | MOD_RSFT, KC_GRV)
 
 // Layer-Tap
-#define NAV_ESC  LT(_NAV, KC_ESC)
-#define NAV_SLSH LT(_NAV, KC_SLSH)
-#define SYM_TAB  LT(_SYM, KC_TAB)
-#define SYM_ENT  LT(_SYM, KC_ENT)
-#define FN_BSLS  LT(_FN,  KC_BSLS)
-#define FN_GRV   LT(_FN,  KC_GRV)
+#define NAV_ESC LT(_NAV, KC_ESC)
+#define SYM_TAB LT(_SYM, KC_TAB)
+#define SYM_ENT LT(_SYM, KC_ENT)
+#define FN_BSLS LT(_FN,  KC_BSLS)
+#define FN_GRV  LT(_FN,  KC_GRV)
 
 // Mod-Tap
 #define HYPR_TAB  RHYPR_T(KC_TAB)
 #define HYPR_BSPC RHYPR_T(KC_BSPC)
 #define SFT_SPC   SFT_T(KC_SPC)
 #define SFT_CW    SFT_T(CW_TOGG)
-#define RSFT_SLSH RSFT_T(KC_SLSH)
 #define RSFT_BSLS RSFT_T(KC_BSLS)
-#define CTL_ENT   CTL_T(KC_ENT)
 #define CTL_ESC   CTL_T(KC_ESC)
 #define RCTL_ENT  RCTL_T(KC_ENT)
-#define RCTL_QUOT RCTL_T(KC_QUOT)
 #define GUI_LNG2  GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
-#define RGUI_GRV  RGUI_T(KC_GRV)
 
 // Home Row Mods
-#define SFT_RBRC  SFT_T(KC_RBRC)
-#define CTL_LBRC  CTL_T(KC_LBRC)
-#define ALT_LSG_A ALT_T(LSG(KC_A))
+// Center Column Mods
+#define RCTL_LBRC RCTL_T(KC_LBRC)
+#define RSFT_RBRC RSFT_T(KC_RBRC)
+#define RGUI_GRV  RGUI_T(KC_GRV)
 
 // }}}
 
@@ -75,15 +69,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
 
-    // TAP:  Shift-Command-A
-    // HOLD: Option
-    case ALT_LSG_A:
-      if (record->tap.count && record->event.pressed) {
-        tap_code16(LSG(KC_A));
-        return false;
-      }
-      return true;
-
     // Otherwise
     default:
       return true;
@@ -93,6 +78,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 // }}}
+
+// -- Key Overrides {{{
+
+// const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_ALT, KC_ESC, KC_GRV);
+// const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, KC_TILD);
+// const key_override_t *key_overrides[] = {
+//   &grave_esc_override,
+//   &tilde_esc_override,
+// };
+
+// -- }}}
 
 // -- Tap-Hold Configuration {{{
 
@@ -123,25 +119,20 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
       return true;
     case CTL_ESC:
       return true;
-    case CTL_ENT:
-      return true;
     case RCTL_ENT:
       return true;
     case GUI_LNG2:
       return true;
     case RGUI_LNG1:
       return true;
-    case RGUI_GRV:
-      return true;
-    case GUI_SFT_GRV:
-      return true;
 
     // -- Home Row Mods
-    case SFT_RBRC:
+    // -- Center Column Mods
+    case RCTL_LBRC:
       return true;
-    case CTL_LBRC:
+    case RSFT_RBRC:
       return true;
-    case ALT_LSG_A:
+    case RGUI_GRV:
       return true;
 
     // Otherwise
@@ -154,14 +145,11 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 // Permissive Hold Mode
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case NAV_SLSH:
-      return true;
-    case RSFT_SLSH:
-      return true;
-    case RCTL_QUOT:
-      return true;
+
+    // Otherwise
     default:
       return false;
+
   }
 }
 
@@ -240,31 +228,31 @@ bool get_combo_must_hold(uint16_t index, combo_t *combo) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT(
-    HYPR_TAB,           KC_Q, KC_W, KC_E, KC_R, KC_T, KC_LBRC,  KC_Y, KC_U, KC_I,    KC_O,   KC_P,      HYPR_BSPC, RCTL_QUOT,
-    CTL_ESC,            KC_A, KC_S, KC_D, KC_F, KC_G, KC_RBRC,  KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,              RCTL_ENT,
-    SFT_CW,   MO(_NAV), KC_Z, KC_X, KC_C, KC_V, KC_B, RGUI_GRV, KC_N, KC_M, KC_COMM, KC_DOT, NAV_SLSH,             FN_BSLS,
-    MO(_FN),  XXXXXXX,  GUI_LNG2,         SFT_SPC,    NAV_ESC,        SYM_ENT,               RGUI_LNG1, XXXXXXX,   KC_RALT
+    HYPR_TAB,           KC_Q, KC_W, KC_E, KC_R, KC_T, RCTL_LBRC, KC_Y, KC_U, KC_I,    KC_O,   KC_P,      HYPR_BSPC, KC_QUOT,
+    CTL_ESC,            KC_A, KC_S, KC_D, KC_F, KC_G, RSFT_RBRC, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,              RCTL_ENT,
+    SFT_CW,   MO(_NAV), KC_Z, KC_X, KC_C, KC_V, KC_B, RGUI_GRV,  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,              FN_BSLS,
+    MO(_FN),  XXXXXXX,  GUI_LNG2,         SFT_SPC,    MO(_NAV),        SYM_ENT,               RGUI_LNG1, XXXXXXX,   KC_RALT
   ),
 
   [_NAV] = LAYOUT(
-    _______,          G(KC_Z),   KC_LPRN,  KC_RPRN,  MEH(KC_C), LSG(KC_T), XXXXXXX, G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC), G(KC_UP), G(KC_DOWN),
-    _______,          ALT_LSG_A, CTL_LBRC, SFT_RBRC, LCG(KC_V), LCG(KC_S), XXXXXXX, KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC),           XXXXXXX,
-    _______, _______, LSG(KC_Z), G(KC_X),  G(KC_C),  LSG(KC_V), G(KC_V),   XXXXXXX, KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), XXXXXXX,              _______,
-    _______, _______, _______,                       _______,              _______,            _______,                     _______,    _______,  _______
+    _______,          G(KC_Z),   KC_LPRN,   KC_RPRN,   MEH(KC_C), LSG(KC_T), XXXXXXX, G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC), G(KC_UP), G(KC_DOWN),
+    _______,          LSG(KC_A), RCTL_LBRC, RSFT_RBRC, LCG(KC_V), LCG(KC_S), XXXXXXX, KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC),           _______,
+    _______, _______, LSG(KC_Z), G(KC_X),   G(KC_C),   LSG(KC_V), G(KC_V),   XXXXXXX, KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), XXXXXXX,              _______,
+    _______, XXXXXXX, _______,                         _______,              _______,            _______,                     _______,    XXXXXXX,  _______
   ),
 
   [_SYM] = LAYOUT(
-    _______,          KC_DOT,  KC_PLUS, KC_UNDS, KC_EXLM, KC_PIPE, KC_LPRN, KC_GRV,  KC_QUES, KC_CIRC, KC_DLR,  KC_COMM, XXXXXXX, KC_QUOT,
-    _______,          KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT,   KC_RPRN, KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN,          XXXXXXX,
+    _______,          KC_DOT,  KC_PLUS, KC_UNDS, KC_EXLM, KC_PIPE, XXXXXXX, KC_GRV,  KC_QUES, KC_CIRC, KC_DLR,  KC_COMM, _______, KC_QUOT,
+    _______,          KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT,   XXXXXXX, KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN,          _______,
     _______, _______, KC_8,    KC_6,    KC_4,    KC_2,    KC_BSLS, XXXXXXX, KC_TILD, KC_3,    KC_5,    KC_7,    KC_9,             _______,
-    _______, _______, _______,                   _______,          _______,          _______,                   _______, _______, _______
+    _______, XXXXXXX, _______,                   _______,          _______,          _______,                   _______, XXXXXXX, _______
   ),
 
   [_WIN] = LAYOUT(
     XXXXXXX,          LCA(KC_U),    LCA(KC_I), XXXXXXX,   MEH(KC_C),    C(KC_1), XXXXXXX, C(KC_4), MEH(KC_C),   A(KC_UP),   XXXXXXX, XXXXXXX, LCA(KC_BSPC), XXXXXXX,
     XXXXXXX,          LCA(KC_LEFT), LCA(KC_D), LCA(KC_G), LCA(KC_RGHT), C(KC_2), XXXXXXX, C(KC_5), LCA(KC_C),   A(KC_DOWN), XXXXXXX, XXXXXXX,               MEH(KC_ENT),
-    XXXXXXX, _______, LCA(KC_Z),    LCA(KC_X), LCA(KC_V), LCA(KC_B),    C(KC_3), XXXXXXX, C(KC_6), LCA(KC_ENT), XXXXXXX,    XXXXXXX, _______,               XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX,               _______,          _______,                          XXXXXXX, XXXXXXX,      XXXXXXX
+    XXXXXXX, XXXXXXX, LCA(KC_Z),    LCA(KC_X), LCA(KC_V), LCA(KC_B),    C(KC_3), XXXXXXX, C(KC_6), LCA(KC_ENT), XXXXXXX,    XXXXXXX, XXXXXXX,               XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX,               XXXXXXX,          XXXXXXX,                          XXXXXXX, XXXXXXX,      XXXXXXX
   ),
 
   [_FN] = LAYOUT(
