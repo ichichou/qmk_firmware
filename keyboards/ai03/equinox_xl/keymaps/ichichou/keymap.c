@@ -17,15 +17,15 @@
 #define FN_GRV  LT(_FN,  KC_GRV)
 
 // Mod-Tap
-#define HYPR_TAB  RHYPR_T(KC_TAB)
-#define HYPR_BSPC RHYPR_T(KC_BSPC)
-#define SFT_SPC   SFT_T(KC_SPC)
-#define SFT_CW    SFT_T(CW_TOGG)
-#define RSFT_BSLS RSFT_T(KC_BSLS)
-#define CTL_ESC   CTL_T(KC_ESC)
-#define RCTL_ENT  RCTL_T(KC_ENT)
-#define GUI_LNG2  GUI_T(KC_LNG2)
-#define RGUI_LNG1 RGUI_T(KC_LNG1)
+#define RHYPR_TAB  RHYPR_T(KC_TAB)
+#define RHYPR_BSPC RHYPR_T(KC_BSPC)
+#define LSFT_SPC   SFT_T(KC_SPC)
+#define LSFT_CW    SFT_T(CW_TOGG)
+#define RSFT_BSLS  RSFT_T(KC_BSLS)
+#define LCTL_ESC   CTL_T(KC_ESC)
+#define RCTL_ENT   RCTL_T(KC_ENT)
+#define LGUI_LNG2  GUI_T(KC_LNG2)
+#define RGUI_LNG1  RGUI_T(KC_LNG1)
 
 // Home Row Mods
 // Center Column Mods
@@ -62,7 +62,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     // TAP:  Caps Word
     // HOLD: Shift
-    case SFT_CW:
+    case LSFT_CW:
       if (record->tap.count && record->event.pressed) {
         caps_word_toggle();
         return false;
@@ -81,12 +81,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // -- Key Overrides {{{
 
-// const key_override_t grave_esc_override = ko_make_basic(MOD_MASK_ALT, KC_ESC, KC_GRV);
-// const key_override_t tilde_esc_override = ko_make_basic(MOD_MASK_SHIFT, KC_ESC, KC_TILD);
-// const key_override_t *key_overrides[] = {
-//   &grave_esc_override,
-//   &tilde_esc_override,
-// };
+const key_override_t lctl_h_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_H, KC_BSPC);
+const key_override_t *key_overrides[] = {
+  &lctl_h_override,
+};
 
 // -- }}}
 
@@ -107,21 +105,21 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
       return true;
 
     // -- Mod Keys
-    case HYPR_TAB:
+    case RHYPR_TAB:
       return true;
-    case HYPR_BSPC:
+    case RHYPR_BSPC:
       return true;
-    case SFT_SPC:
+    case LSFT_SPC:
       return true;
-    case SFT_CW:
+    case LSFT_CW:
       return true;
     case RSFT_BSLS:
       return true;
-    case CTL_ESC:
+    case LCTL_ESC:
       return true;
     case RCTL_ENT:
       return true;
-    case GUI_LNG2:
+    case LGUI_LNG2:
       return true;
     case RGUI_LNG1:
       return true;
@@ -228,14 +226,14 @@ bool get_combo_must_hold(uint16_t index, combo_t *combo) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT(
-    HYPR_TAB,           KC_Q, KC_W, KC_E, KC_R, KC_T, RCTL_LBRC, KC_Y, KC_U, KC_I,    KC_O,   KC_P,      HYPR_BSPC, KC_QUOT,
-    CTL_ESC,            KC_A, KC_S, KC_D, KC_F, KC_G, RSFT_RBRC, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,              RCTL_ENT,
-    SFT_CW,   MO(_NAV), KC_Z, KC_X, KC_C, KC_V, KC_B, RGUI_GRV,  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,              FN_BSLS,
-    MO(_FN),  XXXXXXX,  GUI_LNG2,         SFT_SPC,    MO(_NAV),        SYM_ENT,               RGUI_LNG1, XXXXXXX,   KC_RALT
+    RHYPR_TAB,           KC_Q, KC_W, KC_E, KC_R, KC_T, RCTL_LBRC, KC_Y, KC_U, KC_I,    KC_O,   KC_P,      RHYPR_BSPC, KC_QUOT,
+    LCTL_ESC,            KC_A, KC_S, KC_D, KC_F, KC_G, RSFT_RBRC, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,               RCTL_ENT,
+    LSFT_CW,   MO(_NAV), KC_Z, KC_X, KC_C, KC_V, KC_B, RGUI_GRV,  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,               FN_BSLS,
+    MO(_FN),   XXXXXXX,  LGUI_LNG2,        LSFT_SPC,   MO(_NAV),        SYM_ENT,               RGUI_LNG1, XXXXXXX,    KC_RALT
   ),
 
   [_NAV] = LAYOUT(
-    _______,          G(KC_Z),   KC_LPRN,   KC_RPRN,   MEH(KC_C), LSG(KC_T), XXXXXXX, G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC), G(KC_UP), G(KC_DOWN),
+    _______,          LSG(KC_C), KC_LPRN,   KC_RPRN,   MEH(KC_C), LSG(KC_T), XXXXXXX, G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC), G(KC_UP), G(KC_DOWN),
     _______,          LSG(KC_A), RCTL_LBRC, RSFT_RBRC, LCG(KC_V), LCG(KC_S), XXXXXXX, KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC),           _______,
     _______, _______, LSG(KC_Z), G(KC_X),   G(KC_C),   LSG(KC_V), G(KC_V),   XXXXXXX, KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), XXXXXXX,              _______,
     _______, XXXXXXX, _______,                         _______,              _______,            _______,                     _______,    XXXXXXX,  _______
