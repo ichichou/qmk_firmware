@@ -29,9 +29,9 @@
 
 // Home Row Mods
 // Center Column Mods
-#define RCTL_LBRC RCTL_T(KC_LBRC)
-#define RSFT_RBRC RSFT_T(KC_RBRC)
-#define RGUI_GRV  RGUI_T(KC_GRV)
+#define LCTL_LBRC CTL_T(KC_LBRC)
+#define LSFT_RBRC SFT_T(KC_RBRC)
+#define LGUI_GRV  GUI_T(KC_GRV)
 
 // }}}
 
@@ -126,11 +126,11 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 
     // -- Home Row Mods
     // -- Center Column Mods
-    case RCTL_LBRC:
+    case LCTL_LBRC:
       return true;
-    case RSFT_RBRC:
+    case LSFT_RBRC:
       return true;
-    case RGUI_GRV:
+    case LGUI_GRV:
       return true;
 
     // Otherwise
@@ -226,15 +226,15 @@ bool get_combo_must_hold(uint16_t index, combo_t *combo) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT(
-    RHYPR_TAB,           KC_Q, KC_W, KC_E, KC_R, KC_T, RCTL_LBRC, KC_Y, KC_U, KC_I,    KC_O,   KC_P,      RHYPR_BSPC, KC_QUOT,
-    LCTL_ESC,            KC_A, KC_S, KC_D, KC_F, KC_G, RSFT_RBRC, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,               RCTL_ENT,
-    LSFT_CW,   MO(_NAV), KC_Z, KC_X, KC_C, KC_V, KC_B, RGUI_GRV,  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,               FN_BSLS,
+    RHYPR_TAB,           KC_Q, KC_W, KC_E, KC_R, KC_T, LCTL_LBRC, KC_Y, KC_U, KC_I,    KC_O,   KC_P,      RHYPR_BSPC, KC_QUOT,
+    LCTL_ESC,            KC_A, KC_S, KC_D, KC_F, KC_G, LSFT_RBRC, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,               RCTL_ENT,
+    LSFT_CW,   MO(_NAV), KC_Z, KC_X, KC_C, KC_V, KC_B, LGUI_GRV,  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,               FN_BSLS,
     MO(_FN),   XXXXXXX,  LGUI_LNG2,        LSFT_SPC,   MO(_NAV),        SYM_ENT,               RGUI_LNG1, XXXXXXX,    KC_RALT
   ),
 
   [_NAV] = LAYOUT(
     _______,          LSG(KC_C), KC_LPRN,   KC_RPRN,   MEH(KC_C), LSG(KC_T), XXXXXXX, G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC), G(KC_UP), G(KC_DOWN),
-    _______,          LSG(KC_A), RCTL_LBRC, RSFT_RBRC, LCG(KC_V), LCG(KC_S), XXXXXXX, KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC),           _______,
+    _______,          LSG(KC_A), LCTL_LBRC, LSFT_RBRC, LCG(KC_V), LCG(KC_S), XXXXXXX, KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC),           _______,
     _______, _______, LSG(KC_Z), G(KC_X),   G(KC_C),   LSG(KC_V), G(KC_V),   XXXXXXX, KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), XXXXXXX,              _______,
     _______, XXXXXXX, _______,                         _______,              _______,            _______,                     _______,    XXXXXXX,  _______
   ),
