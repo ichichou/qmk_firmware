@@ -81,10 +81,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // -- Key Overrides {{{
 
-const key_override_t lctl_h_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_H, KC_BSPC);
-const key_override_t *key_overrides[] = {
-  &lctl_h_override,
-};
+// const key_override_t lctl_h_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_H, KC_BSPC);
+// const key_override_t *key_overrides[] = {
+//   &lctl_h_override,
+// };
 
 // -- }}}
 
