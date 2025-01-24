@@ -11,6 +11,7 @@
 
 // Layer-Tap
 #define NAV_ESC LT(_NAV, KC_ESC)
+#define NAV_TAB LT(_NAV, KC_TAB)
 #define SYM_TAB LT(_SYM, KC_TAB)
 #define SYM_ENT LT(_SYM, KC_ENT)
 #define FN_BSLS LT(_FN,  KC_BSLS)
@@ -229,7 +230,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RHYPR_TAB,           KC_Q, KC_W, KC_E, KC_R, KC_T, LCTL_LBRC, KC_Y, KC_U, KC_I,    KC_O,   KC_P,      RHYPR_BSPC, KC_QUOT,
     LCTL_ESC,            KC_A, KC_S, KC_D, KC_F, KC_G, LSFT_RBRC, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,               RCTL_ENT,
     LSFT_CW,   MO(_NAV), KC_Z, KC_X, KC_C, KC_V, KC_B, LGUI_GRV,  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,               FN_BSLS,
-    MO(_FN),   XXXXXXX,  LGUI_LNG2,        LSFT_SPC,   MO(_NAV),        SYM_ENT,               RGUI_LNG1, XXXXXXX,    KC_RALT
+    MO(_FN),   XXXXXXX,  LGUI_LNG2,        LSFT_SPC,   NAV_TAB,         SYM_ENT,               RGUI_LNG1, XXXXXXX,    KC_RALT
   ),
 
   [_NAV] = LAYOUT(
