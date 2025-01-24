@@ -219,6 +219,7 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
   }
   return COMBO_TERM;
 }
+// COMBO_TERM を50にすると、Karabiner での同時押し判定に支障が出る。
 
 // COMBO_MUST_TAP_PER_COMBO
 bool get_combo_must_tap(uint16_t index, combo_t *combo) {
