@@ -154,6 +154,26 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 
 // }}}
 
+// -- Key Overrides {{{
+
+// Key Overrides は Karabiner-Elements との相性が悪いため、両者の処理対象とするキーが被る限り使用できない。
+// 例えば QMK 側で LCmd-H -> Left とオーバーライドしたなら、Karabiner が干渉して LCmd-H -> LCmd-Left と出力されてしまう。
+// これは Karabiner の Complex Modifications に何もルールを登録していなかったとしても同じである。
+// 唯一の手段として、Key Overrides を使用したいキーボード自体を Karabiner の管理対象から外せば、Karabiner の干渉を免れることができる。
+
+// const key_override_t lgui_h_override = ko_make_basic(MOD_BIT(KC_LGUI), KC_H, KC_LEFT);
+// const key_override_t lgui_j_override = ko_make_basic(MOD_BIT(KC_LGUI), KC_J, KC_DOWN);
+// const key_override_t lgui_k_override = ko_make_basic(MOD_BIT(KC_LGUI), KC_K, KC_UP);
+// const key_override_t lgui_l_override = ko_make_basic(MOD_BIT(KC_LGUI), KC_L, KC_RGHT);
+// const key_override_t *key_overrides[] = {
+//   &lgui_h_override,
+//   &lgui_j_override,
+//   &lgui_k_override,
+//   &lgui_l_override,
+// };
+
+// }}}
+
 // -- Combos {{{
 
 enum combos {
