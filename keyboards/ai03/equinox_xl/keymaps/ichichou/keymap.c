@@ -156,7 +156,7 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 
 // -- Key Overrides {{{
 
-// Key Overrides は Karabiner-Elements との相性が悪いため、両者の処理対象とするキーが被る限り使用できない。
+// Key Overrides は Karabiner-Elements との相性が悪いため、併用できない。
 // 例えば QMK 側で LCmd-H -> Left とオーバーライドしたなら、Karabiner が干渉して LCmd-H -> LCmd-Left と出力されてしまう。
 // これは Karabiner の Complex Modifications に何もルールを登録していなかったとしても同じである。
 // 唯一の手段として、Key Overrides を使用したいキーボード自体を Karabiner の管理対象から外せば、Karabiner の干渉を免れることができる。
