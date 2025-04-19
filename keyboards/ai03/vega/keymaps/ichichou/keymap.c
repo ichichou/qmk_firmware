@@ -261,7 +261,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,          XXXXXXX,      XXXXXXX,   XXXXXXX,   XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     _______,          LCA(KC_U),    LCA(KC_I), XXXXXXX,   MEH(KC_C),    C(KC_1), XXXXXXX, C(KC_4), MEH(KC_C),   A(KC_UP),   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
     _______,          LCA(KC_LEFT), LCA(KC_D), LCA(KC_G), LCA(KC_RGHT), C(KC_2), XXXXXXX, C(KC_5), LCA(KC_C),   A(KC_DOWN), XXXXXXX, XXXXXXX,          XXXXXXX,          XXXXXXX,
-    _______, XXXXXXX, LCA(KC_Z),    LCA(KC_X), LCA(KC_V), LCA(KC_B),    C(KC_3), XXXXXXX, C(KC_6), LCA(KC_ENT), XXXXXXX,    XXXXXXX, XXXXXXX,          XXXXXXX,          XXXXXXX,
+    _______, XXXXXXX, LCA(KC_Z),    LCA(KC_X), LCA(KC_V), LCA(KC_B),    C(KC_3), XXXXXXX, C(KC_6), LCA(KC_ENT), LCG(KC_F),  XXXXXXX, XXXXXXX,          XXXXXXX,          XXXXXXX,
     _______, XXXXXXX, _______,                 XXXXXXX,                 _______,          XXXXXXX,              XXXXXXX,    _______,          XXXXXXX, XXXXXXX,          XXXXXXX
   ),
 
