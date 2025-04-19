@@ -25,6 +25,8 @@
 #define RSFT_BSLS  RSFT_T(KC_BSLS)
 #define LCTL_ESC   CTL_T(KC_ESC)
 #define RCTL_ENT   RCTL_T(KC_ENT)
+#define RCTL_TAB   RCTL_T(KC_TAB)
+#define RALT_GRV   RALT_T(KC_GRV)
 #define LGUI_LNG2  GUI_T(KC_LNG2)
 #define RGUI_LNG1  RGUI_T(KC_LNG1)
 
@@ -248,10 +250,10 @@ bool get_combo_must_hold(uint16_t index, combo_t *combo) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT(
-    RHYPR_TAB,           KC_Q, KC_W, KC_E, KC_R, KC_T, LCTL_LBRC, KC_Y, KC_U, KC_I,    KC_O,   KC_P,      KC_BSPC, KC_QUOT,
-    LCTL_ESC,            KC_A, KC_S, KC_D, KC_F, KC_G, LSFT_RBRC, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,            RCTL_ENT,
-    LSFT_CW,   MO(_NAV), KC_Z, KC_X, KC_C, KC_V, KC_B, LGUI_GRV,  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,            FN_BSLS,
-    MO(_FN),   XXXXXXX,  LGUI_LNG2,        LSFT_SPC,   NAV_TAB,         SYM_ENT,               RGUI_LNG1, XXXXXXX, KC_RALT
+    RHYPR_TAB,           KC_Q, KC_W, KC_E, KC_R, KC_T, KC_LBRC, KC_Y, KC_U, KC_I,    KC_O,   KC_P,      KC_BSPC, KC_QUOT,
+    LCTL_ESC,            KC_A, KC_S, KC_D, KC_F, KC_G, KC_RBRC, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,            RCTL_ENT,
+    LSFT_CW,   MO(_NAV), KC_Z, KC_X, KC_C, KC_V, KC_B, KC_GRV,  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,            FN_BSLS,
+    MO(_FN),   XXXXXXX,  LGUI_LNG2,        LSFT_SPC,   RCTL_TAB,      SYM_ENT,               RGUI_LNG1, XXXXXXX, RALT_GRV
   ),
 
   [_NAV] = LAYOUT(
