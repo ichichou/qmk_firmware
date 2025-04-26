@@ -31,7 +31,6 @@
 #define RGUI_LNG1  RGUI_T(KC_LNG1)
 
 // Home Row Mods
-// Center Column Mods
 #define LCTL_LBRC CTL_T(KC_LBRC)
 #define LSFT_RBRC SFT_T(KC_RBRC)
 #define LGUI_GRV  GUI_T(KC_GRV)
@@ -84,12 +83,88 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // -- Key Overrides {{{
 
-// const key_override_t lctl_h_override = ko_make_basic(MOD_BIT(KC_LCTL), KC_H, KC_BSPC);
+// Key Overrides は Karabiner-Elements との相性が悪いため、併用できない。
+// 例えば QMK 側で LCmd-H -> Left とオーバーライドしたなら、Karabiner が干渉して LCmd-H -> LCmd-Left と出力されてしまう。
+// これは Karabiner の Complex Modifications に何もルールを登録していなかったとしても同じである。
+// 唯一の手段として、Key Overrides を使用したいキーボード自体を Karabiner の管理対象から外せば、Karabiner の干渉を免れることができる。
+
+// const key_override_t lgui_h_override = ko_make_basic(MOD_BIT(KC_LGUI), KC_H, KC_LEFT);
+// const key_override_t lgui_j_override = ko_make_basic(MOD_BIT(KC_LGUI), KC_J, KC_DOWN);
+// const key_override_t lgui_k_override = ko_make_basic(MOD_BIT(KC_LGUI), KC_K, KC_UP);
+// const key_override_t lgui_l_override = ko_make_basic(MOD_BIT(KC_LGUI), KC_L, KC_RGHT);
 // const key_override_t *key_overrides[] = {
-//   &lctl_h_override,
+//   &lgui_h_override,
+//   &lgui_j_override,
+//   &lgui_k_override,
+//   &lgui_l_override,
 // };
 
-// -- }}}
+// }}}
+
+// -- Combos {{{
+
+enum combos {
+  SD,
+  KL,
+  WE,
+  IO,
+};
+
+const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
+const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
+const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
+
+combo_t key_combos[] = {
+  [SD] = COMBO(sd_combo, MO(_NAV)),
+  [KL] = COMBO(kl_combo, MO(_NAV)),
+  [WE] = COMBO(we_combo, MO(_WIN)),
+  [IO] = COMBO(io_combo, MO(_WIN)),
+};
+
+// }}}
+
+// -- Combo Configuration {{{
+
+// COMBO_TERM_PER_COMBO (Default: 50)
+// COMBO_TERM を50にすると、Karabiner での同時押し判定に支障が出る。
+uint16_t get_combo_term(uint16_t index, combo_t *combo) {
+  switch (index) {
+    case SD:
+      return 20;
+    case KL:
+      return 20;
+    case WE:
+      return 20;
+    case IO:
+      return 20;
+  }
+  return COMBO_TERM;
+}
+
+// COMBO_MUST_TAP_PER_COMBO
+bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+  switch (index) {
+  }
+  return false;
+}
+
+// COMBO_MUST_HOLD_PER_COMBO
+bool get_combo_must_hold(uint16_t index, combo_t *combo) {
+  switch (index) {
+    case SD:
+      return true;
+    case KL:
+      return true;
+    case WE:
+      return true;
+    case IO:
+      return true;
+  }
+  return false;
+}
+
+// }}}
 
 // -- Tap-Hold Configuration {{{
 
@@ -151,97 +226,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
       return false;
 
   }
-}
-
-// }}}
-
-// -- Key Overrides {{{
-
-// Key Overrides は Karabiner-Elements との相性が悪いため、併用できない。
-// 例えば QMK 側で LCmd-H -> Left とオーバーライドしたなら、Karabiner が干渉して LCmd-H -> LCmd-Left と出力されてしまう。
-// これは Karabiner の Complex Modifications に何もルールを登録していなかったとしても同じである。
-// 唯一の手段として、Key Overrides を使用したいキーボード自体を Karabiner の管理対象から外せば、Karabiner の干渉を免れることができる。
-
-// const key_override_t lgui_h_override = ko_make_basic(MOD_BIT(KC_LGUI), KC_H, KC_LEFT);
-// const key_override_t lgui_j_override = ko_make_basic(MOD_BIT(KC_LGUI), KC_J, KC_DOWN);
-// const key_override_t lgui_k_override = ko_make_basic(MOD_BIT(KC_LGUI), KC_K, KC_UP);
-// const key_override_t lgui_l_override = ko_make_basic(MOD_BIT(KC_LGUI), KC_L, KC_RGHT);
-// const key_override_t *key_overrides[] = {
-//   &lgui_h_override,
-//   &lgui_j_override,
-//   &lgui_k_override,
-//   &lgui_l_override,
-// };
-
-// }}}
-
-// -- Combos {{{
-
-enum combos {
-  DF,
-  JK,
-  SD,
-  KL,
-  WE,
-  IO,
-};
-
-const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
-const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
-const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
-const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
-const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
-
-combo_t key_combos[] = {
-  [DF] = COMBO(df_combo, KC_LNG2),
-  [JK] = COMBO(jk_combo, KC_LNG1),
-  [SD] = COMBO(sd_combo, MO(_NAV)),
-  [KL] = COMBO(kl_combo, MO(_NAV)),
-  [WE] = COMBO(we_combo, LT(_WIN, KC_ESC)),
-  [IO] = COMBO(io_combo, LT(_WIN, KC_TAB)),
-};
-
-// COMBO_TERM_PER_COMBO (Default: 50)
-uint16_t get_combo_term(uint16_t index, combo_t *combo) {
-  switch (index) {
-    case DF:
-      return 20;
-    case JK:
-      return 20;
-    case SD:
-      return 20;
-    case KL:
-      return 20;
-    case WE:
-      return 20;
-    case IO:
-      return 20;
-  }
-  return COMBO_TERM;
-}
-// COMBO_TERM を50にすると、Karabiner での同時押し判定に支障が出る。
-
-// COMBO_MUST_TAP_PER_COMBO
-bool get_combo_must_tap(uint16_t index, combo_t *combo) {
-  switch (index) {
-    case DF:
-      return true;
-    case JK:
-      return true;
-  }
-  return false;
-}
-
-// COMBO_MUST_HOLD_PER_COMBO
-bool get_combo_must_hold(uint16_t index, combo_t *combo) {
-  switch (index) {
-    case SD:
-      return true;
-    case KL:
-      return true;
-  }
-  return false;
 }
 
 // }}}
