@@ -128,7 +128,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
       return true;
 
     // -- Home Row Mods
-    // -- Center Column Mods
     case LCTL_LBRC:
       return true;
     case LSFT_RBRC:
