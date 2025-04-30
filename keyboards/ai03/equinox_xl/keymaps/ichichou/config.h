@@ -1,5 +1,5 @@
 // Layer
-#define DYNAMIC_KEYMAP_LAYER_COUNT 5
+#define DYNAMIC_KEYMAP_LAYER_COUNT 6
 
 // Tap-Hold Configuration
 #define TAPPING_TERM 150

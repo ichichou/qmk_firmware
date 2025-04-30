@@ -37,12 +37,28 @@
 #define LSFT_RBRC SFT_T(KC_RBRC)
 #define LGUI_GRV  GUI_T(KC_GRV)
 
+// MTGAP
+#define MTGAP_KEYCODE(name, mtgap_key, qwerty_key) \
+  case name:                                       \
+    if (record->event.pressed) {                   \
+      if ((get_mods() & ~(MOD_MASK_SHIFT)) == 0) { \
+        register_code(mtgap_key);                  \
+      } else {                                     \
+        register_code(qwerty_key);                 \
+      }                                            \
+    } else {                                       \
+      unregister_code(mtgap_key);                  \
+      unregister_code(qwerty_key);                 \
+    }                                              \
+    return false;
+
 // }}}
 
 // -- Layers {{{
 
 enum layer_names {
   _BASE,
+  _MTGAP,
   _NAV,
   _SYM,
   _WIN,
@@ -53,9 +69,47 @@ enum layer_names {
 
 // -- Custom Keycodes {{{
 
-// enum my_keycodes {
-//   SAMPLE = QK_USER,
-// };
+enum my_keycodes {
+  SAMPLE = QK_USER,
+
+  // MTGAP {{{
+
+  MT_A,
+  MT_B,
+  MT_C,
+  MT_D,
+  MT_E,
+  MT_F,
+  MT_G,
+  MT_H,
+  MT_I,
+  MT_J,
+  MT_K,
+  MT_L,
+  MT_M,
+  MT_N,
+  MT_O,
+  MT_P,
+  MT_Q,
+  MT_R,
+  MT_S,
+  MT_T,
+  MT_U,
+  MT_V,
+  MT_W,
+  MT_X,
+  MT_Y,
+  MT_Z,
+  MT_SCLN,
+  MT_QUOT,
+  MT_COMM,
+  MT_DOT,
+  MT_SLSH,
+
+  // }}}
+
+};
+
 
 // }}}
 
@@ -73,6 +127,45 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
       return true;
+
+    // MTGAP (mod-1) {{{
+
+    // ypou; kdlcw
+    // inea, mhtsr q
+    // z/'.x bfgvj
+    MTGAP_KEYCODE(MT_A,    KC_A,    KC_F)
+    MTGAP_KEYCODE(MT_B,    KC_B,    KC_N)
+    MTGAP_KEYCODE(MT_C,    KC_C,    KC_O)
+    MTGAP_KEYCODE(MT_D,    KC_D,    KC_U)
+    MTGAP_KEYCODE(MT_E,    KC_E,    KC_D)
+    MTGAP_KEYCODE(MT_F,    KC_F,    KC_M)
+    MTGAP_KEYCODE(MT_G,    KC_G,    KC_COMM)
+    MTGAP_KEYCODE(MT_H,    KC_H,    KC_J)
+    MTGAP_KEYCODE(MT_I,    KC_I,    KC_A)
+    MTGAP_KEYCODE(MT_J,    KC_J,    KC_SLSH)
+    MTGAP_KEYCODE(MT_K,    KC_K,    KC_Y)
+    MTGAP_KEYCODE(MT_L,    KC_L,    KC_I)
+    MTGAP_KEYCODE(MT_M,    KC_M,    KC_H)
+    MTGAP_KEYCODE(MT_N,    KC_N,    KC_S)
+    MTGAP_KEYCODE(MT_O,    KC_O,    KC_E)
+    MTGAP_KEYCODE(MT_P,    KC_P,    KC_W)
+    MTGAP_KEYCODE(MT_Q,    KC_Q,    KC_QUOT)
+    MTGAP_KEYCODE(MT_R,    KC_R,    KC_SCLN)
+    MTGAP_KEYCODE(MT_S,    KC_S,    KC_L)
+    MTGAP_KEYCODE(MT_T,    KC_T,    KC_K)
+    MTGAP_KEYCODE(MT_U,    KC_U,    KC_R)
+    MTGAP_KEYCODE(MT_V,    KC_V,    KC_DOT)
+    MTGAP_KEYCODE(MT_W,    KC_W,    KC_P)
+    MTGAP_KEYCODE(MT_X,    KC_X,    KC_B)
+    MTGAP_KEYCODE(MT_Y,    KC_Y,    KC_Q)
+    MTGAP_KEYCODE(MT_Z,    KC_Z,    KC_Z)
+    MTGAP_KEYCODE(MT_SCLN, KC_SCLN, KC_T)
+    MTGAP_KEYCODE(MT_QUOT, KC_QUOT, KC_C)
+    MTGAP_KEYCODE(MT_COMM, KC_COMM, KC_G)
+    MTGAP_KEYCODE(MT_DOT,  KC_DOT,  KC_V)
+    MTGAP_KEYCODE(MT_SLSH, KC_SLSH, KC_X)
+
+    // }}}
 
     // Otherwise
     default:
@@ -107,7 +200,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // -- Combos {{{
 
-// コンボは Karabiner の同時押しと干渉するため、すべて Karabiner 側に担当させる。
+// コンボは Karabiner の同時押しと干渉するため、
+// 同時押し系の機能はすべて Karabiner 側で実装する。
 
 // enum combos {
 //   SD,
@@ -170,18 +264,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // -- Tap-Hold Configuration {{{
 
 // 'Hold on other key press' と 'permissive hold' を併用するには、
-// HOLD_ON_OTHER_KEY_PRESS_PER_KEY と PERMISSIVE_HOLD_PER_KEY を設定することが必要。
+// HOLD_ON_OTHER_KEY_PRESS_PER_KEY と PERMISSIVE_HOLD_PER_KEY の組み合わせが必要。
 //
 // HOLD_ON_OTHER_KEY_PRESS と PERMISSIVE_HOLD_PER_KEY の組み合わせはうまく動作しない。
 // Tap-hold キーの基本動作を 'hold on other key press' としながら、
-// 個別に指定したキーを 'permissive hold' とすることを意図しているが、
-// 指定しても 'permissive hold' とはならず、すべて 'hold on other key press' になってしまう。
+// 個別に指定したキーの動作を 'permissive hold' とすることを意図しているが、
+// そのように指定しても 'permissive hold' とはならず、すべて 'hold on other key press' になってしまう。
+// 'hold on other key press' と 'permissive hold' の両方が設定されていると、'hold on...' が優先されるのだろう。
 
 // Hold On Other Key Press Mode
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
-    // -- Layer Keys
+    // Layer-Tap Keys
     case NAV_ESC: return true;
     case NAV_TAB: return true;
     case SYM_TAB: return true;
@@ -189,7 +284,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case FN_BSLS: return true;
     case FN_GRV:  return true;
 
-    // -- Mod Keys
+    // Mod-Tap Keys
     case RHYPR_TAB:  return true;
     case RHYPR_BSPC: return true;
     case LSFT_SPC:   return true;
@@ -204,7 +299,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case LGUI_LNG2:  return true;
     case RGUI_LNG1:  return true;
 
-    // -- Home Row Mods
+    // Home Row Mods
     case LCTL_LBRC: return true;
     case LSFT_RBRC: return true;
     case LGUI_GRV:  return true;
@@ -238,6 +333,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MO(_FN),   XXXXXXX,  LGUI_LNG2,        LSFT_SPC,   RCTL_TAB,      SYM_ENT,               RGUI_LNG1, XXXXXXX, RALT_GRV
   ),
 
+  [_MTGAP] = LAYOUT(
+    RHYPR_TAB,           MT_Y, MT_P,    MT_O,    MT_U,   MT_SCLN, KC_LBRC, MT_K, MT_D, MT_L, MT_C, MT_W,      KC_BSPC, MT_Q,
+    LCTL_ESC,            MT_I, MT_N,    MT_E,    MT_A,   MT_COMM, KC_RBRC, MT_M, MT_H, MT_T, MT_S, MT_R,               RCTL_ENT,
+    LSFT_CW,   MO(_NAV), MT_Z, MT_SLSH, MT_QUOT, MT_DOT, MT_X,    KC_GRV,  MT_B, MT_F, MT_G, MT_V, MT_J,               FN_BSLS,
+    MO(_FN),   XXXXXXX,  LGUI_LNG2,              LSFT_SPC,        RCTL_TAB,      SYM_ENT,          RGUI_LNG1, XXXXXXX, RALT_GRV
+  ),
+
   [_NAV] = LAYOUT(
     _______,          LSG(KC_C), KC_LPRN,   KC_RPRN,   MEH(KC_C), LSG(KC_T), XXXXXXX, G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC), G(KC_UP), G(KC_DOWN),
     _______,          LSG(KC_A), LCTL_LBRC, LSFT_RBRC, LCG(KC_V), LCG(KC_S), XXXXXXX, KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC),           _______,
@@ -260,10 +362,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT(
-    LCG(KC_Q),          KC_F1, KC_F2,  KC_F3,  KC_F4,  XXXXXXX, XXXXXXX, LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MNXT,
-    XXXXXXX,            KC_F5, KC_F6,  KC_F7,  KC_F8,  XXXXXXX, XXXXXXX, LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV,          KC_MPLY,
-    XXXXXXX,   XXXXXXX, KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX, XXXXXXX, LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,          _______,
-    _______,   XXXXXXX, XXXXXXX,               EE_CLR,          QK_BOOT,            XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
+    LCG(KC_Q),          KC_F1, KC_F2,  KC_F3,  KC_F4,  XXXXXXX, DF(_BASE),  LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MNXT,
+    XXXXXXX,            KC_F5, KC_F6,  KC_F7,  KC_F8,  XXXXXXX, DF(_MTGAP), LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV,          KC_MPLY,
+    XXXXXXX,   XXXXXXX, KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX, XXXXXXX,    LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,          _______,
+    _______,   XXXXXXX, XXXXXXX,               EE_CLR,          QK_BOOT,               XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
 };
