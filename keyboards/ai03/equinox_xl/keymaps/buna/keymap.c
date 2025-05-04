@@ -49,6 +49,12 @@
 #define LGUI_GRV  GUI_T(KC_GRV)
 
 // Buna Layout
+#define BUNA2 OSL(_BUNA2)
+#define BUNA3 OSL(_BUNA3)
+
+// }}}
+
+// -- Functions {{{
 
 static bool process_buna_key(uint8_t qwerty_key, const char *kana, bool *registered, keyrecord_t *record, uint8_t mod_state) {
   if (record->event.pressed) {
@@ -71,9 +77,6 @@ static bool process_buna_key(uint8_t qwerty_key, const char *kana, bool *registe
   }
   return false;
 }
-
-#define BUNA2 OSL(_BUNA2)
-#define BUNA3 OSL(_BUNA3)
 
 // }}}
 
