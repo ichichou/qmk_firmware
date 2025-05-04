@@ -1,23 +1,28 @@
 // Copyright 2024 ai03
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-// 新下駄配列の実装についてメモ：
-// おおむねうまくいったが、問題点がいくつか残っている。
-//
 // 1. LGUI, RGUI でレイヤーの切り替えができない。
 // ChatGPT に訊いたら初耳の内容が返ってきたが、それはまだ試していない。
+// -> process_record_user でタップ時の動作を上書き
 //
 // 2. Key Overrides が機能しない。
 // LCtrl-J/L でレイヤーを切り替えたいが、現状できない。
+// -> process_record_user で動作を上書き
 //
 // 3. ファームウェアのサイズが上限ぎりぎりで、他の必要な設定が入るか分からない。
 // サイズ圧縮の方法がないわけではない。
+// -> マクロを関数化
+// -> 文字列（新下駄配列の仮名）を PROGMEM に移動する
+
+// -- #include {{{
 
 #include QMK_KEYBOARD_H
 
-// -- Define Macros {{{
+// }}}
 
-// Modifier Keycodes
+// -- #define {{{
+
+// Modifiers
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
 #define LCG(kc)     (QK_LCTL | QK_LGUI | (kc))
 
@@ -49,47 +54,48 @@
 #define LSFT_RBRC SFT_T(KC_RBRC)
 #define LGUI_GRV  GUI_T(KC_GRV)
 
-// 新下駄配列 {{{
-
-#define SHINGETA_KEYCODE(name, sg_kana, qwerty_key, qw_var)  \
-  case name:                                                 \
-    {                                                        \
-      static bool qw_var##_registered;                       \
-                                                             \
-      if (record->event.pressed) {                           \
-        if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {          \
-          SEND_STRING(sg_kana);                              \
-          return false;                                      \
-        } else {                                             \
-          register_code(qwerty_key);                         \
-          qw_var##_registered = true;                        \
-          return false;                                      \
-        }                                                    \
-      } else {                                               \
-        if (qw_var##_registered) {                           \
-          unregister_code(qwerty_key);                       \
-          qw_var##_registered = false;                       \
-          return false;                                      \
-        }                                                    \
-      }                                                      \
-      return false;                                          \
-    }
-
-#define OUTPUT_KEYCODE(output_keycode, str)  \
-  case output_keycode:                       \
-    if (record->event.pressed) {             \
-      SEND_STRING(str);                      \
-      return false;                          \
-    }                                        \
-    return false;
-
-#define CONST_COMBO(combo_name, shift_key, key)  \
+// 新下駄配列
+#define CONST_COMBO(combo_name, shift_key, key) \
   const uint16_t PROGMEM combo_name##_combo[] = {shift_key, key, COMBO_END};
 
-#define COMBO_LIST(combo_code, combo_name, output_key)  \
+#define COMBO_LIST(combo_code, combo_name, output_key) \
   [combo_code] = COMBO(combo_name##_combo, output_key)
 
 // }}}
+
+// -- Functions {{{
+
+#define SHINGETA_KEYCODE(name, sg_kana, qwerty_key, qw_var) \
+  case name:                                                \
+    {                                                       \
+      static bool qw_var##_registered;                      \
+                                                            \
+      if (record->event.pressed) {                          \
+        if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {         \
+          SEND_STRING(sg_kana);                             \
+          return false;                                     \
+        } else {                                            \
+          register_code(qwerty_key);                        \
+          qw_var##_registered = true;                       \
+          return false;                                     \
+        }                                                   \
+      } else {                                              \
+        if (qw_var##_registered) {                          \
+          unregister_code(qwerty_key);                      \
+          qw_var##_registered = false;                      \
+          return false;                                     \
+        }                                                   \
+      }                                                     \
+      return false;                                         \
+    }
+
+#define OUTPUT_KEYCODE(output_keycode, str) \
+  case output_keycode:                      \
+    if (record->event.pressed) {            \
+      SEND_STRING(str);                     \
+      return false;                         \
+    }                                       \
+    return false;
 
 // }}}
 
@@ -319,9 +325,8 @@ enum my_keycodes {
 
 // -- Behavior of Any Keycode {{{
 
-uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  mod_state = get_mods();
+  uint8_t mod_state = get_mods();
   switch (keycode) {
 
     // 新下駄配列 {{{
