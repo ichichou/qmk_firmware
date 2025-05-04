@@ -1,26 +1,6 @@
 // KB: Equinox XL
 // KM: buna
 
-// ぶな配列（v2.0 改変2）の実装テスト
-// ベース面、シフト面はレイヤーとして実装
-// シフトキーには OSL を使う
-// Tap-dance は必要ないだろう
-
-// 【ベース】
-// こ に は て も　り っ し の き
-// で か 　 な た　く ん 　 い と ー
-// だ が ま す ょ　る う れ ら 。
-//
-// 【左シフト】
-// づ 　 ぢ ぷ ぅ　ぬ ぱ げ じ ゃ
-// ば さ 。 ゅ ぜ　ひ を め ー ぶ
-// ぴ ぞ 　 ゆ ヴ　ず む ぎ ぐ ぽ
-//
-// 【右シフト】
-// べ ぼ ほ そ へ　　 ぺ ぇ え や
-// わ せ け ど あ　び つ 、 お ろ
-// ふ ざ ご ね よ　み ち ぉ ぃ ぁ
-
 // -- Copyright {{{
 
 // Copyright 2024 ai03
@@ -73,7 +53,9 @@
 static bool process_buna_key(uint8_t qwerty_key, const char *kana, bool *registered, keyrecord_t *record, uint8_t mod_state) {
   if (record->event.pressed) {
     if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
-      send_string_P(kana);
+      if (kana != NULL) {
+        send_string_P(kana);
+      }
       return false;
     } else {
       register_code(qwerty_key);
@@ -89,29 +71,6 @@ static bool process_buna_key(uint8_t qwerty_key, const char *kana, bool *registe
   }
   return false;
 }
-
-#define BUNA_UNDEFINED(name, qwerty_key, qwerty_var) \
-  case name: \
-    { \
-      static bool qwerty_var##_registered; \
-      \
-      if (record->event.pressed) { \
-        if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) { \
-          return false; \
-        } else { \
-          register_code(qwerty_key); \
-          qwerty_var##_registered = true; \
-          return false; \
-        } \
-      } else { \
-        if (qwerty_var##_registered) { \
-          unregister_code(qwerty_key); \
-          qwerty_var##_registered = false; \
-          return false; \
-        } \
-      } \
-      return false; \
-    }
 
 #define BUNA2 OSL(_BUNA2)
 #define BUNA3 OSL(_BUNA3)
@@ -350,8 +309,6 @@ const char kana_slsh[] PROGMEM = "/";
 const char kana_scln[] PROGMEM = ";";
 const char kana_quot[] PROGMEM = "'";
 
-const char kana_xxxx[] PROGMEM = "";
-
 // }}}
 
 // -- process_record_user {{{
@@ -375,14 +332,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case BN1_A:    return process_buna_key(KC_A,    kana_de,   &key_registered[0],  record, mod_state);
     case BN1_B:    return process_buna_key(KC_B,    kana_xyo,  &key_registered[1],  record, mod_state);
     case BN1_C:    return process_buna_key(KC_C,    kana_ma,   &key_registered[2],  record, mod_state);
-    // case BN1_D:    return process_buna_key(KC_D,    kana_,     &key_registered[3],  record, mod_state);
+    // case BN1_D:    return process_buna_key(KC_D,    NULL,      &key_registered[3],  record, mod_state);
     case BN1_E:    return process_buna_key(KC_E,    kana_ha,   &key_registered[4],  record, mod_state);
     case BN1_F:    return process_buna_key(KC_F,    kana_na,   &key_registered[5],  record, mod_state);
     case BN1_G:    return process_buna_key(KC_G,    kana_ta,   &key_registered[6],  record, mod_state);
     case BN1_H:    return process_buna_key(KC_H,    kana_ku,   &key_registered[7],  record, mod_state);
     case BN1_I:    return process_buna_key(KC_I,    kana_si,   &key_registered[8],  record, mod_state);
     case BN1_J:    return process_buna_key(KC_J,    kana_nn,   &key_registered[9],  record, mod_state);
-    // case BN1_K:    return process_buna_key(KC_K,    kana_,     &key_registered[10], record, mod_state);
+    // case BN1_K:    return process_buna_key(KC_K,    NULL,      &key_registered[10], record, mod_state);
     case BN1_L:    return process_buna_key(KC_L,    kana_i,    &key_registered[11], record, mod_state);
     case BN1_M:    return process_buna_key(KC_M,    kana_u,    &key_registered[12], record, mod_state);
     case BN1_N:    return process_buna_key(KC_N,    kana_ru,   &key_registered[13], record, mod_state);
@@ -408,7 +365,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // _BUNA2 {{{
     case BN2_A:    return process_buna_key(KC_A,    kana_ba,   &key_registered[31], record, mod_state);
     case BN2_B:    return process_buna_key(KC_B,    kana_vu,   &key_registered[32], record, mod_state);
-    case BN2_C:    return process_buna_key(KC_C,    kana_xxxx, &key_registered[33], record, mod_state);  // 動作を要検証
+    case BN2_C:    return process_buna_key(KC_C,    NULL,      &key_registered[33], record, mod_state);
     case BN2_D:    return process_buna_key(KC_D,    kana_dot,  &key_registered[34], record, mod_state);
     case BN2_E:    return process_buna_key(KC_E,    kana_di,   &key_registered[35], record, mod_state);
     case BN2_F:    return process_buna_key(KC_F,    kana_xyu,  &key_registered[36], record, mod_state);
@@ -428,12 +385,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case BN2_T:    return process_buna_key(KC_T,    kana_xu,   &key_registered[50], record, mod_state);
     case BN2_U:    return process_buna_key(KC_U,    kana_pa,   &key_registered[51], record, mod_state);
     case BN2_V:    return process_buna_key(KC_V,    kana_yu,   &key_registered[52], record, mod_state);
-    case BN2_W:    return process_buna_key(KC_W,    kana_xxxx, &key_registered[53], record, mod_state);  // 動作を要検証
+    case BN2_W:    return process_buna_key(KC_W,    NULL,      &key_registered[53], record, mod_state);
     case BN2_X:    return process_buna_key(KC_X,    kana_zo,   &key_registered[54], record, mod_state);
     case BN2_Y:    return process_buna_key(KC_Y,    kana_nu,   &key_registered[55], record, mod_state);
     case BN2_Z:    return process_buna_key(KC_Z,    kana_pi,   &key_registered[56], record, mod_state);
     case BN2_SCLN: return process_buna_key(KC_SCLN, kana_bu,   &key_registered[57], record, mod_state);
-    case BN2_QUOT: return process_buna_key(KC_QUOT, kana_xxxx, &key_registered[58], record, mod_state);  // 動作を要検証
+    case BN2_QUOT: return process_buna_key(KC_QUOT, NULL,      &key_registered[58], record, mod_state);
     case BN2_COMM: return process_buna_key(KC_COMM, kana_gi,   &key_registered[59], record, mod_state);
     case BN2_DOT:  return process_buna_key(KC_DOT,  kana_gu,   &key_registered[60], record, mod_state);
     case BN2_SLSH: return process_buna_key(KC_SLSH, kana_po,   &key_registered[61], record, mod_state);
@@ -464,10 +421,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case BN3_V:    return process_buna_key(KC_V,    kana_ne,   &key_registered[83], record, mod_state);
     case BN3_W:    return process_buna_key(KC_W,    kana_bo,   &key_registered[84], record, mod_state);
     case BN3_X:    return process_buna_key(KC_X,    kana_za,   &key_registered[85], record, mod_state);
-    case BN3_Y:    return process_buna_key(KC_Y,    kana_xxxx, &key_registered[86], record, mod_state);  // 動作を要検証
+    case BN3_Y:    return process_buna_key(KC_Y,    NULL,      &key_registered[86], record, mod_state);
     case BN3_Z:    return process_buna_key(KC_Z,    kana_hu,   &key_registered[87], record, mod_state);
     case BN3_SCLN: return process_buna_key(KC_SCLN, kana_ro,   &key_registered[88], record, mod_state);
-    case BN3_QUOT: return process_buna_key(KC_QUOT, kana_xxxx, &key_registered[89], record, mod_state);  // 動作を要検証
+    case BN3_QUOT: return process_buna_key(KC_QUOT, NULL,      &key_registered[89], record, mod_state);
     case BN3_COMM: return process_buna_key(KC_COMM, kana_xo,   &key_registered[90], record, mod_state);
     case BN3_DOT:  return process_buna_key(KC_DOT,  kana_xi,   &key_registered[91], record, mod_state);
     case BN3_SLSH: return process_buna_key(KC_SLSH, kana_xa,   &key_registered[92], record, mod_state);
