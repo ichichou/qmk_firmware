@@ -70,49 +70,25 @@
 
 // Buna Layout
 
-#define BUNA_KEYCODE(name, qwerty_key, buna_kana, qwerty_var) \
-  case name: \
-    { \
-      static bool qwerty_var##_registered; \
-      \
-      if (record->event.pressed) { \
-        if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) { \
-          send_string_P(buna_kana); \
-          return false; \
-        } else { \
-          register_code(qwerty_key); \
-          qwerty_var##_registered = true; \
-          return false; \
-        } \
-      } else { \
-        if (qwerty_var##_registered) { \
-          unregister_code(qwerty_key); \
-          qwerty_var##_registered = false; \
-          return false; \
-        } \
-      } \
-      return false; \
+static bool process_buna_key(uint8_t qwerty_key, const char *kana, bool *registered, keyrecord_t *record, uint8_t mod_state) {
+  if (record->event.pressed) {
+    if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
+      send_string_P(kana);
+      return false;
+    } else {
+      register_code(qwerty_key);
+      *registered = true;
+      return false;
     }
-
-// static bool process_buna_key(uint16_t keycode, uint8_t qwerty_key, const char *kana, bool *registered, keyrecord_t *record) {
-//   if (record->event.pressed) {
-//     if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
-//       send_string_P(kana);
-//       return false;
-//     } else {
-//       register_code(qwerty_key);
-//       *registered = true;
-//       return false;
-//     }
-//   } else {
-//     if (*registered) {
-//       unregister_code(qwerty_key);
-//       *registered = false;
-//       return false;
-//     }
-//   }
-//   return false;
-// }
+  } else {
+    if (*registered) {
+      unregister_code(qwerty_key);
+      *registered = false;
+      return false;
+    }
+  }
+  return false;
+}
 
 #define BUNA_UNDEFINED(name, qwerty_key, qwerty_var) \
   case name: \
@@ -268,119 +244,120 @@ enum my_keycodes {
 
 // }}}
 
-// -- buna_kana {{{
+// -- kana_* {{{
 
-const char buna_a[]    PROGMEM = "a";
-const char buna_i[]    PROGMEM = "i";
-const char buna_u[]    PROGMEM = "u";
-const char buna_e[]    PROGMEM = "e";
-const char buna_o[]    PROGMEM = "o";
+const char kana_a[]    PROGMEM = "a";
+const char kana_i[]    PROGMEM = "i";
+const char kana_u[]    PROGMEM = "u";
+const char kana_e[]    PROGMEM = "e";
+const char kana_o[]    PROGMEM = "o";
 
-const char buna_ka[]   PROGMEM = "ka";
-const char buna_ki[]   PROGMEM = "ki";
-const char buna_ku[]   PROGMEM = "ku";
-const char buna_ke[]   PROGMEM = "ke";
-const char buna_ko[]   PROGMEM = "ko";
+const char kana_ka[]   PROGMEM = "ka";
+const char kana_ki[]   PROGMEM = "ki";
+const char kana_ku[]   PROGMEM = "ku";
+const char kana_ke[]   PROGMEM = "ke";
+const char kana_ko[]   PROGMEM = "ko";
 
-const char buna_sa[]   PROGMEM = "sa";
-const char buna_si[]   PROGMEM = "si";
-const char buna_su[]   PROGMEM = "su";
-const char buna_se[]   PROGMEM = "se";
-const char buna_so[]   PROGMEM = "so";
+const char kana_sa[]   PROGMEM = "sa";
+const char kana_si[]   PROGMEM = "si";
+const char kana_su[]   PROGMEM = "su";
+const char kana_se[]   PROGMEM = "se";
+const char kana_so[]   PROGMEM = "so";
 
-const char buna_ta[]   PROGMEM = "ta";
-const char buna_ti[]   PROGMEM = "ti";
-const char buna_tu[]   PROGMEM = "tu";
-const char buna_te[]   PROGMEM = "te";
-const char buna_to[]   PROGMEM = "to";
+const char kana_ta[]   PROGMEM = "ta";
+const char kana_ti[]   PROGMEM = "ti";
+const char kana_tu[]   PROGMEM = "tu";
+const char kana_te[]   PROGMEM = "te";
+const char kana_to[]   PROGMEM = "to";
 
-const char buna_na[]   PROGMEM = "na";
-const char buna_ni[]   PROGMEM = "ni";
-const char buna_nu[]   PROGMEM = "nu";
-const char buna_ne[]   PROGMEM = "ne";
-const char buna_no[]   PROGMEM = "no";
+const char kana_na[]   PROGMEM = "na";
+const char kana_ni[]   PROGMEM = "ni";
+const char kana_nu[]   PROGMEM = "nu";
+const char kana_ne[]   PROGMEM = "ne";
+const char kana_no[]   PROGMEM = "no";
 
-const char buna_ha[]   PROGMEM = "ha";
-const char buna_hi[]   PROGMEM = "hi";
-const char buna_hu[]   PROGMEM = "hu";
-const char buna_he[]   PROGMEM = "he";
-const char buna_ho[]   PROGMEM = "ho";
+const char kana_ha[]   PROGMEM = "ha";
+const char kana_hi[]   PROGMEM = "hi";
+const char kana_hu[]   PROGMEM = "hu";
+const char kana_he[]   PROGMEM = "he";
+const char kana_ho[]   PROGMEM = "ho";
 
-const char buna_ma[]   PROGMEM = "ma";
-const char buna_mi[]   PROGMEM = "mi";
-const char buna_mu[]   PROGMEM = "mu";
-const char buna_me[]   PROGMEM = "me";
-const char buna_mo[]   PROGMEM = "mo";
+const char kana_ma[]   PROGMEM = "ma";
+const char kana_mi[]   PROGMEM = "mi";
+const char kana_mu[]   PROGMEM = "mu";
+const char kana_me[]   PROGMEM = "me";
+const char kana_mo[]   PROGMEM = "mo";
 
-const char buna_ya[]   PROGMEM = "ya";
-const char buna_yu[]   PROGMEM = "yu";
-const char buna_yo[]   PROGMEM = "yo";
+const char kana_ya[]   PROGMEM = "ya";
+const char kana_yu[]   PROGMEM = "yu";
+const char kana_yo[]   PROGMEM = "yo";
 
-const char buna_ra[]   PROGMEM = "ra";
-const char buna_ri[]   PROGMEM = "ri";
-const char buna_ru[]   PROGMEM = "ru";
-const char buna_re[]   PROGMEM = "re";
-const char buna_ro[]   PROGMEM = "ro";
+const char kana_ra[]   PROGMEM = "ra";
+const char kana_ri[]   PROGMEM = "ri";
+const char kana_ru[]   PROGMEM = "ru";
+const char kana_re[]   PROGMEM = "re";
+const char kana_ro[]   PROGMEM = "ro";
 
-const char buna_wa[]   PROGMEM = "wa";
-const char buna_wo[]   PROGMEM = "wo";
-const char buna_nn[]   PROGMEM = "nn";
+const char kana_wa[]   PROGMEM = "wa";
+const char kana_wo[]   PROGMEM = "wo";
+const char kana_nn[]   PROGMEM = "nn";
 
-const char buna_ga[]   PROGMEM = "ga";
-const char buna_gi[]   PROGMEM = "gi";
-const char buna_gu[]   PROGMEM = "gu";
-const char buna_ge[]   PROGMEM = "ge";
-const char buna_go[]   PROGMEM = "go";
+const char kana_ga[]   PROGMEM = "ga";
+const char kana_gi[]   PROGMEM = "gi";
+const char kana_gu[]   PROGMEM = "gu";
+const char kana_ge[]   PROGMEM = "ge";
+const char kana_go[]   PROGMEM = "go";
 
-const char buna_za[]   PROGMEM = "za";
-const char buna_zi[]   PROGMEM = "zi";
-const char buna_zu[]   PROGMEM = "zu";
-const char buna_ze[]   PROGMEM = "ze";
-const char buna_zo[]   PROGMEM = "zo";
+const char kana_za[]   PROGMEM = "za";
+const char kana_zi[]   PROGMEM = "zi";
+const char kana_zu[]   PROGMEM = "zu";
+const char kana_ze[]   PROGMEM = "ze";
+const char kana_zo[]   PROGMEM = "zo";
 
-const char buna_da[]   PROGMEM = "da";
-const char buna_di[]   PROGMEM = "di";
-const char buna_du[]   PROGMEM = "du";
-const char buna_de[]   PROGMEM = "de";
-const char buna_do[]   PROGMEM = "do";
+const char kana_da[]   PROGMEM = "da";
+const char kana_di[]   PROGMEM = "di";
+const char kana_du[]   PROGMEM = "du";
+const char kana_de[]   PROGMEM = "de";
+const char kana_do[]   PROGMEM = "do";
 
-const char buna_ba[]   PROGMEM = "ba";
-const char buna_bi[]   PROGMEM = "bi";
-const char buna_bu[]   PROGMEM = "bu";
-const char buna_be[]   PROGMEM = "be";
-const char buna_bo[]   PROGMEM = "bo";
+const char kana_ba[]   PROGMEM = "ba";
+const char kana_bi[]   PROGMEM = "bi";
+const char kana_bu[]   PROGMEM = "bu";
+const char kana_be[]   PROGMEM = "be";
+const char kana_bo[]   PROGMEM = "bo";
 
-const char buna_pa[]   PROGMEM = "pa";
-const char buna_pi[]   PROGMEM = "pi";
-const char buna_pu[]   PROGMEM = "pu";
-const char buna_pe[]   PROGMEM = "pe";
-const char buna_po[]   PROGMEM = "po";
+const char kana_pa[]   PROGMEM = "pa";
+const char kana_pi[]   PROGMEM = "pi";
+const char kana_pu[]   PROGMEM = "pu";
+const char kana_pe[]   PROGMEM = "pe";
+const char kana_po[]   PROGMEM = "po";
 
-const char buna_xtu[]  PROGMEM = "xtu";
-const char buna_xya[]  PROGMEM = "xya";
-const char buna_xyu[]  PROGMEM = "xyu";
-const char buna_xyo[]  PROGMEM = "xyo";
-const char buna_xa[]   PROGMEM = "xa";
-const char buna_xi[]   PROGMEM = "xi";
-const char buna_xu[]   PROGMEM = "xu";
-const char buna_xe[]   PROGMEM = "xe";
-const char buna_xo[]   PROGMEM = "xo";
+const char kana_xtu[]  PROGMEM = "xtu";
+const char kana_xya[]  PROGMEM = "xya";
+const char kana_xyu[]  PROGMEM = "xyu";
+const char kana_xyo[]  PROGMEM = "xyo";
+const char kana_xa[]   PROGMEM = "xa";
+const char kana_xi[]   PROGMEM = "xi";
+const char kana_xu[]   PROGMEM = "xu";
+const char kana_xe[]   PROGMEM = "xe";
+const char kana_xo[]   PROGMEM = "xo";
 
-const char buna_vu[]   PROGMEM = "vu";
+const char kana_vu[]   PROGMEM = "vu";
 
-const char buna_comm[] PROGMEM = ",";
-const char buna_dot[]  PROGMEM = ".";
-const char buna_slsh[] PROGMEM = "/";
-const char buna_scln[] PROGMEM = ";";
-const char buna_quot[] PROGMEM = "'";
+const char kana_comm[] PROGMEM = ",";
+const char kana_dot[]  PROGMEM = ".";
+const char kana_slsh[] PROGMEM = "/";
+const char kana_scln[] PROGMEM = ";";
+const char kana_quot[] PROGMEM = "'";
+
+const char kana_xxxx[] PROGMEM = "";
 
 // }}}
 
 // -- process_record_user {{{
 
-uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  mod_state = get_mods();
+  uint8_t mod_state = get_mods();
   switch (keycode) {
 
     case SFT_T(CW_TOGG):
@@ -392,113 +369,108 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     // Buna Layout {{{
 
+    static bool key_registered[93];
+
     // _BUNA1 {{{
-    BUNA_KEYCODE(BN1_A,    KC_A,    buna_de,   akey)
-    BUNA_KEYCODE(BN1_B,    KC_B,    buna_xyo,  bkey)
-    BUNA_KEYCODE(BN1_C,    KC_C,    buna_ma,   ckey)
-    // BUNA_KEYCODE(BN1_D,    KC_D,    buna_,     dkey)
-    BUNA_KEYCODE(BN1_E,    KC_E,    buna_ha,   ekey)
-    BUNA_KEYCODE(BN1_F,    KC_F,    buna_na,   fkey)
-    BUNA_KEYCODE(BN1_G,    KC_G,    buna_ta,   gkey)
-    BUNA_KEYCODE(BN1_H,    KC_H,    buna_ku,   hkey)
-    BUNA_KEYCODE(BN1_I,    KC_I,    buna_si,   ikey)
-    BUNA_KEYCODE(BN1_J,    KC_J,    buna_nn,   jkey)
-    // BUNA_KEYCODE(BN1_K,    KC_K,    buna_,     kkey)
-    BUNA_KEYCODE(BN1_L,    KC_L,    buna_i,    lkey)
-    BUNA_KEYCODE(BN1_M,    KC_M,    buna_u,    mkey)
-    BUNA_KEYCODE(BN1_N,    KC_N,    buna_ru,   nkey)
-    BUNA_KEYCODE(BN1_O,    KC_O,    buna_no,   okey)
-    BUNA_KEYCODE(BN1_P,    KC_P,    buna_ki,   pkey)
-    BUNA_KEYCODE(BN1_Q,    KC_Q,    buna_ko,   qkey)
-    BUNA_KEYCODE(BN1_R,    KC_R,    buna_te,   rkey)
-    BUNA_KEYCODE(BN1_S,    KC_S,    buna_ka,   skey)
-    BUNA_KEYCODE(BN1_T,    KC_T,    buna_mo,   tkey)
-    BUNA_KEYCODE(BN1_U,    KC_U,    buna_xtu,  ukey)
-    BUNA_KEYCODE(BN1_V,    KC_V,    buna_su,   vkey)
-    BUNA_KEYCODE(BN1_W,    KC_W,    buna_ni,   wkey)
-    BUNA_KEYCODE(BN1_X,    KC_X,    buna_ga,   xkey)
-    BUNA_KEYCODE(BN1_Y,    KC_Y,    buna_ri,   ykey)
-    BUNA_KEYCODE(BN1_Z,    KC_Z,    buna_da,   zkey)
-    BUNA_KEYCODE(BN1_SCLN, KC_SCLN, buna_to,   sclnkey)
-    BUNA_KEYCODE(BN1_QUOT, KC_QUOT, buna_quot, quotkey)
-    BUNA_KEYCODE(BN1_COMM, KC_COMM, buna_re,   commkey)
-    BUNA_KEYCODE(BN1_DOT,  KC_DOT,  buna_ra,   dotkey)
-    BUNA_KEYCODE(BN1_SLSH, KC_SLSH, buna_dot,  slshkey)
+    case BN1_A:    return process_buna_key(KC_A,    kana_de,   &key_registered[0],  record, mod_state);
+    case BN1_B:    return process_buna_key(KC_B,    kana_xyo,  &key_registered[1],  record, mod_state);
+    case BN1_C:    return process_buna_key(KC_C,    kana_ma,   &key_registered[2],  record, mod_state);
+    // case BN1_D:    return process_buna_key(KC_D,    kana_,     &key_registered[3],  record, mod_state);
+    case BN1_E:    return process_buna_key(KC_E,    kana_ha,   &key_registered[4],  record, mod_state);
+    case BN1_F:    return process_buna_key(KC_F,    kana_na,   &key_registered[5],  record, mod_state);
+    case BN1_G:    return process_buna_key(KC_G,    kana_ta,   &key_registered[6],  record, mod_state);
+    case BN1_H:    return process_buna_key(KC_H,    kana_ku,   &key_registered[7],  record, mod_state);
+    case BN1_I:    return process_buna_key(KC_I,    kana_si,   &key_registered[8],  record, mod_state);
+    case BN1_J:    return process_buna_key(KC_J,    kana_nn,   &key_registered[9],  record, mod_state);
+    // case BN1_K:    return process_buna_key(KC_K,    kana_,     &key_registered[10], record, mod_state);
+    case BN1_L:    return process_buna_key(KC_L,    kana_i,    &key_registered[11], record, mod_state);
+    case BN1_M:    return process_buna_key(KC_M,    kana_u,    &key_registered[12], record, mod_state);
+    case BN1_N:    return process_buna_key(KC_N,    kana_ru,   &key_registered[13], record, mod_state);
+    case BN1_O:    return process_buna_key(KC_O,    kana_no,   &key_registered[14], record, mod_state);
+    case BN1_P:    return process_buna_key(KC_P,    kana_ki,   &key_registered[15], record, mod_state);
+    case BN1_Q:    return process_buna_key(KC_Q,    kana_ko,   &key_registered[16], record, mod_state);
+    case BN1_R:    return process_buna_key(KC_R,    kana_te,   &key_registered[17], record, mod_state);
+    case BN1_S:    return process_buna_key(KC_S,    kana_ka,   &key_registered[18], record, mod_state);
+    case BN1_T:    return process_buna_key(KC_T,    kana_mo,   &key_registered[19], record, mod_state);
+    case BN1_U:    return process_buna_key(KC_U,    kana_xtu,  &key_registered[20], record, mod_state);
+    case BN1_V:    return process_buna_key(KC_V,    kana_su,   &key_registered[21], record, mod_state);
+    case BN1_W:    return process_buna_key(KC_W,    kana_ni,   &key_registered[22], record, mod_state);
+    case BN1_X:    return process_buna_key(KC_X,    kana_ga,   &key_registered[23], record, mod_state);
+    case BN1_Y:    return process_buna_key(KC_Y,    kana_ri,   &key_registered[24], record, mod_state);
+    case BN1_Z:    return process_buna_key(KC_Z,    kana_da,   &key_registered[25], record, mod_state);
+    case BN1_SCLN: return process_buna_key(KC_SCLN, kana_to,   &key_registered[26], record, mod_state);
+    case BN1_QUOT: return process_buna_key(KC_QUOT, kana_quot, &key_registered[27], record, mod_state);
+    case BN1_COMM: return process_buna_key(KC_COMM, kana_re,   &key_registered[28], record, mod_state);
+    case BN1_DOT:  return process_buna_key(KC_DOT,  kana_ra,   &key_registered[29], record, mod_state);
+    case BN1_SLSH: return process_buna_key(KC_SLSH, kana_dot,  &key_registered[30], record, mod_state);
     // }}}
 
     // _BUNA2 {{{
-    BUNA_KEYCODE(BN2_A,    KC_A,    buna_ba,   akey)
-    BUNA_KEYCODE(BN2_B,    KC_B,    buna_vu,   bkey)
-    // BUNA_KEYCODE(BN2_C,    KC_C,    buna_,     ckey)  // 動作を要検証
-    BUNA_KEYCODE(BN2_D,    KC_D,    buna_dot,  dkey)
-    BUNA_KEYCODE(BN2_E,    KC_E,    buna_di,   ekey)
-    BUNA_KEYCODE(BN2_F,    KC_F,    buna_xyu,  fkey)
-    BUNA_KEYCODE(BN2_G,    KC_G,    buna_ze,   gkey)
-    BUNA_KEYCODE(BN2_H,    KC_H,    buna_hi,   hkey)
-    BUNA_KEYCODE(BN2_I,    KC_I,    buna_ge,   ikey)
-    BUNA_KEYCODE(BN2_J,    KC_J,    buna_wo,   jkey)
-    BUNA_KEYCODE(BN2_K,    KC_K,    buna_me,   kkey)
-    BUNA_KEYCODE(BN2_L,    KC_L,    buna_quot, lkey)
-    BUNA_KEYCODE(BN2_M,    KC_M,    buna_mu,   mkey)
-    BUNA_KEYCODE(BN2_N,    KC_N,    buna_zu,   nkey)
-    BUNA_KEYCODE(BN2_O,    KC_O,    buna_zi,   okey)
-    BUNA_KEYCODE(BN2_P,    KC_P,    buna_xya,  pkey)
-    BUNA_KEYCODE(BN2_Q,    KC_Q,    buna_du,   qkey)
-    BUNA_KEYCODE(BN2_R,    KC_R,    buna_pu,   rkey)
-    BUNA_KEYCODE(BN2_S,    KC_S,    buna_sa,   skey)
-    BUNA_KEYCODE(BN2_T,    KC_T,    buna_xu,   tkey)
-    BUNA_KEYCODE(BN2_U,    KC_U,    buna_pa,   ukey)
-    BUNA_KEYCODE(BN2_V,    KC_V,    buna_yu,   vkey)
-    // BUNA_KEYCODE(BN2_W,    KC_W,    buna_,     wkey)  // 動作を要検証
-    BUNA_KEYCODE(BN2_X,    KC_X,    buna_zo,   xkey)
-    BUNA_KEYCODE(BN2_Y,    KC_Y,    buna_nu,   ykey)
-    BUNA_KEYCODE(BN2_Z,    KC_Z,    buna_pi,   zkey)
-    BUNA_KEYCODE(BN2_SCLN, KC_SCLN, buna_bu,   sclnkey)
-    // BUNA_KEYCODE(BN2_QUOT, KC_QUOT, buna_,     quotkey)  // 動作を要検証
-    BUNA_KEYCODE(BN2_COMM, KC_COMM, buna_gi,   commkey)
-    BUNA_KEYCODE(BN2_DOT,  KC_DOT,  buna_gu,   dotkey)
-    BUNA_KEYCODE(BN2_SLSH, KC_SLSH, buna_po,   slshkey)
-
-    // BUNA_UNDEFINED(BN2_C,    KC_C,    ckey)
-    // BUNA_UNDEFINED(BN2_W,    KC_W,    wkey)
-    // BUNA_UNDEFINED(BN2_QUOT, KC_QUOT, quotkey)
+    case BN2_A:    return process_buna_key(KC_A,    kana_ba,   &key_registered[31], record, mod_state);
+    case BN2_B:    return process_buna_key(KC_B,    kana_vu,   &key_registered[32], record, mod_state);
+    case BN2_C:    return process_buna_key(KC_C,    kana_xxxx, &key_registered[33], record, mod_state);  // 動作を要検証
+    case BN2_D:    return process_buna_key(KC_D,    kana_dot,  &key_registered[34], record, mod_state);
+    case BN2_E:    return process_buna_key(KC_E,    kana_di,   &key_registered[35], record, mod_state);
+    case BN2_F:    return process_buna_key(KC_F,    kana_xyu,  &key_registered[36], record, mod_state);
+    case BN2_G:    return process_buna_key(KC_G,    kana_ze,   &key_registered[37], record, mod_state);
+    case BN2_H:    return process_buna_key(KC_H,    kana_hi,   &key_registered[38], record, mod_state);
+    case BN2_I:    return process_buna_key(KC_I,    kana_ge,   &key_registered[39], record, mod_state);
+    case BN2_J:    return process_buna_key(KC_J,    kana_wo,   &key_registered[40], record, mod_state);
+    case BN2_K:    return process_buna_key(KC_K,    kana_me,   &key_registered[41], record, mod_state);
+    case BN2_L:    return process_buna_key(KC_L,    kana_quot, &key_registered[42], record, mod_state);
+    case BN2_M:    return process_buna_key(KC_M,    kana_mu,   &key_registered[43], record, mod_state);
+    case BN2_N:    return process_buna_key(KC_N,    kana_zu,   &key_registered[44], record, mod_state);
+    case BN2_O:    return process_buna_key(KC_O,    kana_zi,   &key_registered[45], record, mod_state);
+    case BN2_P:    return process_buna_key(KC_P,    kana_xya,  &key_registered[46], record, mod_state);
+    case BN2_Q:    return process_buna_key(KC_Q,    kana_du,   &key_registered[47], record, mod_state);
+    case BN2_R:    return process_buna_key(KC_R,    kana_pu,   &key_registered[48], record, mod_state);
+    case BN2_S:    return process_buna_key(KC_S,    kana_sa,   &key_registered[49], record, mod_state);
+    case BN2_T:    return process_buna_key(KC_T,    kana_xu,   &key_registered[50], record, mod_state);
+    case BN2_U:    return process_buna_key(KC_U,    kana_pa,   &key_registered[51], record, mod_state);
+    case BN2_V:    return process_buna_key(KC_V,    kana_yu,   &key_registered[52], record, mod_state);
+    case BN2_W:    return process_buna_key(KC_W,    kana_xxxx, &key_registered[53], record, mod_state);  // 動作を要検証
+    case BN2_X:    return process_buna_key(KC_X,    kana_zo,   &key_registered[54], record, mod_state);
+    case BN2_Y:    return process_buna_key(KC_Y,    kana_nu,   &key_registered[55], record, mod_state);
+    case BN2_Z:    return process_buna_key(KC_Z,    kana_pi,   &key_registered[56], record, mod_state);
+    case BN2_SCLN: return process_buna_key(KC_SCLN, kana_bu,   &key_registered[57], record, mod_state);
+    case BN2_QUOT: return process_buna_key(KC_QUOT, kana_xxxx, &key_registered[58], record, mod_state);  // 動作を要検証
+    case BN2_COMM: return process_buna_key(KC_COMM, kana_gi,   &key_registered[59], record, mod_state);
+    case BN2_DOT:  return process_buna_key(KC_DOT,  kana_gu,   &key_registered[60], record, mod_state);
+    case BN2_SLSH: return process_buna_key(KC_SLSH, kana_po,   &key_registered[61], record, mod_state);
     // }}}
 
     // _BUNA3 {{{
-    BUNA_KEYCODE(BN3_A,    KC_A,    buna_wa,   akey)
-    BUNA_KEYCODE(BN3_B,    KC_B,    buna_yo,   bkey)
-    BUNA_KEYCODE(BN3_C,    KC_C,    buna_go,   ckey)
-    BUNA_KEYCODE(BN3_D,    KC_D,    buna_ke,   dkey)
-    BUNA_KEYCODE(BN3_E,    KC_E,    buna_ho,   ekey)
-    BUNA_KEYCODE(BN3_F,    KC_F,    buna_do,   fkey)
-    BUNA_KEYCODE(BN3_G,    KC_G,    buna_a,    gkey)
-    BUNA_KEYCODE(BN3_H,    KC_H,    buna_bi,   hkey)
-    BUNA_KEYCODE(BN3_I,    KC_I,    buna_xe,   ikey)
-    BUNA_KEYCODE(BN3_J,    KC_J,    buna_tu,   jkey)
-    BUNA_KEYCODE(BN3_K,    KC_K,    buna_comm, kkey)
-    BUNA_KEYCODE(BN3_L,    KC_L,    buna_o,    lkey)
-    BUNA_KEYCODE(BN3_M,    KC_M,    buna_ti,   mkey)
-    BUNA_KEYCODE(BN3_N,    KC_N,    buna_mi,   nkey)
-    BUNA_KEYCODE(BN3_O,    KC_O,    buna_e,    okey)
-    BUNA_KEYCODE(BN3_P,    KC_P,    buna_ya,   pkey)
-    BUNA_KEYCODE(BN3_Q,    KC_Q,    buna_be,   qkey)
-    BUNA_KEYCODE(BN3_R,    KC_R,    buna_so,   rkey)
-    BUNA_KEYCODE(BN3_S,    KC_S,    buna_se,   skey)
-    BUNA_KEYCODE(BN3_T,    KC_T,    buna_he,   tkey)
-    BUNA_KEYCODE(BN3_U,    KC_U,    buna_pe,   ukey)
-    BUNA_KEYCODE(BN3_V,    KC_V,    buna_ne,   vkey)
-    BUNA_KEYCODE(BN3_W,    KC_W,    buna_bo,   wkey)
-    BUNA_KEYCODE(BN3_X,    KC_X,    buna_za,   xkey)
-    // BUNA_KEYCODE(BN3_Y,    KC_Y,    buna_,     ykey)  // 動作を要検証
-    BUNA_KEYCODE(BN3_Z,    KC_Z,    buna_hu,   zkey)
-    BUNA_KEYCODE(BN3_SCLN, KC_SCLN, buna_ro,   sclnkey)
-    // BUNA_KEYCODE(BN3_QUOT, KC_QUOT, buna_,     quotkey)  // 動作を要検証
-    BUNA_KEYCODE(BN3_COMM, KC_COMM, buna_xo,   commkey)
-    BUNA_KEYCODE(BN3_DOT,  KC_DOT,  buna_xi,   dotkey)
-    BUNA_KEYCODE(BN3_SLSH, KC_SLSH, buna_xa,   slshkey)
-
-    // BUNA_UNDEFINED(BN3_Y,    KC_Y,    ykey)
-    // BUNA_UNDEFINED(BN3_QUOT, KC_QUOT, quotkey)
+    case BN3_A:    return process_buna_key(KC_A,    kana_wa,   &key_registered[62], record, mod_state);
+    case BN3_B:    return process_buna_key(KC_B,    kana_yo,   &key_registered[63], record, mod_state);
+    case BN3_C:    return process_buna_key(KC_C,    kana_go,   &key_registered[64], record, mod_state);
+    case BN3_D:    return process_buna_key(KC_D,    kana_ke,   &key_registered[65], record, mod_state);
+    case BN3_E:    return process_buna_key(KC_E,    kana_ho,   &key_registered[66], record, mod_state);
+    case BN3_F:    return process_buna_key(KC_F,    kana_do,   &key_registered[67], record, mod_state);
+    case BN3_G:    return process_buna_key(KC_G,    kana_a,    &key_registered[68], record, mod_state);
+    case BN3_H:    return process_buna_key(KC_H,    kana_bi,   &key_registered[69], record, mod_state);
+    case BN3_I:    return process_buna_key(KC_I,    kana_xe,   &key_registered[70], record, mod_state);
+    case BN3_J:    return process_buna_key(KC_J,    kana_tu,   &key_registered[71], record, mod_state);
+    case BN3_K:    return process_buna_key(KC_K,    kana_comm, &key_registered[72], record, mod_state);
+    case BN3_L:    return process_buna_key(KC_L,    kana_o,    &key_registered[73], record, mod_state);
+    case BN3_M:    return process_buna_key(KC_M,    kana_ti,   &key_registered[74], record, mod_state);
+    case BN3_N:    return process_buna_key(KC_N,    kana_mi,   &key_registered[75], record, mod_state);
+    case BN3_O:    return process_buna_key(KC_O,    kana_e,    &key_registered[76], record, mod_state);
+    case BN3_P:    return process_buna_key(KC_P,    kana_ya,   &key_registered[77], record, mod_state);
+    case BN3_Q:    return process_buna_key(KC_Q,    kana_be,   &key_registered[78], record, mod_state);
+    case BN3_R:    return process_buna_key(KC_R,    kana_so,   &key_registered[79], record, mod_state);
+    case BN3_S:    return process_buna_key(KC_S,    kana_se,   &key_registered[80], record, mod_state);
+    case BN3_T:    return process_buna_key(KC_T,    kana_he,   &key_registered[81], record, mod_state);
+    case BN3_U:    return process_buna_key(KC_U,    kana_pe,   &key_registered[82], record, mod_state);
+    case BN3_V:    return process_buna_key(KC_V,    kana_ne,   &key_registered[83], record, mod_state);
+    case BN3_W:    return process_buna_key(KC_W,    kana_bo,   &key_registered[84], record, mod_state);
+    case BN3_X:    return process_buna_key(KC_X,    kana_za,   &key_registered[85], record, mod_state);
+    case BN3_Y:    return process_buna_key(KC_Y,    kana_xxxx, &key_registered[86], record, mod_state);  // 動作を要検証
+    case BN3_Z:    return process_buna_key(KC_Z,    kana_hu,   &key_registered[87], record, mod_state);
+    case BN3_SCLN: return process_buna_key(KC_SCLN, kana_ro,   &key_registered[88], record, mod_state);
+    case BN3_QUOT: return process_buna_key(KC_QUOT, kana_xxxx, &key_registered[89], record, mod_state);  // 動作を要検証
+    case BN3_COMM: return process_buna_key(KC_COMM, kana_xo,   &key_registered[90], record, mod_state);
+    case BN3_DOT:  return process_buna_key(KC_DOT,  kana_xi,   &key_registered[91], record, mod_state);
+    case BN3_SLSH: return process_buna_key(KC_SLSH, kana_xa,   &key_registered[92], record, mod_state);
     // }}}
 
     // }}}
