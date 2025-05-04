@@ -1,11 +1,22 @@
+// KB: Equinox XL
+// KM: ichichou
+
+// -- Copyright {{{
+
 // Copyright 2024 ai03
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+// }}}
+
+// -- #include {{{
+
 #include QMK_KEYBOARD_H
 
-// -- Define Macros {{{
+// }}}
 
-// Modifier Keycodes
+// -- #define {{{
+
+// Modifiers
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
 #define LCG(kc)     (QK_LCTL | QK_LGUI | (kc))
 
@@ -39,36 +50,35 @@
 
 // MTGAP
 #define MTGAP_KEYCODE(name, mtgap_key, qwerty_key, mt_var, qwerty_var) \
-  case name:                                         \
-    {                                                \
-      static bool mt_##mtgap_var##_registered;       \
-      static bool qw_##qwerty_var##_registered;      \
-                                                     \
-      if (record->event.pressed) {                   \
-        if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {  \
-          register_code(mtgap_key);                  \
-          mt_##mtgap_var##_registered = true;        \
-          return false;                              \
-        } else {                                     \
-          register_code(qwerty_key);                 \
-          qw_##qwerty_var##_registered = true;       \
-          return false;                              \
-        }                                            \
-      } else {                                       \
-        if (mt_##mtgap_var##_registered) {           \
-          unregister_code(mtgap_key);                \
-          mt_##mtgap_var##_registered = false;       \
-          return false;                              \
-        } else if (qw_##qwerty_var##_registered) {   \
-          unregister_code(qwerty_key);               \
-          qw_##qwerty_var##_registered = false;      \
-          return false;                              \
-        }                                            \
-      }                                              \
-      return false;                                  \
+  case name: \
+    { \
+      static bool mt_##mtgap_var##_registered; \
+      static bool qw_##qwerty_var##_registered; \
+      \
+      if (record->event.pressed) { \
+        if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) { \
+          register_code(mtgap_key); \
+          mt_##mtgap_var##_registered = true; \
+          return false; \
+        } else { \
+          register_code(qwerty_key); \
+          qw_##qwerty_var##_registered = true; \
+          return false; \
+        } \
+      } else { \
+        if (mt_##mtgap_var##_registered) { \
+          unregister_code(mtgap_key); \
+          mt_##mtgap_var##_registered = false; \
+          return false; \
+        } else if (qw_##qwerty_var##_registered) { \
+          unregister_code(qwerty_key); \
+          qw_##qwerty_var##_registered = false; \
+          return false; \
+        } \
+      } \
+      return false; \
     }
 
-// 動作は未確認
 #define RCTL_MT_Q RCTL_T(MT_Q)
 
 // }}}
@@ -129,7 +139,7 @@ enum my_keycodes {
 
 // }}}
 
-// -- Behavior of Any Keycode {{{
+// -- process_record_user {{{
 
 uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -143,11 +153,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
 
-    // MTGAP (mod-1) {{{
-    //
+    // MTGAP (Mod-1) {{{
+
     // ypou; kdlcw
     // inea, mhtsr q
     // z/'.x bfgvj
+
     MTGAP_KEYCODE(MT_A,    KC_A,    KC_F,    a,    f)
     MTGAP_KEYCODE(MT_B,    KC_B,    KC_N,    b,    n)
     MTGAP_KEYCODE(MT_C,    KC_C,    KC_O,    c,    o)
@@ -179,11 +190,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     MTGAP_KEYCODE(MT_COMM, KC_COMM, KC_G,    comm, g)
     MTGAP_KEYCODE(MT_DOT,  KC_DOT,  KC_V,    dot,  v)
     MTGAP_KEYCODE(MT_SLSH, KC_SLSH, KC_X,    slsh, x)
+
+    case RCTL_T(MT_Q):
+      if (record->tap.count && record->event.pressed) {
+        if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
+          tap_code(KC_Q);
+          return false;
+        } else {
+          tap_code(KC_QUOT);
+          return false;
+        }
+      }
+      return true;
+
     // }}}
 
     // Otherwise
     default:
       return true;
+
   }
 }
 
@@ -288,7 +313,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
-    // Layer-Tap Keys
+    // Layer-Tap
     case NAV_ESC: return true;
     case NAV_TAB: return true;
     case SYM_TAB: return true;
@@ -296,7 +321,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case FN_BSLS: return true;
     case FN_GRV:  return true;
 
-    // Mod-Tap Keys
+    // Mod-Tap
     case RHYPR_TAB:  return true;
     case RHYPR_BSPC: return true;
     case LSFT_SPC:   return true;
@@ -316,6 +341,9 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case LSFT_RBRC: return true;
     case LGUI_GRV:  return true;
 
+    // MTGAP
+    case RCTL_MT_Q: return true;
+
     // Otherwise
     default:
       return false;
@@ -326,11 +354,9 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 // Permissive Hold Mode
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-
     // Otherwise
     default:
       return false;
-
   }
 }
 
@@ -355,7 +381,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_NAV] = LAYOUT(
-    _______,          LSG(KC_C), KC_LPRN,   KC_RPRN,   MEH(KC_C), LSG(KC_T), XXXXXXX, G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC), G(KC_UP), G(KC_DOWN),
+    _______,          LSG(KC_C), KC_LPRN,   KC_RPRN,   C(KC_TAB), LSG(KC_T), XXXXXXX, G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC), G(KC_UP), G(KC_DOWN),
     _______,          LSG(KC_A), LCTL_LBRC, LSFT_RBRC, LCG(KC_V), LCG(KC_S), XXXXXXX, KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC),           _______,
     _______, _______, LSG(KC_Z), G(KC_X),   G(KC_C),   LSG(KC_V), G(KC_V),   XXXXXXX, KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), XXXXXXX,              _______,
     _______, XXXXXXX, _______,                         _______,              _______,            _______,                     _______,    XXXXXXX,  _______
