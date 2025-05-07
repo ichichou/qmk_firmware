@@ -56,7 +56,13 @@
 
 // -- Functions {{{
 
-static bool process_buna_key(uint8_t qwerty_key, const char *kana, bool *registered, keyrecord_t *record, uint8_t mod_state) {
+// MTGAP
+static bool process_buna_key(uint8_t qwerty_key,
+                             const char *kana,
+                             bool *registered,
+                             keyrecord_t *record,
+                             uint8_t mod_state) {
+
   if (record->event.pressed) {
     if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
       if (kana != NULL) {
