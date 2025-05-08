@@ -1,4 +1,4 @@
-// FILE: ichichou.h
+// ichichou.h
 
 #include QMK_KEYBOARD_H
 
@@ -108,11 +108,11 @@ enum my_keycodes {
 // -- Prototypes {{{
 
 // MTGAP
-static bool process_mtgap_key(uint8_t mtgap_key,
-                              uint8_t qwerty_key,
-                              bool *mtgap_registered,
-                              bool *qwerty_registered,
-                              keyrecord_t *record,
-                              uint8_t mod_state);
+bool process_mtgap_key(uint8_t mtgap_key,
+                       uint8_t qwerty_key,
+                       bool *mtgap_registered,
+                       bool *qwerty_registered,
+                       keyrecord_t *record,
+                       uint8_t mod_state);
 
 // }}}

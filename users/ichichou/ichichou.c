@@ -1,16 +1,16 @@
-// FILE: ichichou.c
+// ichichou.c
 
 #include "ichichou.h"
 
 // -- Functions {{{
 
 // MTGAP
-static bool process_mtgap_key(uint8_t mtgap_key,
-                              uint8_t qwerty_key,
-                              bool *mtgap_registered,
-                              bool *qwerty_registered,
-                              keyrecord_t *record,
-                              uint8_t mod_state) {
+bool process_mtgap_key(uint8_t mtgap_key,
+                       uint8_t qwerty_key,
+                       bool *mtgap_registered,
+                       bool *qwerty_registered,
+                       keyrecord_t *record,
+                       uint8_t mod_state) {
 
   if (record->event.pressed) {
     if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {

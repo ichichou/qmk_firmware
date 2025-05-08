@@ -2,6 +2,7 @@
 // KM: userspace
 
 #include QMK_KEYBOARD_H
+#include "ichichou.h"
 
 // -- Keymaps {{{
 
