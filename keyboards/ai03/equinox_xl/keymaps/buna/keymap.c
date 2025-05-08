@@ -8,13 +8,13 @@
 
 // }}}
 
-// -- #include {{{
+// -- Includes {{{
 
 #include QMK_KEYBOARD_H
 
 // }}}
 
-// -- #define {{{
+// -- Macros {{{
 
 // Modifiers
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)

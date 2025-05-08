@@ -8,13 +8,21 @@
 
 // }}}
 
-// -- #include {{{
+// -- Includes {{{
 
 #include QMK_KEYBOARD_H
 
 // }}}
 
-// -- #define {{{
+// -- Macros {{{
+
+// Layers
+#define BASE  MO(_BASE)
+#define MTGAP MO(_MTGAP)
+#define NAV   MO(_NAV)
+#define SYM   MO(_SYM)
+#define WIN   MO(_WIN)
+#define FN    MO(_FN)
 
 // Modifiers
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
@@ -50,42 +58,6 @@
 
 // MTGAP
 #define RCTL_MT_Q RCTL_T(MT_Q)
-
-// }}}
-
-// -- Functions {{{
-
-// MTGAP
-static bool process_mtgap_key(uint8_t mtgap_key,
-                              uint8_t qwerty_key,
-                              bool *mtgap_registered,
-                              bool *qwerty_registered,
-                              keyrecord_t *record,
-                              uint8_t mod_state) {
-
-  if (record->event.pressed) {
-    if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
-      register_code(mtgap_key);
-      *mtgap_registered = true;
-      return false;
-    } else {
-      register_code(qwerty_key);
-      *qwerty_registered = true;
-      return false;
-    }
-  } else {
-    if (*mtgap_registered) {
-      unregister_code(mtgap_key);
-      *mtgap_registered = false;
-      return false;
-    } else if (*qwerty_registered) {
-      unregister_code(qwerty_key);
-      *qwerty_registered = false;
-      return false;
-    }
-  }
-  return false;
-}
 
 // }}}
 
@@ -142,6 +114,42 @@ enum my_keycodes {
   // }}}
 
 };
+
+// }}}
+
+// -- Functions {{{
+
+// MTGAP
+static bool process_mtgap_key(uint8_t mtgap_key,
+                              uint8_t qwerty_key,
+                              bool *mtgap_registered,
+                              bool *qwerty_registered,
+                              keyrecord_t *record,
+                              uint8_t mod_state) {
+
+  if (record->event.pressed) {
+    if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
+      register_code(mtgap_key);
+      *mtgap_registered = true;
+      return false;
+    } else {
+      register_code(qwerty_key);
+      *qwerty_registered = true;
+      return false;
+    }
+  } else {
+    if (*mtgap_registered) {
+      unregister_code(mtgap_key);
+      *mtgap_registered = false;
+      return false;
+    } else if (*qwerty_registered) {
+      unregister_code(qwerty_key);
+      *qwerty_registered = false;
+      return false;
+    }
+  }
+  return false;
+}
 
 // }}}
 
@@ -376,17 +384,17 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT(
-    RHYPR_TAB,           KC_Q, KC_W, KC_E, KC_R, KC_T, KC_LBRC, KC_Y, KC_U, KC_I,    KC_O,   KC_P,      KC_BSPC, KC_QUOT,
-    LCTL_ESC,            KC_A, KC_S, KC_D, KC_F, KC_G, KC_RBRC, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,            RCTL_ENT,
-    LSFT_CW,   MO(_NAV), KC_Z, KC_X, KC_C, KC_V, KC_B, KC_GRV,  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,            FN_BSLS,
-    MO(_FN),   XXXXXXX,  LGUI_LNG2,        LSFT_SPC,   RCTL_TAB,      SYM_ENT,               RGUI_LNG1, XXXXXXX, RALT_GRV
+    RHYPR_TAB,          KC_Q, KC_W, KC_E, KC_R, KC_T, KC_LBRC, KC_Y, KC_U, KC_I,    KC_O,   KC_P,      KC_BSPC, KC_QUOT,
+    LCTL_ESC,           KC_A, KC_S, KC_D, KC_F, KC_G, KC_RBRC, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN,            RCTL_ENT,
+    LSFT_CW,   NAV,     KC_Z, KC_X, KC_C, KC_V, KC_B, KC_GRV,  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,            FN_BSLS,
+    FN,        XXXXXXX, LGUI_LNG2,        LSFT_SPC,   RCTL_TAB,      SYM_ENT,               RGUI_LNG1, XXXXXXX, RALT_GRV
   ),
 
   [_MTGAP] = LAYOUT(
-    RHYPR_TAB,           MT_Y, MT_P,    MT_O,    MT_U,   MT_SCLN, KC_LBRC, MT_K, MT_D, MT_L, MT_C, MT_W,      KC_BSPC, MT_Q,
-    LCTL_ESC,            MT_I, MT_N,    MT_E,    MT_A,   MT_COMM, KC_RBRC, MT_M, MT_H, MT_T, MT_S, MT_R,               RCTL_ENT,
-    LSFT_CW,   MO(_NAV), MT_Z, MT_SLSH, MT_QUOT, MT_DOT, MT_X,    KC_GRV,  MT_B, MT_F, MT_G, MT_V, MT_J,               FN_BSLS,
-    MO(_FN),   XXXXXXX,  LGUI_LNG2,              LSFT_SPC,        RCTL_TAB,      SYM_ENT,          RGUI_LNG1, XXXXXXX, RALT_GRV
+    RHYPR_TAB,          MT_Y, MT_P,    MT_O,    MT_U,   MT_SCLN, KC_LBRC, MT_K, MT_D, MT_L, MT_C, MT_W,      KC_BSPC, MT_Q,
+    LCTL_ESC,           MT_I, MT_N,    MT_E,    MT_A,   MT_COMM, KC_RBRC, MT_M, MT_H, MT_T, MT_S, MT_R,               RCTL_ENT,
+    LSFT_CW,   NAV,     MT_Z, MT_SLSH, MT_QUOT, MT_DOT, MT_X,    KC_GRV,  MT_B, MT_F, MT_G, MT_V, MT_J,               FN_BSLS,
+    FN,        XXXXXXX, LGUI_LNG2,              LSFT_SPC,        RCTL_TAB,      SYM_ENT,          RGUI_LNG1, XXXXXXX, RALT_GRV
   ),
 
   [_NAV] = LAYOUT(
