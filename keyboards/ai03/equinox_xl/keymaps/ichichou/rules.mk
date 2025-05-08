@@ -1,3 +1,5 @@
+USER_NAME := no_user
+
 VIA_ENABLE = no
 CAPS_WORD_ENABLE = yes
 SEND_STRING_ENABLE = yes
