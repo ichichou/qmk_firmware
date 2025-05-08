@@ -2,7 +2,18 @@
 
 #include QMK_KEYBOARD_H
 
-// -- Macros {{{
+enum layer_names {
+  _BASE,
+  _MTGAP,
+  _NAV,
+  _SYM,
+  _WIN,
+  _FN,
+};
+
+enum my_keycodes {
+  SAMPLE = QK_USER,
+};
 
 // Layers
 #define BASE  MO(_BASE)
@@ -44,75 +55,6 @@
 #define LSFT_RBRC SFT_T(KC_RBRC)
 #define LGUI_GRV  GUI_T(KC_GRV)
 
-// MTGAP
-#define RCTL_MT_Q RCTL_T(MT_Q)
-
-// }}}
-
-// -- Layers {{{
-
-enum layer_names {
-  _BASE,
-  _MTGAP,
-  _NAV,
-  _SYM,
-  _WIN,
-  _FN,
-};
-
-// }}}
-
-// -- Custom Keycodes {{{
-
-enum my_keycodes {
-  SAMPLE = QK_USER,
-
-  // MTGAP {{{
-  MT_A,
-  MT_B,
-  MT_C,
-  MT_D,
-  MT_E,
-  MT_F,
-  MT_G,
-  MT_H,
-  MT_I,
-  MT_J,
-  MT_K,
-  MT_L,
-  MT_M,
-  MT_N,
-  MT_O,
-  MT_P,
-  MT_Q,
-  MT_R,
-  MT_S,
-  MT_T,
-  MT_U,
-  MT_V,
-  MT_W,
-  MT_X,
-  MT_Y,
-  MT_Z,
-  MT_SCLN,
-  MT_QUOT,
-  MT_COMM,
-  MT_DOT,
-  MT_SLSH,
-  // }}}
-
-};
-
-// }}}
-
-// -- Prototypes {{{
-
-// MTGAP
-bool process_mtgap_key(uint8_t mtgap_key,
-                       uint8_t qwerty_key,
-                       bool *mtgap_registered,
-                       bool *qwerty_registered,
-                       keyrecord_t *record,
-                       uint8_t mod_state);
-
-// }}}
+#ifdef ENABLE_MTGAP
+#include "mtgap.h"
+#endif
