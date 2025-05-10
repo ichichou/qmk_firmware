@@ -49,6 +49,8 @@
 #define LGUI_GRV  GUI_T(KC_GRV)
 
 // Buna Layout
+#define BASE  DF(_BASE)
+#define BUNA1 DF(_BUNA1)
 #define BUNA2 OSL(_BUNA2)
 #define BUNA3 OSL(_BUNA3)
 
@@ -56,13 +58,11 @@
 
 // -- Functions {{{
 
-// MTGAP
 static bool process_buna_key(uint8_t qwerty_key,
                              const char *kana,
                              bool *registered,
                              keyrecord_t *record,
                              uint8_t mod_state) {
-
   if (record->event.pressed) {
     if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
       if (kana != NULL) {
@@ -325,7 +325,6 @@ const char kana_quot[] PROGMEM = "'";
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   uint8_t mod_state = get_mods();
   switch (keycode) {
-
     case SFT_T(CW_TOGG):
       if (record->tap.count && record->event.pressed) {
         caps_word_on();
@@ -441,10 +440,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     // }}}
 
-    // Otherwise
     default:
       return true;
-
   }
 }
 
@@ -464,7 +461,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // Hold On Other Key Press Mode
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-
     // Layer-Tap
     case NAV_ESC: return true;
     case NAV_TAB: return true;
@@ -496,14 +492,12 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     // Otherwise
     default:
       return false;
-
   }
 }
 
 // Permissive Hold Mode
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    // Otherwise
     default:
       return false;
   }
@@ -558,10 +552,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT(
-    LCG(KC_Q),          KC_F1, KC_F2,  KC_F3,  KC_F4,  XXXXXXX, DF(_BASE),  LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MNXT,
-    XXXXXXX,            KC_F5, KC_F6,  KC_F7,  KC_F8,  XXXXXXX, DF(_BUNA1), LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV,          KC_MPLY,
-    XXXXXXX,   XXXXXXX, KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX, XXXXXXX,    LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,          _______,
-    _______,   XXXXXXX, XXXXXXX,               EE_CLR,          QK_BOOT,               XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
+    LCG(KC_Q),          KC_F1, KC_F2,  KC_F3,  KC_F4,  XXXXXXX, BASE,    LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MNXT,
+    XXXXXXX,            KC_F5, KC_F6,  KC_F7,  KC_F8,  XXXXXXX, BUNA1,   LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV,          KC_MPLY,
+    XXXXXXX,   XXXXXXX, KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX, XXXXXXX, LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,          _______,
+    _______,   XXXXXXX, XXXXXXX,               EE_CLR,          QK_BOOT,            XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
 };
