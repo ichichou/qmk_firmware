@@ -126,7 +126,6 @@ static bool process_mtgap_key(uint8_t mtgap_key,
                               bool *qwerty_registered,
                               keyrecord_t *record,
                               uint8_t mod_state) {
-
   if (record->event.pressed) {
     if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
       register_code(mtgap_key);
@@ -222,10 +221,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     // }}}
 
-    // Otherwise
     default:
       return true;
-
   }
 }
 
@@ -364,14 +361,12 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     // Otherwise
     default:
       return false;
-
   }
 }
 
 // Permissive Hold Mode
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    // Otherwise
     default:
       return false;
   }
@@ -419,10 +414,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT(
-    LCG(KC_Q),          KC_F1, KC_F2,  KC_F3,  KC_F4,  XXXXXXX, DF(_BASE),  LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MNXT,
-    XXXXXXX,            KC_F5, KC_F6,  KC_F7,  KC_F8,  XXXXXXX, DF(_MTGAP), LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV,          KC_MPLY,
-    XXXXXXX,   XXXXXXX, KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX, XXXXXXX,    LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,          _______,
-    _______,   XXXXXXX, XXXXXXX,               EE_CLR,          QK_BOOT,               XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
+    LCG(KC_Q),          KC_F1, KC_F2,  KC_F3,  KC_F4,  XXXXXXX, BASE,    LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MNXT,
+    XXXXXXX,            KC_F5, KC_F6,  KC_F7,  KC_F8,  XXXXXXX, MTGAP,   LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV,          KC_MPLY,
+    XXXXXXX,   XXXXXXX, KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX, XXXXXXX, LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,          _______,
+    _______,   XXXXXXX, XXXXXXX,               EE_CLR,          QK_BOOT,            XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
 };
