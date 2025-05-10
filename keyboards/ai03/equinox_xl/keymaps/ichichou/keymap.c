@@ -158,7 +158,6 @@ uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   mod_state = get_mods();
   switch (keycode) {
-
     case SFT_T(CW_TOGG):
       if (record->tap.count && record->event.pressed) {
         caps_word_on();
@@ -326,7 +325,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // Hold On Other Key Press Mode
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-
     // Layer-Tap
     case NAV_ESC: return true;
     case NAV_TAB: return true;
