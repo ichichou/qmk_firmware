@@ -4,20 +4,29 @@
 
 enum layer_names {
   _BASE,
-  _MTGAP,
   _NAV,
   _SYM,
   _WIN,
   _FN,
+
+#ifdef ENABLE_MTGAP
+  _MTGAP,
+#endif
+
+#ifdef ENABLE_BUNA
+  _BUNA1,
+  _BUNA2,
+  _BUNA3
+#endif
+
 };
 
 enum my_keycodes {
-  SAMPLE = QK_USER,
+  KC_SAMPLE = QK_USER,
 };
 
 // Layers
 #define BASE  MO(_BASE)
-#define MTGAP MO(_MTGAP)
 #define NAV   MO(_NAV)
 #define SYM   MO(_SYM)
 #define WIN   MO(_WIN)
@@ -57,4 +66,8 @@ enum my_keycodes {
 
 #ifdef ENABLE_MTGAP
 #include "mtgap.h"
+#endif
+
+#ifdef ENABLE_BUNA
+#include "buna.h"
 #endif

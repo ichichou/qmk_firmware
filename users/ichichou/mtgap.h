@@ -2,11 +2,15 @@
 
 #pragma once
 #include QMK_KEYBOARD_H
+#include "keycodes_start.h"
 
+#define MTGAP     MO(_MTGAP)
 #define RCTL_MT_Q RCTL_T(MT_Q)
 
+// Custom Keycodes {{{
+
 enum mtgap_keycodes {
-  MT_A = QK_USER,
+  MT_A = MT_START,
   MT_B,
   MT_C,
   MT_D,
@@ -38,6 +42,8 @@ enum mtgap_keycodes {
   MT_DOT,
   MT_SLSH,
 };
+
+// }}}
 
 bool process_mtgap_key(uint8_t mtgap_key,
                        uint8_t qwerty_key,

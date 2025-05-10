@@ -2,13 +2,14 @@
 
 #include "mtgap.h"
 
+// Functions {{{
+
 bool process_mtgap_key(uint8_t mtgap_key,
                        uint8_t qwerty_key,
                        bool *mtgap_registered,
                        bool *qwerty_registered,
                        keyrecord_t *record,
                        uint8_t mod_state) {
-
   if (record->event.pressed) {
     if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
       register_code(mtgap_key);
@@ -33,13 +34,16 @@ bool process_mtgap_key(uint8_t mtgap_key,
   return false;
 }
 
+// }}}
+
+// process_record_* {{{
+
 static bool mtgap_registered[31];
 static bool qwerty_registered[31];
 
 bool process_record_mtgap(uint16_t keycode,
                           keyrecord_t *record,
                           uint8_t mod_state) {
-
   switch (keycode) {
     case MT_A:    return process_mtgap_key(KC_A,    KC_F,    &mtgap_registered[0],  &qwerty_registered[0],  record, mod_state);
     case MT_B:    return process_mtgap_key(KC_B,    KC_N,    &mtgap_registered[1],  &qwerty_registered[1],  record, mod_state);
@@ -77,3 +81,5 @@ bool process_record_mtgap(uint16_t keycode,
       return true;
   }
 }
+
+// }}}

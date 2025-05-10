@@ -1,5 +1,13 @@
 // Layer
+#if defined(ENABLE_BUNA) && defined(ENABLE_MTGAP)
+#define DYNAMIC_KEYMAP_LAYER_COUNT 9
+#elif defined(ENABLE_BUNA)
+#define DYNAMIC_KEYMAP_LAYER_COUNT 8
+#elif defined(ENABLE_MTGAP)
 #define DYNAMIC_KEYMAP_LAYER_COUNT 6
+#else
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
+#endif
 
 // Tap-Hold Configuration
 #define TAPPING_TERM 150
@@ -16,3 +24,9 @@
 
 // Caps Word
 #define CAPS_WORD_IDLE_TIMEOUT 0
+
+// One Shot Keys
+#ifdef ENABLE_BUNA
+#define ONESHOT_TAP_TOGGLE 0
+#define ONESHOT_TIMEOUT 0
+#endif
