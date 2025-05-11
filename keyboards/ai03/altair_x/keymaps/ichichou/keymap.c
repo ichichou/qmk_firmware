@@ -11,8 +11,6 @@
 #include QMK_KEYBOARD_H
 #include "ichichou.h"
 
-// -- Keymaps {{{
-
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -55,12 +53,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    LCG(KC_Q), ___________________FN_R1___________________, XXXXXXX,    LSG(KC_2), ___________________FN_L1___________________, LCG(KC_Q),
-    XXXXXXX,   ___________________FN_R2___________________, XXXXXXX,    LSG(KC_3), ___________________FN_L2___________________, KC_MPLY,
-    XXXXXXX,   ___________________FN_R3___________________, XXXXXXX,    LSG(KC_4), ___________________FN_L3___________________, KC_MUTE,
+    LCG(KC_Q), __________________FN_R1____________________, XXXXXXX,    LSG(KC_2), __________________FN_L1____________________, LCG(KC_Q),
+    XXXXXXX,   __________________FN_R2____________________, XXXXXXX,    LSG(KC_3), __________________FN_L2____________________, KC_MPLY,
+    XXXXXXX,   __________________FN_R3____________________, XXXXXXX,    LSG(KC_4), __________________FN_L3____________________, KC_MUTE,
                                  XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,     QK_BOOT, XXXXXXX, XXXXXXX, _______
   ),
 
 };
-
-// }}}

@@ -110,13 +110,21 @@ enum my_keycodes {
 #define __________________WIN_R2___________________ C(KC_5),      LCA(KC_C),   A(KC_DOWN),  XXXXXXX,      XXXXXXX
 #define __________________WIN_R3___________________ C(KC_6),      LCA(KC_ENT), MEH(KC_ENT), XXXXXXX,      XXXXXXX
 
-#define ___________________FN_L1___________________ KC_F1,     KC_F2,   KC_F3,   KC_F4,   XXXXXXX
-#define ___________________FN_L2___________________ KC_F5,     KC_F6,   KC_F7,   KC_F8,   XXXXXXX
-#define ___________________FN_L3___________________ KC_F9,     KC_F10,  KC_F11,  KC_F12,  XXXXXXX
+#define __________________FN_L1____________________ KC_F1,     KC_F2,   KC_F3,   KC_F4,   XXXXXXX
+#define __________________FN_L2____________________ KC_F5,     KC_F6,   KC_F7,   KC_F8,   XXXXXXX
+#define __________________FN_L3____________________ KC_F9,     KC_F10,  KC_F11,  KC_F12,  XXXXXXX
 
-#define ___________________FN_R1___________________ LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-#define ___________________FN_R2___________________ LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT
-#define ___________________FN_R3___________________ LSG(KC_4), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU
+#define __________________FN_R1____________________ LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+#define __________________FN_R2____________________ LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT
+#define __________________FN_R3____________________ LSG(KC_4), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU
+
+#define __________________1_TO_5___________________ KC_1, KC_2, KC_3, KC_4, KC_5
+#define __________________7_TO_MINS________________ KC_7, KC_8, KC_9, KC_0, KC_MINS
+
+#define __________________F1_TO_F5_________________ KC_F1, KC_F2, KC_F3, KC_F4,  KC_F5
+#define __________________F7_TO_F11________________ KC_F7, KC_F8, KC_F9, KC_F10, KC_F11
+
+#define __________________NONE_____________________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 
 // }}}
 
