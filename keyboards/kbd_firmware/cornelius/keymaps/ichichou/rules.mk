@@ -1,8 +1,2 @@
-USER_NAME := no_user
-
-VIA_ENABLE = yes
-CAPS_WORD_ENABLE = yes
-SEND_STRING_ENABLE = yes
-# COMBO_ENABLE = yes
-# KEY_OVERRIDE_ENABLE = yes
-EXTRAFLAGS += -flto
+# MTGAP_ENABLE = yes
+# BUNA_ENABLE = yes
