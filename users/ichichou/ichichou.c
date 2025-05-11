@@ -15,7 +15,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
 
-#ifdef ENABLE_MTGAP
+#ifdef MTGAP_ENABLE
     case MT_A ... MT_SLSH:
       return process_record_mtgap(keycode, record, mod_state);
 
@@ -32,7 +32,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return true;
 #endif
 
-#ifdef ENABLE_BUNA
+#ifdef BUNA_ENABLE
     case BN1_A ... BN3_SLSH:
       return process_record_buna(keycode, record, mod_state);
 #endif
@@ -77,7 +77,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case LSFT_RBRC: return true;
     case LGUI_GRV:  return true;
 
-# ifdef ENABLE_MTGAP
+# ifdef MTGAP_ENABLE
     case RCTL_MT_Q: return true;
 #endif
 

@@ -1,13 +1,13 @@
-#if defined(ENABLE_MTGAP) && defined(ENABLE_BUNA)
+#if defined(MTGAP_ENABLE) && defined(BUNA_ENABLE)
 #define MT_START (QK_USER  + 50)
 #define BN_START (MT_START + 50)
 #define KM_START (BN_START + 150)
 
-#elif defined(ENABLE_MTGAP)
+#elif defined(MTGAP_ENABLE)
 #define MT_START (QK_USER  + 50)
 #define KM_START (MT_START + 50)
 
-#elif defined(ENABLE_BUNA)
+#elif defined(BUNA_ENABLE)
 #define BN_START (QK_USER  + 50)
 #define KM_START (BN_START + 150)
 

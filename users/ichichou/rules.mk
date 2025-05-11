@@ -7,12 +7,12 @@ SEND_STRING_ENABLE = yes
 # COMBO_ENABLE = yes
 # KEY_OVERRIDE_ENABLE = yes
 
-ifeq ($(strip $(ENABLE_MTGAP)), yes)
+ifeq ($(strip $(MTGAP_ENABLE)), yes)
   SRC += mtgap.c
-  OPT_DEFS += -DENABLE_MTGAP
+  OPT_DEFS += -DMTGAP_ENABLE
 endif
 
-ifeq ($(strip $(ENABLE_BUNA)), yes)
+ifeq ($(strip $(BUNA_ENABLE)), yes)
   SRC += buna.c
-  OPT_DEFS += -DENABLE_BUNA
+  OPT_DEFS += -DBUNA_ENABLE
 endif

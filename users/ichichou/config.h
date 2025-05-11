@@ -1,14 +1,17 @@
 // Layer
-#if defined(ENABLE_BUNA) && defined(ENABLE_MTGAP)
 #ifdef DYNAMIC_KEYMAP_LAYER_COUNT
 #undef DYNAMIC_KEYMAP_LAYER_COUNT
 #endif
 
+#if defined(BUNA_ENABLE) && defined(MTGAP_ENABLE)
 #define DYNAMIC_KEYMAP_LAYER_COUNT 9
-#elif defined(ENABLE_BUNA)
+
+#elif defined(BUNA_ENABLE)
 #define DYNAMIC_KEYMAP_LAYER_COUNT 8
-#elif defined(ENABLE_MTGAP)
+
+#elif defined(MTGAP_ENABLE)
 #define DYNAMIC_KEYMAP_LAYER_COUNT 6
+
 #else
 #define DYNAMIC_KEYMAP_LAYER_COUNT 5
 #endif
@@ -34,7 +37,7 @@
 #endif
 
 // One Shot Keys
-#ifdef ENABLE_BUNA
+#ifdef BUNA_ENABLE
 #define ONESHOT_TAP_TOGGLE 0
 #define ONESHOT_TIMEOUT 0
 #endif
