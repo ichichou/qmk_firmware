@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, __________________WIN_L1___________________, XXXXXXX,    XXXXXXX, __________________WIN_R1___________________, LCA(KC_BSPC),
     XXXXXXX, __________________WIN_L2___________________, XXXXXXX,    XXXXXXX, __________________WIN_R2___________________, MEH(KC_ENT),
     XXXXXXX, __________________WIN_L3___________________, XXXXXXX,    XXXXXXX, __________________WIN_R3___________________, XXXXXXX,
-                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+                               XXXXXXX, XXXXXXX, _______, XXXXXXX,    XXXXXXX, _______, XXXXXXX, XXXXXXX
   ),
 
   [_FN] = LAYOUT_wrapper(
