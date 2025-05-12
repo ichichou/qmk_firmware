@@ -19,37 +19,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
   ),
 
-#ifdef ENABLE_MTGAP
-  [_MTGAP] = LAYOUT_wrapper(
-    RHYPR_TAB,     __________________MTGAP_L1_________________, KC_LBRC, __________________MTGAP_R1_________________, KC_BSPC, MT_Q,
-    LCTL_ESC,      __________________MTGAP_L1_________________, KC_RBRC, __________________MTGAP_R1_________________,          RCTL_ENT,
-    LSFT_CW,  NAV, __________________MTGAP_L1_________________, KC_GRV,  __________________MTGAP_R1_________________,          FN_BSLS,
-    FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
-  ),
-#endif
+  #ifdef ENABLE_MTGAP
+    [_MTGAP] = LAYOUT_wrapper(
+      RHYPR_TAB,     __________________MTGAP_L1_________________, KC_LBRC, __________________MTGAP_R1_________________, KC_BSPC, MT_Q,
+      LCTL_ESC,      __________________MTGAP_L1_________________, KC_RBRC, __________________MTGAP_R1_________________,          RCTL_ENT,
+      LSFT_CW,  NAV, __________________MTGAP_L1_________________, KC_GRV,  __________________MTGAP_R1_________________,          FN_BSLS,
+      FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
+    ),
+  #endif
 
-#ifdef ENABLE_BUNA
-  [_BUNA1] = LAYOUT_wrapper(
-    RHYPR_TAB,     __________________BUNA1_L1_________________, KC_LBRC, __________________BUNA1_R1_________________, KC_BSPC, BN1_QUOT,
-    LCTL_ESC,      __________________BUNA1_L2_________________, KC_RBRC, __________________BUNA1_R2_________________,          RCTL_ENT,
-    LSFT_CW,  NAV, __________________BUNA1_L3_________________, KC_GRV,  __________________BUNA1_R3_________________,          FN_BSLS,
-    FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
-  ),
+  #ifdef ENABLE_BUNA
+    [_BUNA1] = LAYOUT_wrapper(
+      RHYPR_TAB,     __________________BUNA1_L1_________________, KC_LBRC, __________________BUNA1_R1_________________, KC_BSPC, BN1_QUOT,
+      LCTL_ESC,      __________________BUNA1_L2_________________, KC_RBRC, __________________BUNA1_R2_________________,          RCTL_ENT,
+      LSFT_CW,  NAV, __________________BUNA1_L3_________________, KC_GRV,  __________________BUNA1_R3_________________,          FN_BSLS,
+      FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
+    ),
 
-  [_BUNA2] = LAYOUT_wrapper(
-    RHYPR_TAB,     __________________BUNA2_L1_________________, KC_LBRC, __________________BUNA2_R1_________________, KC_BSPC, BN2_QUOT,
-    LCTL_ESC,      __________________BUNA2_L2_________________, KC_RBRC, __________________BUNA2_R2_________________,          RCTL_ENT,
-    LSFT_CW,  NAV, __________________BUNA2_L3_________________, KC_GRV,  __________________BUNA2_R3_________________,          FN_BSLS,
-    FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
-  ),
+    [_BUNA2] = LAYOUT_wrapper(
+      RHYPR_TAB,     __________________BUNA2_L1_________________, KC_LBRC, __________________BUNA2_R1_________________, KC_BSPC, BN2_QUOT,
+      LCTL_ESC,      __________________BUNA2_L2_________________, KC_RBRC, __________________BUNA2_R2_________________,          RCTL_ENT,
+      LSFT_CW,  NAV, __________________BUNA2_L3_________________, KC_GRV,  __________________BUNA2_R3_________________,          FN_BSLS,
+      FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
+    ),
 
-  [_BUNA3] = LAYOUT_wrapper(
-    RHYPR_TAB,     __________________BUNA3_L1_________________, KC_LBRC, __________________BUNA3_R1_________________, KC_BSPC, BN3_QUOT,
-    LCTL_ESC,      __________________BUNA3_L2_________________, KC_RBRC, __________________BUNA3_R2_________________,          RCTL_ENT,
-    LSFT_CW,  NAV, __________________BUNA3_L3_________________, KC_GRV,  __________________BUNA3_R3_________________,          FN_BSLS,
-    FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
-  ),
-#endif
+    [_BUNA3] = LAYOUT_wrapper(
+      RHYPR_TAB,     __________________BUNA3_L1_________________, KC_LBRC, __________________BUNA3_R1_________________, KC_BSPC, BN3_QUOT,
+      LCTL_ESC,      __________________BUNA3_L2_________________, KC_RBRC, __________________BUNA3_R2_________________,          RCTL_ENT,
+      LSFT_CW,  NAV, __________________BUNA3_L3_________________, KC_GRV,  __________________BUNA3_R3_________________,          FN_BSLS,
+      FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
+    ),
+  #endif
 
   [_NAV] = LAYOUT_wrapper(
     _______,          __________________NAV_L1___________________, XXXXXXX, __________________NAV_R1___________________, G(KC_UP), G(KC_DOWN),
@@ -72,34 +72,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX,      XXXXXXX
   ),
 
-#if defined(ENABLE_MTGAP) && defined(ENABLE_BUNA)
-  [_FN] = LAYOUT_wrapper(
-    LCG(KC_Q),         __________________FN_L1____________________, BASE,  __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
-    XXXXXXX,           __________________FN_L1____________________, MTGAP, __________________FN_EQUINOX_R2____________,          KC_MPLY,
-    XXXXXXX,  XXXXXXX, __________________FN_L1____________________, BUNA,  __________________FN_EQUINOX_R3____________,          _______,
-    _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX
-  ),
-#elif defined(ENABLE_MTGAP)
-  [_FN] = LAYOUT_wrapper(
-    LCG(KC_Q),         __________________FN_L1____________________, BASE,    __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
-    XXXXXXX,           __________________FN_L1____________________, MTGAP,   __________________FN_EQUINOX_R2____________,          KC_MPLY,
-    XXXXXXX,  XXXXXXX, __________________FN_L1____________________, XXXXXXX, __________________FN_EQUINOX_R3____________,          _______,
-    _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
-  ),
-#elif defined(ENABLE_BUNA)
-  [_FN] = LAYOUT_wrapper(
-    LCG(KC_Q),         __________________FN_L1____________________, BASE,    __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
-    XXXXXXX,           __________________FN_L1____________________, BUNA,    __________________FN_EQUINOX_R2____________,          KC_MPLY,
-    XXXXXXX,  XXXXXXX, __________________FN_L1____________________, XXXXXXX, __________________FN_EQUINOX_R3____________,          _______,
-    _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
-  ),
-#else
-  [_FN] = LAYOUT_wrapper(
-    LCG(KC_Q),         __________________FN_L1____________________, XXXXXXX, __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
-    XXXXXXX,           __________________FN_L2____________________, XXXXXXX, __________________FN_EQUINOX_R2____________,          KC_MPLY,
-    XXXXXXX,  XXXXXXX, __________________FN_L3____________________, XXXXXXX, __________________FN_EQUINOX_R3____________,          _______,
-    _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
-  ),
-#endif
+  #if defined(ENABLE_MTGAP) && defined(ENABLE_BUNA)
+    [_FN] = LAYOUT_wrapper(
+      LCG(KC_Q),         __________________FN_L1____________________, BASE,  __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
+      XXXXXXX,           __________________FN_L1____________________, MTGAP, __________________FN_EQUINOX_R2____________,          KC_MPLY,
+      XXXXXXX,  XXXXXXX, __________________FN_L1____________________, BUNA,  __________________FN_EQUINOX_R3____________,          _______,
+      _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+
+  #elif defined(ENABLE_MTGAP)
+    [_FN] = LAYOUT_wrapper(
+      LCG(KC_Q),         __________________FN_L1____________________, BASE,    __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
+      XXXXXXX,           __________________FN_L1____________________, MTGAP,   __________________FN_EQUINOX_R2____________,          KC_MPLY,
+      XXXXXXX,  XXXXXXX, __________________FN_L1____________________, XXXXXXX, __________________FN_EQUINOX_R3____________,          _______,
+      _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+
+  #elif defined(ENABLE_BUNA)
+    [_FN] = LAYOUT_wrapper(
+      LCG(KC_Q),         __________________FN_L1____________________, BASE,    __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
+      XXXXXXX,           __________________FN_L1____________________, BUNA,    __________________FN_EQUINOX_R2____________,          KC_MPLY,
+      XXXXXXX,  XXXXXXX, __________________FN_L1____________________, XXXXXXX, __________________FN_EQUINOX_R3____________,          _______,
+      _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+
+  #else
+    [_FN] = LAYOUT_wrapper(
+      LCG(KC_Q),         __________________FN_L1____________________, XXXXXXX, __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
+      XXXXXXX,           __________________FN_L2____________________, XXXXXXX, __________________FN_EQUINOX_R2____________,          KC_MPLY,
+      XXXXXXX,  XXXXXXX, __________________FN_L3____________________, XXXXXXX, __________________FN_EQUINOX_R3____________,          _______,
+      _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+  #endif
 
 };

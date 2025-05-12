@@ -11,15 +11,15 @@ enum layer_names {
   _WIN,
   _FN,
 
-#ifdef MTGAP_ENABLE
-  _MTGAP,
-#endif
+  #ifdef MTGAP_ENABLE
+    _MTGAP,
+  #endif
 
-#ifdef BUNA_ENABLE
-  _BUNA1,
-  _BUNA2,
-  _BUNA3
-#endif
+  #ifdef BUNA_ENABLE
+    _BUNA1,
+    _BUNA2,
+    _BUNA3
+  #endif
 
 };
 
@@ -131,11 +131,11 @@ enum my_keycodes {
 // Includes {{{
 
 #ifdef MTGAP_ENABLE
-#include "mtgap.h"
+  #include "mtgap.h"
 #endif
 
 #ifdef BUNA_ENABLE
-#include "buna.h"
+  #include "buna.h"
 #endif
 
 // }}}

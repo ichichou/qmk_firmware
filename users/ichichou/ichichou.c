@@ -15,27 +15,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
 
-#ifdef MTGAP_ENABLE
-    case MT_A ... MT_SLSH:
-      return process_record_mtgap(keycode, record, mod_state);
+    #ifdef MTGAP_ENABLE
+      case MT_A ... MT_SLSH:
+        return process_record_mtgap(keycode, record, mod_state);
 
-    case RCTL_T(MT_Q):
-      if (record->tap.count && record->event.pressed) {
-        if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
-          tap_code(KC_Q);
-          return false;
-        } else {
-          tap_code(KC_QUOT);
-          return false;
+      case RCTL_T(MT_Q):
+        if (record->tap.count && record->event.pressed) {
+          if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
+            tap_code(KC_Q);
+            return false;
+          } else {
+            tap_code(KC_QUOT);
+            return false;
+          }
         }
-      }
-      return true;
-#endif
+        return true;
+    #endif
 
-#ifdef BUNA_ENABLE
-    case BN1_A ... BN3_SLSH:
-      return process_record_buna(keycode, record, mod_state);
-#endif
+    #ifdef BUNA_ENABLE
+      case BN1_A ... BN3_SLSH:
+        return process_record_buna(keycode, record, mod_state);
+    #endif
 
     default:
       return true;
@@ -77,9 +77,9 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case LSFT_RBRC: return true;
     case LGUI_GRV:  return true;
 
-# ifdef MTGAP_ENABLE
-    case RCTL_MT_Q: return true;
-#endif
+    # ifdef MTGAP_ENABLE
+      case RCTL_MT_Q: return true;
+    #endif
 
     default:
       return false;

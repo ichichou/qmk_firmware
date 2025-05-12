@@ -22,14 +22,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                KC_LALT, LGUI_LNG2, NAV_ESC, LSFT_SPC,   RCTL_ENT, SYM_TAB, RGUI_LNG1, FN_GRV
   ),
 
-#ifdef MTGAP_ENABLE
-  [_MTGAP] = LAYOUT_wrapper(
-    RHYPR_TAB, __________________MTGAP_L1_________________, C(KC_1),    C(KC_4), __________________MTGAP_R1_________________, KC_BSPC,
-    LCTL_ESC,  __________________MTGAP_L2_________________, C(KC_2),    C(KC_5), __________________MTGAP_R2_________________, RCTL_MT_Q,
-    LSFT_CW,   __________________MTGAP_L3_________________, C(KC_3),    C(KC_6), __________________MTGAP_R3_________________, RSFT_BSLS,
-                               KC_LALT, LGUI_LNG2, NAV_ESC, LSFT_SPC,   RCTL_ENT, SYM_TAB, RGUI_LNG1, FN_GRV
-  ),
-#endif
+  #ifdef MTGAP_ENABLE
+    [_MTGAP] = LAYOUT_wrapper(
+      RHYPR_TAB, __________________MTGAP_L1_________________, C(KC_1),    C(KC_4), __________________MTGAP_R1_________________, KC_BSPC,
+      LCTL_ESC,  __________________MTGAP_L2_________________, C(KC_2),    C(KC_5), __________________MTGAP_R2_________________, RCTL_MT_Q,
+      LSFT_CW,   __________________MTGAP_L3_________________, C(KC_3),    C(KC_6), __________________MTGAP_R3_________________, RSFT_BSLS,
+                                 KC_LALT, LGUI_LNG2, NAV_ESC, LSFT_SPC,   RCTL_ENT, SYM_TAB, RGUI_LNG1, FN_GRV
+    ),
+  #endif
 
   [_NAV] = LAYOUT_wrapper(
     _______, __________________NAV_L1___________________, XXXXXXX,    XXXXXXX, __________________NAV_R1___________________, G(KC_UP),

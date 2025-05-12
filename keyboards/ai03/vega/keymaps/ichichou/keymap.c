@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_FN] = LAYOUT_wrapper(
     LCG(KC_Q),        __________________F1_TO_F5_________________, KC_F6,   __________________F7_TO_F11________________, KC_F12,  KC_DEL,  XXXXXXX, XXXXXXX,
     XXXXXXX,          __________________FN_L1____________________, XXXXXXX, __________________FN_VEGA_R1_______________, XXXXXXX, XXXXXXX,          G(KC_UP),
-    XXXXXXX,          __________________FN_L2____________________, XXXXXXX, __________________FN_VEGA_R2_______________, KC_MPLY,                   G(KC_DOWN),
+    XXXXXXX,          __________________FN_L2____________________, EE_CLR,  __________________FN_VEGA_R2_______________, KC_MPLY,                   G(KC_DOWN),
     XXXXXXX, XXXXXXX, __________________FN_L3____________________, QK_BOOT, __________________FN_VEGA_R3_______________,                   KC_PGUP, _______,
     _______, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX,          KC_HOME, KC_PGDN, KC_END
   ),
