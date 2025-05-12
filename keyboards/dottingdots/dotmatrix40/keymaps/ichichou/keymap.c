@@ -1,83 +1,63 @@
+// KB: dotmatrix40
+// KM: ichichou
+
+// -- Copyright {{{
+
 // Copyright 2023 QMK
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+// }}}
+
 #include QMK_KEYBOARD_H
+#include "ichichou.h"
+
+#define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    [0] = LAYOUT(
-        KC_MINS, KC_Q,    KC_W,    KC_E,    KC_R,   KC_T,   KC_Y,    KC_U,    KC_I,     KC_O,    KC_P,    KC_BSPC,
-        KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,   KC_G,   KC_H,    KC_J,    KC_K,     KC_L,    KC_SCLN, KC_QUOT,
-        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,   KC_B,   KC_N,    KC_M,    KC_COMM,  KC_DOT,  KC_UP,   KC_SLSH,
-        MO(1),   KC_LCTL, KC_LALT, KC_LNG2, KC_SPC,     KC_NO,       KC_ENT,  KC_LNG1,  KC_LEFT, KC_DOWN, KC_RGHT
-    ),
-    [1] = LAYOUT(
-        KC_ESC,  KC_F10,  KC_F11,  KC_F12,  KC_SCLN, KC_NO,  KC_NO,  KC_QUOT,  KC_PPLS,  KC_7,   KC_8,    KC_9,
-        KC_TRNS, KC_F7,   KC_F8,   KC_F9,   KC_RBRC, KC_NO,  KC_NO,  KC_BSLS,  KC_PMNS,  KC_4,   KC_5,    KC_6,
-        KC_TRNS, KC_F4,   KC_F5,   KC_F6,   KC_LBRC, KC_NO,  KC_INT1,KC_INT3,  KC_PAST,  KC_1,   KC_2,    KC_3,
-        KC_TRNS, KC_F1,   KC_F2,   KC_F3,   MO(2),       KC_NO,      KC_DEL,   KC_PSLS,  KC_0,   KC_PDOT, KC_PEQL
-    ),
-    [2] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   UG_TOGG,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   UG_VALU, KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_NO,   KC_NO,       KC_NO,   UG_HUED, UG_VALD, UG_HUEU
-    ),    
-    [3] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_NO,   KC_NO,       KC_NO,   KC_NO,   KC_NO,   KC_NO
-    ),
-    [4] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_NO,   KC_NO,       KC_NO,   KC_NO,   KC_NO,   KC_NO
-    ),
-    [5] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_NO,   KC_NO,       KC_NO,   KC_NO,   KC_NO,   KC_NO
-    ),
-    [6] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_NO,   KC_NO,       KC_NO,   KC_NO,   KC_NO,   KC_NO
-    ),
-    [7] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_NO,   KC_NO,       KC_NO,   KC_NO,   KC_NO,   KC_NO
-    ),        
-    [8] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_NO,   KC_NO,       KC_NO,   KC_NO,   KC_NO,   KC_NO
-    ),
-    [9] = LAYOUT(
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,        KC_NO,   KC_NO,   KC_NO,       KC_NO,   KC_NO,   KC_NO,   KC_NO
-    )
+  [_BASE] = LAYOUT_wrapper(
+    RHYPR_TAB, __________________BASE_L1__________________, __________________BASE_R1__________________, KC_BSPC,
+    LCTL_ESC,  __________________BASE_L2__________________, __________________BASE_R2__________________, RCTL_QUOT,
+    LSFT_CW,   __________________BASE_L3__________________, __________________BASE_R3__________________, RSFT_BSLS,
+    FN, KC_LALT, LGUI_LNG2, NAV_ESC,          LSFT_SPC, XXXXXXX, RCTL_ENT,  SYM_TAB, RGUI_LNG1, KC_RCTL, FN_GRV
+  ),
+
+  [_NAV] = LAYOUT_wrapper(
+    _______, __________________NAV_L1___________________, __________________NAV_R1___________________, G(KC_UP),
+    _______, __________________NAV_L2___________________, __________________NAV_R2___________________, G(KC_DOWN),
+    _______, __________________NAV_L3___________________, __________________NAV_R3___________________, XXXXXXX,
+    _______, _______, _______, _______,      _______, XXXXXXX, _______,     _______, _______, _______, _______
+  ),
+
+  [_SYM] = LAYOUT_wrapper(
+    _______, __________________SYM_L1___________________, __________________SYM_R1___________________, XXXXXXX,
+    _______, __________________SYM_L2___________________, __________________SYM_R2___________________, KC_QUOT,
+    _______, __________________SYM_L3___________________, __________________SYM_R3___________________, XXXXXXX,
+    _______, _______, _______, _______,      _______, XXXXXXX, _______,     _______, _______, _______, _______
+  ),
+
+  [_WIN] = LAYOUT_wrapper(
+    XXXXXXX, __________________WIN_L1___________________, __________________WIN_R1___________________, LCA(KC_BSPC),
+    XXXXXXX, __________________WIN_L2___________________, __________________WIN_R2___________________, MEH(KC_ENT),
+    XXXXXXX, __________________WIN_L3___________________, __________________WIN_R3___________________, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+  ),
+
+  [_FN] = LAYOUT_wrapper(
+    LCG(KC_Q), __________________FN_R1____________________, __________________FN_L1____________________, LCG(KC_Q),
+    XXXXXXX,   __________________FN_R2____________________, __________________FN_L2____________________, KC_MPLY,
+    XXXXXXX,   __________________FN_R3____________________, __________________FN_L3____________________, KC_MUTE,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX,         EE_CLR, XXXXXXX, QK_BOOT,     XXXXXXX, XXXXXXX, XXXXXXX, _______
+  ),
+
 };
 
-#if defined(ENCODER_MAP_ENABLE)
+#ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-/* layer 0 */    [0]   = { ENCODER_CCW_CW(MS_WHLU, MS_WHLD)},
-/* layer 1 */    [1]   = { ENCODER_CCW_CW(MS_WHLR, MS_WHLL)},
-/* layer 2 */    [2]   = { ENCODER_CCW_CW(BL_DOWN, BL_UP)},
-/* layer 3 */    [3]   = { ENCODER_CCW_CW(KC_NO, KC_NO)},
-/* layer 4 */    [4]   = { ENCODER_CCW_CW(KC_NO, KC_NO)},
-/* layer 5 */    [5]   = { ENCODER_CCW_CW(KC_NO, KC_NO)},
-/* layer 6 */    [6]   = { ENCODER_CCW_CW(KC_NO, KC_NO)},
-/* layer 7 */    [7]   = { ENCODER_CCW_CW(KC_NO, KC_NO)},
-/* layer 8 */    [8]   = { ENCODER_CCW_CW(KC_NO, KC_NO)},
-/* layer 9 */    [9]   = { ENCODER_CCW_CW(KC_NO, KC_NO)}
+  [_BASE] = { ENCODER_CCW_CW(MS_WHLU, MS_WHLD) },
+  [_NAV]  = { ENCODER_CCW_CW(MS_WHLL, MS_WHLR) },
+  [_SYM]  = { ENCODER_CCW_CW(KC_NO,   KC_NO)   },
+  [_WIN]  = { ENCODER_CCW_CW(KC_NO,   KC_NO)   },
+  [_FN]   = { ENCODER_CCW_CW(BL_DOWN, BL_UP)   },
 };
 #endif
