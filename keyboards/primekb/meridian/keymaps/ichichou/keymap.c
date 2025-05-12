@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,   __________________FN_L1____________________,          __________________FN_MERIDIAN_R1___________, XXXXXXX, KC_TILD,   KC_GRV,
     XXXXXXX,   __________________FN_L2____________________,          __________________FN_MERIDIAN_R2___________, KC_MNXT,            KC_MPLY,
     XXXXXXX,   __________________FN_L3____________________, QK_BOOT, __________________FN_MERIDIAN_R3___________,          KC_MUTE,   _______,
-    _______,   XXXXXXX,                   XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX,   XXXXXXX
+    _______,   XXXXXXX,                    XXXXXXX, EE_CLR,          XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX,   XXXXXXX
   ),
 
 };
