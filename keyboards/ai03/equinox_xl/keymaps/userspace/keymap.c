@@ -19,16 +19,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
   ),
 
-  #ifdef ENABLE_MTGAP
+  #ifdef MTGAP_ENABLE
     [_MTGAP] = LAYOUT_wrapper(
-      RHYPR_TAB,     __________________MTGAP_L1_________________, KC_LBRC, __________________MTGAP_R1_________________, KC_BSPC, MT_Q,
+      RHYPR_TAB,     __________________MTGAP_L1_________________, KC_LBRC, __________________MTGAP_R1_________________, KC_BSPC, MT_QUOT,
       LCTL_ESC,      __________________MTGAP_L2_________________, KC_RBRC, __________________MTGAP_R2_________________,          RCTL_ENT,
       LSFT_CW,  NAV, __________________MTGAP_L3_________________, KC_GRV,  __________________MTGAP_R3_________________,          FN_BSLS,
       FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
     ),
   #endif
 
-  #ifdef ENABLE_BUNA
+  #ifdef BUNA_ENABLE
     [_BUNA1] = LAYOUT_wrapper(
       RHYPR_TAB,     __________________BUNA1_L1_________________, KC_LBRC, __________________BUNA1_R1_________________, KC_BSPC, BN1_QUOT,
       LCTL_ESC,      __________________BUNA1_L2_________________, KC_RBRC, __________________BUNA1_R2_________________,          RCTL_ENT,
@@ -72,7 +72,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, _______,                            XXXXXXX, XXXXXXX,      XXXXXXX
   ),
 
-  #if defined(ENABLE_MTGAP) && defined(ENABLE_BUNA)
+  [_FN] = LAYOUT_wrapper(
+    LCG(KC_Q),         __________________FN_L1____________________, BASE,    __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
+    XXXXXXX,           __________________FN_L2____________________, MTGAP,   __________________FN_EQUINOX_R2____________,          KC_MPLY,
+    XXXXXXX,  XXXXXXX, __________________FN_L3____________________, XXXXXXX, __________________FN_EQUINOX_R3____________,          _______,
+    _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
+  ),
+
+  #if defined(MTGAP_ENABLE) && defined(BUNA_ENABLE)
     [_FN] = LAYOUT_wrapper(
       LCG(KC_Q),         __________________FN_L1____________________, BASE,  __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
       XXXXXXX,           __________________FN_L2____________________, MTGAP, __________________FN_EQUINOX_R2____________,          KC_MPLY,
@@ -80,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
-  #elif defined(ENABLE_MTGAP)
+  #elif defined(MTGAP_ENABLE)
     [_FN] = LAYOUT_wrapper(
       LCG(KC_Q),         __________________FN_L1____________________, BASE,    __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
       XXXXXXX,           __________________FN_L2____________________, MTGAP,   __________________FN_EQUINOX_R2____________,          KC_MPLY,
@@ -88,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
-  #elif defined(ENABLE_BUNA)
+  #elif defined(BUNA_ENABLE)
     [_FN] = LAYOUT_wrapper(
       LCG(KC_Q),         __________________FN_L1____________________, BASE,    __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
       XXXXXXX,           __________________FN_L2____________________, XXXXXXX, __________________FN_EQUINOX_R2____________,          KC_MPLY,

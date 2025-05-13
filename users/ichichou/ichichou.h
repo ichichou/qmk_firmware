@@ -6,10 +6,6 @@
 
 enum layer_names {
   _BASE,
-  _NAV,
-  _SYM,
-  _WIN,
-  _FN,
 
   #ifdef MTGAP_ENABLE
     _MTGAP,
@@ -21,6 +17,10 @@ enum layer_names {
     _BUNA3
   #endif
 
+  _NAV,
+  _SYM,
+  _WIN,
+  _FN,
 };
 
 // }}}
@@ -36,7 +36,7 @@ enum my_keycodes {
 // Macros {{{
 
 // Layers
-#define BASE  MO(_BASE)
+#define BASE  DF(_BASE)
 #define NAV   MO(_NAV)
 #define SYM   MO(_SYM)
 #define WIN   MO(_WIN)
@@ -123,6 +123,10 @@ enum my_keycodes {
 
 #define __________________F1_TO_F5_________________ KC_F1, KC_F2, KC_F3, KC_F4,  KC_F5
 #define __________________F7_TO_F11________________ KC_F7, KC_F8, KC_F9, KC_F10, KC_F11
+
+#define __________________F1_TO_F4_________________ KC_F1,     KC_F2,   KC_F3,   KC_F4
+#define __________________F5_TO_F8_________________ KC_F5,     KC_F6,   KC_F7,   KC_F8
+#define __________________F9_TO_F12________________ KC_F9,     KC_F10,  KC_F11,  KC_F12
 
 #define __________________NONE_____________________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 

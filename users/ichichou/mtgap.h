@@ -49,10 +49,10 @@ enum mtgap_keycodes {
 
 // -- Prototypes
 
-bool process_mtgap_key(uint8_t mtgap_key,
-                       uint8_t qwerty_key,
-                       bool *mtgap_registered,
+bool process_mtgap_key(uint8_t qwerty_key,
+                       uint8_t mtgap_key,
                        bool *qwerty_registered,
+                       bool *mtgap_registered,
                        keyrecord_t *record,
                        uint8_t mod_state);
 
