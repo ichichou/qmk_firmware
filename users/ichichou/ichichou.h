@@ -98,9 +98,9 @@ enum my_keycodes {
 #define __________________SYM_L2___________________ KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT
 #define __________________SYM_L3___________________ KC_8,    KC_6,    KC_4,    KC_2,    KC_BSLS
 
-#define __________________SYM_R1___________________ KC_GRV,  KC_QUES, KC_CIRC, KC_DLR,  KC_COMM
+#define __________________SYM_R1___________________ KC_TILD, KC_QUES, KC_CIRC, KC_DLR,  KC_COMM
 #define __________________SYM_R2___________________ KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN
-#define __________________SYM_R3___________________ KC_TILD, KC_3,    KC_5,    KC_7,    KC_9
+#define __________________SYM_R3___________________ KC_GRV,  KC_3,    KC_5,    KC_7,    KC_9
 
 #define __________________WIN_L1___________________ LCA(KC_U),    LCA(KC_I),   XXXXXXX,     MEH(KC_C),    C(KC_1)
 #define __________________WIN_L2___________________ LCA(KC_LEFT), XXXXXXX,     XXXXXXX,     LCA(KC_RGHT), C(KC_2)
