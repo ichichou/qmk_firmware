@@ -1,2 +1,2 @@
-# MTGAP_ENABLE = yes
+MTGAP_ENABLE = yes
 # BUNA_ENABLE = yes
