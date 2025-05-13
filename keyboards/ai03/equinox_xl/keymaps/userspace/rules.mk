@@ -1,3 +1,3 @@
 USER_NAME := ichichou
-# ENABLE_MTGAP = yes
-# ENABLE_BUNA = yes
+# MTGAP_ENABLE = yes
+# BUNA_ENABLE = yes
