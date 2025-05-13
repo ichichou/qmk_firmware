@@ -26,12 +26,16 @@
 
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 
+// #define __________________FN_MTGAP_L1______________ KC_F1, KC_F2,  KC_F3,  KC_F4,  BASE
+// #define __________________FN_MTGAP_L1______________ KC_F5, KC_F6,  KC_F7,  KC_F8,  MTGAP
+// #define __________________FN_MTGAP_L1______________ KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT_wrapper(
-    RHYPR_TAB, __________________BASE_L1__________________,    __________________BASE_L1__________________,  KC_BSPC,
-    LCTL_ESC,  __________________BASE_L2__________________,    __________________BASE_L2__________________,  RCTL_QUOT,
-    LSFT_CW,   __________________BASE_L3__________________,    __________________BASE_L3__________________,  RSFT_BSLS,
+    RHYPR_TAB, __________________BASE_L1__________________,    __________________BASE_R1__________________,  KC_BSPC,
+    LCTL_ESC,  __________________BASE_L2__________________,    __________________BASE_R2__________________,  RCTL_QUOT,
+    LSFT_CW,   __________________BASE_L3__________________,    __________________BASE_R3__________________,  RSFT_BSLS,
     FN, KC_RCTL, KC_LALT,     LGUI_LNG2, NAV_ESC, LSFT_SPC,    RCTL_ENT, SYM_TAB, RGUI_LNG1, KC_DOWN, KC_UP, FN_GRV
   ),
 
