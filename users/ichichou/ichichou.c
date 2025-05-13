@@ -19,7 +19,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case MT_A ... MT_SLSH:
         return process_record_mtgap(keycode, record, mod_state);
 
-      case RCTL_T(MT_Q):
+      case RCTL_T(MT_QUOT):
         if (record->tap.count && record->event.pressed) {
           if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
             tap_code(KC_Q);
@@ -78,7 +78,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case LGUI_GRV:  return true;
 
     # ifdef MTGAP_ENABLE
-      case RCTL_MT_Q: return true;
+      case RCTL_MT_QUOT: return true;
     #endif
 
     default:
