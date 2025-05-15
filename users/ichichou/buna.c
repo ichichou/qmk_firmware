@@ -2,36 +2,6 @@
 
 #include "buna.h"
 
-// Functions {{{
-
-bool process_buna_key(uint8_t qwerty_key,
-                      const char *kana,
-                      bool *registered,
-                      keyrecord_t *record,
-                      uint8_t mod_state) {
-  if (record->event.pressed) {
-    if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
-      if (kana != NULL) {
-        send_string_P(kana);
-      }
-      return false;
-    } else {
-      register_code(qwerty_key);
-      *registered = true;
-      return false;
-    }
-  } else {
-    if (*registered) {
-      unregister_code(qwerty_key);
-      *registered = false;
-      return false;
-    }
-  }
-  return false;
-}
-
-// }}}
-
 // kana_* {{{
 
 const char kana_a[]    PROGMEM = "a";
@@ -140,7 +110,31 @@ const char kana_quot[] PROGMEM = "'";
 
 // }}}
 
-// process_record_* {{{
+bool process_buna_key(uint8_t qwerty_key,
+                      const char *kana,
+                      bool *registered,
+                      keyrecord_t *record,
+                      uint8_t mod_state) {
+  if (record->event.pressed) {
+    if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
+      if (kana != NULL) {
+        send_string_P(kana);
+      }
+      return false;
+    } else {
+      register_code(qwerty_key);
+      *registered = true;
+      return false;
+    }
+  } else {
+    if (*registered) {
+      unregister_code(qwerty_key);
+      *registered = false;
+      return false;
+    }
+  }
+  return false;
+}
 
 static bool key_registered[93];
 
@@ -251,5 +245,3 @@ bool process_record_buna(uint16_t keycode,
       return true;
   }
 }
-
-// }}}
