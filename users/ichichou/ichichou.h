@@ -142,4 +142,8 @@ enum my_keycodes {
   #include "buna.h"
 #endif
 
+#ifdef INVERTED_NUM_ENABLE
+  #include "inverted_num.h"
+#endif
+
 // }}}

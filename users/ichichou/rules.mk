@@ -14,3 +14,8 @@ ifeq ($(strip $(BUNA_ENABLE)), yes)
   SRC += buna.c
   OPT_DEFS += -DBUNA_ENABLE
 endif
+
+ifeq ($(strip $(INVERTED_NUM_ENABLE)), yes)
+  SRC += inverted_num.c
+  OPT_DEFS += -DINVERTED_NUM_ENABLE
+endif
