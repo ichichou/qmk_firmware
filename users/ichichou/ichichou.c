@@ -38,7 +38,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #endif
 
     #ifdef SHINGETA_ENABLE
-      case SG_A ... SG_SLSH:
+      case SG_ON ... SG_SLSH:
         return process_record_shingeta(keycode, record, mod_state);
     #endif
 
@@ -116,72 +116,78 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 // -- Combos {{{
 
+// コンボは userspace 内ではなく、
+// 各キーマップの keymap.c に書く必要がある
+
 // コンボは Karabiner の同時押しと干渉するため、
 // 同時押し系の機能はすべて Karabiner 側で実装する。
 
-#ifdef COMBO_ENABLE
-
-enum combos {
-  SD,
-  KL,
-  WE,
-  IO,
-};
-
-const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
-const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
-const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
-
-combo_t key_combos[] = {
-  [SD] = COMBO(sd_combo, MO(_NAV)),
-  [KL] = COMBO(kl_combo, MO(_NAV)),
-  [WE] = COMBO(we_combo, MO(_WIN)),
-  [IO] = COMBO(io_combo, MO(_WIN)),
-};
-
-#endif
+// #ifdef COMBO_ENABLE
+//
+// enum combos {
+//   SD,
+//   KL,
+//   WE,
+//   IO,
+// };
+//
+// const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+// const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
+// const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
+// const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
+//
+// combo_t key_combos[] = {
+//   [SD] = COMBO(sd_combo, MO(_NAV)),
+//   [KL] = COMBO(kl_combo, MO(_NAV)),
+//   [WE] = COMBO(we_combo, MO(_WIN)),
+//   [IO] = COMBO(io_combo, MO(_WIN)),
+// };
+//
+// #endif
 
 // }}}
 
 // -- Combo Configuration {{{
 
-#ifdef COMBO_ENABLE
+// コンボ設定は userspace 内ではなく、
+// 各キーマップの keymap.c に書く必要がある
 
-// COMBO_TERM_PER_COMBO (Default: 50)
+// #ifdef COMBO_ENABLE
 //
-// Karabiner 側の閾値が 50 ms の場合、COMBO_TERM は 20 ms 程度でないと、Karabiner での同時押し判定に支障が出る。
-// Karabiner 側の閾値が 70 ms なら、COMBO_TERM を 50 ms にしても実用に耐える。
-// 新下駄配列の同時押しに絡まないキーでのコンボなら関係ないと思われる。
-uint16_t get_combo_term(uint16_t index, combo_t *combo) {
-  switch (index) {
-    case SD: return 20;
-    case KL: return 20;
-    case WE: return 20;
-    case IO: return 20;
-  }
-  return COMBO_TERM;
-}
-
-// COMBO_MUST_TAP_PER_COMBO
-bool get_combo_must_tap(uint16_t index, combo_t *combo) {
-  switch (index) {
-  }
-  return false;
-}
-
-// COMBO_MUST_HOLD_PER_COMBO
-bool get_combo_must_hold(uint16_t index, combo_t *combo) {
-  switch (index) {
-    case SD: return true;
-    case KL: return true;
-    case WE: return true;
-    case IO: return true;
-  }
-  return false;
-}
-
-#endif
+// // COMBO_TERM_PER_COMBO (Default: 50)
+// //
+// // Karabiner 側の閾値が 50 ms の場合、COMBO_TERM は 20 ms 程度でないと、Karabiner での同時押し判定に支障が出る。
+// // Karabiner 側の閾値が 70 ms なら、COMBO_TERM を 50 ms にしても実用に耐える。
+// // 新下駄配列の同時押しに絡まないキーでのコンボなら関係ないと思われる。
+// uint16_t get_combo_term(uint16_t index, combo_t *combo) {
+//   switch (index) {
+//     case SD: return 20;
+//     case KL: return 20;
+//     case WE: return 20;
+//     case IO: return 20;
+//   }
+//   return COMBO_TERM;
+// }
+//
+// // COMBO_MUST_TAP_PER_COMBO
+// bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+//   switch (index) {
+//   }
+//   return false;
+// }
+//
+// // COMBO_MUST_HOLD_PER_COMBO
+// bool get_combo_must_hold(uint16_t index, combo_t *combo) {
+//   switch (index) {
+//     case SD: return true;
+//     case KL: return true;
+//     case WE: return true;
+//     case IO: return true;
+//   }
+//   return false;
+// }
+//
+// #endif
 
 // }}}
 

@@ -1,6 +1,6 @@
 // inverted_num.h
 
-// Inverted num key の実装はうまくいっていない。
+// Inverted number key の実装はうまくいっていない。
 // 動作として単打 -> 記号、シフト -> 数字、となってほしい。
 // ただ、シフトキーを押しながら INV_1 等のキーを押しても、
 // 1打目では数字にならず、連続で2回押してやっと数字になる。
@@ -9,6 +9,7 @@
 
 #pragma once
 #include QMK_KEYBOARD_H
+#include "ichichou.h"
 
 // -- Prototypes
 

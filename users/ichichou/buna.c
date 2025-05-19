@@ -2,7 +2,7 @@
 
 #include "buna.h"
 
-// kana_* {{{
+// -- Kana {{{
 
 const char kana_a[]    PROGMEM = "a";
 const char kana_i[]    PROGMEM = "i";
@@ -109,6 +109,8 @@ const char kana_scln[] PROGMEM = ";";
 const char kana_quot[] PROGMEM = "'";
 
 // }}}
+
+// -- Functions {{{
 
 bool process_buna_key(uint8_t qwerty_key,
                       const char *kana,
@@ -245,3 +247,5 @@ bool process_record_buna(uint16_t keycode,
       return true;
   }
 }
+
+// }}}

@@ -1,8 +1,9 @@
 // ichichou.h
 
+#pragma once
 #include QMK_KEYBOARD_H
 
-// Layers {{{
+// -- Layers {{{
 
 enum layer_names {
   _BASE,
@@ -29,7 +30,7 @@ enum layer_names {
 
 // }}}
 
-// Custom Keycodes {{{
+// -- Custom Keycodes {{{
 
 enum my_keycodes {
   KC_SAMPLE = QK_USER,
@@ -71,7 +72,7 @@ enum my_keycodes {
   // Buna {{{
   #ifdef BUNA_ENABLE
     // _BN1 {{{
-    BN1_A = BN_START,
+    BN1_A,
     BN1_B,
     BN1_C,
     BN1_D,
@@ -173,8 +174,10 @@ enum my_keycodes {
   // }}}
   // Shingeta {{{
   #ifdef SHINGETA_ENABLE
+    // 制御用キーコード {{{
     SG_ON,
     SG_OFF,
+    // }}}
     // 配置用キーコード {{{
     SG_A,
     SG_B,
@@ -367,7 +370,7 @@ enum my_keycodes {
   #endif
   // }}}
   // Inverted Number Row {{{
-  #ifdef INVERTED_NUM_ENABLE
+  #ifdef INVERTED_NUM_ROW
     INV_1,
     INV_2,
     INV_3,
@@ -384,14 +387,14 @@ enum my_keycodes {
 
 // }}}
 
-// Macros {{{
+// -- Macros {{{
 
 // Layers
-#define BASE  DF(_BASE)
-#define NAV   MO(_NAV)
-#define SYM   MO(_SYM)
-#define WIN   MO(_WIN)
-#define FN    MO(_FN)
+#define BASE DF(_BASE)
+#define NAV  MO(_NAV)
+#define SYM  MO(_SYM)
+#define WIN  MO(_WIN)
+#define FN   MO(_FN)
 
 // Modifiers
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
@@ -427,7 +430,7 @@ enum my_keycodes {
 
 // }}}
 
-// Wrappers {{{
+// -- Wrappers {{{
 
 #define __________________BASE_L1__________________ KC_Q, KC_W, KC_E,    KC_R,   KC_T
 #define __________________BASE_L2__________________ KC_A, KC_S, KC_D,    KC_F,   KC_G
@@ -483,7 +486,7 @@ enum my_keycodes {
 
 // }}}
 
-// Includes {{{
+// -- Includes {{{
 
 #ifdef MTGAP_ENABLE
   #include "mtgap.h"

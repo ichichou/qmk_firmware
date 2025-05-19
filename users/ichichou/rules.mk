@@ -15,6 +15,11 @@ ifeq ($(strip $(BUNA_ENABLE)), yes)
   OPT_DEFS += -DBUNA_ENABLE
 endif
 
+ifeq ($(strip $(SHINGETA_ENABLE)), yes)
+  SRC += shingeta.c
+  OPT_DEFS += -DSHINGETA_ENABLE
+endif
+
 ifeq ($(strip $(INVERTED_NUM_ENABLE)), yes)
   SRC += inverted_num.c
   OPT_DEFS += -DINVERTED_NUM_ENABLE
