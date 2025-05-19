@@ -1,4 +1,3 @@
+USER_NAME := ichichou
 SHINGETA_ENABLE = yes
-
 COMBO_ENABLE = yes
-COMBO_TERM_PER_COMBO = yes
