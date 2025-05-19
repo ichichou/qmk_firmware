@@ -431,6 +431,28 @@ bool process_record_shingeta(uint16_t keycode,
     case OUT_EXLM: return process_output_key(kana_exlm, record, mod_state);  // ！
     case OUT_QUES: return process_output_key(kana_ques, record, mod_state);  // ？
     // }}}
+    // 括弧 {{{
+    case OUT_BRC:
+      if (record->event.pressed) {
+        SEND_STRING("[]" SS_TAP(X_LEFT));
+        return false;
+      }
+      return false;
+
+    case OUT_PRN:
+      if (record->event.pressed) {
+        SEND_STRING("()" SS_TAP(X_LEFT));
+        return false;
+      }
+      return false;
+
+    case OUT_CBR:
+      if (record->event.pressed) {
+        SEND_STRING("{}" SS_TAP(X_LEFT));
+        return false;
+      }
+      return false;
+    // }}}
     // }}}
     default:
       return true;

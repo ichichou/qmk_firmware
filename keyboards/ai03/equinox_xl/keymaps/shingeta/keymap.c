@@ -6,6 +6,7 @@
 
 // -km shingeta_bk は正常に動作する。要比較。
 // まずは Combo list を移植してみるのがいい。
+// -> 移植した。動作を検証。
 
 #include QMK_KEYBOARD_H
 #include "ichichou.h"
@@ -16,9 +17,144 @@
 #define __________________FN_EQUINOX_R2____________ LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV
 #define __________________FN_EQUINOX_R3____________ LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE
 
-// -- Combos {{{
+// Combo list {{{
 
-// Sequences of keys -----------------------------
+enum combos {
+  // 制御用 {{{
+  BASE_DF,
+  BASE_JK,
+  SHINGETA_DF,
+  SHINGETA_JK,
+  // }}}
+  // 中指シフト (左) {{{
+  D_Y,
+  D_U,
+  D_I,
+  D_O,
+  D_P,
+  D_H,
+  D_J,
+  D_K,
+  D_L,
+  D_SCLN,
+  D_QUOT,
+  D_N,
+  D_M,
+  D_COMM,
+  D_DOT,
+  D_SLSH,
+  // }}}
+  // 中指シフト (右) {{{
+  K_Q,
+  K_W,
+  K_E,
+  K_R,
+  K_T,
+  K_A,
+  K_S,
+  // K_D,
+  K_F,
+  K_G,
+  K_Z,
+  K_X,
+  K_C,
+  K_V,
+  K_B,
+  // }}}
+  // 薬指シフト (左) {{{
+  S_Y,
+  S_U,
+  S_I,
+  S_O,
+  S_P,
+  S_H,
+  S_J,
+  // S_K,
+  S_L,
+  S_SCLN,
+  S_N,
+  S_M,
+  S_COMM,
+  S_DOT,
+  S_SLSH,
+  // }}}
+  // 薬指シフト (右) {{{
+  L_Q,
+  L_W,
+  L_E,
+  L_R,
+  L_T,
+  L_A,
+  // L_S,
+  // L_D,
+  L_F,
+  L_G,
+  L_Z,
+  L_X,
+  L_C,
+  L_V,
+  L_B,
+  // }}}
+  // 中指上段シフト {{{
+  I_Q,
+  I_W,
+  I_E,
+  I_R,
+  I_T,
+  I_A,
+  I_F,
+  I_G,
+  I_Z,
+  I_X,
+  I_C,
+  I_V,
+  I_B,
+  // }}}
+  // 薬指上段シフト {{{
+  O_Q,
+  O_W,
+  O_E,
+  O_R,
+  O_T,
+  O_A,
+  O_F,
+  O_G,
+  O_Z,
+  O_X,
+  O_C,
+  O_V,
+  O_B,
+  // }}}
+  // 小指上段シフト (右) {{{
+  P_Q,
+  P_W,
+  P_E,
+  P_R,
+  P_T,
+  P_A,
+  P_F,
+  P_G,
+  P_Z,
+  P_C,
+  P_V,
+  P_B,
+  // }}}
+  // 小指上段シフト (左) {{{
+  Q_Y,
+  Q_U,
+  Q_H,
+  Q_J,
+  Q_N,
+  Q_M,
+  Q_COMM,
+  Q_DOT,
+  Q_SLSH,
+  // }}}
+};
+
+// }}}
+
+// Sequences of keys {{{
 
 // 制御キー {{{
 const uint16_t PROGMEM base_df_combo[]     = {KC_D, KC_F, COMBO_END};
@@ -151,157 +287,161 @@ const uint16_t PROGMEM q_dot_combo[]  = {SG_Q, SG_DOT,  COMBO_END};
 const uint16_t PROGMEM q_slsh_combo[] = {SG_Q, SG_SLSH, COMBO_END};
 // }}}
 
-// Combos and its resulting action ---------------
+// }}}
+
+// Combos and its resulting action {{{
 
 combo_t key_combos[] = {
   // 制御キー {{{
-  COMBO(base_df_combo,     SG_OFF),
-  COMBO(base_jk_combo,     SG_ON),
-  COMBO(shingeta_df_combo, SG_OFF),
-  COMBO(shingeta_jk_combo, SG_ON),
+  [BASE_DF] = COMBO(base_df_combo, SG_OFF),
+  [BASE_JK] = COMBO(base_jk_combo, SG_ON),
+  [SHINGETA_DF] = COMBO(shingeta_df_combo, SG_OFF),
+  [SHINGETA_JK] = COMBO(shingeta_jk_combo, SG_ON),
   // }}}
   // 中指シフト (左) {{{
-  COMBO(d_y_combo,    OUT_WI),   // うぃ
-  COMBO(d_u_combo,    OUT_PA),   // ぱ
-  COMBO(d_i_combo,    OUT_YO),   // よ
-  COMBO(d_o_combo,    OUT_MI),   // み
-  COMBO(d_p_combo,    OUT_WE),   // うぇ
-  COMBO(d_h_combo,    OUT_HE),   // へ
-  COMBO(d_j_combo,    OUT_A),    // あ
-  COMBO(d_k_combo,    OUT_RE),   // れ
-  COMBO(d_l_combo,    OUT_O),    // お
-  COMBO(d_scln_combo, OUT_E),    // え
-  COMBO(d_quot_combo, OUT_WHO),  // うぉ
-  COMBO(d_n_combo,    OUT_SE),   // せ
-  COMBO(d_m_combo,    OUT_NE),   // ね
-  COMBO(d_comm_combo, OUT_BE),   // べ
-  COMBO(d_dot_combo,  OUT_PU),   // ぷ
-  COMBO(d_slsh_combo, OUT_VU),   // ヴ
+  [D_Y]    = COMBO(d_y_combo,    OUT_WI),   // うぃ
+  [D_U]    = COMBO(d_u_combo,    OUT_PA),   // ぱ
+  [D_I]    = COMBO(d_i_combo,    OUT_YO),   // よ
+  [D_O]    = COMBO(d_o_combo,    OUT_MI),   // み
+  [D_P]    = COMBO(d_p_combo,    OUT_WE),   // うぇ
+  [D_H]    = COMBO(d_h_combo,    OUT_HE),   // へ
+  [D_J]    = COMBO(d_j_combo,    OUT_A),    // あ
+  [D_K]    = COMBO(d_k_combo,    OUT_RE),   // れ
+  [D_L]    = COMBO(d_l_combo,    OUT_O),    // お
+  [D_SCLN] = COMBO(d_scln_combo, OUT_E),    // え
+  [D_QUOT] = COMBO(d_quot_combo, OUT_WHO),  // うぉ
+  [D_N]    = COMBO(d_n_combo,    OUT_SE),   // せ
+  [D_M]    = COMBO(d_m_combo,    OUT_NE),   // ね
+  [D_COMM] = COMBO(d_comm_combo, OUT_BE),   // べ
+  [D_DOT]  = COMBO(d_dot_combo,  OUT_PU),   // ぷ
+  [D_SLSH] = COMBO(d_slsh_combo, OUT_VU),   // ヴ
   // }}}
   // 中指シフト (右) {{{
-  COMBO(k_q_combo, OUT_FA),  // ふぁ
-  COMBO(k_w_combo, OUT_GO),  // ご
-  COMBO(k_e_combo, OUT_HU),  // ふ
-  COMBO(k_r_combo, OUT_FI),  // ふぃ
-  COMBO(k_t_combo, OUT_FE),  // ふぇ
-  COMBO(k_a_combo, OUT_HO),  // ほ
-  COMBO(k_s_combo, OUT_ZI),  // じ
-  // COMBO(k_d_combo, OUT_RE),  // れ
-  COMBO(k_f_combo, OUT_MO),  // も
-  COMBO(k_g_combo, OUT_YU),  // ゆ
-  COMBO(k_z_combo, OUT_DU),  // づ
-  COMBO(k_x_combo, OUT_ZO),  // ぞ
-  COMBO(k_c_combo, OUT_BO),  // ぼ
-  COMBO(k_v_combo, OUT_MU),  // む
-  COMBO(k_b_combo, OUT_FO),  // ふぉ
+  [K_Q] = COMBO(k_q_combo, OUT_FA),  // ふぁ
+  [K_W] = COMBO(k_w_combo, OUT_GO),  // ご
+  [K_E] = COMBO(k_e_combo, OUT_HU),  // ふ
+  [K_R] = COMBO(k_r_combo, OUT_FI),  // ふぃ
+  [K_T] = COMBO(k_t_combo, OUT_FE),  // ふぇ
+  [K_A] = COMBO(k_a_combo, OUT_HO),  // ほ
+  [K_S] = COMBO(k_s_combo, OUT_ZI),  // じ
+  // [K_D] = COMBO(k_d_combo, OUT_RE),  // れ
+  [K_F] = COMBO(k_f_combo, OUT_MO),  // も
+  [K_G] = COMBO(k_g_combo, OUT_YU),  // ゆ
+  [K_Z] = COMBO(k_z_combo, OUT_DU),  // づ
+  [K_X] = COMBO(k_x_combo, OUT_ZO),  // ぞ
+  [K_C] = COMBO(k_c_combo, OUT_BO),  // ぼ
+  [K_V] = COMBO(k_v_combo, OUT_MU),  // む
+  [K_B] = COMBO(k_b_combo, OUT_FO),  // ふぉ
   // }}}
   // 薬指シフト (左) {{{
-  COMBO(s_y_combo,    OUT_SYE),  // しぇ
-  COMBO(s_u_combo,    OUT_PE),   // ぺ
-  COMBO(s_i_combo,    OUT_DO),   // ど
-  COMBO(s_o_combo,    OUT_YA),   // や
-  COMBO(s_p_combo,    OUT_ZYE),  // じぇ
-  COMBO(s_h_combo,    OUT_BI),   // び
-  COMBO(s_j_combo,    OUT_RA),   // ら
-  // COMBO(s_k_combo,    OUT_ZI),   // じ
-  COMBO(s_l_combo,    OUT_SA),   // さ
-  COMBO(s_scln_combo, OUT_SO),   // そ
-  COMBO(s_n_combo,    OUT_WA),   // わ
-  COMBO(s_m_combo,    OUT_DA),   // だ
-  COMBO(s_comm_combo, OUT_PI),   // ぴ
-  COMBO(s_dot_combo,  OUT_PO),   // ぽ
-  COMBO(s_slsh_combo, OUT_TYE),  // ちぇ
+  [S_Y]    = COMBO(s_y_combo,    OUT_SYE),  // しぇ
+  [S_U]    = COMBO(s_u_combo,    OUT_PE),   // ぺ
+  [S_I]    = COMBO(s_i_combo,    OUT_DO),   // ど
+  [S_O]    = COMBO(s_o_combo,    OUT_YA),   // や
+  [S_P]    = COMBO(s_p_combo,    OUT_ZYE),  // じぇ
+  [S_H]    = COMBO(s_h_combo,    OUT_BI),   // び
+  [S_J]    = COMBO(s_j_combo,    OUT_RA),   // ら
+  // [S_K]    = COMBO(s_k_combo,    OUT_ZI),   // じ
+  [S_L]    = COMBO(s_l_combo,    OUT_SA),   // さ
+  [S_SCLN] = COMBO(s_scln_combo, OUT_SO),   // そ
+  [S_N]    = COMBO(s_n_combo,    OUT_WA),   // わ
+  [S_M]    = COMBO(s_m_combo,    OUT_DA),   // だ
+  [S_COMM] = COMBO(s_comm_combo, OUT_PI),   // ぴ
+  [S_DOT]  = COMBO(s_dot_combo,  OUT_PO),   // ぽ
+  [S_SLSH] = COMBO(s_slsh_combo, OUT_TYE),  // ちぇ
   // }}}
   // 薬指シフト (右) {{{
-  COMBO(l_q_combo, OUT_DI),   // ぢ
-  COMBO(l_w_combo, OUT_ME),   // め
-  COMBO(l_e_combo, OUT_KE),   // け
-  COMBO(l_r_combo, OUT_THI),  // てぃ
-  COMBO(l_t_combo, OUT_DHI),  // でぃ
-  COMBO(l_a_combo, OUT_WO),   // を
-  // COMBO(l_s_combo, OUT_SA),   // さ
-  // COMBO(l_d_combo, OUT_O),    // お
-  COMBO(l_f_combo, OUT_RI),   // り
-  COMBO(l_g_combo, OUT_ZU),   // ず
-  COMBO(l_z_combo, OUT_ZE),   // ぜ
-  COMBO(l_x_combo, OUT_ZA),   // ざ
-  COMBO(l_c_combo, OUT_GI),   // ぎ
-  COMBO(l_v_combo, OUT_RO),   // ろ
-  COMBO(l_b_combo, OUT_NU),   // ぬ
+  [L_Q] = COMBO(l_q_combo, OUT_DI),   // ぢ
+  [L_W] = COMBO(l_w_combo, OUT_ME),   // め
+  [L_E] = COMBO(l_e_combo, OUT_KE),   // け
+  [L_R] = COMBO(l_r_combo, OUT_THI),  // てぃ
+  [L_T] = COMBO(l_t_combo, OUT_DHI),  // でぃ
+  [L_A] = COMBO(l_a_combo, OUT_WO),   // を
+  // [L_S] = COMBO(l_s_combo, OUT_SA),   // さ
+  // [L_D] = COMBO(l_d_combo, OUT_O),    // お
+  [L_F] = COMBO(l_f_combo, OUT_RI),   // り
+  [L_G] = COMBO(l_g_combo, OUT_ZU),   // ず
+  [L_Z] = COMBO(l_z_combo, OUT_ZE),   // ぜ
+  [L_X] = COMBO(l_x_combo, OUT_ZA),   // ざ
+  [L_C] = COMBO(l_c_combo, OUT_GI),   // ぎ
+  [L_V] = COMBO(l_v_combo, OUT_RO),   // ろ
+  [L_B] = COMBO(l_b_combo, OUT_NU),   // ぬ
   // }}}
   // 中指上段シフト {{{
-  COMBO(i_q_combo, OUT_HYU),  // ひゅ
-  COMBO(i_w_combo, OUT_SYU),  // しゅ
-  COMBO(i_e_combo, OUT_SYO),  // しょ
-  COMBO(i_r_combo, OUT_KYU),  // きゅ
-  COMBO(i_t_combo, OUT_TYU),  // ちゅ
-  COMBO(i_a_combo, OUT_HYO),  // ひょ
-  COMBO(i_f_combo, OUT_KYO),  // きょ
-  COMBO(i_g_combo, OUT_TYO),  // ちょ
-  COMBO(i_z_combo, OUT_HYA),  // ひゃ
-  COMBO(i_x_combo, OUT_TWU),  // とぅ
-  COMBO(i_c_combo, OUT_SYA),  // しゃ
-  COMBO(i_v_combo, OUT_KYA),  // きゃ
-  COMBO(i_b_combo, OUT_TYA),  // ちゃ
+  [I_Q] = COMBO(i_q_combo, OUT_HYU),  // ひゅ
+  [I_W] = COMBO(i_w_combo, OUT_SYU),  // しゅ
+  [I_E] = COMBO(i_e_combo, OUT_SYO),  // しょ
+  [I_R] = COMBO(i_r_combo, OUT_KYU),  // きゅ
+  [I_T] = COMBO(i_t_combo, OUT_TYU),  // ちゅ
+  [I_A] = COMBO(i_a_combo, OUT_HYO),  // ひょ
+  [I_F] = COMBO(i_f_combo, OUT_KYO),  // きょ
+  [I_G] = COMBO(i_g_combo, OUT_TYO),  // ちょ
+  [I_Z] = COMBO(i_z_combo, OUT_HYA),  // ひゃ
+  [I_X] = COMBO(i_x_combo, OUT_TWU),  // とぅ
+  [I_C] = COMBO(i_c_combo, OUT_SYA),  // しゃ
+  [I_V] = COMBO(i_v_combo, OUT_KYA),  // きゃ
+  [I_B] = COMBO(i_b_combo, OUT_TYA),  // ちゃ
   // }}}
   // 薬指上段シフト {{{
-  COMBO(o_q_combo, OUT_RYU),  // りゅ
-  COMBO(o_w_combo, OUT_ZYU),  // じゅ
-  COMBO(o_e_combo, OUT_ZYO),  // じょ
-  COMBO(o_r_combo, OUT_GYU),  // ぎゅ
-  COMBO(o_t_combo, OUT_NYU),  // にゅ
-  COMBO(o_a_combo, OUT_RYO),  // りょ
-  COMBO(o_f_combo, OUT_GYO),  // ぎょ
-  COMBO(o_g_combo, OUT_NYO),  // にょ
-  COMBO(o_z_combo, OUT_RYA),  // りゃ
-  COMBO(o_x_combo, OUT_DWU),  // どぅ
-  COMBO(o_c_combo, OUT_ZYA),  // じゃ
-  COMBO(o_v_combo, OUT_GYA),  // ぎゃ
-  COMBO(o_b_combo, OUT_NYA),  // にゃ
+  [O_Q] = COMBO(o_q_combo, OUT_RYU),  // りゅ
+  [O_W] = COMBO(o_w_combo, OUT_ZYU),  // じゅ
+  [O_E] = COMBO(o_e_combo, OUT_ZYO),  // じょ
+  [O_R] = COMBO(o_r_combo, OUT_GYU),  // ぎゅ
+  [O_T] = COMBO(o_t_combo, OUT_NYU),  // にゅ
+  [O_A] = COMBO(o_a_combo, OUT_RYO),  // りょ
+  [O_F] = COMBO(o_f_combo, OUT_GYO),  // ぎょ
+  [O_G] = COMBO(o_g_combo, OUT_NYO),  // にょ
+  [O_Z] = COMBO(o_z_combo, OUT_RYA),  // りゃ
+  [O_X] = COMBO(o_x_combo, OUT_DWU),  // どぅ
+  [O_C] = COMBO(o_c_combo, OUT_ZYA),  // じゃ
+  [O_V] = COMBO(o_v_combo, OUT_GYA),  // ぎゃ
+  [O_B] = COMBO(o_b_combo, OUT_NYA),  // にゃ
   // }}}
   // 小指上段シフト (右) {{{
-  COMBO(p_q_combo, OUT_PYU),  // ぴゅ
-  COMBO(p_w_combo, OUT_MYU),  // みゅ
-  COMBO(p_e_combo, OUT_MYO),  // みょ
-  COMBO(p_r_combo, OUT_BYU),  // びゅ
-  COMBO(p_t_combo, OUT_DYU),  // ぢゅ
-  COMBO(p_a_combo, OUT_PYO),  // ぴょ
-  COMBO(p_f_combo, OUT_BYO),  // びょ
-  COMBO(p_g_combo, OUT_DYO),  // ぢょ
-  COMBO(p_z_combo, OUT_PYA),  // ぴゃ
-  COMBO(p_c_combo, OUT_MYA),  // みゃ
-  COMBO(p_v_combo, OUT_BYA),  // びゃ
-  COMBO(p_b_combo, OUT_DYA),  // ぢゃ
+  [P_Q] = COMBO(p_q_combo, OUT_PYU),  // ぴゅ
+  [P_W] = COMBO(p_w_combo, OUT_MYU),  // みゅ
+  [P_E] = COMBO(p_e_combo, OUT_MYO),  // みょ
+  [P_R] = COMBO(p_r_combo, OUT_BYU),  // びゅ
+  [P_T] = COMBO(p_t_combo, OUT_DYU),  // ぢゅ
+  [P_A] = COMBO(p_a_combo, OUT_PYO),  // ぴょ
+  [P_F] = COMBO(p_f_combo, OUT_BYO),  // びょ
+  [P_G] = COMBO(p_g_combo, OUT_DYO),  // ぢょ
+  [P_Z] = COMBO(p_z_combo, OUT_PYA),  // ぴゃ
+  [P_C] = COMBO(p_c_combo, OUT_MYA),  // みゃ
+  [P_V] = COMBO(p_v_combo, OUT_BYA),  // びゃ
+  [P_B] = COMBO(p_b_combo, OUT_DYA),  // ぢゃ
   // }}}
   // 小指上段シフト (左) {{{
-  COMBO(q_y_combo,    OUT_XYA),  // ゃ
-  COMBO(q_u_combo,    OUT_XA),   // ぁ
-  COMBO(q_h_combo,    OUT_XYU),  // ゅ
-  COMBO(q_j_combo,    OUT_XI),   // ぃ
-  COMBO(q_n_combo,    OUT_XYO),  // ょ
-  COMBO(q_m_combo,    OUT_XU),   // ぅ
-  COMBO(q_comm_combo, OUT_XE),   // ぇ
-  COMBO(q_dot_combo,  OUT_XO),   // ぉ
-  COMBO(q_slsh_combo, OUT_XWA),  // ゎ
+  [Q_Y]    = COMBO(q_y_combo,    OUT_XYA),  // ゃ
+  [Q_U]    = COMBO(q_u_combo,    OUT_XA),   // ぁ
+  [Q_H]    = COMBO(q_h_combo,    OUT_XYU),  // ゅ
+  [Q_J]    = COMBO(q_j_combo,    OUT_XI),   // ぃ
+  [Q_N]    = COMBO(q_n_combo,    OUT_XYO),  // ょ
+  [Q_M]    = COMBO(q_m_combo,    OUT_XU),   // ぅ
+  [Q_COMM] = COMBO(q_comm_combo, OUT_XE),   // ぇ
+  [Q_DOT]  = COMBO(q_dot_combo,  OUT_XO),   // ぉ
+  [Q_SLSH] = COMBO(q_slsh_combo, OUT_XWA),  // ゎ
   // }}}
 };
 
 // }}}
 
-// -- Combo Configurations {{{
+// Combo Configurations {{{
 
 // コンパイルエラーになる。
 // Combo list で定義した名前で case XXXX: とすれば改善するかも。
+// -> 修正した。要検証。
+// -> コンパイルは通った。
 
-// uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
-//   switch (combo_index) {
-//     case base_df_combo:     return 20;
-//     case base_jk_combo:     return 20;
-//     case shingeta_df_combo: return 20;
-//     case shingeta_jk_combo: return 20;
-//   }
-//   return COMBO_TERM;
-// }
+uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
+  switch (combo_index) {
+    case BASE_DF:     return 20;
+    case BASE_JK:     return 20;
+    case SHINGETA_DF: return 20;
+    case SHINGETA_JK: return 20;
+  }
+  return COMBO_TERM;
+}
 
 // }}}
 

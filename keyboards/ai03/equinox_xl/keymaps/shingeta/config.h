@@ -1,2 +1,2 @@
 #define COMBO_TERM 50
-// #define COMBO_TERM_PER_COMBO
+#define COMBO_TERM_PER_COMBO
