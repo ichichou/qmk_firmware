@@ -173,6 +173,8 @@ enum my_keycodes {
   // }}}
   // Shingeta {{{
   #ifdef SHINGETA_ENABLE
+    SG_ON,
+    SG_OFF,
     // 配置用キーコード {{{
     SG_A,
     SG_B,
