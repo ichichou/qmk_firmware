@@ -7,6 +7,8 @@
   #define DYNAMIC_KEYMAP_LAYER_COUNT 9
 #elif defined(BUNA_ENABLE)
   #define DYNAMIC_KEYMAP_LAYER_COUNT 8
+#elif defined(SHINGETA_ENABLE)
+  #define DYNAMIC_KEYMAP_LAYER_COUNT 6
 #elif defined(MTGAP_ENABLE)
   #define DYNAMIC_KEYMAP_LAYER_COUNT 6
 #else
@@ -19,14 +21,14 @@
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 #define PERMISSIVE_HOLD_PER_KEY
 
-// Combo
-#ifdef COMBO_ENABLE
-  #define COMBO_TERM 50
-  #define COMBO_HOLD_TERM 100
-  #define COMBO_TERM_PER_COMBO
-  #define COMBO_MUST_TAP_PER_COMBO
-  #define COMBO_MUST_HOLD_PER_COMBO
-#endif
+// // Combo
+// #ifdef COMBO_ENABLE
+//   #define COMBO_TERM 50
+//   #define COMBO_HOLD_TERM 100
+//   #define COMBO_TERM_PER_COMBO
+//   #define COMBO_MUST_TAP_PER_COMBO
+//   #define COMBO_MUST_HOLD_PER_COMBO
+// #endif
 
 // Caps Word
 #ifdef CAPS_WORD_ENABLE

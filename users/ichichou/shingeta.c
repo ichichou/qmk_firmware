@@ -709,4 +709,16 @@ combo_t key_combos[] = {
 };
 // }}}
 
+// Combo Configurations {{{
+uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
+  switch (combo_index) {
+    case base_df_combo:     return 20;
+    case base_jk_combo:     return 20;
+    case shingeta_df_combo: return 20;
+    case shingeta_jk_combo: return 20;
+  }
+  return COMBO_TERM;
+}
+// }}}
+
 // }}}
