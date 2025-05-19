@@ -9,26 +9,6 @@
 
 #pragma once
 #include QMK_KEYBOARD_H
-#include "keycodes_start.h"
-
-// -- Custom Keycodes
-
-// 実際に利用するには keycodes_start.h で
-// INV_1 のスタート地点を決める必要があるかもしれない
-
-enum inverted_num_keycode {
-  // INV_1 = QK_USER,
-  INV_1,
-  INV_2,
-  INV_3,
-  INV_4,
-  INV_5,
-  INV_6,
-  INV_7,
-  INV_8,
-  INV_9,
-  INV_0,
-};
 
 // -- Prototypes
 

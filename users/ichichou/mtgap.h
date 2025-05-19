@@ -2,50 +2,11 @@
 
 #pragma once
 #include QMK_KEYBOARD_H
-#include "keycodes_start.h"
 
 // -- Macros
 
 #define MTGAP     DF(_MTGAP)
 #define RCTL_MT_QUOT RCTL_T(MT_QUOT)
-
-// -- Custom Keycodes {{{
-
-enum mtgap_keycodes {
-  MT_A = MT_START,
-  MT_B,
-  MT_C,
-  MT_D,
-  MT_E,
-  MT_F,
-  MT_G,
-  MT_H,
-  MT_I,
-  MT_J,
-  MT_K,
-  MT_L,
-  MT_M,
-  MT_N,
-  MT_O,
-  MT_P,
-  MT_Q,
-  MT_R,
-  MT_S,
-  MT_T,
-  MT_U,
-  MT_V,
-  MT_W,
-  MT_X,
-  MT_Y,
-  MT_Z,
-  MT_SCLN,
-  MT_QUOT,
-  MT_COMM,
-  MT_DOT,
-  MT_SLSH,
-};
-
-// }}}
 
 // -- Prototypes
 
