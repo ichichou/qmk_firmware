@@ -1,26 +1,17 @@
-// Copyright 2024 ai03
-// SPDX-License-Identifier: GPL-2.0-or-later
+// KB: Equinox XL
+// KM: shingeta_bk
 
-// 1. LGUI, RGUI でレイヤーの切り替えができない。
-// ChatGPT に訊いたら初耳の内容が返ってきたが、それはまだ試していない。
-// -> process_record_user でタップ時の動作を上書き
-//
-// 2. Key Overrides が機能しない。
-// LCtrl-J/L でレイヤーを切り替えたいが、現状できない。
-// -> process_record_user で動作を上書き
-//
-// 3. ファームウェアのサイズが上限ぎりぎりで、他の必要な設定が入るか分からない。
-// サイズ圧縮の方法がないわけではない。
-// -> マクロを関数化
-// -> 文字列（新下駄配列の仮名）を PROGMEM に移動する
-
-// -- #include {{{
+// -- Includes {{{
 
 #include QMK_KEYBOARD_H
 
 // }}}
 
-// -- #define {{{
+// -- Macros {{{
+
+// Layers
+#define BASE  DF(_BASE)
+#define SHING DF(_SHINGETA)
 
 // Modifiers
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
@@ -54,16 +45,15 @@
 #define LSFT_RBRC SFT_T(KC_RBRC)
 #define LGUI_GRV  GUI_T(KC_GRV)
 
-// 新下駄配列
+// }}}
+
+// -- Macros for Shingeta {{{
+
 #define CONST_COMBO(combo_name, shift_key, key) \
   const uint16_t PROGMEM combo_name##_combo[] = {shift_key, key, COMBO_END};
 
 #define COMBO_LIST(combo_code, combo_name, output_key) \
   [combo_code] = COMBO(combo_name##_combo, output_key)
-
-// }}}
-
-// -- Functions {{{
 
 #define SHINGETA_KEYCODE(name, sg_kana, qwerty_key, qw_var) \
   case name:                                                \
@@ -115,13 +105,11 @@ enum layer_names {
 // -- Custom Keycodes {{{
 
 enum my_keycodes {
-  // 入力切替
-  SHINGETA_ON = QK_USER,
-  SHINGETA_OFF,
-  LGUI_SG_OFF,
-  RGUI_SG_ON,
-
-  // SG_XX {{{
+  // 制御用キーコード {{{
+  SG_ON = QK_USER + 100,
+  SG_OFF,
+  // }}}
+  // 配置用キーコード {{{
   SG_A,
   SG_B,
   SG_C,
@@ -154,10 +142,8 @@ enum my_keycodes {
   SG_SCLN,
   SG_QUOT,
   // }}}
-
-  // OUT_XX {{{
-
-  // 清音
+  // 出力用キーコード {{{
+  // 清音 {{{
   OUT_A,
   OUT_I,
   OUT_U,
@@ -204,8 +190,8 @@ enum my_keycodes {
   OUT_WA,
   OUT_WO,
   OUT_NN,
-
-  // 濁音・半濁音
+  // }}}
+  // 濁音・半濁音 {{{
   OUT_GA,
   OUT_GI,
   OUT_GU,
@@ -231,8 +217,8 @@ enum my_keycodes {
   OUT_PU,
   OUT_PE,
   OUT_PO,
-
-  // 拗音（清音）
+  // }}}
+  // 拗音 (清音) {{{
   OUT_KYA,
   OUT_KYU,
   OUT_KYO,
@@ -254,8 +240,8 @@ enum my_keycodes {
   OUT_RYA,
   OUT_RYU,
   OUT_RYO,
-
-  // 拗音（濁音・半濁音）
+  // }}}
+  // 拗音 (濁音・半濁音) {{{
   OUT_GYA,
   OUT_GYU,
   OUT_GYO,
@@ -271,8 +257,8 @@ enum my_keycodes {
   OUT_PYA,
   OUT_PYU,
   OUT_PYO,
-
-  // 外来音
+  // }}}
+  // 外来音 {{{
   OUT_WI,
   OUT_WE,
   OUT_WHO,
@@ -292,8 +278,8 @@ enum my_keycodes {
   OUT_VU,
   OUT_VE,
   OUT_VO,
-
-  // 捨て仮名
+  // }}}
+  // 捨て仮名 {{{
   OUT_XTU,
   OUT_XYA,
   OUT_XYU,
@@ -304,8 +290,8 @@ enum my_keycodes {
   OUT_XE,
   OUT_XO,
   OUT_XWA,
-
-  // 記号
+  // }}}
+  // 記号 {{{
   OUT_COMM,
   OUT_DOT,
   OUT_LONG,
@@ -316,31 +302,20 @@ enum my_keycodes {
   OUT_BRC,
   OUT_PRN,
   OUT_CBR,
-
   // }}}
-
+  // }}}
 };
 
 // }}}
 
 // -- Behavior of Any Keycode {{{
 
+uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  uint8_t mod_state = get_mods();
+  mod_state = get_mods();
   switch (keycode) {
-
-    // 新下駄配列 {{{
-
-    // 入力切替
-    case SHINGETA_OFF:
-      if (record->event.pressed) {
-        tap_code(KC_LNG2);
-        set_single_default_layer(_BASE);
-        return false;
-      }
-      return false;
-
-    case SHINGETA_ON:
+    // 制御用キーコード {{{
+    case SG_ON:
       if (record->event.pressed) {
         tap_code(KC_LNG1);
         set_single_default_layer(_SHINGETA);
@@ -348,33 +323,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
 
-    // レイヤーが切り替わらない（_BASE にも _SHINGETA にも）
-    case LGUI_SG_OFF:
-      if (record->tap.count && record->event.pressed) {
+    case SG_OFF:
+      if (record->event.pressed) {
         tap_code(KC_LNG2);
         set_single_default_layer(_BASE);
         return false;
-      } else if (record->event.pressed) {
-        register_code(KC_LGUI);
-      } else {
-        unregister_code(KC_LGUI);
       }
       return false;
-
-    // レイヤーが切り替わらない（_BASE にも _SHINGETA にも）
-    case RGUI_SG_ON:
-      if (record->tap.count && record->event.pressed) {
-        tap_code(KC_LNG1);
-        set_single_default_layer(_SHINGETA);
-        return false;
-      } else if (record->event.pressed) {
-        register_code(KC_RGUI);
-      } else {
-        unregister_code(KC_RGUI);
-      }
-      return false;
-
-    // ボード配置用
+    // }}}
+    // 配置用キーコード {{{
     SHINGETA_KEYCODE(SG_A,    "no",  KC_A,    a)
     SHINGETA_KEYCODE(SG_B,    "tu",  KC_B,    b)
     SHINGETA_KEYCODE(SG_C,    "ki",  KC_C,    c)
@@ -406,174 +363,169 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     SHINGETA_KEYCODE(SG_SLSH, "bu",  KC_SLSH, slsh)
     SHINGETA_KEYCODE(SG_SCLN, "na",  KC_SCLN, scln)
     SHINGETA_KEYCODE(SG_QUOT, "ge",  KC_QUOT, quot)
-
     // }}}
-
-    // 新下駄配列 (削除予定) {{{
-
-    // // 清音
-    // OUTPUT_KEYCODE(OUT_A, "a")
-    // OUTPUT_KEYCODE(OUT_I, "i")
-    // OUTPUT_KEYCODE(OUT_U, "u")
-    // OUTPUT_KEYCODE(OUT_E, "e")
-    // OUTPUT_KEYCODE(OUT_O, "o")
-    // OUTPUT_KEYCODE(OUT_KA,"ka")
-    // OUTPUT_KEYCODE(OUT_KI,"ki")
-    // OUTPUT_KEYCODE(OUT_KU,"ku")
-    // OUTPUT_KEYCODE(OUT_KE,"ke")
-    // OUTPUT_KEYCODE(OUT_KO,"ko")
-    // OUTPUT_KEYCODE(OUT_SA,"sa")
-    // OUTPUT_KEYCODE(OUT_SI,"si")
-    // OUTPUT_KEYCODE(OUT_SU,"su")
-    // OUTPUT_KEYCODE(OUT_SE,"se")
-    // OUTPUT_KEYCODE(OUT_SO,"so")
-    // OUTPUT_KEYCODE(OUT_TA,"ta")
-    // OUTPUT_KEYCODE(OUT_TI,"ti")
-    // OUTPUT_KEYCODE(OUT_TU,"tu")
-    // OUTPUT_KEYCODE(OUT_TE,"te")
-    // OUTPUT_KEYCODE(OUT_TO,"to")
-    // OUTPUT_KEYCODE(OUT_NA,"na")
-    // OUTPUT_KEYCODE(OUT_NI,"ni")
-    // OUTPUT_KEYCODE(OUT_NU,"nu")
-    // OUTPUT_KEYCODE(OUT_NE,"ne")
-    // OUTPUT_KEYCODE(OUT_NO,"no")
-    // OUTPUT_KEYCODE(OUT_HA,"ha")
-    // OUTPUT_KEYCODE(OUT_HI,"hi")
-    // OUTPUT_KEYCODE(OUT_HU,"hu")
-    // OUTPUT_KEYCODE(OUT_HE,"he")
-    // OUTPUT_KEYCODE(OUT_HO,"ho")
-    // OUTPUT_KEYCODE(OUT_MA,"ma")
-    // OUTPUT_KEYCODE(OUT_MI,"mi")
-    // OUTPUT_KEYCODE(OUT_MU,"mu")
-    // OUTPUT_KEYCODE(OUT_ME,"me")
-    // OUTPUT_KEYCODE(OUT_MO,"mo")
-    // OUTPUT_KEYCODE(OUT_YA,"ya")
-    // OUTPUT_KEYCODE(OUT_YU,"yu")
-    // OUTPUT_KEYCODE(OUT_YO,"yo")
-    // OUTPUT_KEYCODE(OUT_RA,"ra")
-    // OUTPUT_KEYCODE(OUT_RI,"ri")
-    // OUTPUT_KEYCODE(OUT_RU,"ru")
-    // OUTPUT_KEYCODE(OUT_RE,"re")
-    // OUTPUT_KEYCODE(OUT_RO,"ro")
-    // OUTPUT_KEYCODE(OUT_WA,"wa")
-    // OUTPUT_KEYCODE(OUT_WO,"wo")
-    // OUTPUT_KEYCODE(OUT_NN,"nn")
-    //
-    // // 濁音・半濁音
-    // OUTPUT_KEYCODE(OUT_GA, "ga")
-    // OUTPUT_KEYCODE(OUT_GI, "gi")
-    // OUTPUT_KEYCODE(OUT_GU, "gu")
-    // OUTPUT_KEYCODE(OUT_GE, "ge")
-    // OUTPUT_KEYCODE(OUT_GO, "go")
-    // OUTPUT_KEYCODE(OUT_ZA, "za")
-    // OUTPUT_KEYCODE(OUT_ZI, "zi")
-    // OUTPUT_KEYCODE(OUT_ZU, "zu")
-    // OUTPUT_KEYCODE(OUT_ZE, "ze")
-    // OUTPUT_KEYCODE(OUT_ZO, "zo")
-    // OUTPUT_KEYCODE(OUT_DA, "da")
-    // OUTPUT_KEYCODE(OUT_DI, "di")
-    // OUTPUT_KEYCODE(OUT_DU, "du")
-    // OUTPUT_KEYCODE(OUT_DE, "de")
-    // OUTPUT_KEYCODE(OUT_DO, "do")
-    // OUTPUT_KEYCODE(OUT_BA, "ba")
-    // OUTPUT_KEYCODE(OUT_BI, "bi")
-    // OUTPUT_KEYCODE(OUT_BU, "bu")
-    // OUTPUT_KEYCODE(OUT_BE, "be")
-    // OUTPUT_KEYCODE(OUT_BO, "bo")
-    // OUTPUT_KEYCODE(OUT_PA, "pa")
-    // OUTPUT_KEYCODE(OUT_PI, "pi")
-    // OUTPUT_KEYCODE(OUT_PU, "pu")
-    // OUTPUT_KEYCODE(OUT_PE, "pe")
-    // OUTPUT_KEYCODE(OUT_PO, "po")
-    //
-    // // 拗音（清音）
-    // OUTPUT_KEYCODE(OUT_KYA, "kya")
-    // OUTPUT_KEYCODE(OUT_KYU, "kyu")
-    // OUTPUT_KEYCODE(OUT_KYO, "kyo")
-    // OUTPUT_KEYCODE(OUT_SYA, "sya")
-    // OUTPUT_KEYCODE(OUT_SYU, "syu")
-    // OUTPUT_KEYCODE(OUT_SYO, "syo")
-    // OUTPUT_KEYCODE(OUT_TYA, "tya")
-    // OUTPUT_KEYCODE(OUT_TYU, "tyu")
-    // OUTPUT_KEYCODE(OUT_TYO, "tyo")
-    // OUTPUT_KEYCODE(OUT_NYA, "nya")
-    // OUTPUT_KEYCODE(OUT_NYU, "nyu")
-    // OUTPUT_KEYCODE(OUT_NYO, "nyo")
-    // OUTPUT_KEYCODE(OUT_HYA, "hya")
-    // OUTPUT_KEYCODE(OUT_HYU, "hyu")
-    // OUTPUT_KEYCODE(OUT_HYO, "hyo")
-    // OUTPUT_KEYCODE(OUT_MYA, "mya")
-    // OUTPUT_KEYCODE(OUT_MYU, "myu")
-    // OUTPUT_KEYCODE(OUT_MYO, "myo")
-    // OUTPUT_KEYCODE(OUT_RYA, "rya")
-    // OUTPUT_KEYCODE(OUT_RYU, "ryu")
-    // OUTPUT_KEYCODE(OUT_RYO, "ryo")
-    //
-    // // 拗音（濁音・半濁音）
-    // OUTPUT_KEYCODE(OUT_GYA, "gya")
-    // OUTPUT_KEYCODE(OUT_GYU, "gyu")
-    // OUTPUT_KEYCODE(OUT_GYO, "gyo")
-    // OUTPUT_KEYCODE(OUT_ZYA, "zya")
-    // OUTPUT_KEYCODE(OUT_ZYU, "zyu")
-    // OUTPUT_KEYCODE(OUT_ZYO, "zyo")
-    // OUTPUT_KEYCODE(OUT_DYA, "dya")
-    // OUTPUT_KEYCODE(OUT_DYU, "dyu")
-    // OUTPUT_KEYCODE(OUT_DYO, "dyo")
-    // OUTPUT_KEYCODE(OUT_BYA, "bya")
-    // OUTPUT_KEYCODE(OUT_BYU, "byu")
-    // OUTPUT_KEYCODE(OUT_BYO, "byo")
-    // OUTPUT_KEYCODE(OUT_PYA, "pya")
-    // OUTPUT_KEYCODE(OUT_PYU, "pyu")
-    // OUTPUT_KEYCODE(OUT_PYO, "pyo")
-    //
-    // // 外来音
-    // OUTPUT_KEYCODE(OUT_WI,  "wi")
-    // OUTPUT_KEYCODE(OUT_WE,  "we")
-    // OUTPUT_KEYCODE(OUT_WHO, "who")
-    // OUTPUT_KEYCODE(OUT_FA,  "fa")
-    // OUTPUT_KEYCODE(OUT_FI,  "fi")
-    // OUTPUT_KEYCODE(OUT_FE,  "fe")
-    // OUTPUT_KEYCODE(OUT_FO,  "fo")
-    // OUTPUT_KEYCODE(OUT_SYE, "sye")
-    // OUTPUT_KEYCODE(OUT_ZYE, "zye")
-    // OUTPUT_KEYCODE(OUT_TYE, "tye")
-    // OUTPUT_KEYCODE(OUT_THI, "thi")
-    // OUTPUT_KEYCODE(OUT_DHI, "dhi")
-    // OUTPUT_KEYCODE(OUT_TWU, "twu")
-    // OUTPUT_KEYCODE(OUT_DWU, "dwu")
-    // OUTPUT_KEYCODE(OUT_VA,  "va")
-    // OUTPUT_KEYCODE(OUT_VI,  "vi")
-    // OUTPUT_KEYCODE(OUT_VU,  "vu")
-    // OUTPUT_KEYCODE(OUT_VE,  "ve")
-    // OUTPUT_KEYCODE(OUT_VO,  "vo")
-    //
-    // // 捨て仮名
-    // OUTPUT_KEYCODE(OUT_XTU, "xtu")
-    // OUTPUT_KEYCODE(OUT_XYA, "xya")
-    // OUTPUT_KEYCODE(OUT_XYU, "xyu")
-    // OUTPUT_KEYCODE(OUT_XYO, "xyo")
-    // OUTPUT_KEYCODE(OUT_XA,  "xa")
-    // OUTPUT_KEYCODE(OUT_XI,  "xi")
-    // OUTPUT_KEYCODE(OUT_XU,  "xu")
-    // OUTPUT_KEYCODE(OUT_XE,  "xe")
-    // OUTPUT_KEYCODE(OUT_XO,  "xo")
-    // OUTPUT_KEYCODE(OUT_XWA, "xwa")
-    //
-    // // 記号
-    // OUTPUT_KEYCODE(OUT_COMM, ",")
-    // OUTPUT_KEYCODE(OUT_DOT,  ".")
-    // OUTPUT_KEYCODE(OUT_LONG, "'")
-    // OUTPUT_KEYCODE(OUT_MDOT, "\"")
-    // OUTPUT_KEYCODE(OUT_SLSH, "/")
-    // OUTPUT_KEYCODE(OUT_EXLM, "!")
-    // OUTPUT_KEYCODE(OUT_QUES, "?")
-    // OUTPUT_KEYCODE(OUT_BRC,  "[]" SS_TAP(X_LEFT))
-    // OUTPUT_KEYCODE(OUT_PRN,  "()" SS_TAP(X_LEFT))
-    // OUTPUT_KEYCODE(OUT_CBR,  "{}" SS_TAP(X_LEFT))
-
+    // 出力用キーコード {{{
+    // 清音 {{{
+    OUTPUT_KEYCODE(OUT_A, "a")
+    OUTPUT_KEYCODE(OUT_I, "i")
+    OUTPUT_KEYCODE(OUT_U, "u")
+    OUTPUT_KEYCODE(OUT_E, "e")
+    OUTPUT_KEYCODE(OUT_O, "o")
+    OUTPUT_KEYCODE(OUT_KA,"ka")
+    OUTPUT_KEYCODE(OUT_KI,"ki")
+    OUTPUT_KEYCODE(OUT_KU,"ku")
+    OUTPUT_KEYCODE(OUT_KE,"ke")
+    OUTPUT_KEYCODE(OUT_KO,"ko")
+    OUTPUT_KEYCODE(OUT_SA,"sa")
+    OUTPUT_KEYCODE(OUT_SI,"si")
+    OUTPUT_KEYCODE(OUT_SU,"su")
+    OUTPUT_KEYCODE(OUT_SE,"se")
+    OUTPUT_KEYCODE(OUT_SO,"so")
+    OUTPUT_KEYCODE(OUT_TA,"ta")
+    OUTPUT_KEYCODE(OUT_TI,"ti")
+    OUTPUT_KEYCODE(OUT_TU,"tu")
+    OUTPUT_KEYCODE(OUT_TE,"te")
+    OUTPUT_KEYCODE(OUT_TO,"to")
+    OUTPUT_KEYCODE(OUT_NA,"na")
+    OUTPUT_KEYCODE(OUT_NI,"ni")
+    OUTPUT_KEYCODE(OUT_NU,"nu")
+    OUTPUT_KEYCODE(OUT_NE,"ne")
+    OUTPUT_KEYCODE(OUT_NO,"no")
+    OUTPUT_KEYCODE(OUT_HA,"ha")
+    OUTPUT_KEYCODE(OUT_HI,"hi")
+    OUTPUT_KEYCODE(OUT_HU,"hu")
+    OUTPUT_KEYCODE(OUT_HE,"he")
+    OUTPUT_KEYCODE(OUT_HO,"ho")
+    OUTPUT_KEYCODE(OUT_MA,"ma")
+    OUTPUT_KEYCODE(OUT_MI,"mi")
+    OUTPUT_KEYCODE(OUT_MU,"mu")
+    OUTPUT_KEYCODE(OUT_ME,"me")
+    OUTPUT_KEYCODE(OUT_MO,"mo")
+    OUTPUT_KEYCODE(OUT_YA,"ya")
+    OUTPUT_KEYCODE(OUT_YU,"yu")
+    OUTPUT_KEYCODE(OUT_YO,"yo")
+    OUTPUT_KEYCODE(OUT_RA,"ra")
+    OUTPUT_KEYCODE(OUT_RI,"ri")
+    OUTPUT_KEYCODE(OUT_RU,"ru")
+    OUTPUT_KEYCODE(OUT_RE,"re")
+    OUTPUT_KEYCODE(OUT_RO,"ro")
+    OUTPUT_KEYCODE(OUT_WA,"wa")
+    OUTPUT_KEYCODE(OUT_WO,"wo")
+    OUTPUT_KEYCODE(OUT_NN,"nn")
     // }}}
-
-    // Otherwise
+    // 濁音・半濁音 {{{
+    OUTPUT_KEYCODE(OUT_GA, "ga")
+    OUTPUT_KEYCODE(OUT_GI, "gi")
+    OUTPUT_KEYCODE(OUT_GU, "gu")
+    OUTPUT_KEYCODE(OUT_GE, "ge")
+    OUTPUT_KEYCODE(OUT_GO, "go")
+    OUTPUT_KEYCODE(OUT_ZA, "za")
+    OUTPUT_KEYCODE(OUT_ZI, "zi")
+    OUTPUT_KEYCODE(OUT_ZU, "zu")
+    OUTPUT_KEYCODE(OUT_ZE, "ze")
+    OUTPUT_KEYCODE(OUT_ZO, "zo")
+    OUTPUT_KEYCODE(OUT_DA, "da")
+    OUTPUT_KEYCODE(OUT_DI, "di")
+    OUTPUT_KEYCODE(OUT_DU, "du")
+    OUTPUT_KEYCODE(OUT_DE, "de")
+    OUTPUT_KEYCODE(OUT_DO, "do")
+    OUTPUT_KEYCODE(OUT_BA, "ba")
+    OUTPUT_KEYCODE(OUT_BI, "bi")
+    OUTPUT_KEYCODE(OUT_BU, "bu")
+    OUTPUT_KEYCODE(OUT_BE, "be")
+    OUTPUT_KEYCODE(OUT_BO, "bo")
+    OUTPUT_KEYCODE(OUT_PA, "pa")
+    OUTPUT_KEYCODE(OUT_PI, "pi")
+    OUTPUT_KEYCODE(OUT_PU, "pu")
+    OUTPUT_KEYCODE(OUT_PE, "pe")
+    OUTPUT_KEYCODE(OUT_PO, "po")
+    // }}}
+    // 拗音 (清音) {{{
+    OUTPUT_KEYCODE(OUT_KYA, "kya")
+    OUTPUT_KEYCODE(OUT_KYU, "kyu")
+    OUTPUT_KEYCODE(OUT_KYO, "kyo")
+    OUTPUT_KEYCODE(OUT_SYA, "sya")
+    OUTPUT_KEYCODE(OUT_SYU, "syu")
+    OUTPUT_KEYCODE(OUT_SYO, "syo")
+    OUTPUT_KEYCODE(OUT_TYA, "tya")
+    OUTPUT_KEYCODE(OUT_TYU, "tyu")
+    OUTPUT_KEYCODE(OUT_TYO, "tyo")
+    OUTPUT_KEYCODE(OUT_NYA, "nya")
+    OUTPUT_KEYCODE(OUT_NYU, "nyu")
+    OUTPUT_KEYCODE(OUT_NYO, "nyo")
+    OUTPUT_KEYCODE(OUT_HYA, "hya")
+    OUTPUT_KEYCODE(OUT_HYU, "hyu")
+    OUTPUT_KEYCODE(OUT_HYO, "hyo")
+    OUTPUT_KEYCODE(OUT_MYA, "mya")
+    OUTPUT_KEYCODE(OUT_MYU, "myu")
+    OUTPUT_KEYCODE(OUT_MYO, "myo")
+    OUTPUT_KEYCODE(OUT_RYA, "rya")
+    OUTPUT_KEYCODE(OUT_RYU, "ryu")
+    OUTPUT_KEYCODE(OUT_RYO, "ryo")
+    // }}}
+    // 拗音 (濁音・半濁音) {{{
+    OUTPUT_KEYCODE(OUT_GYA, "gya")
+    OUTPUT_KEYCODE(OUT_GYU, "gyu")
+    OUTPUT_KEYCODE(OUT_GYO, "gyo")
+    OUTPUT_KEYCODE(OUT_ZYA, "zya")
+    OUTPUT_KEYCODE(OUT_ZYU, "zyu")
+    OUTPUT_KEYCODE(OUT_ZYO, "zyo")
+    OUTPUT_KEYCODE(OUT_DYA, "dya")
+    OUTPUT_KEYCODE(OUT_DYU, "dyu")
+    OUTPUT_KEYCODE(OUT_DYO, "dyo")
+    OUTPUT_KEYCODE(OUT_BYA, "bya")
+    OUTPUT_KEYCODE(OUT_BYU, "byu")
+    OUTPUT_KEYCODE(OUT_BYO, "byo")
+    OUTPUT_KEYCODE(OUT_PYA, "pya")
+    OUTPUT_KEYCODE(OUT_PYU, "pyu")
+    OUTPUT_KEYCODE(OUT_PYO, "pyo")
+    // }}}
+    // 外来音 {{{
+    OUTPUT_KEYCODE(OUT_WI,  "wi")
+    OUTPUT_KEYCODE(OUT_WE,  "we")
+    OUTPUT_KEYCODE(OUT_WHO, "who")
+    OUTPUT_KEYCODE(OUT_FA,  "fa")
+    OUTPUT_KEYCODE(OUT_FI,  "fi")
+    OUTPUT_KEYCODE(OUT_FE,  "fe")
+    OUTPUT_KEYCODE(OUT_FO,  "fo")
+    OUTPUT_KEYCODE(OUT_SYE, "sye")
+    OUTPUT_KEYCODE(OUT_ZYE, "zye")
+    OUTPUT_KEYCODE(OUT_TYE, "tye")
+    OUTPUT_KEYCODE(OUT_THI, "thi")
+    OUTPUT_KEYCODE(OUT_DHI, "dhi")
+    OUTPUT_KEYCODE(OUT_TWU, "twu")
+    OUTPUT_KEYCODE(OUT_DWU, "dwu")
+    OUTPUT_KEYCODE(OUT_VA,  "va")
+    OUTPUT_KEYCODE(OUT_VI,  "vi")
+    OUTPUT_KEYCODE(OUT_VU,  "vu")
+    OUTPUT_KEYCODE(OUT_VE,  "ve")
+    OUTPUT_KEYCODE(OUT_VO,  "vo")
+    // }}}
+    // 捨て仮名 {{{
+    OUTPUT_KEYCODE(OUT_XTU, "xtu")
+    OUTPUT_KEYCODE(OUT_XYA, "xya")
+    OUTPUT_KEYCODE(OUT_XYU, "xyu")
+    OUTPUT_KEYCODE(OUT_XYO, "xyo")
+    OUTPUT_KEYCODE(OUT_XA,  "xa")
+    OUTPUT_KEYCODE(OUT_XI,  "xi")
+    OUTPUT_KEYCODE(OUT_XU,  "xu")
+    OUTPUT_KEYCODE(OUT_XE,  "xe")
+    OUTPUT_KEYCODE(OUT_XO,  "xo")
+    OUTPUT_KEYCODE(OUT_XWA, "xwa")
+    // }}}
+    // 記号 {{{
+    OUTPUT_KEYCODE(OUT_COMM, ",")
+    OUTPUT_KEYCODE(OUT_DOT,  ".")
+    OUTPUT_KEYCODE(OUT_LONG, "'")
+    OUTPUT_KEYCODE(OUT_MDOT, "\"")
+    OUTPUT_KEYCODE(OUT_SLSH, "/")
+    OUTPUT_KEYCODE(OUT_EXLM, "!")
+    OUTPUT_KEYCODE(OUT_QUES, "?")
+    OUTPUT_KEYCODE(OUT_BRC,  "[]" SS_TAP(X_LEFT))
+    OUTPUT_KEYCODE(OUT_PRN,  "()" SS_TAP(X_LEFT))
+    OUTPUT_KEYCODE(OUT_CBR,  "{}" SS_TAP(X_LEFT))
+    // }}}
+    // }}}
     default:
       return true;
   }
@@ -583,21 +535,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // -- Combos {{{
 
+// Combo list {{{
+
 enum combos {
-  SD,
-  KL,
-  WE,
-  IO,
-
-  // 新下駄配列 {{{
-
-  // 入力切替
+  // 制御用 {{{
   BASE_DF,
   BASE_JK,
   SHINGETA_DF,
   SHINGETA_JK,
-
-  // 記号類
+  // }}}
+  // 記号類 {{{
   FG,
   HJ,
   RG,
@@ -608,8 +555,8 @@ enum combos {
   FV,
   JN,
   JM,
-
-  // 中指シフト（左）
+  // }}}
+  // 中指シフト (左) {{{
   D_Y,
   D_U,
   D_I,
@@ -626,8 +573,8 @@ enum combos {
   D_COMM,
   D_DOT,
   D_SLSH,
-
-  // 中指シフト（右）
+  // }}}
+  // 中指シフト (右) {{{
   K_Q,
   K_W,
   K_E,
@@ -642,8 +589,8 @@ enum combos {
   K_C,
   K_V,
   K_B,
-
-  // 薬指シフト（左）
+  // }}}
+  // 薬指シフト (左) {{{
   S_Y,
   S_U,
   S_I,
@@ -658,8 +605,8 @@ enum combos {
   S_COMM,
   S_DOT,
   S_SLSH,
-
-  // 薬指シフト（右）
+  // }}}
+  // 薬指シフト (右) {{{
   L_Q,
   L_W,
   L_E,
@@ -673,8 +620,8 @@ enum combos {
   L_C,
   L_V,
   L_B,
-
-  // 中指上段シフト
+  // }}}
+  // 中指上段シフト {{{
   I_Q,
   I_W,
   I_E,
@@ -688,8 +635,8 @@ enum combos {
   I_C,
   I_V,
   I_B,
-
-  // 薬指上段シフト
+  // }}}
+  // 薬指上段シフト {{{
   O_Q,
   O_W,
   O_E,
@@ -703,8 +650,8 @@ enum combos {
   O_C,
   O_V,
   O_B,
-
-  // 小指上段シフト（右）
+  // }}}
+  // 小指上段シフト (右) {{{
   P_Q,
   P_W,
   P_E,
@@ -717,8 +664,8 @@ enum combos {
   P_C,
   P_V,
   P_B,
-
-  // 小指上段シフト（左）
+  // }}}
+  // 小指上段シフト (左) {{{
   Q_Y,
   Q_U,
   Q_H,
@@ -730,25 +677,20 @@ enum combos {
   Q_COMM,
   Q_DOT,
   Q_SLSH,
-
   // }}}
-
 };
 
-const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM kl_combo[] = {KC_K, KC_L, COMBO_END};
-const uint16_t PROGMEM we_combo[] = {KC_W, KC_E, COMBO_END};
-const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
+// }}}
 
-// 新下駄配列 {{{
+// Sequences of keys {{{
 
-// 入力切替
+// 制御用 {{{
 const uint16_t PROGMEM base_df_combo[] = {KC_D, KC_F, COMBO_END};
 const uint16_t PROGMEM base_jk_combo[] = {KC_J, KC_K, COMBO_END};
 const uint16_t PROGMEM shingeta_df_combo[] = {SG_D, SG_F, COMBO_END};
 const uint16_t PROGMEM shingeta_jk_combo[] = {SG_J, SG_K, COMBO_END};
-
-// 記号類
+// }}}
+// 記号類 {{{
 const uint16_t PROGMEM fg_combo[] = {SG_F, SG_G, COMBO_END};
 const uint16_t PROGMEM hj_combo[] = {SG_H, SG_J, COMBO_END};
 const uint16_t PROGMEM rg_combo[] = {SG_R, SG_G, COMBO_END};
@@ -759,8 +701,8 @@ const uint16_t PROGMEM fb_combo[] = {SG_F, SG_B, COMBO_END};
 const uint16_t PROGMEM fv_combo[] = {SG_F, SG_V, COMBO_END};
 const uint16_t PROGMEM jn_combo[] = {SG_J, SG_N, COMBO_END};
 const uint16_t PROGMEM jm_combo[] = {SG_J, SG_M, COMBO_END};
-
-// 中指シフト（左）
+// }}}
+// 中指シフト (左) {{{
 CONST_COMBO(d_y,    SG_D, SG_Y)
 CONST_COMBO(d_u,    SG_D, SG_U)
 CONST_COMBO(d_i,    SG_D, SG_I)
@@ -777,8 +719,8 @@ CONST_COMBO(d_m,    SG_D, SG_M)
 CONST_COMBO(d_comm, SG_D, SG_COMM)
 CONST_COMBO(d_dot,  SG_D, SG_DOT)
 CONST_COMBO(d_slsh, SG_D, SG_SLSH)
-
-// 中指シフト（右）
+// }}}
+// 中指シフト (右) {{{
 CONST_COMBO(k_q, SG_K, SG_Q)
 CONST_COMBO(k_w, SG_K, SG_W)
 CONST_COMBO(k_e, SG_K, SG_E)
@@ -793,8 +735,8 @@ CONST_COMBO(k_x, SG_K, SG_X)
 CONST_COMBO(k_c, SG_K, SG_C)
 CONST_COMBO(k_v, SG_K, SG_V)
 CONST_COMBO(k_b, SG_K, SG_B)
-
-// 薬指シフト（左）
+// }}}
+// 薬指シフト (左) {{{
 CONST_COMBO(s_y,    SG_S, SG_Y)
 CONST_COMBO(s_u,    SG_S, SG_U)
 CONST_COMBO(s_i,    SG_S, SG_I)
@@ -809,8 +751,8 @@ CONST_COMBO(s_m,    SG_S, SG_M)
 CONST_COMBO(s_comm, SG_S, SG_COMM)
 CONST_COMBO(s_dot,  SG_S, SG_DOT)
 CONST_COMBO(s_slsh, SG_S, SG_SLSH)
-
-// 薬指シフト（右）
+// }}}
+// 薬指シフト (右) {{{
 CONST_COMBO(l_q, SG_L, SG_Q)
 CONST_COMBO(l_w, SG_L, SG_W)
 CONST_COMBO(l_e, SG_L, SG_E)
@@ -824,8 +766,8 @@ CONST_COMBO(l_x, SG_L, SG_X)
 CONST_COMBO(l_c, SG_L, SG_C)
 CONST_COMBO(l_v, SG_L, SG_V)
 CONST_COMBO(l_b, SG_L, SG_B)
-
-// 中指上段シフト
+// }}}
+// 中指上段シフト {{{
 CONST_COMBO(i_q, SG_I, SG_Q)
 CONST_COMBO(i_w, SG_I, SG_W)
 CONST_COMBO(i_e, SG_I, SG_E)
@@ -839,8 +781,8 @@ CONST_COMBO(i_x, SG_I, SG_X)
 CONST_COMBO(i_c, SG_I, SG_C)
 CONST_COMBO(i_v, SG_I, SG_V)
 CONST_COMBO(i_b, SG_I, SG_B)
-
-// 薬指上段シフト
+// }}}
+// 薬指上段シフト {{{
 CONST_COMBO(o_q, SG_O, SG_Q)
 CONST_COMBO(o_w, SG_O, SG_W)
 CONST_COMBO(o_e, SG_O, SG_E)
@@ -854,8 +796,8 @@ CONST_COMBO(o_x, SG_O, SG_X)
 CONST_COMBO(o_c, SG_O, SG_C)
 CONST_COMBO(o_v, SG_O, SG_V)
 CONST_COMBO(o_b, SG_O, SG_B)
-
-// 小指上段シフト（右）
+// }}}
+// 小指上段シフト (右) {{{
 CONST_COMBO(p_q, SG_P, SG_Q)
 CONST_COMBO(p_w, SG_P, SG_W)
 CONST_COMBO(p_e, SG_P, SG_E)
@@ -868,8 +810,8 @@ CONST_COMBO(p_z, SG_P, SG_Z)
 CONST_COMBO(p_c, SG_P, SG_C)
 CONST_COMBO(p_v, SG_P, SG_V)
 CONST_COMBO(p_b, SG_P, SG_B)
-
-// 小指上段シフト（左）
+// }}}
+// 小指上段シフト (左) {{{
 CONST_COMBO(q_y,    SG_Q, SG_Y)
 CONST_COMBO(q_u,    SG_Q, SG_U)
 CONST_COMBO(q_h,    SG_Q, SG_H)
@@ -881,24 +823,20 @@ CONST_COMBO(q_m,    SG_Q, SG_M)
 CONST_COMBO(q_comm, SG_Q, SG_COMM)
 CONST_COMBO(q_dot,  SG_Q, SG_DOT)
 CONST_COMBO(q_slsh, SG_Q, SG_SLSH)
+// }}}
 
 // }}}
 
+// Combos and its resulting action {{{
+
 combo_t key_combos[] = {
-  [SD] = COMBO(sd_combo, MO(_NAV)),
-  [KL] = COMBO(kl_combo, MO(_NAV)),
-  [WE] = COMBO(we_combo, MO(_WIN)),
-  [IO] = COMBO(io_combo, MO(_WIN)),
-
-  // 新下駄配列 {{{
-
-  // 入力切替
-  [BASE_DF] = COMBO(base_df_combo, SHINGETA_OFF),
-  [BASE_JK] = COMBO(base_jk_combo, SHINGETA_ON),
-  [SHINGETA_DF] = COMBO(shingeta_df_combo, SHINGETA_OFF),
-  [SHINGETA_JK] = COMBO(shingeta_jk_combo, SHINGETA_ON),
-
-  // 記号類
+  // 制御用 {{{
+  [BASE_DF] = COMBO(base_df_combo, SG_OFF),
+  [BASE_JK] = COMBO(base_jk_combo, SG_ON),
+  [SHINGETA_DF] = COMBO(shingeta_df_combo, SG_OFF),
+  [SHINGETA_JK] = COMBO(shingeta_jk_combo, SG_ON),
+  // }}}
+  // 記号類 {{{
   [FG] = COMBO(fg_combo, OUT_BRC),
   [HJ] = COMBO(hj_combo, OUT_PRN),
   [RG] = COMBO(rg_combo, OUT_MDOT),
@@ -909,8 +847,8 @@ combo_t key_combos[] = {
   [FV] = COMBO(fv_combo, OUT_EXLM),
   [JN] = COMBO(jn_combo, OUT_QUES),
   [JM] = COMBO(jm_combo, OUT_QUES),
-
-  // 中指シフト（左）
+  // }}}
+  // 中指シフト (左) {{{
   COMBO_LIST(D_Y,    d_y,    OUT_WI),
   COMBO_LIST(D_U,    d_u,    OUT_PA),
   COMBO_LIST(D_I,    d_i,    OUT_YO),
@@ -927,8 +865,8 @@ combo_t key_combos[] = {
   COMBO_LIST(D_COMM, d_comm, OUT_BE),
   COMBO_LIST(D_DOT,  d_dot,  OUT_PU),
   COMBO_LIST(D_SLSH, d_slsh, OUT_VU),
-
-  // 中指シフト（右）
+  // }}}
+  // 中指シフト (右) {{{
   COMBO_LIST(K_Q, k_q, OUT_FA),
   COMBO_LIST(K_W, k_w, OUT_GO),
   COMBO_LIST(K_E, k_e, OUT_HU),
@@ -943,8 +881,8 @@ combo_t key_combos[] = {
   COMBO_LIST(K_C, k_c, OUT_BO),
   COMBO_LIST(K_V, k_v, OUT_MU),
   COMBO_LIST(K_B, k_b, OUT_FO),
-
-  // 薬指シフト（左）
+  // }}}
+  // 薬指シフト (左) {{{
   COMBO_LIST(S_Y,    s_y,    OUT_SYE),
   COMBO_LIST(S_U,    s_u,    OUT_PE),
   COMBO_LIST(S_I,    s_i,    OUT_DO),
@@ -959,8 +897,8 @@ combo_t key_combos[] = {
   COMBO_LIST(S_COMM, s_comm, OUT_PI),
   COMBO_LIST(S_DOT,  s_dot,  OUT_PO),
   COMBO_LIST(S_SLSH, s_slsh, OUT_TYE),
-
-  // 薬指シフト（右）
+  // }}}
+  // 薬指シフト (右) {{{
   COMBO_LIST(L_Q, l_q, OUT_DI),
   COMBO_LIST(L_W, l_w, OUT_ME),
   COMBO_LIST(L_E, l_e, OUT_KE),
@@ -974,8 +912,8 @@ combo_t key_combos[] = {
   COMBO_LIST(L_C, l_c, OUT_GI),
   COMBO_LIST(L_V, l_v, OUT_RO),
   COMBO_LIST(L_B, l_b, OUT_NU),
-
-  // 中指上段シフト
+  // }}}
+  // 中指上段シフト {{{
   COMBO_LIST(I_Q, i_q, OUT_HYU),
   COMBO_LIST(I_W, i_w, OUT_SYU),
   COMBO_LIST(I_E, i_e, OUT_SYO),
@@ -989,8 +927,8 @@ combo_t key_combos[] = {
   COMBO_LIST(I_C, i_c, OUT_SYA),
   COMBO_LIST(I_V, i_v, OUT_KYA),
   COMBO_LIST(I_B, i_b, OUT_TYA),
-
-  // 薬指上段シフト
+  // }}}
+  // 薬指上段シフト {{{
   COMBO_LIST(O_Q, o_q, OUT_RYU),
   COMBO_LIST(O_W, o_w, OUT_ZYU),
   COMBO_LIST(O_E, o_e, OUT_ZYO),
@@ -1004,8 +942,8 @@ combo_t key_combos[] = {
   COMBO_LIST(O_C, o_c, OUT_ZYA),
   COMBO_LIST(O_V, o_v, OUT_GYA),
   COMBO_LIST(O_B, o_b, OUT_NYA),
-
-  // 小指上段シフト（右）
+  // }}}
+  // 小指上段シフト (右) {{{
   COMBO_LIST(P_Q, p_q, OUT_PYU),
   COMBO_LIST(P_W, p_w, OUT_MYU),
   COMBO_LIST(P_E, p_e, OUT_MYO),
@@ -1018,8 +956,8 @@ combo_t key_combos[] = {
   COMBO_LIST(P_C, p_c, OUT_MYA),
   COMBO_LIST(P_V, p_v, OUT_BYA),
   COMBO_LIST(P_B, p_b, OUT_DYA),
-
-  // 小指上段シフト（左）
+  // }}}
+  // 小指上段シフト (左) {{{
   COMBO_LIST(Q_Y,    q_y,    OUT_XYA),
   COMBO_LIST(Q_U,    q_u,    OUT_XA),
   COMBO_LIST(Q_H,    q_h,    OUT_XYU),
@@ -1031,10 +969,10 @@ combo_t key_combos[] = {
   COMBO_LIST(Q_COMM, q_comm, OUT_XE),
   COMBO_LIST(Q_DOT,  q_dot,  OUT_XO),
   COMBO_LIST(Q_SLSH, q_slsh, OUT_WHO),
-
   // }}}
-
 };
+
+// }}}
 
 // }}}
 
@@ -1044,11 +982,6 @@ combo_t key_combos[] = {
 // コンボ受付時間を '50' にすると、Karabiner での同時押し判定に支障が出る。
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
   switch (index) {
-    case SD: return 20;
-    case KL: return 20;
-    case WE: return 20;
-    case IO: return 20;
-
     case BASE_DF:     return 20;
     case BASE_JK:     return 20;
     case SHINGETA_DF: return 20;
@@ -1057,27 +990,27 @@ uint16_t get_combo_term(uint16_t index, combo_t *combo) {
   return COMBO_TERM;
 }
 
-// COMBO_MUST_TAP_PER_COMBO
-bool get_combo_must_tap(uint16_t index, combo_t *combo) {
-  switch (index) {
-    case BASE_DF:     return true;
-    case BASE_JK:     return true;
-    case SHINGETA_DF: return true;
-    case SHINGETA_JK: return true;
-  }
-  return false;
-}
+// // COMBO_MUST_TAP_PER_COMBO
+// bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+//   switch (index) {
+//     case BASE_DF:     return true;
+//     case BASE_JK:     return true;
+//     case SHINGETA_DF: return true;
+//     case SHINGETA_JK: return true;
+//   }
+//   return false;
+// }
 
-// COMBO_MUST_HOLD_PER_COMBO
-bool get_combo_must_hold(uint16_t index, combo_t *combo) {
-  switch (index) {
-    case SD: return true;
-    case KL: return true;
-    case WE: return true;
-    case IO: return true;
-  }
-  return false;
-}
+// // COMBO_MUST_HOLD_PER_COMBO
+// bool get_combo_must_hold(uint16_t index, combo_t *combo) {
+//   switch (index) {
+//     case SD: return true;
+//     case KL: return true;
+//     case WE: return true;
+//     case IO: return true;
+//   }
+//   return false;
+// }
 
 // }}}
 
@@ -1086,7 +1019,6 @@ bool get_combo_must_hold(uint16_t index, combo_t *combo) {
 // Hold On Other Key Press Mode
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-
     // Layer Keys
     case NAV_ESC: return true;
     case SYM_TAB: return true;
@@ -1108,20 +1040,9 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case LSFT_RBRC: return true;
     case LGUI_GRV:  return true;
 
-    // 新下駄配列
-    case LGUI_SG_OFF: return true;
-    case RGUI_SG_ON:  return true;
-
     // Otherwise
     default:
       return false;
-
-  }
-}
-
-// Permissive Hold Mode
-bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
   }
 }
 
@@ -1139,10 +1060,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_SHINGETA] = LAYOUT(
-    RHYPR_TAB,           SG_Q, SG_W, SG_E, SG_R, SG_T, KC_LBRC, SG_Y, SG_U, SG_I,    SG_O,   SG_P,       KC_BSPC, SG_QUOT,
-    LCTL_ESC,            SG_A, SG_S, SG_D, SG_F, SG_G, KC_RBRC, SG_H, SG_J, SG_K,    SG_L,   SG_SCLN,             RCTL_ENT,
-    KC_LSFT,   MO(_NAV), SG_Z, SG_X, SG_C, SG_V, SG_B, KC_GRV,  SG_N, SG_M, SG_COMM, SG_DOT, SG_SLSH,             FN_BSLS,
-    MO(_FN),   XXXXXXX,  LGUI_SG_OFF,      LSFT_SPC,   RCTL_TAB,      SYM_ENT,               RGUI_SG_ON, XXXXXXX, RALT_GRV
+    RHYPR_TAB,           SG_Q, SG_W, SG_E, SG_R, SG_T, KC_LBRC, SG_Y, SG_U, SG_I,    SG_O,   SG_P,      KC_BSPC, SG_QUOT,
+    LCTL_ESC,            SG_A, SG_S, SG_D, SG_F, SG_G, KC_RBRC, SG_H, SG_J, SG_K,    SG_L,   SG_SCLN,            RCTL_ENT,
+    KC_LSFT,   MO(_NAV), SG_Z, SG_X, SG_C, SG_V, SG_B, KC_GRV,  SG_N, SG_M, SG_COMM, SG_DOT, SG_SLSH,            FN_BSLS,
+    MO(_FN),   XXXXXXX,  LGUI_LNG2,        LSFT_SPC,   RCTL_TAB,      SYM_ENT,               RGUI_LNG1, XXXXXXX, RALT_GRV
   ),
 
   [_NAV] = LAYOUT(
@@ -1167,8 +1088,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT(
-    LCG(KC_Q),          KC_F1, KC_F2,  KC_F3,  KC_F4,  XXXXXXX, XXXXXXX, LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MNXT,
-    XXXXXXX,            KC_F5, KC_F6,  KC_F7,  KC_F8,  XXXXXXX, XXXXXXX, LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV,          KC_MPLY,
+    LCG(KC_Q),          KC_F1, KC_F2,  KC_F3,  KC_F4,  BASE,    XXXXXXX, LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MNXT,
+    XXXXXXX,            KC_F5, KC_F6,  KC_F7,  KC_F8,  SHING,   XXXXXXX, LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV,          KC_MPLY,
     XXXXXXX,   XXXXXXX, KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX, XXXXXXX, LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,          _______,
     _______,   XXXXXXX, XXXXXXX,               XXXXXXX,         QK_BOOT,            XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
   ),
