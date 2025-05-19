@@ -17,6 +17,10 @@ enum layer_names {
     _BUNA3,
   #endif
 
+  #ifdef SHINGETA_ENABLE
+    _SHINGETA,
+  #endif
+
   _NAV,
   _SYM,
   _WIN,
@@ -485,6 +489,10 @@ enum my_keycodes {
 
 #ifdef BUNA_ENABLE
   #include "buna.h"
+#endif
+
+#ifdef SHINGETA_ENABLE
+  #include "shingeta.h"
 #endif
 
 #ifdef INVERTED_NUM_ENABLE

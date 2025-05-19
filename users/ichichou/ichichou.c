@@ -37,6 +37,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return process_record_buna(keycode, record, mod_state);
     #endif
 
+    #ifdef SHINGETA_ENABLE
+      case SG_A ... SG_SLSH:
+        return process_record_shingeta(keycode, record, mod_state);
+    #endif
+
     #ifdef INVERTED_NUM_ENABLE
       case INV_1 ... INV_0:
         return process_record_inverted_num(keycode, record, mod_state);
