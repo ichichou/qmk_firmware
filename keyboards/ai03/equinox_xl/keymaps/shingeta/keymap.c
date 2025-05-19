@@ -1,6 +1,12 @@
 // KB: Equinox XL
 // KM: shingeta
 
+// コンボが利かない。
+// 単打の場合は正しく入力される。
+
+// -km shingeta_bk は正常に動作する。要比較。
+// まずは Combo list を移植してみるのがいい。
+
 #include QMK_KEYBOARD_H
 #include "ichichou.h"
 
@@ -283,6 +289,9 @@ combo_t key_combos[] = {
 // }}}
 
 // -- Combo Configurations {{{
+
+// コンパイルエラーになる。
+// Combo list で定義した名前で case XXXX: とすれば改善するかも。
 
 // uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
 //   switch (combo_index) {
