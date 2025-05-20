@@ -10,6 +10,8 @@
 #define BUNA2 OSL(_BUNA2)
 #define BUNA3 OSL(_BUNA3)
 
+#define RCTL_BN1_QUOT RCTL_T(BN1_QUOT)
+
 // -- Prototypes
 
 bool process_buna_key(uint8_t qwerty_key,

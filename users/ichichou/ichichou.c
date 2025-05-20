@@ -35,11 +35,50 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #ifdef BUNA_ENABLE
       case BN1_A ... BN3_SLSH:
         return process_record_buna(keycode, record, mod_state);
+
+      case RCTL_T(BN1_QUOT):
+        if (record->tap.count && record->event.pressed) {
+          if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
+            SEND_STRING(".");
+            return false;
+          } else {
+            tap_code(KC_QUOT);
+            return false;
+          }
+        }
+        return true;
     #endif
 
     #ifdef SHINGETA_ENABLE
       case SG_ON ... OUT_CBRS:
         return process_record_shingeta(keycode, record, mod_state);
+
+      case RCTL_T(SG_QUOT):
+        if (record->tap.count && record->event.pressed) {
+          if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
+            SEND_STRING("ge");
+            return false;
+          } else {
+            tap_code(KC_QUOT);
+            return false;
+          }
+        }
+        return true;
+
+      #ifdef JSYM_ENABLE
+        case LT(_JSYM, SG_R):
+          if (record->tap.count && record->event.pressed) {
+            if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
+              tap_code(KC_COMM);
+              return false;
+            } else {
+              tap_code(KC_R);
+              return false;
+            }
+          }
+          return true;
+      #endif
+
     #endif
 
     #ifdef INVERTED_NUM_ENABLE
@@ -87,8 +126,15 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case LSFT_RBRC: return true;
     case LGUI_GRV:  return true;
 
-    # ifdef MTGAP_ENABLE
+    #ifdef MTGAP_ENABLE
       case RCTL_MT_QUOT: return true;
+    #endif
+
+    #ifdef SHINGETA_ENABLE
+      case RCTL_SG_QUOT: return true;
+      #ifdef JSYM_ENABLE
+        case SG_R: return true;
+      #endif
     #endif
 
     default:

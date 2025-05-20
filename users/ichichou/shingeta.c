@@ -190,6 +190,27 @@ const char kana_rcbr[] PROGMEM = "}";
 
 // }}}
 
+// -- Japanese Symbol {{{
+
+const char jsym_y[]    PROGMEM = "\\y";
+const char jsym_u[]    PROGMEM = "\\u";
+const char jsym_i[]    PROGMEM = "\\i";
+const char jsym_o[]    PROGMEM = "\\o";
+const char jsym_p[]    PROGMEM = "\\p";
+const char jsym_h[]    PROGMEM = "\\h";
+const char jsym_j[]    PROGMEM = "\\j";
+const char jsym_k[]    PROGMEM = "\\k";
+const char jsym_l[]    PROGMEM = "\\l";
+const char jsym_scln[] PROGMEM = "\\;";
+const char jsym_quot[] PROGMEM = "\\'";
+const char jsym_n[]    PROGMEM = "\\n";
+const char jsym_m[]    PROGMEM = "\\m";
+const char jsym_comm[] PROGMEM = "\\,";
+const char jsym_dot[]  PROGMEM = "\\.";
+const char jsym_slsh[] PROGMEM = "\\/";
+
+// }}}
+
 // -- Functions {{{
 
 bool process_shingeta_key(uint8_t qwerty_key,
@@ -216,11 +237,21 @@ bool process_shingeta_key(uint8_t qwerty_key,
   return false;
 }
 
+// 引数に mod_state はいらないのでは？
 bool process_output_key(const char *kana,
                         keyrecord_t *record,
                         uint8_t mod_state) {
   if (record->event.pressed) {
     send_string_P(kana);
+    return false;
+  }
+  return false;
+}
+
+bool process_jsym_key(const char *sym,
+                      keyrecord_t *record) {
+  if (record->event.pressed) {
+    send_string_P(sym);
     return false;
   }
   return false;
@@ -469,6 +500,24 @@ bool process_record_shingeta(uint16_t keycode,
       }
       return false;
     // }}}
+    // }}}
+    // Japanese Symbol {{{
+    case JSYM_Y:    return process_jsym_key(jsym_y,    record);
+    case JSYM_U:    return process_jsym_key(jsym_u,    record);
+    case JSYM_I:    return process_jsym_key(jsym_i,    record);
+    case JSYM_O:    return process_jsym_key(jsym_o,    record);
+    case JSYM_P:    return process_jsym_key(jsym_p,    record);
+    case JSYM_H:    return process_jsym_key(jsym_h,    record);
+    case JSYM_J:    return process_jsym_key(jsym_j,    record);
+    case JSYM_K:    return process_jsym_key(jsym_k,    record);
+    case JSYM_L:    return process_jsym_key(jsym_l,    record);
+    case JSYM_SCLN: return process_jsym_key(jsym_scln, record);
+    case JSYM_QUOT: return process_jsym_key(jsym_quot, record);
+    case JSYM_N:    return process_jsym_key(jsym_n,    record);
+    case JSYM_M:    return process_jsym_key(jsym_m,    record);
+    case JSYM_COMM: return process_jsym_key(jsym_comm, record);
+    case JSYM_DOT:  return process_jsym_key(jsym_dot,  record);
+    case JSYM_SLSH: return process_jsym_key(jsym_slsh, record);
     // }}}
     default:
       return true;

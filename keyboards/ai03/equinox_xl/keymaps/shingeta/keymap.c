@@ -687,6 +687,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
   ),
 
+  [_JSYM] = LAYOUT_wrapper(
+    _______,          XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, __________________JSYM_R1__________________, _______, JSYM_QUOT,
+    _______,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, __________________JSYM_R2__________________,          _______,
+    _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, __________________JSYM_R3__________________,          _______,
+    _______, XXXXXXX, _______,                            _______, _______, _______,                            _______, XXXXXXX, _______
+  ),
+
   [_NAV] = LAYOUT_wrapper(
     _______,          __________________NAV_L1___________________, XXXXXXX, __________________NAV_R1___________________, G(KC_UP), G(KC_DOWN),
     _______,          __________________NAV_L2___________________, XXXXXXX, __________________NAV_R2___________________,           _______,

@@ -20,6 +20,7 @@ enum layer_names {
 
   #ifdef SHINGETA_ENABLE
     _SHINGETA,
+    _JSYM,
   #endif
 
   _NAV,
@@ -374,6 +375,24 @@ enum my_keycodes {
     OUT_PRNS,
     OUT_CBRS,
     // }}}
+    // }}}
+    // Japanese Symbol {{{
+    JSYM_Y,
+    JSYM_U,
+    JSYM_I,
+    JSYM_O,
+    JSYM_P,
+    JSYM_H,
+    JSYM_J,
+    JSYM_K,
+    JSYM_L,
+    JSYM_SCLN,
+    JSYM_QUOT,
+    JSYM_N,
+    JSYM_M,
+    JSYM_COMM,
+    JSYM_DOT,
+    JSYM_SLSH,
     // }}}
   #endif
   // }}}
