@@ -362,9 +362,17 @@ enum my_keycodes {
     OUT_SLSH,
     OUT_EXLM,
     OUT_QUES,
-    OUT_BRC,
-    OUT_PRN,
-    OUT_CBR,
+    OUT_SCLN,
+    OUT_COLN,
+    OUT_LBRC,
+    OUT_RBRC,
+    OUT_LPRN,
+    OUT_RPRN,
+    OUT_LCBR,
+    OUT_RCBR,
+    OUT_BRCS,
+    OUT_PRNS,
+    OUT_CBRS,
     // }}}
     // }}}
   #endif

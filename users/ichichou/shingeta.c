@@ -181,6 +181,13 @@ const char kana_dquo[] PROGMEM = "\"";
 const char kana_exlm[] PROGMEM = "!";
 const char kana_ques[] PROGMEM = "?";
 
+const char kana_lbrc[] PROGMEM = "[";
+const char kana_rbrc[] PROGMEM = "]";
+const char kana_lprn[] PROGMEM = "(";
+const char kana_rprn[] PROGMEM = ")";
+const char kana_lcbr[] PROGMEM = "{";
+const char kana_rcbr[] PROGMEM = "}";
+
 // }}}
 
 // -- Functions {{{
@@ -430,23 +437,32 @@ bool process_record_shingeta(uint16_t keycode,
     case OUT_SLSH: return process_output_key(kana_slsh, record, mod_state);  // ／
     case OUT_EXLM: return process_output_key(kana_exlm, record, mod_state);  // ！
     case OUT_QUES: return process_output_key(kana_ques, record, mod_state);  // ？
+    case OUT_SCLN: return process_output_key(kana_scln, record, mod_state);  // ；
+    case OUT_COLN: return process_output_key(kana_coln, record, mod_state);  // ：
     // }}}
     // 括弧 {{{
-    case OUT_BRC:
+    case OUT_LBRC: return process_output_key(kana_lbrc, record, mod_state);  // 「
+    case OUT_RBRC: return process_output_key(kana_rbrc, record, mod_state);  // 」
+    case OUT_LPRN: return process_output_key(kana_lprn, record, mod_state);  // （
+    case OUT_RPRN: return process_output_key(kana_rprn, record, mod_state);  // ）
+    case OUT_LCBR: return process_output_key(kana_lcbr, record, mod_state);  // 『
+    case OUT_RCBR: return process_output_key(kana_rcbr, record, mod_state);  // 』
+
+    case OUT_BRCS:
       if (record->event.pressed) {
         SEND_STRING("[]" SS_TAP(X_LEFT));
         return false;
       }
       return false;
 
-    case OUT_PRN:
+    case OUT_PRNS:
       if (record->event.pressed) {
         SEND_STRING("()" SS_TAP(X_LEFT));
         return false;
       }
       return false;
 
-    case OUT_CBR:
+    case OUT_CBRS:
       if (record->event.pressed) {
         SEND_STRING("{}" SS_TAP(X_LEFT));
         return false;

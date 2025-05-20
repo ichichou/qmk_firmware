@@ -18,9 +18,14 @@ endif
 ifeq ($(strip $(SHINGETA_ENABLE)), yes)
   SRC += shingeta.c
   OPT_DEFS += -DSHINGETA_ENABLE
+  COMBO_ENABLE = yes
 endif
 
 ifeq ($(strip $(INVERTED_NUM_ENABLE)), yes)
   SRC += inverted_num.c
   OPT_DEFS += -DINVERTED_NUM_ENABLE
+endif
+
+ifeq ($(strip $(TRI_WIN_LAYER_ENABLE)), yes)
+  OPT_DEFS += -DTRI_WIN_LAYER_ENABLE
 endif
