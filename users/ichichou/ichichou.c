@@ -129,9 +129,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 
     #ifdef SHINGETA_ENABLE
       case RCTL_SG_QUOT: return true;
-      #ifdef JSYM_ENABLE
-        case SG_R: return true;
-      #endif
     #endif
 
     default:
@@ -142,6 +139,10 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 // Permissive Hold Mode
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    #ifdef SHINGETA_ENABLE
+      case JSYM_R: return true;
+    #endif
+
     default:
       return false;
   }

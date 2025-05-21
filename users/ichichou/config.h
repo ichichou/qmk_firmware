@@ -3,9 +3,7 @@
   #undef DYNAMIC_KEYMAP_LAYER_COUNT
 #endif
 
-#if defined(BUNA_ENABLE) && defined(MTGAP_ENABLE)
-  #define DYNAMIC_KEYMAP_LAYER_COUNT 9
-#elif defined(BUNA_ENABLE)
+#if defined(BUNA_ENABLE)
   #define DYNAMIC_KEYMAP_LAYER_COUNT 8
 #elif defined(SHINGETA_ENABLE)
   #define DYNAMIC_KEYMAP_LAYER_COUNT 6
