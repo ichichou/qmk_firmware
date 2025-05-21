@@ -483,12 +483,14 @@ enum my_keycodes {
 #define __________________SYM_L2___________________ KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT
 #define __________________SYM_L3___________________ KC_8,    KC_6,    KC_4,    KC_2,    KC_BSLS
 
-#define __________________SYM_R1___________________ KC_TILD, KC_QUES, KC_CIRC, KC_DLR,  KC_COMM
-#define __________________SYM_R2___________________ KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN
+// #define __________________SYM_R1___________________ KC_TILD, KC_QUES, KC_CIRC, KC_DLR,  KC_COMM
+// #define __________________SYM_R2___________________ KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN
+#define __________________SYM_R1___________________ KC_LBRC, KC_RBRC, KC_CIRC, KC_DLR,  KC_LPRN
+#define __________________SYM_R2___________________ KC_TILD, KC_1,    KC_PERC, KC_HASH, KC_AMPR
 #define __________________SYM_R3___________________ KC_GRV,  KC_3,    KC_5,    KC_7,    KC_9
 
-#define __________________WIN_L1___________________ LCA(KC_U),    LCA(KC_I), XXXXXXX,   MEH(KC_C),    C(KC_1)
-#define __________________WIN_L2___________________ LCA(KC_LEFT), XXXXXXX,   XXXXXXX,   LCA(KC_RGHT), C(KC_2)
+#define __________________WIN_L1___________________ XXXXXXX,      LCA(KC_U), LCA(KC_I), MEH(KC_C),    C(KC_1)
+#define __________________WIN_L2___________________ LCA(KC_LEFT), LCA(KC_J), LCA(KC_K), LCA(KC_RGHT), C(KC_2)
 #define __________________WIN_L3___________________ LCA(KC_Z),    LCA(KC_X), LCA(KC_V), LCA(KC_B),    C(KC_3)
 
 #define __________________WIN_R1___________________ C(KC_4), MEH(KC_C),   A(KC_UP),    XXXXXXX, XXXXXXX
