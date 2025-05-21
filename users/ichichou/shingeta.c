@@ -2,8 +2,9 @@
 
 #include "shingeta.h"
 
-// -- Kana {{{
+// -- Strings {{{
 
+// Kana {{{
 const char kana_a[]    PROGMEM = "a";
 const char kana_i[]    PROGMEM = "i";
 const char kana_u[]    PROGMEM = "u";
@@ -170,16 +171,18 @@ const char kana_xu[]   PROGMEM = "xu";
 const char kana_xe[]   PROGMEM = "xe";
 const char kana_xo[]   PROGMEM = "xo";
 const char kana_xwa[]  PROGMEM = "xwa";
+// }}}
 
-const char kana_comm[] PROGMEM = ",";
-const char kana_dot[]  PROGMEM = ".";
-const char kana_slsh[] PROGMEM = "/";
+// Symbols {{{
 const char kana_scln[] PROGMEM = ";";
 const char kana_coln[] PROGMEM = ":";
 const char kana_quot[] PROGMEM = "'";
 const char kana_dquo[] PROGMEM = "\"";
-const char kana_exlm[] PROGMEM = "!";
+const char kana_comm[] PROGMEM = ",";
+const char kana_dot[]  PROGMEM = ".";
+const char kana_slsh[] PROGMEM = "/";
 const char kana_ques[] PROGMEM = "?";
+const char kana_exlm[] PROGMEM = "!";
 
 const char kana_lbrc[] PROGMEM = "[";
 const char kana_rbrc[] PROGMEM = "]";
@@ -187,11 +190,9 @@ const char kana_lprn[] PROGMEM = "(";
 const char kana_rprn[] PROGMEM = ")";
 const char kana_lcbr[] PROGMEM = "{";
 const char kana_rcbr[] PROGMEM = "}";
-
 // }}}
 
-// -- Japanese Symbol {{{
-
+// Japanese Symbols {{{
 const char jsym_y[]    PROGMEM = "\\y";
 const char jsym_u[]    PROGMEM = "\\u";
 const char jsym_i[]    PROGMEM = "\\i";
@@ -208,6 +209,7 @@ const char jsym_m[]    PROGMEM = "\\m";
 const char jsym_comm[] PROGMEM = "\\,";
 const char jsym_dot[]  PROGMEM = "\\.";
 const char jsym_slsh[] PROGMEM = "\\/";
+// }}}
 
 // }}}
 
@@ -237,10 +239,8 @@ bool process_shingeta_key(uint8_t qwerty_key,
   return false;
 }
 
-// 引数に mod_state はいらないのでは？
 bool process_output_key(const char *kana,
-                        keyrecord_t *record,
-                        uint8_t mod_state) {
+                        keyrecord_t *record) {
   if (record->event.pressed) {
     send_string_P(kana);
     return false;
@@ -248,10 +248,10 @@ bool process_output_key(const char *kana,
   return false;
 }
 
-bool process_jsym_key(const char *sym,
+bool process_jsym_key(const char *symbol,
                       keyrecord_t *record) {
   if (record->event.pressed) {
-    send_string_P(sym);
+    send_string_P(symbol);
     return false;
   }
   return false;
@@ -268,7 +268,7 @@ bool process_record_shingeta(uint16_t keycode,
                              uint8_t mod_state) {
   switch(keycode) {
     // 制御用キーコード {{{
-    case SG_ON:
+    case IME_SG_ON:
       if (record->event.pressed) {
         tap_code(KC_LNG1);
         set_single_default_layer(_SHINGETA);
@@ -276,10 +276,41 @@ bool process_record_shingeta(uint16_t keycode,
       }
       return false;
 
-    case SG_OFF:
+    case IME_SG_OFF:
       if (record->event.pressed) {
         tap_code(KC_LNG2);
         set_single_default_layer(_BASE);
+        return false;
+      }
+      return false;
+
+    case EN_KATAKANA:
+      if (record->event.pressed) {
+        tap_code(KC_LNG1);
+        tap_code16(RCS(KC_SCLN));
+        return false;
+      }
+      return false;
+
+    case JA_KATAKANA:
+      if (record->event.pressed) {
+        tap_code16(RCS(KC_SCLN));
+        return false;
+      }
+      return false;
+
+    case EN_BRCS_SPC:
+      if (record->event.pressed) {
+        SEND_STRING("[] ");
+        return false;
+      }
+      return false;
+
+    case JA_BRCS_SPC:
+      if (record->event.pressed) {
+        tap_code(KC_LNG2);
+        SEND_STRING("[] ");
+        tap_code(KC_LNG1);
         return false;
       }
       return false;
@@ -319,165 +350,165 @@ bool process_record_shingeta(uint16_t keycode,
     // }}}
     // 出力用キーコード {{{
     // 清音 {{{
-    case OUT_A:  return process_output_key(kana_a,  record, mod_state);  // あ
-    case OUT_I:  return process_output_key(kana_i,  record, mod_state);  // い
-    case OUT_U:  return process_output_key(kana_u,  record, mod_state);  // う
-    case OUT_E:  return process_output_key(kana_e,  record, mod_state);  // え
-    case OUT_O:  return process_output_key(kana_o,  record, mod_state);  // お
-    case OUT_KA: return process_output_key(kana_ka, record, mod_state);  // か
-    case OUT_KI: return process_output_key(kana_ki, record, mod_state);  // き
-    case OUT_KU: return process_output_key(kana_ku, record, mod_state);  // く
-    case OUT_KE: return process_output_key(kana_ke, record, mod_state);  // け
-    case OUT_KO: return process_output_key(kana_ko, record, mod_state);  // こ
-    case OUT_SA: return process_output_key(kana_sa, record, mod_state);  // さ
-    case OUT_SI: return process_output_key(kana_si, record, mod_state);  // し
-    case OUT_SU: return process_output_key(kana_su, record, mod_state);  // す
-    case OUT_SE: return process_output_key(kana_se, record, mod_state);  // せ
-    case OUT_SO: return process_output_key(kana_so, record, mod_state);  // そ
-    case OUT_TA: return process_output_key(kana_ta, record, mod_state);  // た
-    case OUT_TI: return process_output_key(kana_ti, record, mod_state);  // ち
-    case OUT_TU: return process_output_key(kana_tu, record, mod_state);  // つ
-    case OUT_TE: return process_output_key(kana_te, record, mod_state);  // て
-    case OUT_TO: return process_output_key(kana_to, record, mod_state);  // と
-    case OUT_NA: return process_output_key(kana_na, record, mod_state);  // な
-    case OUT_NI: return process_output_key(kana_ni, record, mod_state);  // に
-    case OUT_NU: return process_output_key(kana_nu, record, mod_state);  // ぬ
-    case OUT_NE: return process_output_key(kana_ne, record, mod_state);  // ね
-    case OUT_NO: return process_output_key(kana_no, record, mod_state);  // の
-    case OUT_HA: return process_output_key(kana_ha, record, mod_state);  // は
-    case OUT_HI: return process_output_key(kana_hi, record, mod_state);  // ひ
-    case OUT_HU: return process_output_key(kana_hu, record, mod_state);  // ふ
-    case OUT_HE: return process_output_key(kana_he, record, mod_state);  // へ
-    case OUT_HO: return process_output_key(kana_ho, record, mod_state);  // ほ
-    case OUT_MA: return process_output_key(kana_ma, record, mod_state);  // ま
-    case OUT_MI: return process_output_key(kana_mi, record, mod_state);  // み
-    case OUT_MU: return process_output_key(kana_mu, record, mod_state);  // む
-    case OUT_ME: return process_output_key(kana_me, record, mod_state);  // め
-    case OUT_MO: return process_output_key(kana_mo, record, mod_state);  // も
-    case OUT_YA: return process_output_key(kana_ya, record, mod_state);  // や
-    case OUT_YU: return process_output_key(kana_yu, record, mod_state);  // ゆ
-    case OUT_YO: return process_output_key(kana_yo, record, mod_state);  // よ
-    case OUT_RA: return process_output_key(kana_ra, record, mod_state);  // ら
-    case OUT_RI: return process_output_key(kana_ri, record, mod_state);  // り
-    case OUT_RU: return process_output_key(kana_ru, record, mod_state);  // る
-    case OUT_RE: return process_output_key(kana_re, record, mod_state);  // れ
-    case OUT_RO: return process_output_key(kana_ro, record, mod_state);  // ろ
-    case OUT_WA: return process_output_key(kana_wa, record, mod_state);  // わ
-    case OUT_WO: return process_output_key(kana_wo, record, mod_state);  // を
-    case OUT_NN: return process_output_key(kana_nn, record, mod_state);  // ん
+    case OUT_A:  return process_output_key(kana_a,  record);  // あ
+    case OUT_I:  return process_output_key(kana_i,  record);  // い
+    case OUT_U:  return process_output_key(kana_u,  record);  // う
+    case OUT_E:  return process_output_key(kana_e,  record);  // え
+    case OUT_O:  return process_output_key(kana_o,  record);  // お
+    case OUT_KA: return process_output_key(kana_ka, record);  // か
+    case OUT_KI: return process_output_key(kana_ki, record);  // き
+    case OUT_KU: return process_output_key(kana_ku, record);  // く
+    case OUT_KE: return process_output_key(kana_ke, record);  // け
+    case OUT_KO: return process_output_key(kana_ko, record);  // こ
+    case OUT_SA: return process_output_key(kana_sa, record);  // さ
+    case OUT_SI: return process_output_key(kana_si, record);  // し
+    case OUT_SU: return process_output_key(kana_su, record);  // す
+    case OUT_SE: return process_output_key(kana_se, record);  // せ
+    case OUT_SO: return process_output_key(kana_so, record);  // そ
+    case OUT_TA: return process_output_key(kana_ta, record);  // た
+    case OUT_TI: return process_output_key(kana_ti, record);  // ち
+    case OUT_TU: return process_output_key(kana_tu, record);  // つ
+    case OUT_TE: return process_output_key(kana_te, record);  // て
+    case OUT_TO: return process_output_key(kana_to, record);  // と
+    case OUT_NA: return process_output_key(kana_na, record);  // な
+    case OUT_NI: return process_output_key(kana_ni, record);  // に
+    case OUT_NU: return process_output_key(kana_nu, record);  // ぬ
+    case OUT_NE: return process_output_key(kana_ne, record);  // ね
+    case OUT_NO: return process_output_key(kana_no, record);  // の
+    case OUT_HA: return process_output_key(kana_ha, record);  // は
+    case OUT_HI: return process_output_key(kana_hi, record);  // ひ
+    case OUT_HU: return process_output_key(kana_hu, record);  // ふ
+    case OUT_HE: return process_output_key(kana_he, record);  // へ
+    case OUT_HO: return process_output_key(kana_ho, record);  // ほ
+    case OUT_MA: return process_output_key(kana_ma, record);  // ま
+    case OUT_MI: return process_output_key(kana_mi, record);  // み
+    case OUT_MU: return process_output_key(kana_mu, record);  // む
+    case OUT_ME: return process_output_key(kana_me, record);  // め
+    case OUT_MO: return process_output_key(kana_mo, record);  // も
+    case OUT_YA: return process_output_key(kana_ya, record);  // や
+    case OUT_YU: return process_output_key(kana_yu, record);  // ゆ
+    case OUT_YO: return process_output_key(kana_yo, record);  // よ
+    case OUT_RA: return process_output_key(kana_ra, record);  // ら
+    case OUT_RI: return process_output_key(kana_ri, record);  // り
+    case OUT_RU: return process_output_key(kana_ru, record);  // る
+    case OUT_RE: return process_output_key(kana_re, record);  // れ
+    case OUT_RO: return process_output_key(kana_ro, record);  // ろ
+    case OUT_WA: return process_output_key(kana_wa, record);  // わ
+    case OUT_WO: return process_output_key(kana_wo, record);  // を
+    case OUT_NN: return process_output_key(kana_nn, record);  // ん
     // }}}
     // 濁音・半濁音 {{{
-    case OUT_GA: return process_output_key(kana_ga, record, mod_state);  // が
-    case OUT_GI: return process_output_key(kana_gi, record, mod_state);  // ぎ
-    case OUT_GU: return process_output_key(kana_gu, record, mod_state);  // ぐ
-    case OUT_GE: return process_output_key(kana_ge, record, mod_state);  // げ
-    case OUT_GO: return process_output_key(kana_go, record, mod_state);  // ご
-    case OUT_ZA: return process_output_key(kana_za, record, mod_state);  // ざ
-    case OUT_ZI: return process_output_key(kana_zi, record, mod_state);  // じ
-    case OUT_ZU: return process_output_key(kana_zu, record, mod_state);  // ず
-    case OUT_ZE: return process_output_key(kana_ze, record, mod_state);  // ぜ
-    case OUT_ZO: return process_output_key(kana_zo, record, mod_state);  // ぞ
-    case OUT_DA: return process_output_key(kana_da, record, mod_state);  // だ
-    case OUT_DI: return process_output_key(kana_di, record, mod_state);  // ぢ
-    case OUT_DU: return process_output_key(kana_du, record, mod_state);  // づ
-    case OUT_DE: return process_output_key(kana_de, record, mod_state);  // で
-    case OUT_DO: return process_output_key(kana_do, record, mod_state);  // ど
-    case OUT_BA: return process_output_key(kana_ba, record, mod_state);  // ば
-    case OUT_BI: return process_output_key(kana_bi, record, mod_state);  // び
-    case OUT_BU: return process_output_key(kana_bu, record, mod_state);  // ぶ
-    case OUT_BE: return process_output_key(kana_be, record, mod_state);  // べ
-    case OUT_BO: return process_output_key(kana_bo, record, mod_state);  // ぼ
-    case OUT_PA: return process_output_key(kana_pa, record, mod_state);  // ぱ
-    case OUT_PI: return process_output_key(kana_pi, record, mod_state);  // ぴ
-    case OUT_PU: return process_output_key(kana_pu, record, mod_state);  // ぷ
-    case OUT_PE: return process_output_key(kana_pe, record, mod_state);  // ぺ
-    case OUT_PO: return process_output_key(kana_po, record, mod_state);  // ぽ
+    case OUT_GA: return process_output_key(kana_ga, record);  // が
+    case OUT_GI: return process_output_key(kana_gi, record);  // ぎ
+    case OUT_GU: return process_output_key(kana_gu, record);  // ぐ
+    case OUT_GE: return process_output_key(kana_ge, record);  // げ
+    case OUT_GO: return process_output_key(kana_go, record);  // ご
+    case OUT_ZA: return process_output_key(kana_za, record);  // ざ
+    case OUT_ZI: return process_output_key(kana_zi, record);  // じ
+    case OUT_ZU: return process_output_key(kana_zu, record);  // ず
+    case OUT_ZE: return process_output_key(kana_ze, record);  // ぜ
+    case OUT_ZO: return process_output_key(kana_zo, record);  // ぞ
+    case OUT_DA: return process_output_key(kana_da, record);  // だ
+    case OUT_DI: return process_output_key(kana_di, record);  // ぢ
+    case OUT_DU: return process_output_key(kana_du, record);  // づ
+    case OUT_DE: return process_output_key(kana_de, record);  // で
+    case OUT_DO: return process_output_key(kana_do, record);  // ど
+    case OUT_BA: return process_output_key(kana_ba, record);  // ば
+    case OUT_BI: return process_output_key(kana_bi, record);  // び
+    case OUT_BU: return process_output_key(kana_bu, record);  // ぶ
+    case OUT_BE: return process_output_key(kana_be, record);  // べ
+    case OUT_BO: return process_output_key(kana_bo, record);  // ぼ
+    case OUT_PA: return process_output_key(kana_pa, record);  // ぱ
+    case OUT_PI: return process_output_key(kana_pi, record);  // ぴ
+    case OUT_PU: return process_output_key(kana_pu, record);  // ぷ
+    case OUT_PE: return process_output_key(kana_pe, record);  // ぺ
+    case OUT_PO: return process_output_key(kana_po, record);  // ぽ
     // }}}
     // 拗音 {{{
-    case OUT_KYA: return process_output_key(kana_kya, record, mod_state);  // きゃ
-    case OUT_KYU: return process_output_key(kana_kyu, record, mod_state);  // きゅ
-    case OUT_KYO: return process_output_key(kana_kyo, record, mod_state);  // きょ
-    case OUT_SYA: return process_output_key(kana_sya, record, mod_state);  // しゃ
-    case OUT_SYU: return process_output_key(kana_syu, record, mod_state);  // しゅ
-    case OUT_SYO: return process_output_key(kana_syo, record, mod_state);  // しょ
-    case OUT_TYA: return process_output_key(kana_tya, record, mod_state);  // ちゃ
-    case OUT_TYU: return process_output_key(kana_tyu, record, mod_state);  // ちゅ
-    case OUT_TYO: return process_output_key(kana_tyo, record, mod_state);  // ちょ
-    case OUT_NYA: return process_output_key(kana_nya, record, mod_state);  // にゃ
-    case OUT_NYU: return process_output_key(kana_nyu, record, mod_state);  // にゅ
-    case OUT_NYO: return process_output_key(kana_nyo, record, mod_state);  // にょ
-    case OUT_HYA: return process_output_key(kana_hya, record, mod_state);  // ひゃ
-    case OUT_HYU: return process_output_key(kana_hyu, record, mod_state);  // ひゅ
-    case OUT_HYO: return process_output_key(kana_hyo, record, mod_state);  // ひょ
-    case OUT_MYA: return process_output_key(kana_mya, record, mod_state);  // みゃ
-    case OUT_MYU: return process_output_key(kana_myu, record, mod_state);  // みゅ
-    case OUT_MYO: return process_output_key(kana_myo, record, mod_state);  // みょ
-    case OUT_RYA: return process_output_key(kana_rya, record, mod_state);  // りゃ
-    case OUT_RYU: return process_output_key(kana_ryu, record, mod_state);  // りゅ
-    case OUT_RYO: return process_output_key(kana_ryo, record, mod_state);  // りょ
-    case OUT_GYA: return process_output_key(kana_gya, record, mod_state);  // ぎゃ
-    case OUT_GYU: return process_output_key(kana_gyu, record, mod_state);  // ぎゅ
-    case OUT_GYO: return process_output_key(kana_gyo, record, mod_state);  // ぎょ
-    case OUT_ZYA: return process_output_key(kana_zya, record, mod_state);  // じゃ
-    case OUT_ZYU: return process_output_key(kana_zyu, record, mod_state);  // じゅ
-    case OUT_ZYO: return process_output_key(kana_zyo, record, mod_state);  // じょ
-    case OUT_DYA: return process_output_key(kana_dya, record, mod_state);  // ぢゃ
-    case OUT_DYU: return process_output_key(kana_dyu, record, mod_state);  // ぢゅ
-    case OUT_DYO: return process_output_key(kana_dyo, record, mod_state);  // ぢょ
-    case OUT_BYA: return process_output_key(kana_bya, record, mod_state);  // びゃ
-    case OUT_BYU: return process_output_key(kana_byu, record, mod_state);  // びゅ
-    case OUT_BYO: return process_output_key(kana_byo, record, mod_state);  // びょ
-    case OUT_PYA: return process_output_key(kana_pya, record, mod_state);  // ぴゃ
-    case OUT_PYU: return process_output_key(kana_pyu, record, mod_state);  // ぴゅ
-    case OUT_PYO: return process_output_key(kana_pyo, record, mod_state);  // ぴょ
+    case OUT_KYA: return process_output_key(kana_kya, record);  // きゃ
+    case OUT_KYU: return process_output_key(kana_kyu, record);  // きゅ
+    case OUT_KYO: return process_output_key(kana_kyo, record);  // きょ
+    case OUT_SYA: return process_output_key(kana_sya, record);  // しゃ
+    case OUT_SYU: return process_output_key(kana_syu, record);  // しゅ
+    case OUT_SYO: return process_output_key(kana_syo, record);  // しょ
+    case OUT_TYA: return process_output_key(kana_tya, record);  // ちゃ
+    case OUT_TYU: return process_output_key(kana_tyu, record);  // ちゅ
+    case OUT_TYO: return process_output_key(kana_tyo, record);  // ちょ
+    case OUT_NYA: return process_output_key(kana_nya, record);  // にゃ
+    case OUT_NYU: return process_output_key(kana_nyu, record);  // にゅ
+    case OUT_NYO: return process_output_key(kana_nyo, record);  // にょ
+    case OUT_HYA: return process_output_key(kana_hya, record);  // ひゃ
+    case OUT_HYU: return process_output_key(kana_hyu, record);  // ひゅ
+    case OUT_HYO: return process_output_key(kana_hyo, record);  // ひょ
+    case OUT_MYA: return process_output_key(kana_mya, record);  // みゃ
+    case OUT_MYU: return process_output_key(kana_myu, record);  // みゅ
+    case OUT_MYO: return process_output_key(kana_myo, record);  // みょ
+    case OUT_RYA: return process_output_key(kana_rya, record);  // りゃ
+    case OUT_RYU: return process_output_key(kana_ryu, record);  // りゅ
+    case OUT_RYO: return process_output_key(kana_ryo, record);  // りょ
+    case OUT_GYA: return process_output_key(kana_gya, record);  // ぎゃ
+    case OUT_GYU: return process_output_key(kana_gyu, record);  // ぎゅ
+    case OUT_GYO: return process_output_key(kana_gyo, record);  // ぎょ
+    case OUT_ZYA: return process_output_key(kana_zya, record);  // じゃ
+    case OUT_ZYU: return process_output_key(kana_zyu, record);  // じゅ
+    case OUT_ZYO: return process_output_key(kana_zyo, record);  // じょ
+    case OUT_DYA: return process_output_key(kana_dya, record);  // ぢゃ
+    case OUT_DYU: return process_output_key(kana_dyu, record);  // ぢゅ
+    case OUT_DYO: return process_output_key(kana_dyo, record);  // ぢょ
+    case OUT_BYA: return process_output_key(kana_bya, record);  // びゃ
+    case OUT_BYU: return process_output_key(kana_byu, record);  // びゅ
+    case OUT_BYO: return process_output_key(kana_byo, record);  // びょ
+    case OUT_PYA: return process_output_key(kana_pya, record);  // ぴゃ
+    case OUT_PYU: return process_output_key(kana_pyu, record);  // ぴゅ
+    case OUT_PYO: return process_output_key(kana_pyo, record);  // ぴょ
     // }}}
     // 外来音 {{{
-    case OUT_WI:  return process_output_key(kana_wi,  record, mod_state);  // うぃ
-    case OUT_WE:  return process_output_key(kana_we,  record, mod_state);  // うぇ
-    case OUT_WHO: return process_output_key(kana_who, record, mod_state);  // うぉ
-    case OUT_FA:  return process_output_key(kana_fa,  record, mod_state);  // ふぁ
-    case OUT_FI:  return process_output_key(kana_fi,  record, mod_state);  // ふぃ
-    case OUT_FE:  return process_output_key(kana_fe,  record, mod_state);  // ふぇ
-    case OUT_FO:  return process_output_key(kana_fo,  record, mod_state);  // ふぉ
-    case OUT_SYE: return process_output_key(kana_sye, record, mod_state);  // しぇ
-    case OUT_ZYE: return process_output_key(kana_zye, record, mod_state);  // じぇ
-    case OUT_TYE: return process_output_key(kana_tye, record, mod_state);  // ちぇ
-    case OUT_THI: return process_output_key(kana_thi, record, mod_state);  // てぃ
-    case OUT_DHI: return process_output_key(kana_dhi, record, mod_state);  // でぃ
-    case OUT_TWU: return process_output_key(kana_twu, record, mod_state);  // とぅ
-    case OUT_DWU: return process_output_key(kana_dwu, record, mod_state);  // どぅ
-    case OUT_VU:  return process_output_key(kana_vu,  record, mod_state);  // ヴ
+    case OUT_WI:  return process_output_key(kana_wi,  record);  // うぃ
+    case OUT_WE:  return process_output_key(kana_we,  record);  // うぇ
+    case OUT_WHO: return process_output_key(kana_who, record);  // うぉ
+    case OUT_FA:  return process_output_key(kana_fa,  record);  // ふぁ
+    case OUT_FI:  return process_output_key(kana_fi,  record);  // ふぃ
+    case OUT_FE:  return process_output_key(kana_fe,  record);  // ふぇ
+    case OUT_FO:  return process_output_key(kana_fo,  record);  // ふぉ
+    case OUT_SYE: return process_output_key(kana_sye, record);  // しぇ
+    case OUT_ZYE: return process_output_key(kana_zye, record);  // じぇ
+    case OUT_TYE: return process_output_key(kana_tye, record);  // ちぇ
+    case OUT_THI: return process_output_key(kana_thi, record);  // てぃ
+    case OUT_DHI: return process_output_key(kana_dhi, record);  // でぃ
+    case OUT_TWU: return process_output_key(kana_twu, record);  // とぅ
+    case OUT_DWU: return process_output_key(kana_dwu, record);  // どぅ
+    case OUT_VU:  return process_output_key(kana_vu,  record);  // ヴ
     // }}}
     // 捨て仮名 {{{
-    case OUT_XTU: return process_output_key(kana_xtu, record, mod_state);  // っ
-    case OUT_XYA: return process_output_key(kana_xya, record, mod_state);  // ゃ
-    case OUT_XYU: return process_output_key(kana_xyu, record, mod_state);  // ゅ
-    case OUT_XYO: return process_output_key(kana_xyo, record, mod_state);  // ょ
-    case OUT_XA:  return process_output_key(kana_xa,  record, mod_state);  // ぁ
-    case OUT_XI:  return process_output_key(kana_xi,  record, mod_state);  // ぃ
-    case OUT_XU:  return process_output_key(kana_xu,  record, mod_state);  // ぅ
-    case OUT_XE:  return process_output_key(kana_xe,  record, mod_state);  // ぇ
-    case OUT_XO:  return process_output_key(kana_xo,  record, mod_state);  // ぉ
-    case OUT_XWA: return process_output_key(kana_xwa, record, mod_state);  // ゎ
+    case OUT_XTU: return process_output_key(kana_xtu, record);  // っ
+    case OUT_XYA: return process_output_key(kana_xya, record);  // ゃ
+    case OUT_XYU: return process_output_key(kana_xyu, record);  // ゅ
+    case OUT_XYO: return process_output_key(kana_xyo, record);  // ょ
+    case OUT_XA:  return process_output_key(kana_xa,  record);  // ぁ
+    case OUT_XI:  return process_output_key(kana_xi,  record);  // ぃ
+    case OUT_XU:  return process_output_key(kana_xu,  record);  // ぅ
+    case OUT_XE:  return process_output_key(kana_xe,  record);  // ぇ
+    case OUT_XO:  return process_output_key(kana_xo,  record);  // ぉ
+    case OUT_XWA: return process_output_key(kana_xwa, record);  // ゎ
     // }}}
     // 記号 {{{
-    case OUT_COMM: return process_output_key(kana_comm, record, mod_state);  // 、
-    case OUT_DOT:  return process_output_key(kana_dot,  record, mod_state);  // 。
-    case OUT_LONG: return process_output_key(kana_quot, record, mod_state);  // ー
-    case OUT_MDOT: return process_output_key(kana_dquo, record, mod_state);  // ・
-    case OUT_SLSH: return process_output_key(kana_slsh, record, mod_state);  // ／
-    case OUT_EXLM: return process_output_key(kana_exlm, record, mod_state);  // ！
-    case OUT_QUES: return process_output_key(kana_ques, record, mod_state);  // ？
-    case OUT_SCLN: return process_output_key(kana_scln, record, mod_state);  // ；
-    case OUT_COLN: return process_output_key(kana_coln, record, mod_state);  // ：
+    case OUT_COMM: return process_output_key(kana_comm, record);  // 、
+    case OUT_DOT:  return process_output_key(kana_dot,  record);  // 。
+    case OUT_LONG: return process_output_key(kana_quot, record);  // ー
+    case OUT_MDOT: return process_output_key(kana_dquo, record);  // ・
+    case OUT_SLSH: return process_output_key(kana_slsh, record);  // ／
+    case OUT_EXLM: return process_output_key(kana_exlm, record);  // ！
+    case OUT_QUES: return process_output_key(kana_ques, record);  // ？
+    case OUT_SCLN: return process_output_key(kana_scln, record);  // ；
+    case OUT_COLN: return process_output_key(kana_coln, record);  // ：
     // }}}
     // 括弧 {{{
-    case OUT_LBRC: return process_output_key(kana_lbrc, record, mod_state);  // 「
-    case OUT_RBRC: return process_output_key(kana_rbrc, record, mod_state);  // 」
-    case OUT_LPRN: return process_output_key(kana_lprn, record, mod_state);  // （
-    case OUT_RPRN: return process_output_key(kana_rprn, record, mod_state);  // ）
-    case OUT_LCBR: return process_output_key(kana_lcbr, record, mod_state);  // 『
-    case OUT_RCBR: return process_output_key(kana_rcbr, record, mod_state);  // 』
+    case OUT_LBRC: return process_output_key(kana_lbrc, record);  // 「
+    case OUT_RBRC: return process_output_key(kana_rbrc, record);  // 」
+    case OUT_LPRN: return process_output_key(kana_lprn, record);  // （
+    case OUT_RPRN: return process_output_key(kana_rprn, record);  // ）
+    case OUT_LCBR: return process_output_key(kana_lcbr, record);  // 『
+    case OUT_RCBR: return process_output_key(kana_rcbr, record);  // 』
 
     case OUT_BRCS:
       if (record->event.pressed) {
@@ -501,7 +532,7 @@ bool process_record_shingeta(uint16_t keycode,
       return false;
     // }}}
     // }}}
-    // Japanese Symbol {{{
+    // Japanese Symbols {{{
     case JSYM_Y:    return process_jsym_key(jsym_y,    record);
     case JSYM_U:    return process_jsym_key(jsym_u,    record);
     case JSYM_I:    return process_jsym_key(jsym_i,    record);

@@ -7,7 +7,7 @@
 // -- Macros
 
 #define RCTL_SG_QUOT RCTL_T(SG_QUOT)
-#define JSYM_SG_R    LT(_JSYM, SG_R)
+#define JSYM_R       LT(_JSYM, SG_R)
 
 // -- Prototypes
 
@@ -18,8 +18,10 @@ bool process_shingeta_key(uint8_t qwerty_key,
                           uint8_t mod_state);
 
 bool process_output_key(const char *kana,
-                        keyrecord_t *record,
-                        uint8_t mod_state);
+                        keyrecord_t *record);
+
+bool process_jsym_key(const char *symbol,
+                      keyrecord_t *record);
 
 bool process_record_shingeta(uint16_t keycode,
                              keyrecord_t *record,
@@ -27,9 +29,9 @@ bool process_record_shingeta(uint16_t keycode,
 
 // -- Wrappers
 
-#define __________________SHINGETA_L1______________ SG_Q, SG_W, SG_E, JSYM_SG_R, SG_T
-#define __________________SHINGETA_L2______________ SG_A, SG_S, SG_D, SG_F,      SG_G
-#define __________________SHINGETA_L3______________ SG_Z, SG_X, SG_C, SG_V,      SG_B
+#define __________________SHINGETA_L1______________ SG_Q, SG_W, SG_E, JSYM_R, SG_T
+#define __________________SHINGETA_L2______________ SG_A, SG_S, SG_D, SG_F,   SG_G
+#define __________________SHINGETA_L3______________ SG_Z, SG_X, SG_C, SG_V,   SG_B
 
 #define __________________SHINGETA_R1______________ SG_Y, SG_U, SG_I,    SG_O,   SG_P
 #define __________________SHINGETA_R2______________ SG_H, SG_J, SG_K,    SG_L,   SG_SCLN

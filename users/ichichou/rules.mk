@@ -18,7 +18,6 @@ endif
 ifeq ($(strip $(SHINGETA_ENABLE)), yes)
   SRC += shingeta.c
   OPT_DEFS += -DSHINGETA_ENABLE
-  COMBO_ENABLE = yes
 endif
 
 ifeq ($(strip $(INVERTED_NUM_ENABLE)), yes)

@@ -14,24 +14,61 @@
 
 enum combos {
   // レイヤー {{{
-  BASE_SD,
-  BASE_KL,
-  BASE_WE,
-  BASE_IO,
+  KC_SD,
+  KC_KL,
+  KC_WE,
+  KC_IO,
+
   SG_SD,
   SG_KL,
   SG_WE,
   SG_IO,
   // }}}
   // 制御キー {{{
-  BASE_DF,
-  BASE_JK,
-  BASE_VM,
-  BASE_VN,
+  KC_DF,
+  KC_JK,
+  KC_FJ,
+  KC_VM,
+  KC_VN,
+
   SG_DF,
   SG_JK,
+  SG_FJ,
   SG_VM,
   SG_VN,
+  // }}}
+  // 記号 {{{
+  KC_RG,
+  KC_RF,
+  KC_UH,
+  KC_FB,
+  KC_FV,
+  KC_JN,
+
+  SG_RG,
+  SG_RF,
+  SG_UH,
+  SG_FB,
+  SG_FV,
+  SG_JN,
+
+  JSYM_RG,
+  JSYM_RF,
+  // }}}
+  // 記号 (特殊) {{{
+  KC_FG,
+  KC_HJ,
+  KC_RT,
+  KC_VB,
+  KC_NM,
+
+  SG_FG,
+  SG_HJ,
+  SG_RT,
+  SG_VB,
+  SG_NM,
+
+  JSYM_RT,
   // }}}
   // 中指シフト (左) {{{
   D_Y,
@@ -76,6 +113,7 @@ enum combos {
   K_3,
   K_4,
   K_5,
+  JSYM_K_R,
   // }}}
   // 薬指シフト (左) {{{
   S_Y,
@@ -119,6 +157,7 @@ enum combos {
   L_3,
   L_4,
   L_5,
+  JSYM_L_R,
   // }}}
   // 中指上段シフト {{{
   I_Q,
@@ -138,6 +177,7 @@ enum combos {
   I_2,
   I_3,
   I_4,
+  JSYM_I_R,
   // }}}
   // 薬指上段シフト {{{
   O_Q,
@@ -157,6 +197,7 @@ enum combos {
   O_2,
   O_3,
   O_4,
+  JSYM_O_R,
   // }}}
   // 小指上段シフト (右) {{{
   P_Q,
@@ -171,6 +212,7 @@ enum combos {
   P_C,
   P_V,
   P_B,
+  JSYM_P_R,
   // }}}
   // 小指上段シフト (左) {{{
   Q_Y,
@@ -183,16 +225,6 @@ enum combos {
   Q_DOT,
   Q_SLSH,
   // }}}
-  // 記号 {{{
-  R_G,
-  R_F,
-  U_H,
-  F_B,
-  F_V,
-  J_N,
-  F_G,
-  H_J,
-  // }}}
 };
 
 // }}}
@@ -200,24 +232,61 @@ enum combos {
 // -- Sequences of Keys {{{
 
 // レイヤー {{{
-const uint16_t PROGMEM base_sd_combo[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM base_kl_combo[] = {KC_K, KC_L, COMBO_END};
-const uint16_t PROGMEM base_we_combo[] = {KC_W, KC_E, COMBO_END};
-const uint16_t PROGMEM base_io_combo[] = {KC_I, KC_O, COMBO_END};
-const uint16_t PROGMEM sg_sd_combo[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM sg_kl_combo[] = {KC_K, KC_L, COMBO_END};
-const uint16_t PROGMEM sg_we_combo[] = {KC_W, KC_E, COMBO_END};
-const uint16_t PROGMEM sg_io_combo[] = {KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM kc_sd_combo[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM kc_kl_combo[] = {KC_K, KC_L, COMBO_END};
+const uint16_t PROGMEM kc_we_combo[] = {KC_W, KC_E, COMBO_END};
+const uint16_t PROGMEM kc_io_combo[] = {KC_I, KC_O, COMBO_END};
+
+const uint16_t PROGMEM sg_sd_combo[] = {SG_S, SG_D, COMBO_END};
+const uint16_t PROGMEM sg_kl_combo[] = {SG_K, SG_L, COMBO_END};
+const uint16_t PROGMEM sg_we_combo[] = {SG_W, SG_E, COMBO_END};
+const uint16_t PROGMEM sg_io_combo[] = {SG_I, SG_O, COMBO_END};
 // }}}
 // 制御キー {{{
-const uint16_t PROGMEM base_df_combo[] = {KC_D, KC_F, COMBO_END};
-const uint16_t PROGMEM base_jk_combo[] = {KC_J, KC_K, COMBO_END};
-const uint16_t PROGMEM base_vm_combo[] = {KC_V, KC_M, COMBO_END};
-const uint16_t PROGMEM base_vn_combo[] = {KC_V, KC_N, COMBO_END};
+const uint16_t PROGMEM kc_df_combo[] = {KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM kc_jk_combo[] = {KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM kc_fj_combo[] = {KC_F, KC_J, COMBO_END};
+const uint16_t PROGMEM kc_vm_combo[] = {KC_V, KC_M, COMBO_END};
+const uint16_t PROGMEM kc_vn_combo[] = {KC_V, KC_N, COMBO_END};
+
 const uint16_t PROGMEM sg_df_combo[] = {SG_D, SG_F, COMBO_END};
 const uint16_t PROGMEM sg_jk_combo[] = {SG_J, SG_K, COMBO_END};
+const uint16_t PROGMEM sg_fj_combo[] = {SG_F, SG_J, COMBO_END};
 const uint16_t PROGMEM sg_vm_combo[] = {SG_V, SG_M, COMBO_END};
 const uint16_t PROGMEM sg_vn_combo[] = {SG_V, SG_N, COMBO_END};
+// }}}
+// 記号 {{{
+const uint16_t PROGMEM kc_rg_combo[] = {KC_R, KC_G, COMBO_END};
+const uint16_t PROGMEM kc_rf_combo[] = {KC_R, KC_F, COMBO_END};
+const uint16_t PROGMEM kc_uh_combo[] = {KC_U, KC_H, COMBO_END};
+const uint16_t PROGMEM kc_fb_combo[] = {KC_F, KC_B, COMBO_END};
+const uint16_t PROGMEM kc_fv_combo[] = {KC_F, KC_V, COMBO_END};
+const uint16_t PROGMEM kc_jn_combo[] = {KC_J, KC_N, COMBO_END};
+
+const uint16_t PROGMEM sg_rg_combo[] = {SG_R, SG_G, COMBO_END};
+const uint16_t PROGMEM sg_rf_combo[] = {SG_R, SG_F, COMBO_END};
+const uint16_t PROGMEM sg_uh_combo[] = {SG_U, SG_H, COMBO_END};
+const uint16_t PROGMEM sg_fb_combo[] = {SG_F, SG_B, COMBO_END};
+const uint16_t PROGMEM sg_fv_combo[] = {SG_F, SG_V, COMBO_END};
+const uint16_t PROGMEM sg_jn_combo[] = {SG_J, SG_N, COMBO_END};
+
+const uint16_t PROGMEM jsym_rg_combo[] = {JSYM_R, SG_G, COMBO_END};
+const uint16_t PROGMEM jsym_rf_combo[] = {JSYM_R, SG_F, COMBO_END};
+// }}}
+// 記号 (特殊) {{{
+const uint16_t PROGMEM kc_fg_combo[] = {KC_F, KC_G, COMBO_END};
+const uint16_t PROGMEM kc_hj_combo[] = {KC_H, KC_J, COMBO_END};
+const uint16_t PROGMEM kc_rt_combo[] = {KC_R, KC_T, COMBO_END};
+const uint16_t PROGMEM kc_vb_combo[] = {KC_V, KC_B, COMBO_END};
+const uint16_t PROGMEM kc_nm_combo[] = {KC_N, KC_M, COMBO_END};
+
+const uint16_t PROGMEM sg_fg_combo[] = {SG_F, SG_G, COMBO_END};
+const uint16_t PROGMEM sg_hj_combo[] = {SG_H, SG_J, COMBO_END};
+const uint16_t PROGMEM sg_rt_combo[] = {SG_R, SG_T, COMBO_END};
+const uint16_t PROGMEM sg_vb_combo[] = {SG_V, SG_B, COMBO_END};
+const uint16_t PROGMEM sg_nm_combo[] = {SG_N, SG_M, COMBO_END};
+
+const uint16_t PROGMEM jsym_rt_combo[] = {JSYM_R, SG_T, COMBO_END};
 // }}}
 // 中指シフト (左) {{{
 const uint16_t PROGMEM d_y_combo[]    = {SG_D, SG_Y,    COMBO_END};
@@ -262,6 +331,7 @@ const uint16_t PROGMEM k_2_combo[] = {SG_K, KC_2, COMBO_END};
 const uint16_t PROGMEM k_3_combo[] = {SG_K, KC_3, COMBO_END};
 const uint16_t PROGMEM k_4_combo[] = {SG_K, KC_4, COMBO_END};
 const uint16_t PROGMEM k_5_combo[] = {SG_K, KC_5, COMBO_END};
+const uint16_t PROGMEM jsym_k_r_combo[] = {SG_K, JSYM_R, COMBO_END};
 // }}}
 // 薬指シフト (左) {{{
 const uint16_t PROGMEM s_y_combo[]    = {SG_S, SG_Y,    COMBO_END};
@@ -305,6 +375,7 @@ const uint16_t PROGMEM l_2_combo[] = {SG_L, KC_2, COMBO_END};
 const uint16_t PROGMEM l_3_combo[] = {SG_L, KC_3, COMBO_END};
 const uint16_t PROGMEM l_4_combo[] = {SG_L, KC_4, COMBO_END};
 const uint16_t PROGMEM l_5_combo[] = {SG_L, KC_5, COMBO_END};
+const uint16_t PROGMEM jsym_l_r_combo[] = {SG_L, JSYM_R, COMBO_END};
 // }}}
 // 中指上段シフト {{{
 const uint16_t PROGMEM i_q_combo[] = {SG_I, SG_Q, COMBO_END};
@@ -324,6 +395,7 @@ const uint16_t PROGMEM i_1_combo[] = {SG_I, KC_1, COMBO_END};
 const uint16_t PROGMEM i_2_combo[] = {SG_I, KC_2, COMBO_END};
 const uint16_t PROGMEM i_3_combo[] = {SG_I, KC_3, COMBO_END};
 const uint16_t PROGMEM i_4_combo[] = {SG_I, KC_4, COMBO_END};
+const uint16_t PROGMEM jsym_i_r_combo[] = {SG_I, JSYM_R, COMBO_END};
 // }}}
 // 薬指上段シフト {{{
 const uint16_t PROGMEM o_q_combo[] = {SG_O, SG_Q, COMBO_END};
@@ -343,6 +415,7 @@ const uint16_t PROGMEM o_1_combo[] = {SG_O, KC_1, COMBO_END};
 const uint16_t PROGMEM o_2_combo[] = {SG_O, KC_2, COMBO_END};
 const uint16_t PROGMEM o_3_combo[] = {SG_O, KC_3, COMBO_END};
 const uint16_t PROGMEM o_4_combo[] = {SG_O, KC_4, COMBO_END};
+const uint16_t PROGMEM jsym_o_r_combo[] = {SG_O, JSYM_R, COMBO_END};
 // }}}
 // 小指上段シフト (右) {{{
 const uint16_t PROGMEM p_q_combo[] = {SG_P, SG_Q, COMBO_END};
@@ -357,6 +430,7 @@ const uint16_t PROGMEM p_z_combo[] = {SG_P, SG_Z, COMBO_END};
 const uint16_t PROGMEM p_c_combo[] = {SG_P, SG_C, COMBO_END};
 const uint16_t PROGMEM p_v_combo[] = {SG_P, SG_V, COMBO_END};
 const uint16_t PROGMEM p_b_combo[] = {SG_P, SG_B, COMBO_END};
+const uint16_t PROGMEM jsym_p_r_combo[] = {SG_P, JSYM_R, COMBO_END};
 // }}}
 // 小指上段シフト (左) {{{
 const uint16_t PROGMEM q_y_combo[]    = {SG_Q, SG_Y,    COMBO_END};
@@ -369,16 +443,6 @@ const uint16_t PROGMEM q_comm_combo[] = {SG_Q, SG_COMM, COMBO_END};
 const uint16_t PROGMEM q_dot_combo[]  = {SG_Q, SG_DOT,  COMBO_END};
 const uint16_t PROGMEM q_slsh_combo[] = {SG_Q, SG_SLSH, COMBO_END};
 // }}}
-// 記号 {{{
-const uint16_t PROGMEM r_g_combo[] = {SG_R, SG_G, COMBO_END};
-const uint16_t PROGMEM r_f_combo[] = {SG_R, SG_F, COMBO_END};
-const uint16_t PROGMEM u_h_combo[] = {SG_U, SG_H, COMBO_END};
-const uint16_t PROGMEM f_b_combo[] = {SG_F, SG_B, COMBO_END};
-const uint16_t PROGMEM f_v_combo[] = {SG_F, SG_V, COMBO_END};
-const uint16_t PROGMEM j_n_combo[] = {SG_J, SG_N, COMBO_END};
-const uint16_t PROGMEM f_g_combo[] = {SG_F, SG_G, COMBO_END};
-const uint16_t PROGMEM h_j_combo[] = {SG_H, SG_J, COMBO_END};
-// }}}
 
 // }}}
 
@@ -386,24 +450,61 @@ const uint16_t PROGMEM h_j_combo[] = {SG_H, SG_J, COMBO_END};
 
 combo_t key_combos[] = {
   // レイヤー {{{
-  [BASE_SD] = COMBO(base_sd_combo, MO(_NAV)),
-  [BASE_KL] = COMBO(base_kl_combo, MO(_NAV)),
-  [BASE_WE] = COMBO(base_we_combo, MO(_WIN)),
-  [BASE_IO] = COMBO(base_io_combo, MO(_WIN)),
-  [SG_SD] = COMBO(base_sd_combo, MO(_NAV)),
-  [SG_KL] = COMBO(base_kl_combo, MO(_NAV)),
-  [SG_WE] = COMBO(base_we_combo, MO(_WIN)),
-  [SG_IO] = COMBO(base_io_combo, MO(_WIN)),
+  [KC_SD] = COMBO(kc_sd_combo, MO(_NAV)),
+  [KC_KL] = COMBO(kc_kl_combo, MO(_NAV)),
+  [KC_WE] = COMBO(kc_we_combo, MO(_WIN)),
+  [KC_IO] = COMBO(kc_io_combo, MO(_WIN)),
+
+  [SG_SD] = COMBO(sg_sd_combo, MO(_NAV)),
+  [SG_KL] = COMBO(sg_kl_combo, MO(_NAV)),
+  [SG_WE] = COMBO(sg_we_combo, MO(_WIN)),
+  [SG_IO] = COMBO(sg_io_combo, MO(_WIN)),
   // }}}
   // 制御キー {{{
-  [BASE_DF] = COMBO(base_df_combo, SG_OFF),
-  [BASE_JK] = COMBO(base_jk_combo, SG_ON),
-  [BASE_VM] = COMBO(base_vm_combo, KC_ENT),
-  [BASE_VN] = COMBO(base_vn_combo, KC_ENT),
-  [SG_DF] = COMBO(sg_df_combo, SG_OFF),
-  [SG_JK] = COMBO(sg_jk_combo, SG_ON),
+  [KC_DF] = COMBO(kc_df_combo, IME_SG_OFF),
+  [KC_JK] = COMBO(kc_jk_combo, IME_SG_ON),
+  [KC_FJ] = COMBO(kc_fj_combo, EN_KATAKANA),
+  [KC_VM] = COMBO(kc_vm_combo, KC_ENT),
+  [KC_VN] = COMBO(kc_vn_combo, KC_ENT),
+
+  [SG_DF] = COMBO(sg_df_combo, IME_SG_OFF),
+  [SG_JK] = COMBO(sg_jk_combo, IME_SG_ON),
+  [SG_FJ] = COMBO(sg_fj_combo, JA_KATAKANA),
   [SG_VM] = COMBO(sg_vm_combo, KC_ENT),
   [SG_VN] = COMBO(sg_vn_combo, KC_ENT),
+  // }}}
+  // 記号 {{{
+  [KC_RG] = COMBO(kc_rg_combo, OUT_MDOT),  // "
+  [KC_RF] = COMBO(kc_rf_combo, OUT_MDOT),  // "
+  [KC_UH] = COMBO(kc_uh_combo, OUT_SLSH),  // /
+  [KC_FB] = COMBO(kc_fb_combo, OUT_EXLM),  // !
+  [KC_FV] = COMBO(kc_fv_combo, OUT_EXLM),  // !
+  [KC_JN] = COMBO(kc_jn_combo, OUT_QUES),  // ?
+
+  [SG_RG] = COMBO(sg_rg_combo, OUT_MDOT),  // ・
+  [SG_RF] = COMBO(sg_rf_combo, OUT_MDOT),  // ・
+  [SG_UH] = COMBO(sg_uh_combo, OUT_SLSH),  // ／
+  [SG_FB] = COMBO(sg_fb_combo, OUT_EXLM),  // ！
+  [SG_FV] = COMBO(sg_fv_combo, OUT_EXLM),  // ！
+  [SG_JN] = COMBO(sg_jn_combo, OUT_QUES),  // ？
+
+  [JSYM_RG] = COMBO(jsym_rg_combo, OUT_MDOT),  // ・
+  [JSYM_RF] = COMBO(jsym_rf_combo, OUT_MDOT),  // ・
+  // }}}
+  // 記号 (特殊) {{{
+  [KC_FG] = COMBO(kc_fg_combo, OUT_BRCS),     // []
+  [KC_HJ] = COMBO(kc_hj_combo, OUT_PRNS),     // ()
+  [KC_RT] = COMBO(kc_rt_combo, EN_BRCS_SPC),  // []_
+  [KC_VB] = COMBO(kc_vb_combo, EN_BRCS_SPC),  // []_
+  [KC_NM] = COMBO(kc_nm_combo, OUT_CBRS),     // {}
+
+  [SG_FG] = COMBO(sg_fg_combo, OUT_BRCS),     // 「」
+  [SG_HJ] = COMBO(sg_hj_combo, OUT_PRNS),     // （）
+  [SG_RT] = COMBO(sg_rt_combo, JA_BRCS_SPC),  // []_
+  [SG_VB] = COMBO(sg_vb_combo, JA_BRCS_SPC),  // []_
+  [SG_NM] = COMBO(sg_nm_combo, OUT_CBRS),     // 『』
+
+  [JSYM_RT] = COMBO(jsym_rt_combo, JA_BRCS_SPC),  // []_
   // }}}
   // 中指シフト (左) {{{
   [D_Y]    = COMBO(d_y_combo,    OUT_WI),    // うぃ
@@ -448,6 +549,7 @@ combo_t key_combos[] = {
   [K_3] = COMBO(k_3_combo, OUT_XU),  // ぅ
   [K_4] = COMBO(k_4_combo, OUT_XE),  // ぇ
   [K_5] = COMBO(k_5_combo, OUT_XO),  // ぉ
+  [JSYM_K_R] = COMBO(jsym_k_r_combo, OUT_FI),  // ふぃ
   // }}}
   // 薬指シフト (左) {{{
   [S_Y]    = COMBO(s_y_combo,    OUT_SYE),   // しぇ
@@ -491,6 +593,7 @@ combo_t key_combos[] = {
   [L_3] = COMBO(l_3_combo, OUT_MYU),  // みゅ
   [L_4] = COMBO(l_4_combo, OUT_MYO),  // みょ
   [L_5] = COMBO(l_5_combo, OUT_XWA),  // ゎ
+  [JSYM_L_R] = COMBO(jsym_l_r_combo, OUT_THI),  // てぃ
   // }}}
   // 中指上段シフト {{{
   [I_Q] = COMBO(i_q_combo, OUT_HYU),  // ひゅ
@@ -510,6 +613,7 @@ combo_t key_combos[] = {
   [I_2] = COMBO(i_2_combo, OUT_BYA),  // びゃ
   [I_3] = COMBO(i_3_combo, OUT_BYU),  // びゅ
   [I_4] = COMBO(i_4_combo, OUT_BYO),  // びょ
+  [JSYM_I_R] = COMBO(jsym_i_r_combo, OUT_KYU),  // きゅ
   // }}}
   // 薬指上段シフト {{{
   [O_Q] = COMBO(o_q_combo, OUT_RYU),  // りゅ
@@ -529,6 +633,7 @@ combo_t key_combos[] = {
   [O_2] = COMBO(o_2_combo, OUT_PYA),  // ぴゃ
   [O_3] = COMBO(o_3_combo, OUT_PYU),  // ぴゅ
   [O_4] = COMBO(o_4_combo, OUT_PYO),  // ぴょ
+  [JSYM_O_R] = COMBO(jsym_o_r_combo, OUT_GYU),  // ぎゅ
   // }}}
   // 小指上段シフト (右) {{{
   [P_Q] = COMBO(p_q_combo, OUT_PYU),  // ぴゅ
@@ -543,6 +648,7 @@ combo_t key_combos[] = {
   [P_C] = COMBO(p_c_combo, OUT_MYA),  // みゃ
   [P_V] = COMBO(p_v_combo, OUT_BYA),  // びゃ
   [P_B] = COMBO(p_b_combo, OUT_DYA),  // ぢゃ
+  [JSYM_P_R] = COMBO(jsym_p_r_combo, OUT_BYU),  // びゅ
   // }}}
   // 小指上段シフト (左) {{{
   [Q_Y]    = COMBO(q_y_combo,    OUT_XYA),  // ゃ
@@ -555,16 +661,6 @@ combo_t key_combos[] = {
   [Q_DOT]  = COMBO(q_dot_combo,  OUT_XO),   // ぉ
   [Q_SLSH] = COMBO(q_slsh_combo, OUT_XWA),  // ゎ
   // }}}
-  // 記号 {{{
-  [R_G] = COMBO(r_g_combo, OUT_MDOT),  // ・
-  [R_F] = COMBO(r_f_combo, OUT_MDOT),  // ・
-  [U_H] = COMBO(u_h_combo, OUT_SLSH),  // ／
-  [F_B] = COMBO(f_b_combo, OUT_EXLM),  // ！
-  [F_V] = COMBO(f_v_combo, OUT_EXLM),  // ！
-  [J_N] = COMBO(j_n_combo, OUT_QUES),  // ？
-  [F_G] = COMBO(f_g_combo, OUT_BRCS),  // 「」
-  [H_J] = COMBO(h_j_combo, OUT_PRNS),  // （）
-  // }}}
 };
 
 // }}}
@@ -572,23 +668,22 @@ combo_t key_combos[] = {
 // -- Combo Configurations {{{
 
 // COMBO_TERM_PER_COMBO
+// Default: 50 ms
 uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
   switch (combo_index) {
     // レイヤー
-    case BASE_SD: return 20;
-    case BASE_KL: return 20;
-    case BASE_WE: return 20;
-    case BASE_IO: return 20;
-    case SG_SD:   return 20;
-    case SG_KL:   return 20;
-    case SG_WE:   return 20;
-    case SG_IO:   return 20;
+    case KC_SD ... SG_IO:
+      return 20;
 
     // 制御キー
-    case BASE_DF: return 20;
-    case BASE_JK: return 20;
+    case KC_DF: return 20;
+    case KC_JK: return 20;
     case SG_DF:   return 20;
     case SG_JK:   return 20;
+
+    // 仮名キー
+    case D_Y ... Q_SLSH:
+      return 60;
   }
   return COMBO_TERM;
 }
@@ -597,14 +692,8 @@ uint16_t get_combo_term(uint16_t combo_index, combo_t *combo) {
 bool get_combo_must_hold(uint16_t index, combo_t *combo) {
   switch (index) {
     // レイヤー
-    case BASE_SD: return true;
-    case BASE_KL: return true;
-    case BASE_WE: return true;
-    case BASE_IO: return true;
-    case SG_SD:   return true;
-    case SG_KL:   return true;
-    case SG_WE:   return true;
-    case SG_IO:   return true;
+    case KC_SD ... SG_IO:
+      return true;
   }
   return false;
 }
@@ -716,10 +805,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    LCG(KC_Q),         __________________FN_L1____________________, SG_OFF,  __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
-    XXXXXXX,           __________________FN_L2____________________, SG_ON,   __________________FN_EQUINOX_R2____________,          KC_MPLY,
-    XXXXXXX,  XXXXXXX, __________________FN_L3____________________, XXXXXXX, __________________FN_EQUINOX_R3____________,          _______,
-    _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
+    LCG(KC_Q),         __________________FN_L1____________________, IME_SG_OFF, __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
+    XXXXXXX,           __________________FN_L2____________________, IME_SG_ON,  __________________FN_EQUINOX_R2____________,          KC_MPLY,
+    XXXXXXX,  XXXXXXX, __________________FN_L3____________________, XXXXXXX,    __________________FN_EQUINOX_R3____________,          _______,
+    _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT,    XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
 };

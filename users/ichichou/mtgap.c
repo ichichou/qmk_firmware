@@ -2,6 +2,8 @@
 
 #include "mtgap.h"
 
+// -- Functions {{{
+
 bool process_mtgap_key(uint8_t qwerty_key,
                        uint8_t mtgap_key,
                        bool *qwerty_registered,
@@ -31,6 +33,10 @@ bool process_mtgap_key(uint8_t qwerty_key,
   }
   return false;
 }
+
+// }}}
+
+// process_record_mtgap {{{
 
 static bool mtgap_registered[31];
 static bool qwerty_registered[31];
@@ -75,3 +81,5 @@ bool process_record_mtgap(uint16_t keycode,
       return true;
   }
 }
+
+// }}}

@@ -176,8 +176,12 @@ enum my_keycodes {
   // Shingeta {{{
   #ifdef SHINGETA_ENABLE
     // 制御用キーコード {{{
-    SG_ON,
-    SG_OFF,
+    IME_SG_ON,
+    IME_SG_OFF,
+    EN_KATAKANA,
+    JA_KATAKANA,
+    EN_BRCS_SPC,
+    JA_BRCS_SPC,
     // }}}
     // 配置用キーコード {{{
     SG_A,
@@ -376,7 +380,7 @@ enum my_keycodes {
     OUT_CBRS,
     // }}}
     // }}}
-    // Japanese Symbol {{{
+    // Japanese Symbols {{{
     JSYM_Y,
     JSYM_U,
     JSYM_I,

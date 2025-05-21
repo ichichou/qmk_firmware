@@ -50,7 +50,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #endif
 
     #ifdef SHINGETA_ENABLE
-      case SG_ON ... OUT_CBRS:
+      case IME_SG_ON ... JSYM_SLSH:
         return process_record_shingeta(keycode, record, mod_state);
 
       case RCTL_T(SG_QUOT):
@@ -65,20 +65,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return true;
 
-      #ifdef JSYM_ENABLE
-        case LT(_JSYM, SG_R):
-          if (record->tap.count && record->event.pressed) {
-            if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
-              tap_code(KC_COMM);
-              return false;
-            } else {
-              tap_code(KC_R);
-              return false;
-            }
+      case LT(_JSYM, SG_R):
+        if (record->tap.count && record->event.pressed) {
+          if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
+            tap_code(KC_COMM);
+            return false;
+          } else {
+            tap_code(KC_R);
+            return false;
           }
-          return true;
-      #endif
-
+        }
+        return true;
     #endif
 
     #ifdef INVERTED_NUM_ENABLE
