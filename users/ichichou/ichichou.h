@@ -463,9 +463,9 @@ enum my_keycodes {
 
 // -- Wrappers {{{
 
-#define __________________BASE_L1__________________ KC_Q, KC_W, KC_E,    KC_R,   KC_T
-#define __________________BASE_L2__________________ KC_A, KC_S, KC_D,    KC_F,   KC_G
-#define __________________BASE_L3__________________ KC_Z, KC_X, KC_C,    KC_V,   KC_B
+#define __________________BASE_L1__________________ KC_Q, KC_W, KC_E, KC_R, KC_T
+#define __________________BASE_L2__________________ KC_A, KC_S, KC_D, KC_F, KC_G
+#define __________________BASE_L3__________________ KC_Z, KC_X, KC_C, KC_V, KC_B
 
 #define __________________BASE_R1__________________ KC_Y, KC_U, KC_I,    KC_O,   KC_P
 #define __________________BASE_R2__________________ KC_H, KC_J, KC_K,    KC_L,   KC_SCLN
@@ -475,9 +475,9 @@ enum my_keycodes {
 #define __________________NAV_L2___________________ LSG(KC_A), LCTL_LBRC, LSFT_RBRC, LCG(KC_V), LCG(KC_S)
 #define __________________NAV_L3___________________ LSG(KC_Z), G(KC_X),   G(KC_C),   LSG(KC_V), G(KC_V)
 
-#define __________________NAV_R1___________________ G(KC_TAB), C(KC_TAB), KC_LCBR,   KC_RCBR,   G(KC_RBRC)
-#define __________________NAV_R2___________________ KC_LEFT,   KC_DOWN,   KC_UP,     KC_RGHT,   G(KC_LBRC)
-#define __________________NAV_R3___________________ KC_BSPC,   KC_DEL,    C(KC_A),   C(KC_E),   XXXXXXX
+#define __________________NAV_R1___________________ G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC)
+#define __________________NAV_R2___________________ KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC)
+#define __________________NAV_R3___________________ KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), XXXXXXX
 
 #define __________________SYM_L1___________________ KC_DOT,  KC_PLUS, KC_UNDS, KC_EXLM, KC_PIPE
 #define __________________SYM_L2___________________ KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT
@@ -487,17 +487,17 @@ enum my_keycodes {
 #define __________________SYM_R2___________________ KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN
 #define __________________SYM_R3___________________ KC_GRV,  KC_3,    KC_5,    KC_7,    KC_9
 
-#define __________________WIN_L1___________________ LCA(KC_U),    LCA(KC_I),   XXXXXXX,     MEH(KC_C),    C(KC_1)
-#define __________________WIN_L2___________________ LCA(KC_LEFT), XXXXXXX,     XXXXXXX,     LCA(KC_RGHT), C(KC_2)
-#define __________________WIN_L3___________________ LCA(KC_Z),    LCA(KC_X),   LCA(KC_V),   LCA(KC_B),    C(KC_3)
+#define __________________WIN_L1___________________ LCA(KC_U),    LCA(KC_I), XXXXXXX,   MEH(KC_C),    C(KC_1)
+#define __________________WIN_L2___________________ LCA(KC_LEFT), XXXXXXX,   XXXXXXX,   LCA(KC_RGHT), C(KC_2)
+#define __________________WIN_L3___________________ LCA(KC_Z),    LCA(KC_X), LCA(KC_V), LCA(KC_B),    C(KC_3)
 
-#define __________________WIN_R1___________________ C(KC_4),      MEH(KC_C),   A(KC_UP),    XXXXXXX,      XXXXXXX
-#define __________________WIN_R2___________________ C(KC_5),      LCA(KC_C),   A(KC_DOWN),  XXXXXXX,      XXXXXXX
-#define __________________WIN_R3___________________ C(KC_6),      LCA(KC_ENT), MEH(KC_ENT), XXXXXXX,      XXXXXXX
+#define __________________WIN_R1___________________ C(KC_4), MEH(KC_C),   A(KC_UP),    XXXXXXX, XXXXXXX
+#define __________________WIN_R2___________________ C(KC_5), LCA(KC_C),   A(KC_DOWN),  XXXXXXX, XXXXXXX
+#define __________________WIN_R3___________________ C(KC_6), LCA(KC_ENT), MEH(KC_ENT), XXXXXXX, XXXXXXX
 
-#define __________________FN_L1____________________ KC_F1,     KC_F2,   KC_F3,   KC_F4,   XXXXXXX
-#define __________________FN_L2____________________ KC_F5,     KC_F6,   KC_F7,   KC_F8,   XXXXXXX
-#define __________________FN_L3____________________ KC_F9,     KC_F10,  KC_F11,  KC_F12,  XXXXXXX
+#define __________________FN_L1____________________ KC_F1, KC_F2,  KC_F3,  KC_F4,  XXXXXXX
+#define __________________FN_L2____________________ KC_F5, KC_F6,  KC_F7,  KC_F8,  XXXXXXX
+#define __________________FN_L3____________________ KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX
 
 #define __________________FN_R1____________________ LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 #define __________________FN_R2____________________ LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT
