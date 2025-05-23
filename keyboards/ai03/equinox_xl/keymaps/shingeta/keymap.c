@@ -804,12 +804,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, _______,                            XXXXXXX, XXXXXXX,      XXXXXXX
   ),
 
-  [_FN] = LAYOUT_wrapper(
-    LCG(KC_Q),         __________________FN_L1____________________, IME_SG_OFF, __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
-    XXXXXXX,           __________________FN_L2____________________, IME_SG_ON,  __________________FN_EQUINOX_R2____________,          KC_MPLY,
-    XXXXXXX,  XXXXXXX, __________________FN_L3____________________, XXXXXXX,    __________________FN_EQUINOX_R3____________,          _______,
-    _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT,    XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
-  ),
+  #if defined(DYNAMIC_MACRO_ENABLE)
+    [_FN] = LAYOUT_wrapper(
+      LCG(KC_Q),         __________________FN_L1____________________, IME_SG_OFF, __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
+      DM_REC1,           __________________FN_L2____________________, IME_SG_ON,  __________________FN_EQUINOX_R2____________,          KC_MPLY,
+      DM_PLY1,  XXXXXXX, __________________FN_L3____________________, XXXXXXX,    __________________FN_EQUINOX_R3____________,          _______,
+      _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT,    XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+  #else
+    [_FN] = LAYOUT_wrapper(
+      LCG(KC_Q),         __________________FN_L1____________________, IME_SG_OFF, __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
+      XXXXXXX,           __________________FN_L2____________________, IME_SG_ON,  __________________FN_EQUINOX_R2____________,          KC_MPLY,
+      XXXXXXX,  XXXXXXX, __________________FN_L3____________________, XXXXXXX,    __________________FN_EQUINOX_R3____________,          _______,
+      _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT,    XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+  #endif
 
 };
 
