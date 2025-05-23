@@ -21,7 +21,9 @@ bool process_output_key(const char *kana,
                         keyrecord_t *record);
 
 bool process_jsym_key(const char *symbol,
-                      keyrecord_t *record);
+                      const char *shifted_shimbol,
+                      keyrecord_t *record,
+                      uint8_t mod_state);
 
 bool process_record_shingeta(uint16_t keycode,
                              keyrecord_t *record,

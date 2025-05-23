@@ -209,6 +209,13 @@ const char jsym_m[]    PROGMEM = "\\m";
 const char jsym_comm[] PROGMEM = "\\,";
 const char jsym_dot[]  PROGMEM = "\\.";
 const char jsym_slsh[] PROGMEM = "\\/";
+
+const char jsym_coln[] PROGMEM = "\\:";
+const char jsym_dquo[] PROGMEM = "\\\"";
+const char jsym_lt[]   PROGMEM = "\\<";
+const char jsym_gt[]   PROGMEM = "\\>";
+const char jsym_ques[] PROGMEM = "\\?";
+
 // }}}
 
 // }}}
@@ -249,8 +256,16 @@ bool process_output_key(const char *kana,
 }
 
 bool process_jsym_key(const char *symbol,
-                      keyrecord_t *record) {
+                      const char *shifted_symbol,
+                      keyrecord_t *record,
+                      uint8_t mod_state) {
   if (record->event.pressed) {
+    if (shifted_symbol != NULL) {
+      if (mod_state & MOD_MASK_SHIFT) {
+        send_string_P(shifted_symbol);
+        return false;
+      }
+    }
     send_string_P(symbol);
     return false;
   }
@@ -533,22 +548,22 @@ bool process_record_shingeta(uint16_t keycode,
     // }}}
     // }}}
     // Japanese Symbols {{{
-    case JSYM_Y:    return process_jsym_key(jsym_y,    record);
-    case JSYM_U:    return process_jsym_key(jsym_u,    record);
-    case JSYM_I:    return process_jsym_key(jsym_i,    record);
-    case JSYM_O:    return process_jsym_key(jsym_o,    record);
-    case JSYM_P:    return process_jsym_key(jsym_p,    record);
-    case JSYM_H:    return process_jsym_key(jsym_h,    record);
-    case JSYM_J:    return process_jsym_key(jsym_j,    record);
-    case JSYM_K:    return process_jsym_key(jsym_k,    record);
-    case JSYM_L:    return process_jsym_key(jsym_l,    record);
-    case JSYM_SCLN: return process_jsym_key(jsym_scln, record);
-    case JSYM_QUOT: return process_jsym_key(jsym_quot, record);
-    case JSYM_N:    return process_jsym_key(jsym_n,    record);
-    case JSYM_M:    return process_jsym_key(jsym_m,    record);
-    case JSYM_COMM: return process_jsym_key(jsym_comm, record);
-    case JSYM_DOT:  return process_jsym_key(jsym_dot,  record);
-    case JSYM_SLSH: return process_jsym_key(jsym_slsh, record);
+    case JSYM_Y:    return process_jsym_key(jsym_y,    NULL,      record, mod_state);
+    case JSYM_U:    return process_jsym_key(jsym_u,    NULL,      record, mod_state);
+    case JSYM_I:    return process_jsym_key(jsym_i,    NULL,      record, mod_state);
+    case JSYM_O:    return process_jsym_key(jsym_o,    NULL,      record, mod_state);
+    case JSYM_P:    return process_jsym_key(jsym_p,    NULL,      record, mod_state);
+    case JSYM_H:    return process_jsym_key(jsym_h,    NULL,      record, mod_state);
+    case JSYM_J:    return process_jsym_key(jsym_j,    NULL,      record, mod_state);
+    case JSYM_K:    return process_jsym_key(jsym_k,    NULL,      record, mod_state);
+    case JSYM_L:    return process_jsym_key(jsym_l,    NULL,      record, mod_state);
+    case JSYM_SCLN: return process_jsym_key(jsym_scln, jsym_coln, record, mod_state);
+    case JSYM_QUOT: return process_jsym_key(jsym_quot, jsym_dquo, record, mod_state);
+    case JSYM_N:    return process_jsym_key(jsym_n,    NULL,      record, mod_state);
+    case JSYM_M:    return process_jsym_key(jsym_m,    NULL,      record, mod_state);
+    case JSYM_COMM: return process_jsym_key(jsym_comm, jsym_lt,   record, mod_state);
+    case JSYM_DOT:  return process_jsym_key(jsym_dot,  jsym_gt,   record, mod_state);
+    case JSYM_SLSH: return process_jsym_key(jsym_slsh, jsym_ques, record, mod_state);
     // }}}
     default:
       return true;
