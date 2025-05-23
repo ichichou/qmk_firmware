@@ -1,2 +1,3 @@
 MTGAP_ENABLE = yes
 # BUNA_ENABLE = yes
+TRI_WIN_LAYER_ENABLE = yes

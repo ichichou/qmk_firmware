@@ -44,29 +44,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
   #endif
 
-  #ifdef BUNA_ENABLE
-    [_BUNA1] = LAYOUT_wrapper(
-      RHYPR_TAB, __________________BUNA1_L1_________________,    __________________BUNA1_R1_________________,  KC_BSPC,
-      LCTL_ESC,  __________________BUNA1_L2_________________,    __________________BUNA1_R2_________________,  RCTL_QUOT,
-      LSFT_CW,   __________________BUNA1_L3_________________,    __________________BUNA1_R3_________________,  RSFT_BSLS,
-      FN, KC_RCTL, KC_LALT,     LGUI_LNG2, NAV_ESC, LSFT_SPC,    RCTL_ENT, SYM_TAB, RGUI_LNG1, KC_DOWN, KC_UP, FN_GRV
-    ),
-
-    [_BUNA2] = LAYOUT_wrapper(
-      RHYPR_TAB, __________________BUNA2_L1_________________,    __________________BUNA2_R1_________________,  KC_BSPC,
-      LCTL_ESC,  __________________BUNA2_L2_________________,    __________________BUNA2_R2_________________,  RCTL_QUOT,
-      LSFT_CW,   __________________BUNA2_L3_________________,    __________________BUNA2_R3_________________,  RSFT_BSLS,
-      FN, KC_RCTL, KC_LALT,     LGUI_LNG2, NAV_ESC, LSFT_SPC,    RCTL_ENT, SYM_TAB, RGUI_LNG1, KC_DOWN, KC_UP, FN_GRV
-    ),
-
-    [_BUNA3] = LAYOUT_wrapper(
-      RHYPR_TAB, __________________BUNA3_L1_________________,    __________________BUNA3_R1_________________,  KC_BSPC,
-      LCTL_ESC,  __________________BUNA3_L2_________________,    __________________BUNA3_R2_________________,  RCTL_QUOT,
-      LSFT_CW,   __________________BUNA3_L3_________________,    __________________BUNA3_R3_________________,  RSFT_BSLS,
-      FN, KC_RCTL, KC_LALT,     LGUI_LNG2, NAV_ESC, LSFT_SPC,    RCTL_ENT, SYM_TAB, RGUI_LNG1, KC_DOWN, KC_UP, FN_GRV
-    ),
-  #endif
-
   [_NAV] = LAYOUT_wrapper(
     _______, __________________NAV_L1___________________,    __________________NAV_R1___________________, G(KC_UP),
     _______, __________________NAV_L2___________________,    __________________NAV_R2___________________, G(KC_DOWN),
@@ -88,30 +65,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX,    XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
-  #if defined(MTGAP_ENABLE) && defined(BUNA_ENABLE)
-    [_FN] = LAYOUT_wrapper(
-      LCG(KC_Q), __________________F1_TO_F4________, BASE,      __________________FN_R1____________________, LCG(KC_Q),
-      XXXXXXX,   __________________F5_TO_F8________, MTGAP,     __________________FN_R2____________________, KC_MPLY,
-      XXXXXXX,   __________________F9_TO_F12_______, BUNA,      __________________FN_R3____________________, KC_MUTE,
-      _______,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,    QK_BOOT, XXXXXXX, XXXXXXX, KC_LEFT, KC_RGHT, _______
-    ),
-
-  #elif defined(MTGAP_ENABLE)
+  #ifdef MTGAP_ENABLE
     [_FN] = LAYOUT_wrapper(
       LCG(KC_Q), __________________F1_TO_F4________, BASE,       __________________FN_R1____________________, LCG(KC_Q),
       XXXXXXX,   __________________F5_TO_F8________, MTGAP,      __________________FN_R2____________________, KC_MPLY,
       XXXXXXX,   __________________F9_TO_F12_______, XXXXXXX,    __________________FN_R3____________________, KC_MUTE,
       _______,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,     QK_BOOT, XXXXXXX, XXXXXXX, KC_LEFT, KC_RGHT, _______
     ),
-
-  #elif defined(BUNA_ENABLE)
-    [_FN] = LAYOUT_wrapper(
-      LCG(KC_Q), __________________F1_TO_F4________, BASE,       __________________FN_R1____________________, LCG(KC_Q),
-      XXXXXXX,   __________________F5_TO_F8________, XXXXXXX,    __________________FN_R2____________________, KC_MPLY,
-      XXXXXXX,   __________________F9_TO_F12_______, BUNA,       __________________FN_R3____________________, KC_MUTE,
-      _______,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,     QK_BOOT, XXXXXXX, XXXXXXX, KC_LEFT, KC_RGHT, _______
-    ),
-
   #else
     [_FN] = LAYOUT_wrapper(
       LCG(KC_Q), __________________FN_L1____________________,    __________________FN_R1____________________, LCG(KC_Q),
