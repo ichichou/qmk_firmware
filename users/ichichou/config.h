@@ -1,24 +1,27 @@
-// Layer
+// Layer Count
 #ifdef DYNAMIC_KEYMAP_LAYER_COUNT
   #undef DYNAMIC_KEYMAP_LAYER_COUNT
 #endif
 
-#if defined(BUNA_ENABLE)
-  #define DYNAMIC_KEYMAP_LAYER_COUNT 9
-#elif defined(SHINGETA_ENABLE)
-  #define DYNAMIC_KEYMAP_LAYER_COUNT 7
-#elif defined(MTGAP_ENABLE)
-  #define DYNAMIC_KEYMAP_LAYER_COUNT 6
-#else
-  #define DYNAMIC_KEYMAP_LAYER_COUNT 5
-#endif
+#define DEFAULT_LAYER_COUNT 5
+
+#define LAYER_COUNT_IF(condition, count) \
+  (defined(condition) ? (count) : 0)
+
+#define DYNAMIC_KEYMAP_LAYER_COUNT \
+  ( \
+    DEFAULT_LAYER_COUNT \
+    + LAYER_COUNT_IF(MTGAP_ENABLE,    1) \
+    + LAYER_COUNT_IF(STENO_ENABLE,    3) \
+    + LAYER_COUNT_IF(SHINGETA_ENABLE, 2) \
+    + LAYER_COUNT_IF(BUNA_ENABLE,     3) \
+  )
 
 // Tap-Hold Configuration
 #define TAPPING_TERM 150
 #define QUICK_TAP_TERM 0
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 #define PERMISSIVE_HOLD_PER_KEY
-
 
 // Combo Configuration
 #ifdef COMBO_ENABLE
