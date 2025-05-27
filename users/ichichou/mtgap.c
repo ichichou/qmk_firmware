@@ -2,7 +2,7 @@
 
 #include "mtgap.h"
 
-// -- Functions {{{
+// Functions {{{
 
 bool process_mtgap_key(uint8_t qwerty_key,
                        uint8_t mtgap_key,
@@ -41,9 +41,7 @@ bool process_mtgap_key(uint8_t qwerty_key,
 static bool mtgap_registered[31];
 static bool qwerty_registered[31];
 
-bool process_record_mtgap(uint16_t keycode,
-                          keyrecord_t *record,
-                          uint8_t mod_state) {
+bool process_record_mtgap(uint16_t keycode, keyrecord_t *record, uint8_t mod_state) {
   switch (keycode) {
     case MT_A:    return process_mtgap_key(KC_A,    KC_I,    &qwerty_registered[0],  &mtgap_registered[0],  record, mod_state);
     case MT_B:    return process_mtgap_key(KC_B,    KC_X,    &qwerty_registered[1],  &mtgap_registered[1],  record, mod_state);

@@ -2,10 +2,7 @@
 
 #include "inverted_num.h"
 
-bool process_inverted_num_key(uint8_t num_key,
-                              uint16_t symbol_key,
-                              keyrecord_t *record,
-                              uint8_t mod_state) {
+bool process_inverted_num_key(uint8_t num_key, uint16_t symbol_key, keyrecord_t *record, uint8_t mod_state) {
   if (record->event.pressed) {
     // Not pressed modifiers
     if (mod_state == 0) {
@@ -27,9 +24,7 @@ bool process_inverted_num_key(uint8_t num_key,
   return false;
 }
 
-bool process_record_inverted_num(uint16_t keycode,
-                                 keyrecord_t *record,
-                                 uint8_t mod_state) {
+bool process_record_inverted_num(uint16_t keycode, keyrecord_t *record, uint8_t mod_state) {
   switch(keycode) {
     case INV_1: return process_inverted_num_key(KC_1, KC_EXLM, record, mod_state);
     case INV_2: return process_inverted_num_key(KC_2, KC_AT,   record, mod_state);

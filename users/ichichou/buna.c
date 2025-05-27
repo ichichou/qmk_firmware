@@ -112,11 +112,7 @@ const char kana_quot[] PROGMEM = "'";
 
 // -- Functions {{{
 
-bool process_buna_key(uint8_t qwerty_key,
-                      const char *kana,
-                      bool *registered,
-                      keyrecord_t *record,
-                      uint8_t mod_state) {
+bool process_buna_key(uint8_t qwerty_key, const char *kana, bool *registered, keyrecord_t *record, uint8_t mod_state) {
   if (record->event.pressed) {
     if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
       if (kana != NULL) {
@@ -140,9 +136,7 @@ bool process_buna_key(uint8_t qwerty_key,
 
 static bool key_registered[93];
 
-bool process_record_buna(uint16_t keycode,
-                         keyrecord_t *record,
-                         uint8_t mod_state) {
+bool process_record_buna(uint16_t keycode, keyrecord_t *record, uint8_t mod_state) {
   switch(keycode) {
     // _BUNA1 {{{
     case BN1_A:    return process_buna_key(KC_A,    kana_de,   &key_registered[0],  record, mod_state);

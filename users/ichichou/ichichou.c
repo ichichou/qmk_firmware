@@ -32,21 +32,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return true;
     #endif
 
-    #ifdef BUNA_ENABLE
-      case BN1_A ... BN3_SLSH:
-        return process_record_buna(keycode, record, mod_state);
-
-      case RCTL_T(BN1_QUOT):
-        if (record->tap.count && record->event.pressed) {
-          if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
-            SEND_STRING(".");
-            return false;
-          } else {
-            tap_code(KC_QUOT);
-            return false;
-          }
-        }
-        return true;
     #endif
 
     #ifdef SHINGETA_ENABLE
@@ -72,6 +57,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
           } else {
             tap_code(KC_R);
+            return false;
+          }
+        }
+        return true;
+    #endif
+
+    #ifdef BUNA_ENABLE
+      case BN1_A ... BN3_SLSH:
+        return process_record_buna(keycode, record, mod_state);
+
+      case RCTL_T(BN1_QUOT):
+        if (record->tap.count && record->event.pressed) {
+          if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
+            SEND_STRING(".");
+            return false;
+          } else {
+            tap_code(KC_QUOT);
             return false;
           }
         }
