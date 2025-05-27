@@ -10,6 +10,10 @@ ifeq ($(strip $(MTGAP_ENABLE)), yes)
   OPT_DEFS += -DMTGAP_ENABLE
 endif
 
+ifeq ($(strip $(STENO_ENABLE)), yes)
+  SRC += steno.c
+endif
+
 ifeq ($(strip $(BUNA_ENABLE)), yes)
   SRC += buna.c
   OPT_DEFS += -DBUNA_ENABLE

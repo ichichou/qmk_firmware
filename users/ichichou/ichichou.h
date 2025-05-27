@@ -12,6 +12,10 @@ enum layer_names {
     _MTGAP,
   #endif
 
+  #ifdef STENO_ENABLE
+    _PLOVER,
+    _GEMINI,
+    _MEJIRO,
   #endif
 
   #ifdef SHINGETA_ENABLE
@@ -535,6 +539,8 @@ enum my_keycodes {
   #include "mtgap.h"
 #endif
 
+#ifdef STENO_ENABLE
+  #include "steno.h"
 #endif
 
 #ifdef SHINGETA_ENABLE

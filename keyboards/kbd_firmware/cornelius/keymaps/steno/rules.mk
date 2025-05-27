@@ -1,0 +1,7 @@
+USER_NAME := ichichou
+TRI_WIN_LAYER_ENABLE = yes
+DYNAMIC_MACRO_ENABLE = yes
+
+NKRO_ENABLE = yes
+STENO_ENABLE = yes
+STENO_PROTOCOL = geminipr
