@@ -10,8 +10,12 @@ ifeq ($(strip $(MTGAP_ENABLE)), yes)
   OPT_DEFS += -DMTGAP_ENABLE
 endif
 
-ifeq ($(strip $(STENO_ENABLE)), yes)
+ifeq ($(strip $(STENO_SETUP_ENABLE)), yes)
   SRC += steno.c
+  OPT_DEFS += -DSTENO_SETUP_ENABLE
+  NKRO_ENABLE = yes
+  STENO_ENABLE = yes
+  STENO_PROTOCOL = geminipr
 endif
 
 ifeq ($(strip $(BUNA_ENABLE)), yes)

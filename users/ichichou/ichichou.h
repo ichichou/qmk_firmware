@@ -12,7 +12,7 @@ enum layer_names {
     _MTGAP,
   #endif
 
-  #ifdef STENO_ENABLE
+  #ifdef STENO_SETUP_ENABLE
     _PLOVER,
     _GEMINI,
     _MEJIRO,
@@ -77,7 +77,7 @@ enum my_keycodes {
   #endif
   // }}}
   // Steno {{{
-  #ifdef STENO_ENABLE
+  #ifdef STENO_SETUP_ENABLE
     QWERTY,
     PLOVER,
     GEMINI,
@@ -539,7 +539,7 @@ enum my_keycodes {
   #include "mtgap.h"
 #endif
 
-#ifdef STENO_ENABLE
+#ifdef STENO_SETUP_ENABLE
   #include "steno.h"
 #endif
 

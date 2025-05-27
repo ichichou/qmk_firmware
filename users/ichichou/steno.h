@@ -1,17 +1,5 @@
 // steno.h
 
-// ステノを有効化するには、対象となるキーマップで：
-//
-// rules.mk に以下を記述。
-// - NKRO_ENABLE = yes
-// - STENO_ENABLE = yes
-// - STENO_PROTOCOL = geminipr
-//
-// config.h に以下を記述。
-// - #define NKRO_DEFAULT_ON false
-// （記述しなくてもいい）
-// （NKRO をデフォルトオンにしたければ true にする）
-
 #pragma once
 #include QMK_KEYBOARD_H
 #include "ichichou.h"

@@ -32,7 +32,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return true;
     #endif
 
-    #ifdef STENO_ENABLE
+    #ifdef STENO_SETUP_ENABLE
       case QWERTY ... MEJIRO:
         return process_record_steno(keycode, record);
     #endif
