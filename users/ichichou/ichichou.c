@@ -15,6 +15,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
 
+    #ifdef GAME_ENABLE
+      case GAME ... EXT_GAME:
+        return process_record_game(keycode, record);
+    #endif
+
     #ifdef MTGAP_ENABLE
       case MT_A ... MT_SLSH:
         return process_record_mtgap(keycode, record, mod_state);

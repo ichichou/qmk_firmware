@@ -8,6 +8,10 @@
 enum layer_names {
   _BASE,
 
+  #ifdef GAME_ENABLE
+    _GAME,
+  #endif
+
   #ifdef MTGAP_ENABLE
     _MTGAP,
   #endif
@@ -41,6 +45,12 @@ enum layer_names {
 
 enum my_keycodes {
   KC_SAMPLE = QK_USER,
+  // Game {{{
+  #ifdef GAME_ENABLE
+    GAME,
+    EXT_GAME,
+  #endif
+  // }}}
   // MTGAP {{{
   #ifdef MTGAP_ENABLE
     MT_A,
@@ -534,6 +544,10 @@ enum my_keycodes {
 // }}}
 
 // -- Includes {{{
+
+#ifdef GAME_ENABLE
+  #include "game.h"
+#endif
 
 #ifdef MTGAP_ENABLE
   #include "mtgap.h"
