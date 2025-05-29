@@ -43,6 +43,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_PLOVER] = LAYOUT_wrapper(
+    KC_3,    __________________PLOVER_L1________________, __________________PLOVER_R1________________, KC_RPRN,
+    KC_4,    __________________PLOVER_L2________________, __________________PLOVER_R2________________, KC_QUOT,
+    XXXXXXX, __________________PLOVER_L3________________, __________________PLOVER_R3________________, XXXXXXX,
+    FN,      XXXXXXX, XXXXXXX,          KC_1, KC_C, KC_V, KC_N, KC_M, KC_2,          XXXXXXX, XXXXXXX, XXXXXXX
+  ),
+
+  [_GEMINI] = LAYOUT_wrapper(
     STN_N3,  __________________GEMINI_L1________________, __________________GEMINI_R1________________, STN_DR,
     STN_N4,  __________________GEMINI_L2________________, __________________GEMINI_R2________________, STN_ZR,
     XXXXXXX, __________________GEMINI_L3________________, __________________GEMINI_R3________________, XXXXXXX,
@@ -71,10 +78,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    OS_LOCK, __________________F1_TO_F4________, QWERTY, __________________FN_R1____________________, OS_LOCK,
-    DM_REC1, __________________F5_TO_F8________, MTGAP,  __________________FN_R2____________________, KC_MPLY,
-    DM_PLY1, __________________F9_TO_F12_______, PLOVER, __________________FN_R3____________________, KC_MUTE,
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR, QK_BOOT, XXXXXXX, XXXXXXX, KC_LEFT, KC_RGHT, _______
+    OS_LOCK, KC_F1,   KC_F2,   XXXXXXX, XXXXXXX, QWERTY,    LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, OS_LOCK,
+    DM_REC1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MTGAP,     LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_MPLY,
+    DM_PLY1, XXXXXXX, XXXXXXX, XXXXXXX, PLOVER,  GEMINI,    LSG(KC_4), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,    QK_BOOT,   XXXXXXX, XXXXXXX, KC_LEFT, KC_RGHT, _______
   ),
 
 };
