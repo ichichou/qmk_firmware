@@ -6,10 +6,6 @@
 
 #define LAYOUT_wrapper(...) LAYOUT(__VA_ARGS__)
 
-#define __________________FN_EQUINOX_R1____________ LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-#define __________________FN_EQUINOX_R2____________ LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV
-#define __________________FN_EQUINOX_R3____________ LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT_wrapper(
@@ -19,14 +15,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
   ),
 
-  #ifdef MTGAP_ENABLE
-    [_MTGAP] = LAYOUT_wrapper(
-      RHYPR_TAB,     __________________MTGAP_L1_________________, KC_LBRC, __________________MTGAP_R1_________________, KC_BSPC, MT_QUOT,
-      LCTL_ESC,      __________________MTGAP_L2_________________, KC_RBRC, __________________MTGAP_R2_________________,          RCTL_ENT,
-      LSFT_CW,  NAV, __________________MTGAP_L3_________________, KC_GRV,  __________________MTGAP_R3_________________,          FN_BSLS,
-      FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
-    ),
-  #endif
+  [_MTGAP] = LAYOUT_wrapper(
+    RHYPR_TAB,     __________________MTGAP_L1_________________, KC_LBRC, __________________MTGAP_R1_________________, KC_BSPC, MT_QUOT,
+    LCTL_ESC,      __________________MTGAP_L2_________________, KC_RBRC, __________________MTGAP_R2_________________,          RCTL_ENT,
+    LSFT_CW,  NAV, __________________MTGAP_L3_________________, KC_GRV,  __________________MTGAP_R3_________________,          FN_BSLS,
+    FN, XXXXXXX, LGUI_LNG2,                           LSFT_SPC, RCTL_TAB, SYM_ENT,                         RGUI_LNG1, XXXXXXX, RALT_GRV
+  ),
 
   [_NAV] = LAYOUT_wrapper(
     _______,          __________________NAV_L1___________________, XXXXXXX, __________________NAV_R1___________________, G(KC_UP), G(KC_DOWN),
@@ -49,27 +43,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, _______,                            XXXXXXX, XXXXXXX,      XXXXXXX
   ),
 
-  #if defined(DYNAMIC_MACRO_ENABLE)
-    [_FN] = LAYOUT_wrapper(
-      LCG(KC_Q),         __________________FN_L1____________________, BASE,    __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
-      DM_REC1,           __________________FN_L2____________________, MTGAP,   __________________FN_EQUINOX_R2____________,          KC_MPLY,
-      DM_PLY1,  XXXXXXX, __________________FN_L3____________________, XXXXXXX, __________________FN_EQUINOX_R3____________,          _______,
-      _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
-    ),
-  #elif defined(MTGAP_ENABLE)
-    [_FN] = LAYOUT_wrapper(
-      LCG(KC_Q),         __________________FN_L1____________________, BASE,    __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
-      XXXXXXX,           __________________FN_L2____________________, MTGAP,   __________________FN_EQUINOX_R2____________,          KC_MPLY,
-      XXXXXXX,  XXXXXXX, __________________FN_L3____________________, XXXXXXX, __________________FN_EQUINOX_R3____________,          _______,
-      _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
-    ),
-  #else
-    [_FN] = LAYOUT_wrapper(
-      LCG(KC_Q),         __________________FN_L1____________________, XXXXXXX, __________________FN_EQUINOX_R1____________, XXXXXXX, KC_MNXT,
-      XXXXXXX,           __________________FN_L2____________________, XXXXXXX, __________________FN_EQUINOX_R2____________,          KC_MPLY,
-      XXXXXXX,  XXXXXXX, __________________FN_L3____________________, XXXXXXX, __________________FN_EQUINOX_R3____________,          _______,
-      _______,  XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
-    ),
-  #endif
+  [_FN] = LAYOUT_wrapper(
+    OS_LOCK,          __________________FN_L1____________________, BASE,    LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MNXT,
+    DM_REC1,          __________________FN_L2____________________, MTGAP,   LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV,          KC_MPLY,
+    DM_PLY1, XXXXXXX, __________________FN_L3____________________, XXXXXXX, LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,          _______,
+    _______, XXXXXXX, XXXXXXX,                             EE_CLR, QK_BOOT, XXXXXXX,                              XXXXXXX, XXXXXXX, XXXXXXX
+  ),
 
 };

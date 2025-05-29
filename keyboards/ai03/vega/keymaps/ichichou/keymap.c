@@ -27,10 +27,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define LAYOUT_wrapper(...) LAYOUT_all(__VA_ARGS__)
 
-#define __________________FN_VEGA_R1_______________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-#define __________________FN_VEGA_R2_______________ XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT
-#define __________________FN_VEGA_R3_______________ XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT_wrapper(
@@ -51,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SYM] = LAYOUT_wrapper(
     _______,          __________________NONE_____________________, XXXXXXX, __________________NONE_____________________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    _______,          __________________SYM_L1___________________, XXXXXXX, __________________SYM_R1___________________, KC_QUOT, XXXXXXX,          XXXXXXX,
+    _______,          __________________SYM_L1___________________, XXXXXXX, __________________SYM_R1___________________, KC_RPRN, XXXXXXX,          XXXXXXX,
     _______,          __________________SYM_L2___________________, XXXXXXX, __________________SYM_R2___________________, XXXXXXX,                   XXXXXXX,
     _______, XXXXXXX, __________________SYM_L3___________________, XXXXXXX, __________________SYM_R3___________________,                   XXXXXXX, XXXXXXX,
     _______, _______, _______,                            XXXXXXX, _______, XXXXXXX,                   XXXXXXX, _______,          XXXXXXX, XXXXXXX, XXXXXXX
@@ -66,10 +62,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    LCG(KC_Q),        __________________F1_TO_F5_________________, KC_F6,   __________________F7_TO_F11________________, KC_F12,  KC_DEL,  XXXXXXX, XXXXXXX,
-    XXXXXXX,          __________________FN_L1____________________, XXXXXXX, __________________FN_VEGA_R1_______________, XXXXXXX, XXXXXXX,          G(KC_UP),
-    XXXXXXX,          __________________FN_L2____________________, EE_CLR,  __________________FN_VEGA_R2_______________, KC_MPLY,                   G(KC_DOWN),
-    XXXXXXX, XXXXXXX, __________________FN_L3____________________, QK_BOOT, __________________FN_VEGA_R3_______________,                   KC_PGUP, _______,
+    OS_LOCK,          __________________F1_TO_F5_________________, KC_F6,   __________________F7_TO_F11________________, KC_F12,  KC_DEL,  XXXXXXX, XXXXXXX,
+    XXXXXXX,          __________________FN_L1____________________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          G(KC_UP),
+    XXXXXXX,          __________________FN_L2____________________, EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_MPLY,                   G(KC_DOWN),
+    XXXXXXX, XXXXXXX, __________________FN_L3____________________, QK_BOOT, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,                   KC_PGUP, _______,
     _______, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX,          KC_HOME, KC_PGDN, KC_END
   ),
 
