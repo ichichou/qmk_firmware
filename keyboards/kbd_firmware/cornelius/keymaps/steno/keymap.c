@@ -46,14 +46,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_3,    __________________PLOVER_L1________________, __________________PLOVER_R1________________, KC_RPRN,
     KC_4,    __________________PLOVER_L2________________, __________________PLOVER_R2________________, KC_QUOT,
     XXXXXXX, __________________PLOVER_L3________________, __________________PLOVER_R3________________, XXXXXXX,
-    FN,      XXXXXXX, XXXXXXX,          KC_1, KC_C, KC_V, KC_N, KC_M, KC_2,          XXXXXXX, XXXXXXX, XXXXXXX
+    FN,      XXXXXXX, XXXXXXX,          KC_C, KC_V, KC_1, KC_2, KC_N, KC_M,          XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
   [_GEMINI] = LAYOUT_wrapper(
     STN_N3,  __________________GEMINI_L1________________, __________________GEMINI_R1________________, STN_DR,
     STN_N4,  __________________GEMINI_L2________________, __________________GEMINI_R2________________, STN_ZR,
     XXXXXXX, __________________GEMINI_L3________________, __________________GEMINI_R3________________, XXXXXXX,
-    FN,      XXXXXXX, XXXXXXX,      STN_N1, STN_A, STN_O, STN_E, STN_U, STN_N2,      XXXXXXX, XXXXXXX, XXXXXXX
+    FN,      XXXXXXX, XXXXXXX,      STN_A, STN_O, STN_N1, STN_N2, STN_E, STN_U,      XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
   [_NAV] = LAYOUT_wrapper(
