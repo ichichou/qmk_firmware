@@ -18,8 +18,6 @@ enum layer_names {
 
   #ifdef STENO_SETUP_ENABLE
     _PLOVER,
-    _GEMINI,
-    _MEJIRO,
   #endif
 
   #ifdef SHINGETA_ENABLE
@@ -44,7 +42,7 @@ enum layer_names {
 // -- Custom Keycodes {{{
 
 enum my_keycodes {
-  KC_SAMPLE = QK_USER,
+  CK_SAMPLE = QK_USER,
   // Game {{{
   #ifdef GAME_ENABLE
     GAME,
@@ -88,10 +86,8 @@ enum my_keycodes {
   // }}}
   // Steno {{{
   #ifdef STENO_SETUP_ENABLE
-    QWERTY,
     PLOVER,
-    GEMINI,
-    MEJIRO,
+    QWERTY,
   #endif
   // }}}
   // Shingeta {{{
@@ -483,6 +479,9 @@ enum my_keycodes {
 #define LSFT_RBRC SFT_T(KC_RBRC)
 #define LGUI_GRV  GUI_T(KC_GRV)
 
+// Otherwise
+#define OS_LOCK (QK_LCTL | QK_LGUI | KC_Q)
+
 // }}}
 
 // -- Wrappers {{{
@@ -528,11 +527,14 @@ enum my_keycodes {
 #define __________________FN_R1____________________ LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 #define __________________FN_R2____________________ LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT
 #define __________________FN_R3____________________ LSG(KC_4), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU
+#define __________________FN_R3_LEFT_SHIFTED_______ LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE
 
 #define __________________1_TO_5___________________ KC_1, KC_2, KC_3, KC_4, KC_5
+#define __________________6_TO_0___________________ KC_6, KC_7, KC_8, KC_9, KC_0
 #define __________________7_TO_MINS________________ KC_7, KC_8, KC_9, KC_0, KC_MINS
 
 #define __________________F1_TO_F5_________________ KC_F1, KC_F2, KC_F3, KC_F4,  KC_F5
+#define __________________F6_TO_F10________________ KC_F6, KC_F7, KC_F8, KC_F9,  KC_F10
 #define __________________F7_TO_F11________________ KC_F7, KC_F8, KC_F9, KC_F10, KC_F11
 
 #define __________________NONE_____________________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
