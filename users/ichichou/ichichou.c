@@ -24,6 +24,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case MT_A ... MT_SLSH:
         return process_record_mtgap(keycode, record, mod_state);
 
+      case MTGAP:
+        if (record->event.pressed) {
+          layer_move(_MTGAP);
+          set_single_default_layer(_MTGAP);
+          keymap_config.nkro = false;
+        }
+        return false;
+
       case RCTL_T(MT_QUOT):
         if (record->tap.count && record->event.pressed) {
           if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
@@ -38,7 +46,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     #endif
 
     #ifdef STENO_SETUP_ENABLE
-      case PLOVER ... QWERTY:
+      case QWERTY ... EXT_GEMINI:
         return process_record_steno(keycode, record);
     #endif
 
