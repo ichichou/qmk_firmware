@@ -36,24 +36,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_PLOVER] = LAYOUT_wrapper(
-    XXXXXXX, __________________PLOVER_L1________________,    __________________PLOVER_R1________________, KC_LBRC,
-    XXXXXXX, __________________PLOVER_L2________________,    __________________PLOVER_R2________________, KC_QUOT,
-    XXXXXXX, __________________PLOVER_L3________________,    __________________PLOVER_R3________________, XXXXXXX,
-    QWERTY,  XXXXXXX, XXXXXXX,          KC_1, KC_C, KC_V,    KC_N, KC_M, KC_1,          XXXXXXX, XXXXXXX, XXXXXXX
-  ),
-
-  [_GEMINI] = LAYOUT_wrapper(
-    XXXXXXX, __________________GEMINI_L1________________,    __________________GEMINI_R1________________, STN_DR,
-    XXXXXXX, __________________GEMINI_L2________________,    __________________GEMINI_R2________________, STN_ZR,
+    STN_N3,  __________________GEMINI_L1________________,    __________________GEMINI_R1________________, KC_LBRC,
+    STN_N4,  __________________GEMINI_L2________________,    __________________GEMINI_R2________________, KC_QUOT,
     XXXXXXX, __________________GEMINI_L3________________,    __________________GEMINI_R3________________, XXXXXXX,
     QWERTY,  XXXXXXX, XXXXXXX,      STN_N1, STN_A, STN_O,    STN_E, STN_U, STN_N2,      XXXXXXX, XXXXXXX, XXXXXXX
-  ),
-
-  [_MEJIRO] = LAYOUT_wrapper(
-    KC_TAB,  __________________MEJIRO_L1________________,    __________________MEJIRO_R1________________, KC_LBRC,
-    KC_ESC,  __________________MEJIRO_L2________________,    __________________MEJIRO_R2________________, KC_QUOT,
-    XXXXXXX, __________________MEJIRO_L3________________,    __________________MEJIRO_R3________________, XXXXXXX,
-    QWERTY,  XXXXXXX, XXXXXXX,   XXXXXXX, KC_SPC, KC_SPC,     KC_ENT, KC_ENT, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
   [_NAV] = LAYOUT_wrapper(
@@ -78,9 +64,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    LCG(KC_Q), __________________F1_TO_F4________, PLOVER,    __________________FN_R1____________________, LCG(KC_Q),
-    DM_REC1,   __________________F5_TO_F8________, GEMINI,    __________________FN_R2____________________, KC_MPLY,
-    DM_PLY1,   __________________F9_TO_F12_______, MEJIRO,    __________________FN_R3____________________, KC_MUTE,
+    LCG(KC_Q), __________________F1_TO_F4________, QWERTY,    __________________FN_R1____________________, LCG(KC_Q),
+    DM_REC1,   __________________F5_TO_F8________, PLOVER,    __________________FN_R2____________________, KC_MPLY,
+    DM_PLY1,   __________________F9_TO_F12_______, XXXXXXX,   __________________FN_R3____________________, KC_MUTE,
     _______,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,    QK_BOOT, XXXXXXX, XXXXXXX, KC_LEFT, KC_RGHT, _______
   ),
 
