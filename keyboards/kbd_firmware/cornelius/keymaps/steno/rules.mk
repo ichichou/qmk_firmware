@@ -1,4 +1,5 @@
 USER_NAME := ichichou
+MTGAP_ENABLE = yes
 STENO_SETUP_ENABLE = yes
 
 TRI_WIN_LAYER_ENABLE = yes
