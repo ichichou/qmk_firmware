@@ -1,4 +1,4 @@
-// KB: Meridian
+// KB: Meridian (KTR1010 LED)
 // KM: ichichou
 
 // To compile:
@@ -28,11 +28,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include "ichichou.h"
 
-#define LAYOUT_wrapper(...) LAYOUT_split_bs_rshift(__VA_ARGS__)
+// void rgblight_setrgb_at(uint8_t r, uint8_t g, uint8_t b, uint8_t index) {
+//   // 何もしない。RGB LED 無効化のためのダミー関数（コンパイルが通らない）
+// }
 
-#define __________________FN_MERIDIAN_R1___________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-#define __________________FN_MERIDIAN_R2___________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV
-#define __________________FN_MERIDIAN_R3___________ XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU
+void keyboard_post_init_user(void) {
+  rgblight_disable();
+}
+// これで RGB ライトがオフになっているか要確認
+
+#define LAYOUT_wrapper(...) LAYOUT_split_bs_rshift(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -41,21 +46,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RHYPR_TAB, __________________BASE_L1__________________,         __________________BASE_L1__________________, KC_LBRC, KC_RBRC, KC_BSLS,
     LCTL_ESC,  __________________BASE_L2__________________,         __________________BASE_L2__________________, KC_QUOT,          RCTL_ENT,
     LSFT_CW,   __________________BASE_L3__________________, KC_GRV, __________________BASE_L3__________________,          KC_UP,   FN_BSLS,
-    FN, KC_LALT,                       LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_LEFT, KC_DOWN, KC_RGHT
+    FN,        KC_LALT,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_LEFT, KC_DOWN, KC_RGHT
   ),
 
   [_NAV] = LAYOUT_wrapper(
-    XXXXXXX, __________________NONE_____________________, XXXXXXX, __________________NONE_____________________, XXXXXXX,   XXXXXXX, XXXXXXX,
-    _______, __________________NAV_L1___________________,          __________________NAV_R1___________________, G(KC_UP),  XXXXXXX, XXXXXXX,
-    _______, __________________NAV_L2___________________,          __________________NAV_R2___________________, G(KC_DOWN),         XXXXXXX,
-    _______, __________________NAV_L3___________________, XXXXXXX, __________________NAV_R3___________________,            XXXXXXX, XXXXXXX,
-    _______, _______,                   _______, _______,          _______, _______,                            XXXXXXX,   XXXXXXX, XXXXXXX
+    _______, __________________NONE_____________________, XXXXXXX, __________________NONE_____________________, XXXXXXX,    XXXXXXX, XXXXXXX,
+    _______, __________________NAV_L1___________________,          __________________NAV_R1___________________, G(KC_UP),   XXXXXXX, XXXXXXX,
+    _______, __________________NAV_L2___________________,          __________________NAV_R2___________________, G(KC_DOWN),          XXXXXXX,
+    _______, __________________NAV_L3___________________, XXXXXXX, __________________NAV_R3___________________,             XXXXXXX, XXXXXXX,
+    _______, _______,                   _______, _______,          _______, _______,                            XXXXXXX,    XXXXXXX, XXXXXXX
   ),
 
   [_SYM] = LAYOUT_wrapper(
-    XXXXXXX, __________________NONE_____________________, XXXXXXX, __________________NONE_____________________, XXXXXXX, XXXXXXX, XXXXXXX,
-    _______, __________________SYM_L1___________________,          __________________SYM_R1___________________, XXXXXXX, XXXXXXX, XXXXXXX,
-    _______, __________________SYM_L2___________________,          __________________SYM_R2___________________, KC_QUOT,          XXXXXXX,
+    _______, __________________NONE_____________________, XXXXXXX, __________________NONE_____________________, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, __________________SYM_L1___________________,          __________________SYM_R1___________________, KC_RPRN, XXXXXXX, XXXXXXX,
+    _______, __________________SYM_L2___________________,          __________________SYM_R2___________________, KC_COMM,          XXXXXXX,
     _______, __________________SYM_L3___________________, XXXXXXX, __________________SYM_R3___________________,          XXXXXXX, XXXXXXX,
     _______, _______,                   _______, _______,          _______, _______,                            XXXXXXX, XXXXXXX, XXXXXXX
   ),
@@ -69,11 +74,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    LCG(KC_Q), __________________F1_TO_F5_________________, KC_F6,   __________________F7_TO_F11________________, KC_F12,  LCG(KC_Q), XXXXXXX,
-    XXXXXXX,   __________________FN_L1____________________,          __________________FN_MERIDIAN_R1___________, XXXXXXX, KC_TILD,   KC_GRV,
-    XXXXXXX,   __________________FN_L2____________________,          __________________FN_MERIDIAN_R2___________, KC_MNXT,            KC_MPLY,
-    XXXXXXX,   __________________FN_L3____________________, QK_BOOT, __________________FN_MERIDIAN_R3___________,          KC_MUTE,   _______,
-    _______,   XXXXXXX,                    XXXXXXX, EE_CLR,          XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX,   XXXXXXX
+    OS_LOCK, __________________F1_TO_F5_________________, KC_F6,   __________________F7_TO_F11________________, KC_F12,  OS_LOCK, OS_LOCK,
+    XXXXXXX, __________________FN_L1____________________,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_TILD, KC_GRV,
+    XXXXXXX, __________________FN_L2____________________,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT,          KC_MPLY,
+    XXXXXXX, __________________FN_L3____________________, QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU,          KC_MUTE, _______,
+    _______, XXXXXXX,                    XXXXXXX, EE_CLR,          XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
 };
