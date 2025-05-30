@@ -6,7 +6,7 @@ CAPS_WORD_ENABLE = yes
 SEND_STRING_ENABLE = yes
 
 ifeq ($(strip $(GAME_ENABLE)), yes)
-	SRC += game.c
+  SRC += game.c
   OPT_DEFS += -DGAME_ENABLE
   NKRO_ENABLE = yes
 endif
