@@ -17,8 +17,8 @@ enum layer_names {
   #endif
 
   #ifdef STENO_SETUP_ENABLE
-    _PLOVER,
     _GEMINI,
+    _PLOVER,
   #endif
 
   #ifdef SHINGETA_ENABLE
@@ -88,10 +88,10 @@ enum my_keycodes {
   // Steno {{{
   #ifdef STENO_SETUP_ENABLE
     QWERTY,
-    PLOVER,
     GEMINI,
-    EXT_PLOVER,
+    PLOVER,
     EXT_GEMINI,
+    EXT_PLOVER,
   #endif
   // }}}
   // Shingeta {{{
@@ -484,7 +484,7 @@ enum my_keycodes {
 #define LGUI_GRV  GUI_T(KC_GRV)
 
 // Otherwise
-#define OS_LOCK (QK_LCTL | QK_LGUI | KC_Q)
+#define OS_LOCK LCG(KC_Q)
 
 // }}}
 
