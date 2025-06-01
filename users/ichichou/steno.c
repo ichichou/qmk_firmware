@@ -14,16 +14,6 @@ bool process_record_steno(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
 
-    case PLOVER:
-      if (record->event.pressed) {
-        layer_move(_BASE);
-        layer_on(_PLOVER);
-        #if NKRO_DEFAULT_ON != true
-          keymap_config.nkro = true;
-        #endif
-      }
-      return false;
-
     case GEMINI:
       if (record->event.pressed) {
         layer_move(_BASE);
@@ -34,11 +24,12 @@ bool process_record_steno(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
 
-    case EXT_PLOVER:
+    case PLOVER:
       if (record->event.pressed) {
-        layer_off(_PLOVER);
+        layer_move(_BASE);
+        layer_on(_PLOVER);
         #if NKRO_DEFAULT_ON != true
-          keymap_config.nkro = false;
+          keymap_config.nkro = true;
         #endif
       }
       return false;
@@ -46,6 +37,15 @@ bool process_record_steno(uint16_t keycode, keyrecord_t *record) {
     case EXT_GEMINI:
       if (record->event.pressed) {
         layer_off(_GEMINI);
+        #if NKRO_DEFAULT_ON != true
+          keymap_config.nkro = false;
+        #endif
+      }
+      return false;
+
+    case EXT_PLOVER:
+      if (record->event.pressed) {
+        layer_off(_PLOVER);
         #if NKRO_DEFAULT_ON != true
           keymap_config.nkro = false;
         #endif
