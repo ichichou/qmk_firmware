@@ -1,0 +1,2 @@
+#define DYNAMIC_KEYMAP_LAYER_COUNT 1
+#define NKRO_DEFAULT_ON true
