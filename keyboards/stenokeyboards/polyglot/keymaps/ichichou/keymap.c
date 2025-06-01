@@ -32,14 +32,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_wrapper(
     RHYPR_TAB, __________________BASE_L1__________________, __________________BASE_R1__________________, KC_BSPC,
     LCTL_ESC,  __________________BASE_L2__________________, __________________BASE_R2__________________, RCTL_QUOT,
-    LSFT_CW,   __________________BASE_L3__________________, __________________BASE_R3__________________, RSFT_BSLS,
+    LSFT_CW,   __________________BASE_L3__________________, __________________BASE_R3__________________, FN_BSLS,
                               LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_TAB, RGUI_LNG1
   ),
 
   [_MTGAP] = LAYOUT_wrapper(
     RHYPR_TAB, __________________MTGAP_L1_________________, __________________MTGAP_R1_________________, KC_BSPC,
     LCTL_ESC,  __________________MTGAP_L2_________________, __________________MTGAP_R2_________________, RCTL_MT_QUOT,
-    LSFT_CW,   __________________MTGAP_L3_________________, __________________MTGAP_R3_________________, RSFT_BSLS,
+    LSFT_CW,   __________________MTGAP_L3_________________, __________________MTGAP_R3_________________, FN_BSLS,
                               LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_TAB, RGUI_LNG1
   ),
 
