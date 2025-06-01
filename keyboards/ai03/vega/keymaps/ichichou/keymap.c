@@ -33,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,            __________________1_TO_5___________________, KC_6,    __________________7_TO_MINS________________, KC_EQL,  KC_BSPC, KC_DEL,  KC_DEL,
     RHYPR_TAB,         __________________BASE_L1__________________, KC_LBRC, __________________BASE_L1__________________, KC_QUOT, KC_BSLS,          KC_GRV,
     LCTL_ESC,          __________________BASE_L2__________________, KC_RBRC, __________________BASE_L2__________________, RCTL_ENT,                  KC_TILD,
-    LSFT_CW,  XXXXXXX, __________________BASE_L3__________________, KC_GRV,  __________________BASE_L3__________________,                   KC_UP,   FN_BSLS,
+    LSFT_CW,  XXXXXXX, __________________BASE_L3__________________, KC_GRV,  __________________BASE_L3__________________,                   KC_UP,   FN,
     FN,       KC_LALT, LGUI_LNG2,                          XXXXXXX, LSFT_SPC, XXXXXXX,                XXXXXXX, RGUI_LNG1,          KC_LEFT, KC_DOWN, KC_RGHT
   ),
 
@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,          __________________NAV_L1___________________, XXXXXXX, __________________NAV_R1___________________, XXXXXXX, XXXXXXX,          XXXXXXX,
     _______,          __________________NAV_L2___________________, XXXXXXX, __________________NAV_R2___________________, XXXXXXX,                   XXXXXXX,
     _______, XXXXXXX, __________________NAV_L3___________________, XXXXXXX, __________________NAV_R3___________________,                   XXXXXXX, XXXXXXX,
-    _______, _______, _______,                            XXXXXXX, _______, XXXXXXX,                   XXXXXXX, _______,          XXXXXXX, XXXXXXX, XXXXXXX
+    _______, _______, _______,                            _______, _______, _______,                   _______, _______,          XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
   [_SYM] = LAYOUT_wrapper(
@@ -50,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,          __________________SYM_L1___________________, XXXXXXX, __________________SYM_R1___________________, KC_RPRN, XXXXXXX,          XXXXXXX,
     _______,          __________________SYM_L2___________________, XXXXXXX, __________________SYM_R2___________________, XXXXXXX,                   XXXXXXX,
     _______, XXXXXXX, __________________SYM_L3___________________, XXXXXXX, __________________SYM_R3___________________,                   XXXXXXX, XXXXXXX,
-    _______, _______, _______,                            XXXXXXX, _______, XXXXXXX,                   XXXXXXX, _______,          XXXXXXX, XXXXXXX, XXXXXXX
+    _______, _______, _______,                            _______, _______, _______,                   _______, _______,          XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
   [_WIN] = LAYOUT_wrapper(
