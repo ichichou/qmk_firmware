@@ -1,6 +1,9 @@
 // KB: Planck Rev 6 (Drop)
 // KM: ichichou
 
+// To compile:
+// >_ qmk compile -c -kb planck/rev6_drop
+
 // -- Copyright {{{
 
 /* Copyright 2015-2021 Jack Humbert
