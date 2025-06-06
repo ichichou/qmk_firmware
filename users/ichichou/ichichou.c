@@ -26,7 +26,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
       case MTGAP:
         if (record->event.pressed) {
-          layer_move(_MTGAP);
           set_single_default_layer(_MTGAP);
           keymap_config.nkro = false;
         }
