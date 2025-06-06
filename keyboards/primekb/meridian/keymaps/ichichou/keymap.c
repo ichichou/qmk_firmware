@@ -28,14 +28,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include "ichichou.h"
 
-// void rgblight_setrgb_at(uint8_t r, uint8_t g, uint8_t b, uint8_t index) {
-//   // 何もしない。RGB LED 無効化のためのダミー関数（コンパイルが通らない）
+// void keyboard_post_init_user(void) {
+//   rgblight_disable();
 // }
-
-void keyboard_post_init_user(void) {
-  rgblight_disable();
-}
-// これで RGB ライトがオフになるか要確認
+// // RGB ライトをオフにするための関数だが、これを有効化せずとも
+// // ユーザースペースからキーマップをコンパイルするとライトはオフになった
 
 #define LAYOUT_wrapper(...) LAYOUT_split_bs_rshift(__VA_ARGS__)
 
@@ -46,6 +43,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RHYPR_TAB, __________________BASE_L1__________________,         __________________BASE_R1__________________, KC_LBRC, KC_RBRC, KC_BSLS,
     LCTL_ESC,  __________________BASE_L2__________________,         __________________BASE_R2__________________, KC_QUOT,          RCTL_ENT,
     LSFT_CW,   __________________BASE_L3__________________, KC_GRV, __________________BASE_R3__________________,          KC_UP,   FN,
+    FN,        KC_LALT,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_LEFT, KC_DOWN, KC_RGHT
+  ),
+
+  [_MTGAP] = LAYOUT_wrapper(
+    KC_ESC,    __________________1_TO_5___________________, KC_6,   __________________7_TO_MINS________________, KC_EQL,  KC_BSPC, KC_DEL,
+    RHYPR_TAB, __________________MTGAP_L1_________________,         __________________MTGAP_R1_________________, KC_LBRC, KC_RBRC, KC_BSLS,
+    LCTL_ESC,  __________________MTGAP_L2_________________,         __________________MTGAP_R2_________________, MT_QUOT,          RCTL_ENT,
+    LSFT_CW,   __________________MTGAP_L3_________________, KC_GRV, __________________MTGAP_R3_________________,          KC_UP,   FN,
     FN,        KC_LALT,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_LEFT, KC_DOWN, KC_RGHT
   ),
 
@@ -75,10 +80,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FN] = LAYOUT_wrapper(
     OS_LOCK, __________________F1_TO_F5_________________, KC_F6,   __________________F7_TO_F11________________, KC_F12,  OS_LOCK, OS_LOCK,
-    XXXXXXX, __________________FN_L1____________________,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_TILD, KC_GRV,
-    DM_REC1, __________________FN_L2____________________,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT,          KC_MPLY,
-    DM_PLY1, __________________FN_L3____________________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU,          KC_MUTE, _______,
-    _______, XXXXXXX,                    XXXXXXX, EE_CLR,          QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, BASE,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    DM_REC1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MTGAP,            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT,          KC_MPLY,
+    DM_PLY1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU,          KC_MUTE, _______,
+    _______, XXXXXXX,                   XXXXXXX, EE_CLR,           QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
 };
