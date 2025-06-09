@@ -32,7 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //   rgblight_disable();
 // }
 // // RGB ライトをオフにするための関数だが、これを有効化せずとも
-// // ユーザースペースからキーマップをコンパイルするとライトはオフになった
+// // ユーザースペースからキーマップをコンパイルすると RGB ライトはオフになる
 
 #define LAYOUT_wrapper(...) LAYOUT_split_bs_rshift(__VA_ARGS__)
 
@@ -80,9 +80,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FN] = LAYOUT_wrapper(
     OS_LOCK, __________________F1_TO_F5_________________, KC_F6,   __________________F7_TO_F11________________, KC_F12,  OS_LOCK, OS_LOCK,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, BASE,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    DM_REC1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MTGAP,            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT,          KC_MPLY,
-    DM_PLY1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU,          KC_MUTE, _______,
+    XXXXXXX, __________________NONE____________, BASE,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    DM_REC1, __________________NONE____________, MTGAP,            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT,          KC_MPLY,
+    DM_PLY1, __________________NONE____________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU,          KC_MUTE, _______,
     _______, XXXXXXX,                   XXXXXXX, EE_CLR,           QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
