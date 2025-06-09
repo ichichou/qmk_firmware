@@ -1,6 +1,9 @@
 // KB: The Uni v4 (RP2040)
 // KM: ichichou
 
+// To compile:
+// >_ qmk compile -c -kb stenokeyboards/the_uni/rp_2040
+
 // Copyright {{{
 
 /*
