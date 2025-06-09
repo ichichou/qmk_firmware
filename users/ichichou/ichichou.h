@@ -512,6 +512,7 @@ enum my_keycodes {
 
 // #define __________________SYM_R1___________________ KC_TILD, KC_QUES, KC_CIRC, KC_DLR,  KC_COMM
 // #define __________________SYM_R2___________________ KC_AMPR, KC_1,    KC_PERC, KC_HASH, KC_COLN
+
 #define __________________SYM_R1___________________ KC_LBRC, KC_RBRC, KC_CIRC, KC_DLR,  KC_LPRN
 #define __________________SYM_R2___________________ KC_TILD, KC_1,    KC_PERC, KC_HASH, KC_AMPR
 #define __________________SYM_R3___________________ KC_GRV,  KC_3,    KC_5,    KC_7,    KC_9
@@ -546,6 +547,8 @@ enum my_keycodes {
 #define __________________F1_TO_F4________ KC_F1, KC_F2,  KC_F3,  KC_F4
 #define __________________F5_TO_F8________ KC_F5, KC_F6,  KC_F7,  KC_F8
 #define __________________F9_TO_F12_______ KC_F9, KC_F10, KC_F11, KC_F12
+
+#define __________________NONE____________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 
 // }}}
 
