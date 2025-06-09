@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_SYM] = LAYOUT_wrapper(
     _______,          __________________NONE_____________________, XXXXXXX, __________________NONE_____________________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     _______,          __________________SYM_L1___________________, XXXXXXX, __________________SYM_R1___________________, KC_RPRN, XXXXXXX,          XXXXXXX,
-    _______,          __________________SYM_L2___________________, XXXXXXX, __________________SYM_R2___________________, XXXXXXX,                   XXXXXXX,
+    _______,          __________________SYM_L2___________________, XXXXXXX, __________________SYM_R2___________________, KC_RBRC,                   XXXXXXX,
     _______, XXXXXXX, __________________SYM_L3___________________, XXXXXXX, __________________SYM_R3___________________,                   XXXXXXX, XXXXXXX,
     _______, _______, _______,                            _______, _______, _______,                   _______, _______,          XXXXXXX, XXXXXXX, XXXXXXX
   ),
