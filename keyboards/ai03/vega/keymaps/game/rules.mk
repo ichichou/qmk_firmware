@@ -1,2 +1,2 @@
-USER_NAME := ichichou
-GAME_ENABLE = yes
+NKRO_ENABLE = yes
+OS_DETECTION_ENABLE = yes
