@@ -14,7 +14,7 @@ enum layer_names {
 
   #ifdef STENO_SETUP_ENABLE
     _GEMINI,
-    _PLOVER,
+    // _PLOVER,
   #endif
 
   #ifdef SHINGETA_ENABLE
@@ -79,9 +79,9 @@ enum my_keycodes {
   #ifdef STENO_SETUP_ENABLE
     QWERTY,
     GEMINI,
-    PLOVER,
+    // PLOVER,
     EXT_GEMINI,
-    EXT_PLOVER,
+    // EXT_PLOVER,
   #endif
   // }}}
   // Shingeta {{{

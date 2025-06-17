@@ -32,10 +32,10 @@ bool process_record_steno(uint16_t keycode, keyrecord_t *record);
 // Z ROW:  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_5,    KC_6,       KC_7,    KC_8,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 // SPACE:  QWERTY,  XXXXXXX, XXXXXXX, KC_1,    KC_C,    KC_V,       KC_N,    KC_M,    KC_2,    XXXXXXX, XXXXXXX, FN
 
-#define __________________PLOVER_L1________________ KC_Q,    KC_W,    KC_E,    KC_R, KC_T
-#define __________________PLOVER_L2________________ KC_A,    KC_S,    KC_D,    KC_F, KC_G
-#define __________________PLOVER_L3________________ XXXXXXX, XXXXXXX, XXXXXXX, KC_5, KC_6
-
-#define __________________PLOVER_R1________________ KC_Y, KC_U, KC_I,    KC_O,    KC_P
-#define __________________PLOVER_R2________________ KC_H, KC_J, KC_K,    KC_L,    KC_SCLN
-#define __________________PLOVER_R3________________ KC_7, KC_8, XXXXXXX, XXXXXXX, XXXXXXX
+// #define __________________PLOVER_L1________________ KC_Q,    KC_W,    KC_E,    KC_R, KC_T
+// #define __________________PLOVER_L2________________ KC_A,    KC_S,    KC_D,    KC_F, KC_G
+// #define __________________PLOVER_L3________________ XXXXXXX, XXXXXXX, XXXXXXX, KC_5, KC_6
+//
+// #define __________________PLOVER_R1________________ KC_Y, KC_U, KC_I,    KC_O,    KC_P
+// #define __________________PLOVER_R2________________ KC_H, KC_J, KC_K,    KC_L,    KC_SCLN
+// #define __________________PLOVER_R3________________ KC_7, KC_8, XXXXXXX, XXXXXXX, XXXXXXX
