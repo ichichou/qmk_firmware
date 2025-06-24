@@ -5,16 +5,37 @@
 
 #define DEFAULT_LAYER_COUNT 5
 
-#define LAYER_COUNT_IF(condition, count) \
-  (defined(condition) ? (count) : 0)
+#ifdef MTGAP_ENABLE
+  #define LAYER_COUNT_MTGAP 1
+#else
+  #define LAYER_COUNT_MTGAP 0
+#endif
+
+#ifdef STENO_SETUP_ENABLE
+  #define LAYER_COUNT_STENO_SETUP 1
+#else
+  #define LAYER_COUNT_STENO_SETUP 0
+#endif
+
+#ifdef SHINGETA_ENABLE
+  #define LAYER_COUNT_SHINGETA 2
+#else
+  #define LAYER_COUNT_SHINGETA 0
+#endif
+
+#ifdef BUNA_ENABLE
+  #define LAYER_COUNT_BUNA 3
+#else
+  #define LAYER_COUNT_BUNA 0
+#endif
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT \
   ( \
     DEFAULT_LAYER_COUNT \
-    + LAYER_COUNT_IF(MTGAP_ENABLE,       1) \
-    + LAYER_COUNT_IF(STENO_SETUP_ENABLE, 1) \
-    + LAYER_COUNT_IF(SHINGETA_ENABLE,    2) \
-    + LAYER_COUNT_IF(BUNA_ENABLE,        3) \
+    + LAYER_COUNT_MTGAP \
+    + LAYER_COUNT_STENO_SETUP \
+    + LAYER_COUNT_SHINGETA \
+    + LAYER_COUNT_BUNA \
   )
 
 // Tap-Hold Configuration
