@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     OS_LOCK, __________________FN_R1____________________, BASE,    LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, OS_LOCK,
     DM_REC1, __________________FN_R2____________________, MTGAP,   LSG(KC_3), XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_MPLY,
     DM_PLY1, __________________FN_R3____________________, XXXXXXX, LSG(KC_4), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE, _______,
-                               _______, XXXXXXX, XXXXXXX, EE_CLR,  QK_BOOT,   XXXXXXX, XXXXXXX, XXXXXXX
+                                _______, XXXXXXX, EE_CLR, QK_BOOT, QK_BOOT,   EE_CLR, XXXXXXX, XXXXXXX
   ),
 
 };
