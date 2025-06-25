@@ -475,6 +475,9 @@ enum my_keycodes {
 
 // Otherwise
 #define OS_LOCK LCG(KC_Q)
+#define M_RHYPR RHYPR_T(KC_NO)
+#define M_LSG   LSG_T(KC_NO)
+#define M_RSG   RSG_T(KC_NO)
 
 // }}}
 
@@ -488,7 +491,7 @@ enum my_keycodes {
 #define __________________BASE_R2__________________ KC_H, KC_J, KC_K,    KC_L,   KC_SCLN  // KC_QUOT
 #define __________________BASE_R3__________________ KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH  // FN      | KC_RSFT
 
-#define __________________NAV_L1___________________ LSG(KC_C), KC_LPRN,   KC_RPRN,   S(KC_SPC), LSG(KC_T)
+#define __________________NAV_L1___________________ LSG(KC_C), KC_LPRN,   KC_RPRN,   C(KC_TAB), LSG(KC_T)
 #define __________________NAV_L2___________________ LSG(KC_A), LCTL_LBRC, LSFT_RBRC, LCG(KC_V), LCG(KC_S)
 #define __________________NAV_L3___________________ LSG(KC_Z), G(KC_X),   G(KC_C),   LSG(KC_V), G(KC_V)
 
