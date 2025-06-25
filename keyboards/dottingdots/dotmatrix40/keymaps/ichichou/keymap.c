@@ -37,8 +37,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_SYM] = LAYOUT_wrapper(
-    _______, __________________SYM_L1___________________,          __________________SYM_R1___________________, KC_RPRN,
-    _______, __________________SYM_L2___________________,          __________________SYM_R2___________________, KC_RBRC,
+    _______, __________________SYM_L1___________________,          __________________SYM_R1___________________, XXXXXXX,
+    _______, __________________SYM_L2___________________,          __________________SYM_R2___________________, XXXXXXX,
     _______, __________________SYM_L3___________________,          __________________SYM_R3___________________, XXXXXXX,
     _______, _______, _______, _______,          _______, XXXXXXX, _______,          _______, _______, _______, _______
   ),
@@ -51,9 +51,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    OS_LOCK, __________________F1_TO_F4________, BASE,             __________________FN_R1____________________, OS_LOCK,
-    DM_REC1, __________________F5_TO_F8________, MTGAP,            __________________FN_R2____________________, KC_MPLY,
-    DM_PLY1, __________________F9_TO_F12_______, XXXXXXX,          __________________FN_R3____________________, KC_MUTE,
+    OS_LOCK, KC_F1,   KC_F2,   KC_F3,   KC_F4,   BASE,             __________________FN_R1____________________, OS_LOCK,
+    DM_REC1, UG_HUED, UG_HUEU, XXXXXXX, XXXXXXX, MTGAP,            __________________FN_R2____________________, KC_MPLY,
+    DM_PLY1, UG_VALD, UG_VALU, XXXXXXX, XXXXXXX, XXXXXXX,          __________________FN_R3____________________, KC_MUTE,
     _______, XXXXXXX, XXXXXXX, XXXXXXX,          EE_CLR,  XXXXXXX, QK_BOOT,          XXXXXXX, XXXXXXX, XXXXXXX, _______
   ),
 
@@ -61,11 +61,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-  [_BASE]  = { ENCODER_CCW_CW(MS_WHLU, MS_WHLD) },
-  [_MTGAP] = { ENCODER_CCW_CW(MS_WHLU, MS_WHLD) },
-  [_NAV]   = { ENCODER_CCW_CW(MS_WHLL, MS_WHLR) },
-  [_SYM]   = { ENCODER_CCW_CW(MS_WHLL, MS_WHLR) },
+  [_BASE]  = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT) },
+  [_MTGAP] = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT) },
+  [_NAV]   = { ENCODER_CCW_CW(KC_UP,   KC_DOWN) },
+  [_SYM]   = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN) },
   [_WIN]   = { ENCODER_CCW_CW(KC_NO,   KC_NO)   },
   [_FN]    = { ENCODER_CCW_CW(BL_DOWN, BL_UP)   },
 };
 #endif
+
+// BL_UP:   フィラメント LED の光量アップ
+// BL_DOWN: フィラメント LED の光量ダウン
+// UG_VALU: アンダーグロウ LED の光量アップ
+// UG_VALD: アンダーグロウ LED の光量ダウン
+// UG_HUEU: アンダーグロウ LED の hue アップ
+// UG_HUED: アンダーグロウ LED の hue ダウン
