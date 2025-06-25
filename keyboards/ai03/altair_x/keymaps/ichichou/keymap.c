@@ -16,16 +16,16 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT_wrapper(
-    RHYPR_TAB, __________________BASE_L1__________________, KC_LBRC,  KC_RBRC,  __________________BASE_R1__________________, KC_BSPC,
-    LCTL_ESC,  __________________BASE_L2__________________, KC_LPRN,  KC_RPRN,  __________________BASE_R2__________________, RCTL_QUOT,
-    LSFT_CW,   __________________BASE_L3__________________, KC_LCBR,  KC_RCBR,  __________________BASE_R3__________________, FN_BSLS,
+    RHYPR_TAB, __________________BASE_L1__________________, M_RHYPR,  M_RHYPR,  __________________BASE_R1__________________, KC_BSPC,
+    LCTL_ESC,  __________________BASE_L2__________________, KC_RGUI,  KC_RGUI,  __________________BASE_R2__________________, RCTL_QUOT,
+    LSFT_CW,   __________________BASE_L3__________________, M_LSG,    M_RSG,    __________________BASE_R3__________________, FN_BSLS,
                                     FN, LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_TAB, RGUI_LNG1, RALT_GRV
   ),
 
   [_MTGAP] = LAYOUT_wrapper(
-    RHYPR_TAB, __________________MTGAP_L1_________________, KC_LBRC,  KC_RBRC,  __________________MTGAP_R1_________________, KC_BSPC,
-    LCTL_ESC,  __________________MTGAP_L2_________________, KC_LPRN,  KC_RPRN,  __________________MTGAP_R2_________________, RCTL_MT_QUOT,
-    LSFT_CW,   __________________MTGAP_L3_________________, KC_LCBR,  KC_RCBR,  __________________MTGAP_R3_________________, FN_BSLS,
+    RHYPR_TAB, __________________MTGAP_L1_________________, M_RHYPR,  M_RHYPR,  __________________MTGAP_R1_________________, KC_BSPC,
+    LCTL_ESC,  __________________MTGAP_L2_________________, KC_RGUI,  KC_RGUI,  __________________MTGAP_R2_________________, RCTL_MT_QUOT,
+    LSFT_CW,   __________________MTGAP_L3_________________, M_LSG,    M_RSG,    __________________MTGAP_R3_________________, FN_BSLS,
                                     FN, LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_TAB, RGUI_LNG1, RALT_GRV
   ),
 
