@@ -60,8 +60,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_SYM] = LAYOUT_wrapper(
-    _______, __________________SYM_L1___________________, __________________SYM_R1___________________, KC_RPRN,
-    _______, __________________SYM_L2___________________, __________________SYM_R2___________________, KC_RBRC,
+    _______, __________________SYM_L1___________________, __________________SYM_R1___________________, XXXXXXX,
+    _______, __________________SYM_L2___________________, __________________SYM_R2___________________, XXXXXXX,
     _______, __________________SYM_L3___________________, __________________SYM_R3___________________, XXXXXXX,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
@@ -74,10 +74,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    OS_LOCK, KC_F1,   KC_F2,   XXXXXXX, XXXXXXX, QWERTY,    LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, OS_LOCK,
-    DM_REC1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MTGAP,     LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, KC_MPLY,
-    DM_PLY1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, GEMINI,    LSG(KC_4), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,    QK_BOOT,   XXXXXXX, XXXXXXX, KC_LEFT, KC_RGHT, _______
+    OS_LOCK, __________________F1_TO_F4________, QWERTY,    __________________FN_R1____________________, OS_LOCK,
+    DM_REC1, __________________F5_TO_F8________, MTGAP,     __________________FN_R2____________________, KC_MPLY,
+    DM_PLY1, __________________F9_TO_F12_______, GEMINI,    __________________FN_R3____________________, KC_MUTE,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,    QK_BOOT, XXXXXXX, XXXXXXX, KC_LEFT, KC_RGHT, _______
   ),
 
 };
