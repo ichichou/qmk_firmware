@@ -16,17 +16,17 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT_wrapper(
-    RHYPR_TAB, __________________BASE_L1__________________, M_RHYPR,  M_RHYPR,  __________________BASE_R1__________________, KC_BSPC,
-    LCTL_ESC,  __________________BASE_L2__________________, KC_RGUI,  KC_RGUI,  __________________BASE_R2__________________, RCTL_QUOT,
-    LSFT_CW,   __________________BASE_L3__________________, M_LSG,    M_RSG,    __________________BASE_R3__________________, FN_BSLS,
-                                    FN, LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_TAB, RGUI_LNG1, RALT_GRV
+    RHYPR_TAB, __________________BASE_L1__________________, G(KC_LBRC), G(KC_LBRC), __________________BASE_R1__________________, KC_BSPC,
+    LCTL_ESC,  __________________BASE_L2__________________, G(KC_RBRC), G(KC_RBRC), __________________BASE_R2__________________, RCTL_QUOT,
+    LSFT_CW,   __________________BASE_L3__________________, S(KC_SPC),  S(KC_SPC),  __________________BASE_R3__________________, FN_BSLS,
+                                    FN, LGUI_LNG2, NAV_ESC, LSFT_SPC,   RCTL_ENT,   SYM_TAB, RGUI_LNG1, RALT_GRV
   ),
 
   [_MTGAP] = LAYOUT_wrapper(
-    RHYPR_TAB, __________________MTGAP_L1_________________, M_RHYPR,  M_RHYPR,  __________________MTGAP_R1_________________, KC_BSPC,
-    LCTL_ESC,  __________________MTGAP_L2_________________, KC_RGUI,  KC_RGUI,  __________________MTGAP_R2_________________, RCTL_MT_QUOT,
-    LSFT_CW,   __________________MTGAP_L3_________________, M_LSG,    M_RSG,    __________________MTGAP_R3_________________, FN_BSLS,
-                                    FN, LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_TAB, RGUI_LNG1, RALT_GRV
+    RHYPR_TAB, __________________MTGAP_L1_________________, G(KC_LBRC), G(KC_LBRC), __________________MTGAP_R1_________________, KC_BSPC,
+    LCTL_ESC,  __________________MTGAP_L2_________________, G(KC_RBRC), G(KC_RBRC), __________________MTGAP_R2_________________, RCTL_MT_QUOT,
+    LSFT_CW,   __________________MTGAP_L3_________________, S(KC_SPC),  S(KC_SPC),  __________________MTGAP_R3_________________, FN_BSLS,
+                                    FN, LGUI_LNG2, NAV_ESC, LSFT_SPC,   RCTL_ENT,   SYM_TAB, RGUI_LNG1, RALT_GRV
   ),
 
   [_NAV] = LAYOUT_wrapper(
