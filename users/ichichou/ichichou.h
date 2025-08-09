@@ -515,9 +515,9 @@ enum my_keycodes {
 #define __________________WIN_L2___________________ LCA(KC_LEFT), LCA(KC_J), LCA(KC_K), LCA(KC_RGHT), C(KC_2)
 #define __________________WIN_L3___________________ LCA(KC_Z),    LCA(KC_X), LCA(KC_V), LCA(KC_B),    C(KC_3)
 
-#define __________________WIN_R1___________________ C(KC_4), MEH(KC_C),   A(KC_UP),    XXXXXXX, XXXXXXX  // LCA(KC_BSPC)
-#define __________________WIN_R2___________________ C(KC_5), LCA(KC_C),   A(KC_DOWN),  XXXXXXX, XXXXXXX  // MEH(KC_ENT)
-#define __________________WIN_R3___________________ C(KC_6), LCA(KC_ENT), MEH(KC_ENT), XXXXXXX, XXXXXXX  // XXXXXXX
+#define __________________WIN_R1___________________ C(KC_4), MEH(KC_C),   A(KC_UP),    LCA(KC_UP),   XXXXXXX  // LCA(KC_BSPC)
+#define __________________WIN_R2___________________ C(KC_5), LCA(KC_C),   A(KC_DOWN),  LCA(KC_DOWN), XXXXXXX  // MEH(KC_ENT)
+#define __________________WIN_R3___________________ C(KC_6), LCA(KC_ENT), MEH(KC_ENT), XXXXXXX,      XXXXXXX  // XXXXXXX
 
 #define __________________FN_L1____________________ KC_F1, KC_F2,  KC_F3,  KC_F4,  XXXXXXX
 #define __________________FN_L2____________________ KC_F5, KC_F6,  KC_F7,  KC_F8,  XXXXXXX
