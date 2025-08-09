@@ -67,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    OS_LOCK, __________________F1_TO_F4________, QWERTY,  __________________FN_R1____________________, OS_LOCK,
+    OS_LOCK, __________________F1_TO_F4________, BASE,    __________________FN_R1____________________, OS_LOCK,
     DM_REC1, __________________F5_TO_F8________, MTGAP,   __________________FN_R2____________________, KC_MPLY,
     DM_PLY1, __________________F9_TO_F12_______, XXXXXXX, __________________FN_R3____________________, KC_MUTE,
     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,  QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______
