@@ -45,13 +45,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     FN, KC_RCTL, KC_LALT,     LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_TAB, RGUI_LNG1, KC_RALT, KC_RCTL, FN_GRV
   ),
 
-  [_GEMINI] = LAYOUT_wrapper(
-    STN_N3,  __________________GEMINI_L1________________, __________________GEMINI_R1________________, STN_DR,
-    STN_N4,  __________________GEMINI_L2________________, __________________GEMINI_R2________________, STN_ZR,
-    XXXXXXX, __________________GEMINI_L3________________, __________________GEMINI_R3________________, XXXXXXX,
-    FN,      XXXXXXX, XXXXXXX,      STN_N1, STN_A, STN_O, STN_E, STN_U, STN_N2,      XXXXXXX, XXXXXXX, XXXXXXX
-  ),
-
   [_NAV] = LAYOUT_wrapper(
     _______, __________________NAV_L1___________________, __________________NAV_R1___________________, G(KC_UP),
     _______, __________________NAV_L2___________________, __________________NAV_R2___________________, G(KC_DOWN),
@@ -74,10 +67,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    OS_LOCK, __________________F1_TO_F4________, QWERTY,    __________________FN_R1____________________, OS_LOCK,
-    DM_REC1, __________________F5_TO_F8________, MTGAP,     __________________FN_R2____________________, KC_MPLY,
-    DM_PLY1, __________________F9_TO_F12_______, GEMINI,    __________________FN_R3____________________, KC_MUTE,
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,    QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______
+    OS_LOCK, __________________F1_TO_F4________, QWERTY,  __________________FN_R1____________________, OS_LOCK,
+    DM_REC1, __________________F5_TO_F8________, MTGAP,   __________________FN_R2____________________, KC_MPLY,
+    DM_PLY1, __________________F9_TO_F12_______, XXXXXXX, __________________FN_R3____________________, KC_MUTE,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,  QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______
   ),
 
 };
