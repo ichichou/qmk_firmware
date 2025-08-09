@@ -1,8 +1,8 @@
 // KB: Planck Rev 6 (Drop)
-// KM: ichichou
+// KM: ichichou_rev6_drop
 
 // To compile:
-// >_ qmk compile -c -kb planck/rev6_drop
+// >_ qmk compile -c -kb planck/rev6_drop -km ichichou_rev6_drop
 
 // -- Copyright {{{
 
