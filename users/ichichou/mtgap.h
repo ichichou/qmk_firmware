@@ -6,8 +6,8 @@
 
 // -- Macros
 
-#define MTGAP        DF(_MTGAP)
-#define RCTL_MT_QUOT RCTL_T(MT_QUOT)
+#define MTGAP DF(_MTGAP)
+// #define RCTL_MT_QUOT RCTL_T(MT_QUOT)
 
 // -- Prototypes
 

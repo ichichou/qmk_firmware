@@ -6,8 +6,8 @@
 
 // -- Macros
 
-#define RCTL_SG_QUOT RCTL_T(SG_QUOT)
-#define JSYM_R       LT(_JSYM, SG_R)
+// #define RCTL_SG_QUOT RCTL_T(SG_QUOT)
+#define JSYM_R LT(_JSYM, SG_R)
 
 // -- Prototypes
 
