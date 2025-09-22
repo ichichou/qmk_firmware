@@ -51,10 +51,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    OS_LOCK, __________________FN_R1____________________, BASE,    LSG(KC_2), __________________FN_L1____________________, OS_LOCK,
-    XXXXXXX, __________________FN_R2____________________, MTGAP,   LSG(KC_3), __________________FN_L2____________________, KC_MPLY,
-    XXXXXXX, __________________FN_R3____________________, XXXXXXX, LSG(KC_4), __________________FN_R3_LEFT_SHIFTED_______, _______,
-                                _______, XXXXXXX, EE_CLR, QK_BOOT, QK_BOOT,   XXXXXXX, XXXXXXX, XXXXXXX
+    OS_LOCK,    __________________FN_L1____________________, BASE,    LSG(KC_2), __________________FN_R1____________________, OS_LOCK,
+    XXXXXXX,    __________________FN_L2____________________, MTGAP,   LSG(KC_3), __________________FN_R2____________________, KC_MPLY,
+    G(KC_BSPC), __________________FN_L3____________________, XXXXXXX, LSG(KC_4), __________________FN_R3_LEFT_SHIFTED_______, _______,
+                                   _______, XXXXXXX, EE_CLR, QK_BOOT, QK_BOOT,   XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
 };
