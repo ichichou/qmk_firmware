@@ -16,17 +16,17 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT_wrapper(
-    RHYPR_TAB, __________________BASE_L1__________________, G(KC_LBRC), G(KC_RBRC), __________________BASE_R1__________________, KC_BSPC,
-    LCTL_ESC,  __________________BASE_L2__________________, G(KC_RBRC), G(KC_LBRC), __________________BASE_R2__________________, KC_QUOT,
-    LSFT_CW,   __________________BASE_L3__________________, S(KC_SPC),  S(KC_SPC),  __________________BASE_R3__________________, FN_BSLS,
-                                    FN, LGUI_LNG2, NAV_ESC, LSFT_SPC,   RCTL_ENT,   SYM_TAB, RGUI_LNG1, RALT_GRV
+    RHYPR_TAB, __________________BASE_L1__________________, G(KC_LBRC),    G(KC_RBRC),    __________________BASE_R1__________________, KC_BSPC,
+    LCTL_ESC,  __________________BASE_L2__________________, G(KC_RBRC),    G(KC_LBRC),    __________________BASE_R2__________________, KC_QUOT,
+    KC_LSFT,   __________________BASE_L3__________________, RGUI(KC_LALT), RGUI(KC_RALT), __________________BASE_R3__________________, FN_BSLS,
+                                    FN, LGUI_LNG2, NAV_ESC, LSFT_SPC,      RCTL_ENT,      SYM_TAB, RGUI_LNG1, RALT_GRV
   ),
 
   [_MTGAP] = LAYOUT_wrapper(
-    RHYPR_TAB, __________________MTGAP_L1_________________, G(KC_LBRC), G(KC_RBRC), __________________MTGAP_R1_________________, KC_BSPC,
-    LCTL_ESC,  __________________MTGAP_L2_________________, G(KC_RBRC), G(KC_LBRC), __________________MTGAP_R2_________________, MT_QUOT,
-    LSFT_CW,   __________________MTGAP_L3_________________, S(KC_SPC),  S(KC_SPC),  __________________MTGAP_R3_________________, FN_BSLS,
-                                    FN, LGUI_LNG2, NAV_ESC, LSFT_SPC,   RCTL_ENT,   SYM_TAB, RGUI_LNG1, RALT_GRV
+    RHYPR_TAB, __________________MTGAP_L1_________________, G(KC_LBRC),    G(KC_RBRC),    __________________MTGAP_R1_________________, KC_BSPC,
+    LCTL_ESC,  __________________MTGAP_L2_________________, G(KC_RBRC),    G(KC_LBRC),    __________________MTGAP_R2_________________, MT_QUOT,
+    KC_LSFT,   __________________MTGAP_L3_________________, RGUI(KC_LALT), RGUI(KC_RALT), __________________MTGAP_R3_________________, FN_BSLS,
+                                    FN, LGUI_LNG2, NAV_ESC, LSFT_SPC,      RCTL_ENT,      SYM_TAB, RGUI_LNG1, RALT_GRV
   ),
 
   [_NAV] = LAYOUT_wrapper(
@@ -51,10 +51,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    OS_LOCK,    __________________FN_L1____________________, BASE,    LSG(KC_2), __________________FN_R1____________________, OS_LOCK,
-    XXXXXXX,    __________________FN_L2____________________, MTGAP,   LSG(KC_3), __________________FN_R2____________________, KC_MPLY,
-    G(KC_BSPC), __________________FN_L3____________________, XXXXXXX, LSG(KC_4), __________________FN_R3_LEFT_SHIFTED_______, _______,
-                                   _______, XXXXXXX, EE_CLR, QK_BOOT, QK_BOOT,   XXXXXXX, XXXXXXX, XXXXXXX
+    OS_LOCK, __________________FN_L1____________________, BASE,    LSG(KC_2), __________________FN_R1____________________, OS_LOCK,
+    XXXXXXX, __________________FN_L2____________________, MTGAP,   LSG(KC_3), __________________FN_R2____________________, KC_MPLY,
+    XXXXXXX, __________________FN_L3____________________, XXXXXXX, LSG(KC_4), __________________FN_R3_LEFT_SHIFTED_______, _______,
+                                _______, XXXXXXX, EE_CLR, QK_BOOT, QK_BOOT,   XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
 };
