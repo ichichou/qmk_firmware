@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,    __________________1_TO_5___________________, KC_6,   __________________7_TO_MINS________________, KC_EQL,  KC_BSPC, KC_DEL,
     RHYPR_TAB, __________________BASE_L1__________________,         __________________BASE_R1__________________, KC_LBRC, KC_RBRC, KC_BSLS,
     LCTL_ESC,  __________________BASE_L2__________________,         __________________BASE_R2__________________, KC_QUOT,          RCTL_ENT,
-    LSFT_CW,   __________________BASE_L3__________________, KC_GRV, __________________BASE_R3__________________,          KC_UP,   FN,
+    KC_LSFT,   __________________BASE_L3__________________, KC_GRV, __________________BASE_R3__________________,          KC_UP,   FN,
     FN,        KC_LALT,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_LEFT, KC_DOWN, KC_RGHT
   ),
 
@@ -50,15 +50,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //   KC_ESC,    __________________1_TO_5___________________, KC_6,   __________________7_TO_MINS________________, KC_EQL,  KC_BSPC, KC_DEL,
   //   RHYPR_TAB, __________________BASE_L1__________________,         __________________BASE_R1__________________, KC_LBRC, KC_RBRC, KC_BSLS,
   //   LCTL_ESC,  __________________BASE_L2__________________,         __________________BASE_R2__________________, KC_QUOT,          RCTL_ENT,
-  //   LSFT_CW,   __________________BASE_L3__________________, KC_GRV, __________________BASE_R3__________________,          KC_RSFT, FN,
-  //   FN,        KC_RCTL,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_RALT, KC_RCTL, FN
+  //   KC_LSFT,   __________________BASE_L3__________________, KC_GRV, __________________BASE_R3__________________,          KC_RSFT, FN,
+  //   FN,        KC_LALT,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_RALT, KC_RCTL, FN
   // ),
 
   [_MTGAP] = LAYOUT_wrapper(
     KC_ESC,    __________________1_TO_5___________________, KC_6,   __________________7_TO_MINS________________, KC_EQL,  KC_BSPC, KC_DEL,
     RHYPR_TAB, __________________MTGAP_L1_________________,         __________________MTGAP_R1_________________, KC_LBRC, KC_RBRC, KC_BSLS,
     LCTL_ESC,  __________________MTGAP_L2_________________,         __________________MTGAP_R2_________________, MT_QUOT,          RCTL_ENT,
-    LSFT_CW,   __________________MTGAP_L3_________________, KC_GRV, __________________MTGAP_R3_________________,          KC_UP,   FN,
+    KC_LSFT,   __________________MTGAP_L3_________________, KC_GRV, __________________MTGAP_R3_________________,          KC_UP,   FN,
     FN,        KC_LALT,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_LEFT, KC_DOWN, KC_RGHT
   ),
 
@@ -72,9 +72,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SYM] = LAYOUT_wrapper(
     _______, __________________NONE_____________________, XXXXXXX, __________________NONE_____________________, XXXXXXX, XXXXXXX, XXXXXXX,
-    _______, __________________SYM_L1___________________,          __________________SYM_R1___________________, KC_RPRN, XXXXXXX, XXXXXXX,
-    _______, __________________SYM_L2___________________,          __________________SYM_R2___________________, KC_RBRC,          XXXXXXX,
-    _______, __________________SYM_L3___________________, XXXXXXX, __________________SYM_R3_WITHOUT_NAV_______,          XXXXXXX, XXXXXXX,
+    _______, __________________SYM_L1___________________,          __________________SYM_R1___________________, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, __________________SYM_L2___________________,          __________________SYM_R2___________________, XXXXXXX,          XXXXXXX,
+    _______, __________________SYM_L3___________________, XXXXXXX, __________________SYM_R3___________________,          XXXXXXX, XXXXXXX,
     _______, _______,                   _______, _______,          _______, _______,                            XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
@@ -89,8 +89,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_FN] = LAYOUT_wrapper(
     OS_LOCK, __________________F1_TO_F5_________________, KC_F6,   __________________F7_TO_F11________________, KC_F12,  OS_LOCK, OS_LOCK,
     XXXXXXX, __________________NONE____________, BASE,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    DM_REC1, __________________NONE____________, MTGAP,            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT,          KC_MPLY,
-    DM_PLY1, __________________NONE____________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU,          KC_MUTE, _______,
+    XXXXXXX, __________________NONE____________, MTGAP,            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT,          KC_MPLY,
+    XXXXXXX, __________________NONE____________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU,          KC_MUTE, _______,
     _______, XXXXXXX,                   XXXXXXX, EE_CLR,           QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
   ),
 
