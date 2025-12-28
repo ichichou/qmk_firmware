@@ -505,10 +505,6 @@ enum my_keycodes {
 #define __________________SYM_R2___________________ KC_TILD, KC_1,    KC_PERC, KC_HASH, KC_COLN  // XXXXXXX
 #define __________________SYM_R3___________________ KC_GRV,  KC_3,    KC_5,    KC_7,    KC_9     // XXXXXXX
 
-#define __________________SYM_R1_WITHOUT_NAV_______ KC_COMM, KC_AMPR, KC_CIRC, KC_DLR,  KC_LPRN  // KC_RPRN
-#define __________________SYM_R2_WITHOUT_NAV_______ KC_TILD, KC_1,    KC_PERC, KC_HASH, KC_LBRC  // KC_RBRC
-#define __________________SYM_R3_WITHOUT_NAV_______ KC_GRV,  KC_3,    KC_5,    KC_7,    KC_9     // XXXXXXX
-
 #define __________________WIN_L1___________________ XXXXXXX,      LCA(KC_U), LCA(KC_I), MEH(KC_C),    C(KC_1)
 #define __________________WIN_L2___________________ LCA(KC_LEFT), LCA(KC_J), LCA(KC_K), LCA(KC_RGHT), C(KC_2)
 #define __________________WIN_L3___________________ LCA(KC_Z),    LCA(KC_X), LCA(KC_V), LCA(KC_B),    C(KC_3)
