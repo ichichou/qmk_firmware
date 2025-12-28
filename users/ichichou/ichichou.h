@@ -458,11 +458,9 @@ enum my_keycodes {
 #define RHYPR_BSPC RHYPR_T(KC_BSPC)
 #define LSFT_SPC   SFT_T(KC_SPC)
 #define LSFT_CW    SFT_T(CW_TOGG)
-// #define RSFT_SLSH  RSFT_T(KC_SLSH)
 #define RSFT_BSLS  RSFT_T(KC_BSLS)
 #define LCTL_ESC   CTL_T(KC_ESC)
 #define RCTL_ENT   RCTL_T(KC_ENT)
-// #define RCTL_QUOT  RCTL_T(KC_QUOT)
 #define RCTL_TAB   RCTL_T(KC_TAB)
 #define RALT_GRV   RALT_T(KC_GRV)
 #define LGUI_LNG2  GUI_T(KC_LNG2)
@@ -503,7 +501,7 @@ enum my_keycodes {
 #define __________________SYM_L2___________________ KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT
 #define __________________SYM_L3___________________ KC_8,    KC_6,    KC_4,    KC_2,    KC_BSLS
 
-#define __________________SYM_R1___________________ XXXXXXX, KC_AMPR, KC_CIRC, KC_DLR,  KC_COMM  // XXXXXXX
+#define __________________SYM_R1___________________ KC_SLSH, KC_AMPR, KC_CIRC, KC_DLR,  KC_COMM  // XXXXXXX
 #define __________________SYM_R2___________________ KC_TILD, KC_1,    KC_PERC, KC_HASH, KC_COLN  // XXXXXXX
 #define __________________SYM_R3___________________ KC_GRV,  KC_3,    KC_5,    KC_7,    KC_9     // XXXXXXX
 
