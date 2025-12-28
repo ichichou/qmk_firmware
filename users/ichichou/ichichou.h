@@ -487,7 +487,7 @@ enum my_keycodes {
 
 #define __________________BASE_R1__________________ KC_Y, KC_U, KC_I,    KC_O,   KC_P     // KC_BSPC | KC_LBRC
 #define __________________BASE_R2__________________ KC_H, KC_J, KC_K,    KC_L,   KC_SCLN  // KC_QUOT
-#define __________________BASE_R3__________________ KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH  // FN      | KC_RSFT
+#define __________________BASE_R3__________________ KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH  // KC_BSLS | KC_RSFT
 
 #define __________________NAV_L1___________________ LSG(KC_C), KC_LPRN,   KC_RPRN,   C(KC_TAB), LSG(KC_T)
 #define __________________NAV_L2___________________ LSG(KC_A), LCTL_LBRC, LSFT_RBRC, LCG(KC_V), LCG(KC_S)
@@ -495,7 +495,7 @@ enum my_keycodes {
 
 #define __________________NAV_R1___________________ G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC)  // G(KC_UP)
 #define __________________NAV_R2___________________ KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC)  // G(KC_DOWN)
-#define __________________NAV_R3___________________ KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), XXXXXXX     // XXXXXXX
+#define __________________NAV_R3___________________ KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), G(KC_GRV)   // XXXXXXX
 
 #define __________________SYM_L1___________________ KC_DOT,  KC_PLUS, KC_UNDS, KC_EXLM, KC_PIPE
 #define __________________SYM_L2___________________ KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT
@@ -516,6 +516,9 @@ enum my_keycodes {
 #define __________________FN_L1____________________ KC_F1, KC_F2,  KC_F3,  KC_F4,  XXXXXXX
 #define __________________FN_L2____________________ KC_F5, KC_F6,  KC_F7,  KC_F8,  XXXXXXX
 #define __________________FN_L3____________________ KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX
+
+#define __________________FN_L1_MTGAP______________ KC_F1, KC_F2,  KC_F3,  KC_F4,  BASE
+#define __________________FN_L2_MTGAP______________ KC_F5, KC_F6,  KC_F7,  KC_F8,  MTGAP
 
 #define __________________FN_R1____________________ LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  // OS_LOCK | XXXXXXX
 #define __________________FN_R2____________________ LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT  // KC_MPLY
