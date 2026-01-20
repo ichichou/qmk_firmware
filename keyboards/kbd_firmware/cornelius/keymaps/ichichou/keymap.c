@@ -1,6 +1,9 @@
 // KB: Cornelius Rev 2
 // KM: ichichou
 
+
+
+
 // -- Copyright {{{
 
 /* Copyright 2020 foostan
@@ -31,14 +34,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_wrapper(
     RHYPR_TAB, __________________BASE_L1__________________, __________________BASE_R1__________________,    KC_BSPC,
     LCTL_ESC,  __________________BASE_L2__________________, __________________BASE_R2__________________,    KC_QUOT,
-    KC_LSFT,   __________________BASE_L3__________________, __________________BASE_R3__________________,    KC_BSLS,
+    KC_LSFT,   __________________BASE_L3__________________, __________________BASE_R3__________________,    TEMP_ENG,
     FN, KC_RCTL, KC_LALT,     LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_TAB, RGUI_LNG1, KC_RALT, KC_RCTL, FN_GRV
   ),
 
   [_MTGAP] = LAYOUT_wrapper(
     RHYPR_TAB, __________________MTGAP_L1_________________, __________________MTGAP_R1_________________,    KC_BSPC,
     LCTL_ESC,  __________________MTGAP_L2_________________, __________________MTGAP_R2_________________,    MT_QUOT,
-    KC_LSFT,   __________________MTGAP_L3_________________, __________________MTGAP_R3_________________,    KC_BSLS,
+    KC_LSFT,   __________________MTGAP_L3_________________, __________________MTGAP_R3_________________,    TEMP_ENG,
     FN, KC_RCTL, KC_LALT,     LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_TAB, RGUI_LNG1, KC_RALT, KC_RCTL, FN_GRV
   ),
 
@@ -64,10 +67,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    OS_LOCK, __________________FN_L1_MTGAP______________, __________________FN_R1____________________, OS_LOCK,
-    XXXXXXX, __________________FN_L1_MTGAP______________, __________________FN_R2____________________, KC_MPLY,
+    OS_LOCK, __________________FN_L1____________________, __________________FN_R1____________________, OS_LOCK,
+    XXXXXXX, __________________FN_L2____________________, __________________FN_R2____________________, KC_MPLY,
     XXXXXXX, __________________FN_L3____________________, __________________FN_R3____________________, KC_MUTE,
-    _______, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, EE_CLR, QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  EE_CLR, QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______
   ),
 
 };
