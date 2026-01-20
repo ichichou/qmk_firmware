@@ -514,12 +514,9 @@ enum my_keycodes {
 #define __________________WIN_R2___________________ C(KC_5), LCA(KC_C),   A(KC_DOWN),  LCA(KC_DOWN), XXXXXXX  // MEH(KC_ENT)
 #define __________________WIN_R3___________________ C(KC_6), LCA(KC_ENT), MEH(KC_ENT), XXXXXXX,      XXXXXXX  // XXXXXXX
 
-#define __________________FN_L1____________________ KC_F1, KC_F2,  KC_F3,  KC_F4,  XXXXXXX
-#define __________________FN_L2____________________ KC_F5, KC_F6,  KC_F7,  KC_F8,  XXXXXXX
-#define __________________FN_L3____________________ KC_F9, KC_F10, KC_F11, KC_F12, XXXXXXX
-
-#define __________________FN_L1_MTGAP______________ KC_F1, KC_F2,  KC_F3,  KC_F4,  BASE
-#define __________________FN_L2_MTGAP______________ KC_F5, KC_F6,  KC_F7,  KC_F8,  MTGAP
+#define __________________FN_L1____________________ KC_F1,      KC_F2,   XXXXXXX, XXXXXXX, BASE
+#define __________________FN_L2____________________ RCTL(KC_U), XXXXXXX, XXXXXXX, XXXXXXX, MTGAP
+#define __________________FN_L3____________________ XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 
 #define __________________FN_R1____________________ LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  // OS_LOCK | XXXXXXX
 #define __________________FN_R2____________________ LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT  // KC_MPLY
