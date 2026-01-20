@@ -5,8 +5,10 @@
 // -- process_record_user {{{
 
 uint8_t mod_state;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   mod_state = get_mods();
+
   switch (keycode) {
     case SFT_T(CW_TOGG):
       if (record->tap.count && record->event.pressed) {
@@ -14,6 +16,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
       return true;
+
+    case TEMP_ENG:
+      if (record->event.pressed) {
+        tap_code(KC_LNG2);
+      } else {
+        tap_code(KC_LNG1);
+      }
+      return false;
 
     #ifdef MTGAP_ENABLE
       case MT_A ... MT_SLSH:
