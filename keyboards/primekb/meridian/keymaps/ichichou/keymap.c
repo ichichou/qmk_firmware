@@ -41,41 +41,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_wrapper(
     KC_ESC,    __________________1_TO_5___________________, KC_6,   __________________7_TO_MINS________________, KC_EQL,  KC_BSPC, KC_DEL,
     RHYPR_TAB, __________________BASE_L1__________________,         __________________BASE_R1__________________, KC_LBRC, KC_RBRC, KC_BSLS,
-    LCTL_ESC,  __________________BASE_L2__________________,         __________________BASE_R2__________________, KC_QUOT,          RCTL_ENT,
-    KC_LSFT,   __________________BASE_L3__________________, KC_GRV, __________________BASE_R3__________________,          KC_UP,   FN,
-    FN,        KC_LALT,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_LEFT, KC_DOWN, KC_RGHT
+    LCTL_ESC,  __________________BASE_L2__________________,         __________________BASE_R2__________________, KC_QUOT,          KC_ENT,
+    KC_LSFT,   __________________BASE_L3__________________, KC_GRV, __________________BASE_R3__________________,          KC_RSFT, FN_BSLS,
+    FN,        KC_LALT,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_RALT, KC_RCTL, FN_GRV
   ),
 
   // [_BASE] = LAYOUT_wrapper(
   //   KC_ESC,    __________________1_TO_5___________________, KC_6,   __________________7_TO_MINS________________, KC_EQL,  KC_BSPC, KC_DEL,
   //   RHYPR_TAB, __________________BASE_L1__________________,         __________________BASE_R1__________________, KC_LBRC, KC_RBRC, KC_BSLS,
-  //   LCTL_ESC,  __________________BASE_L2__________________,         __________________BASE_R2__________________, KC_QUOT,          RCTL_ENT,
-  //   KC_LSFT,   __________________BASE_L3__________________, KC_GRV, __________________BASE_R3__________________,          KC_RSFT, FN,
-  //   FN,        KC_LALT,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_RALT, KC_RCTL, FN
+  //   LCTL_ESC,  __________________BASE_L2__________________,         __________________BASE_R2__________________, KC_QUOT,          KC_ENT,
+  //   KC_LSFT,   __________________BASE_L3__________________, KC_GRV, __________________BASE_R3__________________,          KC_UP,   FN_BSLS,
+  //   FN,        KC_LALT,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_LEFT, KC_DOWN, KC_RGHT
   // ),
 
   [_MTGAP] = LAYOUT_wrapper(
     KC_ESC,    __________________1_TO_5___________________, KC_6,   __________________7_TO_MINS________________, KC_EQL,  KC_BSPC, KC_DEL,
     RHYPR_TAB, __________________MTGAP_L1_________________,         __________________MTGAP_R1_________________, KC_LBRC, KC_RBRC, KC_BSLS,
-    LCTL_ESC,  __________________MTGAP_L2_________________,         __________________MTGAP_R2_________________, MT_QUOT,          RCTL_ENT,
-    KC_LSFT,   __________________MTGAP_L3_________________, KC_GRV, __________________MTGAP_R3_________________,          KC_UP,   FN,
-    FN,        KC_LALT,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_LEFT, KC_DOWN, KC_RGHT
+    LCTL_ESC,  __________________MTGAP_L2_________________,         __________________MTGAP_R2_________________, MT_QUOT,          KC_ENT,
+    KC_LSFT,   __________________MTGAP_L3_________________, KC_GRV, __________________MTGAP_R3_________________,          KC_RSFT, FN_BSLS,
+    FN,        KC_LALT,                LGUI_LNG2, LSFT_SPC,         SYM_ENT, RGUI_LNG1,                          KC_RALT, KC_RCTL, FN_GRV
   ),
 
   [_NAV] = LAYOUT_wrapper(
     _______, __________________NONE_____________________, XXXXXXX, __________________NONE_____________________, XXXXXXX,    XXXXXXX, XXXXXXX,
     _______, __________________NAV_L1___________________,          __________________NAV_R1___________________, G(KC_UP),   XXXXXXX, XXXXXXX,
     _______, __________________NAV_L2___________________,          __________________NAV_R2___________________, G(KC_DOWN),          XXXXXXX,
-    _______, __________________NAV_L3___________________, XXXXXXX, __________________NAV_R3___________________,             XXXXXXX, XXXXXXX,
-    _______, _______,                   _______, _______,          _______, _______,                            XXXXXXX,    XXXXXXX, XXXXXXX
+    _______, __________________NAV_L3___________________, XXXXXXX, __________________NAV_R3___________________,             _______, _______,
+    _______, _______,                   _______, _______,          _______, _______,                            _______,    _______, _______
   ),
 
   [_SYM] = LAYOUT_wrapper(
     _______, __________________NONE_____________________, XXXXXXX, __________________NONE_____________________, XXXXXXX, XXXXXXX, XXXXXXX,
     _______, __________________SYM_L1___________________,          __________________SYM_R1___________________, XXXXXXX, XXXXXXX, XXXXXXX,
     _______, __________________SYM_L2___________________,          __________________SYM_R2___________________, XXXXXXX,          XXXXXXX,
-    _______, __________________SYM_L3___________________, XXXXXXX, __________________SYM_R3___________________,          XXXXXXX, XXXXXXX,
-    _______, _______,                   _______, _______,          _______, _______,                            XXXXXXX, XXXXXXX, XXXXXXX
+    _______, __________________SYM_L3___________________, XXXXXXX, __________________SYM_R3___________________,          _______, _______,
+    _______, _______,                   _______, _______,          _______, _______,                            _______, _______, _______
   ),
 
   [_WIN] = LAYOUT_wrapper(
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, __________________NONE____________, BASE,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, __________________NONE____________, MTGAP,            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT,          KC_MPLY,
     XXXXXXX, __________________NONE____________, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU,          KC_MUTE, _______,
-    _______, XXXXXXX,                   XXXXXXX, EE_CLR,           QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX
+    _______, XXXXXXX,                   XXXXXXX, EE_CLR,           QK_BOOT, XXXXXXX,                            XXXXXXX, XXXXXXX, _______
   ),
 
 };
