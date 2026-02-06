@@ -1,9 +1,6 @@
 // KB: Cornelius Rev 2
 // KM: ichichou
 
-
-
-
 // -- Copyright {{{
 
 /* Copyright 2020 foostan
