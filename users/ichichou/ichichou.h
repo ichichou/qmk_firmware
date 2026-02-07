@@ -74,6 +74,7 @@ enum my_keycodes {
     MT_COMM,
     MT_DOT,
     MT_SLSH,
+    MT_BSLS,
   #endif
   // }}}
   // Steno {{{

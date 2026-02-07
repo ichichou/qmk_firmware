@@ -26,7 +26,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
 
     #ifdef MTGAP_ENABLE
-      case MT_A ... MT_SLSH:
+      case MT_A ... MT_BSLS:
         return process_record_mtgap(keycode, record, mod_state);
 
       case MTGAP:
@@ -35,18 +35,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           keymap_config.nkro = false;
         }
         return false;
-
-      case RCTL_T(MT_QUOT):
-        if (record->tap.count && record->event.pressed) {
-          if ((mod_state & ~(MOD_MASK_SHIFT)) == 0) {
-            tap_code(KC_Q);
-            return false;
-          } else {
-            tap_code(KC_QUOT);
-            return false;
-          }
-        }
-        return true;
     #endif
 
     #ifdef STENO_SETUP_ENABLE
