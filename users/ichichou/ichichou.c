@@ -17,14 +17,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return true;
 
-    case TEMP_ENG:
-      if (record->event.pressed) {
-        tap_code(KC_LNG2);
-      } else {
-        tap_code(KC_LNG1);
-      }
-      return false;
-
     #ifdef MTGAP_ENABLE
       case MT_A ... MT_BSLS:
         return process_record_mtgap(keycode, record, mod_state);

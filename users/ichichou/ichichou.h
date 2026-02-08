@@ -41,7 +41,6 @@ enum layer_names {
 
 enum my_keycodes {
   CK_SAMPLE = QK_USER,
-  TEMP_ENG,
   // MTGAP {{{
   #ifdef MTGAP_ENABLE
     MT_A,
