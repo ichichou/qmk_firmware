@@ -1,5 +1,5 @@
 // KB: Vega
-// KM: ichichou
+// KM: angle_mod
 
 // -- Copyright {{{
 
