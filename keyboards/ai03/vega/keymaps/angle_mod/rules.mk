@@ -1,4 +1,3 @@
 USER_NAME := ichichou
 VIA_ENABLE = yes
-MTGAP_ENABLE = yes
 TRI_WIN_LAYER_ENABLE = yes
