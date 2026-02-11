@@ -40,8 +40,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_MTGAP] = LAYOUT_wrapper(
     RHYPR_TAB, __________________MTGAP_L1_________________, __________________MTGAP_R1_________________,    KC_BSPC,
-    LCTL_ESC,  __________________MTGAP_L2_________________, __________________MTGAP_R2_________________,    KC_Q,
-    KC_LSFT,   __________________MTGAP_L3_________________, __________________MTGAP_R3_________________,    KC_Z,
+    LCTL_ESC,  __________________MTGAP_L2_________________, __________________MTGAP_R2_________________,    MT_QUOT,
+    KC_LSFT,   __________________MTGAP_L3_________________, __________________MTGAP_R3_________________,    MT_BSLS,
     FN, KC_RCTL, KC_LALT,     LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_TAB, RGUI_LNG1, KC_RALT, KC_RCTL, FN_GRV
   ),
 

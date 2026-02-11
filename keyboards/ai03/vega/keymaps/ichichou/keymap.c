@@ -30,19 +30,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT_wrapper(
-    KC_ESC,            __________________1_TO_5___________________, KC_6,    __________________7_TO_MINS________________, KC_EQL,  KC_BSPC, KC_DEL,  KC_DEL,
-    RHYPR_TAB,         __________________BASE_L1__________________, KC_LBRC, __________________BASE_R1__________________, KC_QUOT, KC_BSLS,          KC_PGUP,
-    LCTL_ESC,          __________________BASE_L2__________________, KC_RBRC, __________________BASE_R2__________________, KC_ENT,                    KC_PGDN,
-    KC_LSFT,  XXXXXXX, __________________BASE_L3__________________, KC_GRV,  __________________BASE_R3__________________,                   KC_UP,   FN_BSLS,
-    FN,       KC_LALT, LGUI_LNG2,                          XXXXXXX, LSFT_SPC, XXXXXXX,                XXXXXXX, RGUI_LNG1,          KC_LEFT, KC_DOWN, KC_RGHT
+    KC_ESC,            __________________1_TO_5___________________, KC_6,     __________________7_TO_MINS________________, KC_EQL,  KC_BSPC, KC_DEL,  KC_DEL,
+    RHYPR_TAB,         __________________BASE_L1__________________, KC_LBRC,  __________________BASE_R1__________________, KC_QUOT, KC_BSLS,          KC_PGUP,
+    LCTL_ESC,          __________________BASE_L2__________________, KC_RBRC,  __________________BASE_R2__________________, KC_ENT,                    KC_PGDN,
+    KC_LSFT,  XXXXXXX, __________________BASE_L3__________________, KC_BSLS,  __________________BASE_R3__________________,                   KC_UP,   FN,
+    FN,       KC_LALT, LGUI_LNG2,                          XXXXXXX, LSFT_SPC, XXXXXXX,                 XXXXXXX, RGUI_LNG1,          KC_LEFT, KC_DOWN, KC_RGHT
   ),
 
   [_MTGAP] = LAYOUT_wrapper(
-    KC_ESC,            __________________1_TO_5___________________, KC_6,    __________________7_TO_MINS________________, KC_EQL, KC_BSPC, KC_DEL,  KC_DEL,
-    RHYPR_TAB,         __________________MTGAP_L1_________________, KC_LBRC, __________________MTGAP_R1_________________, KC_Q,   KC_Z,             KC_PGUP,
-    LCTL_ESC,          __________________MTGAP_L2_________________, KC_RBRC, __________________MTGAP_R2_________________, KC_ENT,                   KC_PGDN,
-    KC_LSFT,  XXXXXXX, __________________MTGAP_L3_________________, KC_GRV,  __________________MTGAP_R3_________________,                  KC_UP,   FN_BSLS,
-    FN,       KC_LALT, LGUI_LNG2,                          XXXXXXX, LSFT_SPC, XXXXXXX,                XXXXXXX, RGUI_LNG1,         KC_LEFT, KC_DOWN, KC_RGHT
+    KC_ESC,            __________________1_TO_5___________________, KC_6,     __________________7_TO_MINS________________, KC_EQL,  KC_BSPC, KC_DEL,  KC_DEL,
+    RHYPR_TAB,         __________________MTGAP_L1_________________, KC_LBRC,  __________________MTGAP_R1_________________, MT_QUOT, MT_BSLS,          KC_PGUP,
+    LCTL_ESC,          __________________MTGAP_L2_________________, KC_RBRC,  __________________MTGAP_R2_________________, KC_ENT,                    KC_PGDN,
+    KC_LSFT,  XXXXXXX, __________________MTGAP_L3_________________, MT_BSLS,  __________________MTGAP_R3_________________,                   KC_UP,   FN,
+    FN,       KC_LALT, LGUI_LNG2,                          XXXXXXX, LSFT_SPC, XXXXXXX,                 XXXXXXX, RGUI_LNG1,          KC_LEFT, KC_DOWN, KC_RGHT
   ),
 
   [_NAV] = LAYOUT_wrapper(
