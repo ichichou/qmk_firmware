@@ -7,11 +7,10 @@
 
 enum layer_names {
   _BASE,
-  _MTGAP,
 
-  // #ifdef MTGAP_ENABLE
-  //   _MTGAP,
-  // #endif
+  #ifdef MTGAP_ENABLE
+    _MTGAP,
+  #endif
 
   #ifdef STENO_SETUP_ENABLE
     _GEMINI,
@@ -491,14 +490,6 @@ enum my_keycodes {
 #define __________________BASE_R1__________________ KC_Y, KC_U, KC_I,    KC_O,   KC_P     // KC_BSPC | KC_LBRC
 #define __________________BASE_R2__________________ KC_H, KC_J, KC_K,    KC_L,   KC_SCLN  // KC_QUOT
 #define __________________BASE_R3__________________ KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH  // KC_BSLS | KC_RSFT
-
-#define __________________MTGAP_L1_________________ KC_Y, KC_P,    KC_O,    KC_U,   KC_SCLN
-#define __________________MTGAP_L2_________________ KC_I, KC_N,    KC_E,    KC_A,   KC_COMM
-#define __________________MTGAP_L3_________________ KC_J, KC_SLSH, KC_QUOT, KC_DOT, KC_BSLS
-
-#define __________________MTGAP_R1_________________ KC_K, KC_D, KC_L, KC_C, KC_W
-#define __________________MTGAP_R2_________________ KC_M, KC_H, KC_T, KC_S, KC_R  // KC_Q
-#define __________________MTGAP_R3_________________ KC_B, KC_F, KC_G, KC_V, KC_X  // KC_Z
 
 #define __________________NAV_L1___________________ LSG(KC_C), KC_LPRN,   KC_RPRN,   C(KC_TAB), LSG(KC_T)
 #define __________________NAV_L2___________________ LSG(KC_A), LCTL_LBRC, LSFT_RBRC, LCG(KC_V), LCG(KC_S)

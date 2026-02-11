@@ -28,5 +28,5 @@ bool process_record_mtgap(uint16_t keycode,
 #define __________________MTGAP_L3_________________ MT_Z, MT_X, MT_C,    MT_V,   MT_B
 
 #define __________________MTGAP_R1_________________ MT_Y, MT_U, MT_I,    MT_O,   MT_P
-#define __________________MTGAP_R2_________________ MT_H, MT_J, MT_K,    MT_L,   MT_SCLN
-#define __________________MTGAP_R3_________________ MT_N, MT_M, MT_COMM, MT_DOT, MT_SLSH
+#define __________________MTGAP_R2_________________ MT_H, MT_J, MT_K,    MT_L,   MT_SCLN  // MT_QUOT
+#define __________________MTGAP_R3_________________ MT_N, MT_M, MT_COMM, MT_DOT, MT_SLSH  // MT_BSLS
