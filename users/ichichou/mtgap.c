@@ -47,16 +47,22 @@ static bool qwerty_registered[32];
 // asdfg hjkl; '
 // zxcvb nm,./ (backslash)
 
-// Mod-1 + 2
+// Mod-1
 //
-// ypou; kdlcw
+// ypou/ kdlcw
 // inea, mhtsr q
-// j/'.z bfgvx z
+// jz'.; bfgvx
+
+// Mod-2
+//
+// ypou\ kdlcw
+// inea, mhtsr q
+// j/'.; bfgvx z
 
 bool process_record_mtgap(uint16_t keycode, keyrecord_t *record, uint8_t mod_state) {
   switch (keycode) {
     case MT_A:    return process_mtgap_key(KC_A,    KC_I,    &qwerty_registered[0],  &mtgap_registered[0],  record, mod_state);
-    case MT_B:    return process_mtgap_key(KC_B,    KC_Z,    &qwerty_registered[1],  &mtgap_registered[1],  record, mod_state);
+    case MT_B:    return process_mtgap_key(KC_B,    KC_SCLN, &qwerty_registered[1],  &mtgap_registered[1],  record, mod_state);
     case MT_C:    return process_mtgap_key(KC_C,    KC_QUOT, &qwerty_registered[2],  &mtgap_registered[2],  record, mod_state);
     case MT_D:    return process_mtgap_key(KC_D,    KC_E,    &qwerty_registered[3],  &mtgap_registered[3],  record, mod_state);
     case MT_E:    return process_mtgap_key(KC_E,    KC_O,    &qwerty_registered[4],  &mtgap_registered[4],  record, mod_state);
@@ -74,11 +80,11 @@ bool process_record_mtgap(uint16_t keycode, keyrecord_t *record, uint8_t mod_sta
     case MT_Q:    return process_mtgap_key(KC_Q,    KC_Y,    &qwerty_registered[16], &mtgap_registered[16], record, mod_state);
     case MT_R:    return process_mtgap_key(KC_R,    KC_U,    &qwerty_registered[17], &mtgap_registered[17], record, mod_state);
     case MT_S:    return process_mtgap_key(KC_S,    KC_N,    &qwerty_registered[18], &mtgap_registered[18], record, mod_state);
-    case MT_T:    return process_mtgap_key(KC_T,    KC_SCLN, &qwerty_registered[19], &mtgap_registered[19], record, mod_state);
+    case MT_T:    return process_mtgap_key(KC_T,    KC_SLSH, &qwerty_registered[19], &mtgap_registered[19], record, mod_state);
     case MT_U:    return process_mtgap_key(KC_U,    KC_D,    &qwerty_registered[20], &mtgap_registered[20], record, mod_state);
     case MT_V:    return process_mtgap_key(KC_V,    KC_DOT,  &qwerty_registered[21], &mtgap_registered[21], record, mod_state);
     case MT_W:    return process_mtgap_key(KC_W,    KC_P,    &qwerty_registered[22], &mtgap_registered[22], record, mod_state);
-    case MT_X:    return process_mtgap_key(KC_X,    KC_SLSH, &qwerty_registered[23], &mtgap_registered[23], record, mod_state);
+    case MT_X:    return process_mtgap_key(KC_X,    KC_Z,    &qwerty_registered[23], &mtgap_registered[23], record, mod_state);
     case MT_Y:    return process_mtgap_key(KC_Y,    KC_K,    &qwerty_registered[24], &mtgap_registered[24], record, mod_state);
     case MT_Z:    return process_mtgap_key(KC_Z,    KC_J,    &qwerty_registered[25], &mtgap_registered[25], record, mod_state);
     case MT_SCLN: return process_mtgap_key(KC_SCLN, KC_R,    &qwerty_registered[26], &mtgap_registered[26], record, mod_state);
