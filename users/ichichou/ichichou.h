@@ -448,12 +448,13 @@ enum my_keycodes {
 #define LCG(kc)     (QK_LCTL | QK_LGUI | (kc))
 
 // Layer-Tap
-#define NAV_ESC LT(_NAV, KC_ESC)
-#define NAV_TAB LT(_NAV, KC_TAB)
-#define SYM_TAB LT(_SYM, KC_TAB)
-#define SYM_ENT LT(_SYM, KC_ENT)
-#define FN_BSLS LT(_FN,  KC_BSLS)
-#define FN_GRV  LT(_FN,  KC_GRV)
+#define NAV_ESC  LT(_NAV, KC_ESC)
+#define NAV_TAB  LT(_NAV, KC_TAB)
+#define SYM_TAB  LT(_SYM, KC_TAB)
+#define SYM_ENT  LT(_SYM, KC_ENT)
+#define SYM_BSPC LT(_SYM, KC_BSPC)
+#define FN_BSLS  LT(_FN,  KC_BSLS)
+#define FN_GRV   LT(_FN,  KC_GRV)
 
 // Mod-Tap
 #define RHYPR_TAB  RHYPR_T(KC_TAB)

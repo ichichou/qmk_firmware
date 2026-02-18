@@ -98,12 +98,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     // Layer-Tap
-    case NAV_ESC: return true;
-    case NAV_TAB: return true;
-    case SYM_TAB: return true;
-    case SYM_ENT: return true;
-    case FN_BSLS: return true;
-    case FN_GRV:  return true;
+    case NAV_ESC:  return true;
+    case NAV_TAB:  return true;
+    case SYM_TAB:  return true;
+    case SYM_ENT:  return true;
+    case SYM_BSPC: return true;
+    case FN_BSLS:  return true;
+    case FN_GRV:   return true;
 
     // Mod-Tap
     case RHYPR_TAB:  return true;
