@@ -94,6 +94,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // -- Tap-Hold Configuration {{{
 
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case SYM_BSPC:
+      return TAPPING_TERM;
+    default:
+      return QUICK_TAP_TERM;
+  }
+}
+
 // Hold On Other Key Press Mode
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
