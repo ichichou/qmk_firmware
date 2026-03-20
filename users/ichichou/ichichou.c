@@ -103,61 +103,6 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
-// Hold On Other Key Press Mode
-bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    // Layer-Tap
-    case NAV_ESC:  return true;
-    case NAV_TAB:  return true;
-    case SYM_TAB:  return true;
-    case SYM_ENT:  return true;
-    case SYM_BSPC: return true;
-    case FN_BSLS:  return true;
-    case FN_GRV:   return true;
-
-    // Mod-Tap
-    case RHYPR_TAB:  return true;
-    case RHYPR_BSPC: return true;
-    case LSFT_SPC:   return true;
-    case LSFT_CW:    return true;
-    case RSFT_BSLS:  return true;
-    case LCTL_ESC:   return true;
-    case RCTL_ENT:   return true;
-    case RCTL_TAB:   return true;
-    case RALT_GRV:   return true;
-    case LGUI_LNG2:  return true;
-    case RGUI_LNG1:  return true;
-
-    // Home Row Mods
-    case LCTL_LBRC: return true;
-    case LSFT_RBRC: return true;
-    case LGUI_GRV:  return true;
-
-    default:
-      return false;
-  }
-}
-
-// Permissive Hold Mode
-bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    // case RSFT_SLSH:  return true;
-    // case RCTL_QUOT:  return true;
-
-    // #ifdef MTGAP_ENABLE
-    //   case RCTL_MT_QUOT: return true;
-    // #endif
-
-    #ifdef SHINGETA_ENABLE
-      // case RCTL_SG_QUOT: return true;
-      case JSYM_R: return true;
-    #endif
-
-    default:
-      return false;
-  }
-}
-
 // }}}
 
 // -- Tri Layers {{{
