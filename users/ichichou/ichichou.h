@@ -457,17 +457,17 @@ enum my_keycodes {
 #define FN_GRV   LT(_FN,  KC_GRV)
 
 // Mod-Tap
-#define RHYPR_TAB  RHYPR_T(KC_TAB)
-#define RHYPR_BSPC RHYPR_T(KC_BSPC)
-#define LSFT_SPC   SFT_T(KC_SPC)
-#define LSFT_CW    SFT_T(CW_TOGG)
-#define RSFT_BSLS  RSFT_T(KC_BSLS)
-#define LCTL_ESC   CTL_T(KC_ESC)
-#define RCTL_ENT   RCTL_T(KC_ENT)
-#define RCTL_TAB   RCTL_T(KC_TAB)
-#define RALT_GRV   RALT_T(KC_GRV)
-#define LGUI_LNG2  GUI_T(KC_LNG2)
-#define RGUI_LNG1  RGUI_T(KC_LNG1)
+#define HYPR_TAB  RHYPR_T(KC_TAB)
+#define HYPR_BSPC RHYPR_T(KC_BSPC)
+#define LSFT_SPC  SFT_T(KC_SPC)
+#define LSFT_CW   SFT_T(CW_TOGG)
+#define RSFT_BSLS RSFT_T(KC_BSLS)
+#define LCTL_ESC  CTL_T(KC_ESC)
+#define RCTL_ENT  RCTL_T(KC_ENT)
+#define RCTL_TAB  RCTL_T(KC_TAB)
+#define RALT_GRV  RALT_T(KC_GRV)
+#define LGUI_LNG2 GUI_T(KC_LNG2)
+#define RGUI_LNG1 RGUI_T(KC_LNG1)
 
 // Home Row Mods
 #define LCTL_LBRC CTL_T(KC_LBRC)
