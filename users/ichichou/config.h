@@ -39,7 +39,7 @@
   )
 
 // Tap-Hold Configuration
-#define TAPPING_TERM 150
+#define TAPPING_TERM 200
 #define QUICK_TAP_TERM 0
 #define QUICK_TAP_TERM_PER_KEY
 #define HOLD_ON_OTHER_KEY_PRESS
