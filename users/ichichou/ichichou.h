@@ -468,6 +468,7 @@ enum my_keycodes {
 #define RALT_GRV  RALT_T(KC_GRV)
 #define LGUI_LNG2 GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
+#define RGUI_TAB  RGUI_T(KC_TAB)
 
 // Home Row Mods
 #define LCTL_LBRC CTL_T(KC_LBRC)
