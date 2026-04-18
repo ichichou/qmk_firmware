@@ -27,6 +27,7 @@
 
 enum layer_names {
   _BASE,
+  _MTGAP,
   _NAV,
   _SYM,
   _WIN,
@@ -38,10 +39,12 @@ enum layer_names {
 // Macros {{{
 
 // Layers
-#define NAV  MO(_NAV)
-#define SYM  MO(_SYM)
-#define WIN  MO(_WIN)
-#define FN   MO(_FN)
+#define BASE  DF(_BASE)
+#define MTGAP DF(_MTGAP)
+#define NAV   MO(_NAV)
+#define SYM   MO(_SYM)
+#define WIN   MO(_WIN)
+#define FN    MO(_FN)
 
 // Modifiers
 #define LCG(kc) (QK_LCTL | QK_LGUI | (kc))
@@ -58,6 +61,7 @@ enum layer_names {
 #define RCTL_ENT  RCTL_T(KC_ENT)
 #define LGUI_LNG2 GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
+#define RGUI_TAB  RGUI_T(KC_TAB)
 
 // Home Row Mods
 #define LCTL_LBRC CTL_T(KC_LBRC)
@@ -77,6 +81,14 @@ enum layer_names {
 #define __________________BASE_R1__________________ KC_Y, KC_U, KC_I,    KC_O,   KC_P
 #define __________________BASE_R2__________________ KC_H, KC_J, KC_K,    KC_L,   KC_SCLN
 #define __________________BASE_R3__________________ KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH
+
+#define __________________MTGAP_L1_________________ KC_Y, KC_P, KC_O,    KC_U,   KC_J
+#define __________________MTGAP_L2_________________ KC_I, KC_N, KC_E,    KC_A,   KC_COMMA
+#define __________________MTGAP_L3_________________ KC_Q, KC_Z, KC_SLSH, KC_DOT, KC_SCLN
+
+#define __________________MTGAP_R1_________________ KC_K, KC_D, KC_L, KC_C, KC_P
+#define __________________MTGAP_R2_________________ KC_M, KC_H, KC_T, KC_S, KC_R
+#define __________________MTGAP_R3_________________ KC_B, KC_F, KC_G, KC_V, KC_X
 
 #define __________________NAV_L1___________________ LSG(KC_C), KC_LPRN,   KC_RPRN,   C(KC_TAB), LSG(KC_T)
 #define __________________NAV_L2___________________ LSG(KC_A), LCTL_LBRC, LSFT_RBRC, LCG(KC_V), LCG(KC_S)
@@ -139,10 +151,17 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_BASE] = LAYOUT_wrapper(
-    HYPR_TAB,    __________________BASE_L1__________________, __________________BASE_R1__________________,     KC_BSPC,
-    LCTL_ESC,    __________________BASE_L2__________________, __________________BASE_R2__________________,     KC_QUOT,
-    KC_LSFT,     __________________BASE_L3__________________, __________________BASE_R3__________________,     KC_BSLS,
-    FN,       KC_RCTL, KC_LALT, LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_BSPC, RGUI_LNG1, KC_RALT, KC_RCTL, FN_GRV
+    HYPR_TAB,    __________________BASE_L1__________________, __________________BASE_R1__________________,    KC_BSPC,
+    LCTL_ESC,    __________________BASE_L2__________________, __________________BASE_R2__________________,    KC_QUOT,
+    KC_LSFT,     __________________BASE_L3__________________, __________________BASE_R3__________________,    KC_BSLS,
+    FN,       KC_RCTL, KC_LALT, LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_BSPC, RGUI_TAB, KC_RALT, KC_RCTL, FN_GRV
+  ),
+
+  [_MTGAP] = LAYOUT_wrapper(
+    HYPR_TAB,    __________________MTGAP_L1_________________, __________________MTGAP_R1_________________,    KC_BSPC,
+    LCTL_ESC,    __________________MTGAP_L2_________________, __________________MTGAP_R2_________________,    KC_QUOT,
+    KC_LSFT,     __________________MTGAP_L3_________________, __________________MTGAP_R3_________________,    KC_BSLS,
+    FN,       KC_RCTL, KC_LALT, LGUI_LNG2, NAV_ESC, LSFT_SPC, RCTL_ENT, SYM_BSPC, RGUI_TAB, KC_RALT, KC_RCTL, FN_GRV
   ),
 
   [_NAV] = LAYOUT_wrapper(
