@@ -501,12 +501,12 @@ enum my_keycodes {
 #define __________________NAV_R2___________________ KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC)  // G(KC_DOWN)
 #define __________________NAV_R3___________________ KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), G(KC_GRV)   // XXXXXXX
 
-#define __________________SYM_L1___________________ KC_DOT,  KC_PLUS, KC_UNDS, KC_EXLM, KC_PIPE
+#define __________________SYM_L1___________________ KC_F16,  KC_PLUS, KC_UNDS, KC_EXLM, KC_PIPE
 #define __________________SYM_L2___________________ KC_ASTR, KC_EQL,  KC_MINS, KC_0,    KC_AT
 #define __________________SYM_L3___________________ KC_8,    KC_6,    KC_4,    KC_2,    KC_BSLS
 
-#define __________________SYM_R1___________________ KC_SLSH, KC_AMPR, KC_CIRC, KC_DLR,  KC_COMM  // XXXXXXX
-#define __________________SYM_R2___________________ KC_TILD, KC_1,    KC_PERC, KC_HASH, KC_COLN  // XXXXXXX
+#define __________________SYM_R1___________________ KC_F17,  KC_AMPR, KC_CIRC, KC_DLR,  KC_F15   // XXXXXXX
+#define __________________SYM_R2___________________ KC_TILD, KC_1,    KC_PERC, KC_HASH, KC_F18   // XXXXXXX
 #define __________________SYM_R3___________________ KC_GRV,  KC_3,    KC_5,    KC_7,    KC_9     // XXXXXXX
 
 #define __________________WIN_L1___________________ XXXXXXX,      LCA(KC_U), LCA(KC_I), MEH(KC_C),    C(KC_1)
