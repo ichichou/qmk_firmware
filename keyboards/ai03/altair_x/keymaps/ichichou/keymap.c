@@ -22,13 +22,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               KC_LALT, LGUI_LNG2, NAV_ESC, LSFT_SPC,   RCTL_ENT, SYM_BSPC, RGUI_TAB, FN_GRV
   ),
 
-  [_MTGAP] = LAYOUT_wrapper(
-    HYPR_TAB, __________________MTGAP_L1_________________, G(KC_LBRC), XXXXXXX,  __________________MTGAP_R1_________________, KC_BSPC,
-    LCTL_ESC, __________________MTGAP_L2_________________, G(KC_RBRC), XXXXXXX,  __________________MTGAP_R2_________________, MT_QUOT,
-    KC_LSFT,  __________________MTGAP_L3_________________, FN,         FN,       __________________MTGAP_R3_________________, MT_BSLS,
-                              KC_LALT, LGUI_LNG2, NAV_ESC, LSFT_SPC,   RCTL_ENT, SYM_BSPC, RGUI_TAB, FN_GRV
-  ),
-
   [_NAV] = LAYOUT_wrapper(
     G(KC_RBRC), __________________NAV_L1___________________, XXXXXXX, XXXXXXX, __________________NAV_R1___________________, G(KC_UP),
     G(KC_LBRC), __________________NAV_L2___________________, XXXXXXX, XXXXXXX, __________________NAV_R2___________________, G(KC_DOWN),

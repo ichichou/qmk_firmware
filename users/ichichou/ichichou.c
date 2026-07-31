@@ -99,6 +99,8 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case SYM_BSPC:
       return TAPPING_TERM;
+    case RGUI_BSPC:
+      return TAPPING_TERM;
     default:
       return QUICK_TAP_TERM;
   }
