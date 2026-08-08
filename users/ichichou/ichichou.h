@@ -437,7 +437,7 @@ enum my_keycodes {
 
 // Layers
 #define BASE  DF(_BASE)
-#define MTGAP DF(_MTGAP)
+// #define MTGAP DF(_MTGAP)
 #define NAV   MO(_NAV)
 #define SYM   MO(_SYM)
 #define WIN   MO(_WIN)
@@ -518,8 +518,8 @@ enum my_keycodes {
 #define __________________WIN_R2___________________ C(KC_5), LCA(KC_C),   A(KC_DOWN),  LSG(KC_RBRC), XXXXXXX  // MEH(KC_ENT)
 #define __________________WIN_R3___________________ C(KC_6), LCA(KC_ENT), MEH(KC_ENT), XXXXXXX,      XXXXXXX  // XXXXXXX
 
-#define __________________FN_L1____________________ KC_F1,      KC_F2,      XXXXXXX, XXXXXXX, BASE
-#define __________________FN_L2____________________ RCTL(KC_U), XXXXXXX,    XXXXXXX, XXXXXXX, MTGAP
+#define __________________FN_L1____________________ KC_F1,      KC_F2,      XXXXXXX, XXXXXXX, XXXXXXX
+#define __________________FN_L2____________________ RCTL(KC_U), XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
 #define __________________FN_L3____________________ G(KC_LBRC), G(KC_RBRC), XXXXXXX, XXXXXXX, XXXXXXX
 
 #define __________________FN_R1____________________ LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  // OS_LOCK | XXXXXXX

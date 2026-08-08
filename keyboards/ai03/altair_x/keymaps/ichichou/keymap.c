@@ -19,7 +19,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     HYPR_TAB, __________________BASE_L1__________________, G(KC_LBRC), XXXXXXX,  __________________BASE_R1__________________, KC_BSPC,
     LCTL_ESC, __________________BASE_L2__________________, G(KC_RBRC), XXXXXXX,  __________________BASE_R2__________________, KC_QUOT,
     KC_LSFT,  __________________BASE_L3__________________, FN,         FN,       __________________BASE_R3__________________, KC_BSLS,
-                              KC_LALT, LGUI_LNG2, NAV_ESC, LSFT_SPC,   RCTL_ENT, SYM_BSPC, RGUI_TAB, FN_GRV
+                              KC_LALT, LGUI_LNG2, NAV_ESC, LSFT_SPC,   RCTL_ENT, SYM_BSPC, RGUI_LNG1, FN_GRV
   ),
 
   [_NAV] = LAYOUT_wrapper(
@@ -44,8 +44,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_FN] = LAYOUT_wrapper(
-    OS_LOCK, __________________FN_L1____________________, BASE,    XXXXXXX, __________________FN_R1____________________, OS_LOCK,
-    XXXXXXX, __________________FN_L2____________________, MTGAP,   XXXXXXX, __________________FN_R2____________________, KC_MPLY,
+    OS_LOCK, __________________FN_L1____________________, XXXXXXX, XXXXXXX, __________________FN_R1____________________, OS_LOCK,
+    XXXXXXX, __________________FN_L2____________________, XXXXXXX, XXXXXXX, __________________FN_R2____________________, KC_MPLY,
     XXXXXXX, __________________FN_L3____________________, _______, _______, __________________FN_R3____________________, KC_MUTE,
                                 XXXXXXX, XXXXXXX, EE_CLR, QK_BOOT, QK_BOOT, EE_CLR, XXXXXXX, _______
   ),
