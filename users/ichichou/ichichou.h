@@ -510,6 +510,13 @@ enum my_keycodes {
 #define __________________SYM_R2___________________ KC_TILD, KC_1,    KC_PERC, KC_HASH, KC_F18   // XXXXXXX
 #define __________________SYM_R3___________________ KC_GRV,  KC_3,    KC_5,    KC_7,    KC_9     // XXXXXXX
 
+// SYM レイヤーの F15, F16, F17, F18 は Karabiner-Elements で記号に変換する
+// 英語入力／日本語入力のどちらでも半角記号を入力
+// - F15 -> ,
+// - F16 -> .
+// - F17 -> /
+// - F18 -> :
+
 #define __________________WIN_L1___________________ XXXXXXX,      LCA(KC_U), LCA(KC_I), MEH(KC_C),    C(KC_1)
 #define __________________WIN_L2___________________ LCA(KC_LEFT), LCA(KC_J), LCA(KC_K), LCA(KC_RGHT), C(KC_2)
 #define __________________WIN_L3___________________ LCA(KC_Z),    LCA(KC_X), LCA(KC_V), LCA(KC_B),    C(KC_3)
