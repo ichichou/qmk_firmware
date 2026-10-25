@@ -498,8 +498,8 @@ enum my_keycodes {
 #define __________________NAV_L2___________________ LSG(KC_A), LCTL_LBRC, LSFT_RBRC, LCG(KC_V), LCG(KC_S)
 #define __________________NAV_L3___________________ LSG(KC_Z), G(KC_X),   G(KC_C),   LSG(KC_V), G(KC_V)
 
-#define __________________NAV_R1___________________ G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC)  // G(KC_UP)
-#define __________________NAV_R2___________________ KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC)  // G(KC_DOWN)
+#define __________________NAV_R1___________________ G(KC_TAB), C(KC_TAB), KC_LCBR, KC_RCBR, G(KC_RBRC)  // LCS(KC_LBRC)
+#define __________________NAV_R2___________________ KC_LEFT,   KC_DOWN,   KC_UP,   KC_RGHT, G(KC_LBRC)  // LCS(KC_RBRC)
 #define __________________NAV_R3___________________ KC_BSPC,   KC_DEL,    C(KC_A), C(KC_E), G(KC_GRV)   // XXXXXXX
 
 #define __________________SYM_L1___________________ KC_F16,  KC_PLUS, KC_UNDS, KC_EXLM, KC_PIPE
@@ -531,9 +531,7 @@ enum my_keycodes {
 
 #define __________________FN_R1____________________ LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  // OS_LOCK | XXXXXXX
 #define __________________FN_R2____________________ LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT  // KC_MPLY
-#define __________________FN_R3____________________ LSG(KC_4), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU  // KC_MUTE
-
-#define __________________FN_R3_LEFT_SHIFTED_______ LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE  // FN
+#define __________________FN_R3____________________ LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE  // KC_MUTE | FN
 
 // Number Row
 #define __________________1_TO_5___________________ KC_1, KC_2, KC_3, KC_4, KC_5
