@@ -445,7 +445,8 @@ enum my_keycodes {
 
 // Modifiers
 #define RHYPR_T(kc) MT(MOD_RCTL | MOD_RSFT | MOD_RALT | MOD_RGUI, kc)
-#define LCG(kc)     (QK_LCTL | QK_LGUI | (kc))
+#define LCS(kc)     (QK_LCTL | QK_LSFT | (kc))  // QMK 0.30.0 以降は標準キーコードに存在するので必要ない
+#define LCG(kc)     (QK_LCTL | QK_LGUI | (kc))  // QMK 0.30.0 以降は標準キーコードに存在するので必要ない
 
 // Layer-Tap
 #define NAV_ESC  LT(_NAV, KC_ESC)
