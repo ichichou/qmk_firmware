@@ -530,9 +530,11 @@ enum my_keycodes {
 #define __________________FN_L2____________________ RCTL(KC_U), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 #define __________________FN_L3____________________ KC_F1,      KC_F2,   XXXXXXX, XXXXXXX, XXXXXXX
 
-#define __________________FN_R1____________________ LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  // OS_LOCK | XXXXXXX
+#define __________________FN_R1____________________ LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  // OS_LOCK
 #define __________________FN_R2____________________ LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT  // KC_MPLY
-#define __________________FN_R3____________________ LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE  // KC_MUTE | FN
+#define __________________FN_R3____________________ LSG(KC_4), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU  // KC_MUTE
+
+#define __________________FN_R3_LEFT_SHIFTED_______ LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE  // FN
 
 // Number Row
 #define __________________1_TO_5___________________ KC_1, KC_2, KC_3, KC_4, KC_5
