@@ -466,6 +466,7 @@ enum my_keycodes {
 #define LCTL_ESC  CTL_T(KC_ESC)
 #define RCTL_ENT  RCTL_T(KC_ENT)
 #define RCTL_TAB  RCTL_T(KC_TAB)
+#define RCTL_GRV  RCTL_T(KC_GRV)
 #define RALT_GRV  RALT_T(KC_GRV)
 #define LGUI_LNG2 GUI_T(KC_LNG2)
 #define RGUI_LNG1 RGUI_T(KC_LNG1)
@@ -493,7 +494,7 @@ enum my_keycodes {
 
 #define __________________BASE_R1__________________ KC_Y, KC_U, KC_I,    KC_O,   KC_P     // KC_BSPC | KC_LBRC
 #define __________________BASE_R2__________________ KC_H, KC_J, KC_K,    KC_L,   KC_SCLN  // KC_QUOT
-#define __________________BASE_R3__________________ KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH  // KC_BSLS | KC_RSFT
+#define __________________BASE_R3__________________ KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH  // FN_BSLS | KC_RSFT
 
 #define __________________NAV_L1___________________ LSG(KC_C), KC_LPRN,   KC_RPRN,   C(KC_TAB), LSG(KC_T)
 #define __________________NAV_L2___________________ LSG(KC_A), LCTL_LBRC, LSFT_RBRC, LCG(KC_V), LCG(KC_S)
@@ -532,9 +533,9 @@ enum my_keycodes {
 
 #define __________________FN_R1____________________ LSG(KC_2), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  // OS_LOCK
 #define __________________FN_R2____________________ LSG(KC_3), XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT  // KC_MPLY
-#define __________________FN_R3____________________ LSG(KC_4), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU  // KC_MUTE
+#define __________________FN_R3____________________ LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE  // FN
 
-#define __________________FN_R3_LEFT_SHIFTED_______ LSG(KC_4), XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE  // FN
+#define __________________FN_R3_RIGHT_SHIFTED______ LSG(KC_4), XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU  // KC_MUTE
 
 // Number Row
 #define __________________1_TO_5___________________ KC_1, KC_2, KC_3, KC_4, KC_5
